@@ -91,7 +91,8 @@ if [[ -z "$WORKFLOW" ]]; then
     if [[ ! -z "$1" ]]; then
        WORKFLOW=$1 ; shift # not "$1" to get rid of compound commands
     else
-       WORKFLOW=help
+       #WORKFLOW=help
+       WORKFLOW=upgrade
     fi
 fi
 
