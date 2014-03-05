@@ -1,0 +1,74 @@
+    tag upgrade-ux
+    title upgrade-ux
+    description upgrade-ux
+    copyright (c)Copyright GPL v3
+    number A.00.01
+
+product
+    tag upgrade-ux
+    title upgrade-ux
+    description upgrade-ux
+    copyright (c)Copyright GPL v3
+    revision A.00.01
+    architecture HP-UX_B.11_32/64
+    machine_type *
+    os_name HP-UX
+    os_release ?.11.*
+    os_version *
+    is_locatable false
+    is_patch false
+    vendor_tag GPL
+    readme < ../../README.md
+    preinstall preinstall.sh
+    postinstall postinstall.sh
+    configure configure.sh
+    postremove postremove.sh
+
+    fileset
+        tag upgrade-ux-SCRIPTS
+        title upgrade-ux script
+        revision A.00.01
+        description upgrade-ux script
+
+        directory ../../opt/upgrade-ux/bin = /opt/upgrade-ux/bin
+        file_permissions -o root -g sys -m 755
+        file -m 755 -o root -g sys upgrade-ux
+
+        directory ../../opt/upgrade-ux/lib = /opt/upgrade-ux/lib
+        file_permissions -o root -g sys -m 755
+        file *
+
+        directory ../../opt/upgrade-ux/scripts = /opt/upgrade-ux/scripts
+        file_permissions -o root -g sys -m 755
+        file *
+
+
+    end
+
+    fileset
+        tag upgrade-ux-CONFIG
+        title upgrade-ux configuration files
+        revision A.00.01
+        description upgrade-ux configuration files
+
+        directory ../../etc/opt/upgrade-ux = /etc/opt/upgrade-ux
+        file_permissions -o root -g sys -m 755
+        file *
+    end
+
+    fileset
+        tag upgrade-ux-VAR
+	title upgrade-ux var files
+	revision A.00.01
+	description upgrade-ux var files
+
+	directory ../../var/opt/upgrade-ux = /var/opt/upgrade-ux
+	file_permissions -o root -g sys -m 755
+
+	directory ../../var/opt/upgrade-ux/log = /var/opt/upgrade-ux/log
+	file *
+	exclude .gitignore
+	exclude *.log
+    end
+
+end # of product
