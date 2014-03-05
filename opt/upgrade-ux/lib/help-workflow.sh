@@ -3,7 +3,7 @@
 
 function WORKFLOW_help  {
     cat <<EOF
-Usage: $PROGRAM [-dDsSvV] [-c DIR ] COMMAND [-- ARGS...]
+Usage: $PROGRAM [-dDsSpvV] [-c DIR ] COMMAND [-- ARGS...]
 
 $PRODUCT comes with ABSOLUTELY NO WARRANTY; for details see
 the GNU General Public License at: http://www.gnu.org/licenses/gpl.html
@@ -14,6 +14,7 @@ Available options:
  -D           debugscript mode; log every function call
  -s           simulation mode; show what scripts $PROGRAM would include
  -S           step-by-step mode; acknowledge each script individually
+ -p           preview mode; run all swinstall or other commands in preview
  -v           verbose mode; show more output
  -V           version information
 
