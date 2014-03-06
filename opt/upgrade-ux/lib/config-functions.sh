@@ -56,8 +56,8 @@ function SetOSVendorAndVersion  {
 
     # combined stuff
     OS_VENDOR_VERSION="$OS_VENDOR/$OS_VERSION"
-    OS_VENDOR_ARCH="$OS_VENDOR/$model"
-    OS_VENDOR_VERSION_ARCH="$OS_VENDOR/$OS_VERSION/$model"
+    OS_VENDOR_ARCH="$OS_VENDOR/$REAL_MACHINE"
+    OS_VENDOR_VERSION_ARCH="$OS_VENDOR/$OS_VERSION/$REAL_MACHINE"
 
     # add OS_MASTER_* vars in case this is a derived OS
     case "$( echo $OS_VENDOR_VERSION | tr '[:upper:]' '[:lower:]' )" in
@@ -95,8 +95,8 @@ function SetOSVendorAndVersion  {
     # combined stuff for OS_MASTER_*
     if [ "$OS_MASTER_VENDOR" ] ; then
         OS_MASTER_VENDOR_VERSION="$OS_MASTER_VENDOR/$OS_MASTER_VERSION"
-        OS_MASTER_VENDOR_ARCH="$OS_MASTER_VENDOR/$model"
-        OS_MASTER_VENDOR_VERSION_ARCH="$OS_MASTER_VENDOR/$OS_MASTER_VERSION/$model"
+        OS_MASTER_VENDOR_ARCH="$OS_MASTER_VENDOR/$REAL_MACHINE"
+        OS_MASTER_VENDOR_VERSION_ARCH="$OS_MASTER_VENDOR/$OS_MASTER_VERSION/$REAL_MACHINE"
     fi
 
 }
