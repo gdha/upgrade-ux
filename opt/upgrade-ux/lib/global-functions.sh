@@ -1,24 +1,3 @@
-# ------------------------------------------------------------------------------
-# Paramters --------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-
-typeset -x PID=$$
-typeset -r platform=$(uname -s)         # Operating System name, e.g. Linux, HP-UX, SunOS
-typeset -r lhost=$(uname -n)            # Local host name
-typeset    osVer=$(uname -r)            # OS Release
-osVer=$(echo ${osVer#B.})               # B.11.11 becomes 11.11
-typeset -r model=$(uname -m)            # Model of the system (architecture)
-
-# we gonna remove the .sh extention from the following filenames
-typeset ERRfile=$LOG_DIR/${PROGRAM%.*}-${PID}-ERRfile.txt  # contains the exit code (not sure we keep this??)
-typeset LOGFILE=$LOG_DIR/${PROGRAM%.*}-${PID}-LOGFILE.log
-typeset LOCKDIR=/tmp/${PROGRAM%.*}-LOCKDIR
-typeset PIDFILE=${LOCKDIR}/${PROGRAM%.*}-PIDFILE
-
-# ------------------------------------------------------------------------------
-# Functions --------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-
 function IsDigit {
     expr "$1" + 1 > /dev/null 2>&1  # sets the exit to non-zero if $1 non-numeric
 }

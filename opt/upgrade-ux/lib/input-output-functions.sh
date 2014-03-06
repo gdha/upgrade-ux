@@ -151,6 +151,7 @@ function Echo {
     # echo is not the same on HP-UX/Linux
     case $platform in
         Linux|Darwin) arg="-e " ;;
+        *) arg="" ;;
     esac
     echo $arg "$*"
 }
