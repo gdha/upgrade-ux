@@ -157,7 +157,7 @@ function Echo {
 }
 
 function Print {
-    test "$VERBOSE" && Echo "$*" >&7
+    test "$VERBOSE" && echo "$*" >&7
 }
 
 # print if there is an error
