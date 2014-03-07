@@ -6,3 +6,4 @@
 grep -q "hpvminfo: Not on an HPVM guest, HPVM vPar or HPVM host" $TMP_DIR/hpvminfo  && return  # no hpvm guest running
 
 # TODO: what other output should we check on?
+HP_VM_MODE=hpvm
