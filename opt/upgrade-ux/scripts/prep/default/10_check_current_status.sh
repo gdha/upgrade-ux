@@ -9,7 +9,8 @@ if [[ ! -f $VAR_DIR/status ]]; then
     echo "$(Stamp)$stage:start" > $VAR_DIR/status
     CURRENT_STATUS="$stage:start"
 else
-    CURRENT_STATUS=$(cat $VAR_DIR/status | awk '{print $3}')
+    # read the last line of the status file (as we will append our data)
+    CURRENT_STATUS=$(tail -1 $VAR_DIR/status | awk '{print $3}')
 fi
 
 LogPrint "Current status is $CURRENT_STATUS"
