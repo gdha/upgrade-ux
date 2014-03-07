@@ -28,10 +28,16 @@ function SetOSVendorAndVersion  {
                     OS_VERSION=none
                 fi
                 ;;
-        *)     # HP-UX, Solaris, AIX
-               OS_VENDOR="$platform"
-               OS_VERSION=$osVer
-               ;;
+        HP-UX)  OS_VENDOR="hp"
+		OS_VERSION=$osVer
+		;;
+        SunOS)  OS_VENDOR="oracle"
+		OS_VERSION=$osVer
+		;;
+        *)      # AIX, others....
+                OS_VENDOR="$platform"
+                OS_VERSION=$osVer
+                ;;
     esac
     if test "$OS_VENDOR" = generic -o "$OS_VERSION" = none ; then
 
