@@ -22,8 +22,8 @@ function StartOfHtmlDocument
     echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">'
     echo '<HTML> <HEAD>'
     echo "<META NAME=\"CHANGED\" CONTENT=\" $(date) \">"
-    echo "<META NAME=\"DESCRIPTION\" CONTENT=\"$PRGNAME\">"
-    echo "<META NAME=\"subject\" CONTENT=\"Results of $PRGNAME\">"
+    echo "<META NAME=\"DESCRIPTION\" CONTENT=\"$PRODUCT\">"
+    echo "<META NAME=\"subject\" CONTENT=\"Results of $PRODUCT\">"
     echo '<style type="text/css">'
     echo "Pre     {Font-Family: Courier-New, Courier;Font-Size: 10pt}"
     echo "BODY        {FONT-FAMILY: Arial, Verdana, Helvetica, Sans-serif; FONT-SIZE: 12pt;}"
