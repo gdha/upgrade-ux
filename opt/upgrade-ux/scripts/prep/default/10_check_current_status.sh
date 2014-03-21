@@ -5,6 +5,6 @@
 # at each phase in the process we will change the value of CURRENT_STATUS ($stage:[start|ended])
 # flag looks like e.g.: 2014-03-20 13:23:59 prep:ended
 
-ReadCurrentStatus "$STATUS_FILE"
+CURRENT_STATUS=$( ReadCurrentStatus "$STATUS_FILE" )
 LogPrint "Current status is $CURRENT_STATUS"
 
