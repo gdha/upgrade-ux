@@ -231,3 +231,23 @@ function ProgressStep {
 function ProgressInfo {
     : ;
 }
+
+function ReadCurrentStatus {
+    # read the last line of the $STATUS_FILE (input arg1; output status as string)
+    [[ ! -f $1 ]] && Error "Status File $1 not found"
+    tail -1 $1 | awk '{print $3}'
+}
+
+function SetCurrentStatus {
+    # append the content of $CURRENT_STATUS (exported var) to the $STATUS_FILE
+    # input arg is $STATUS_FILE; output 0 success or 1 failure)
+    if [[ ! -f $1 ]]; then
+        # first time we ever run this tool
+	Log "Initialize $1 with status \"$stage:start\""
+	echo "$(Stamp)$stage:start" > $1
+	CURRENT_STATUS="$stage:start"
+    else
+	echo "$CURRENT_STATUS" >> $1
+    fi
+}
+

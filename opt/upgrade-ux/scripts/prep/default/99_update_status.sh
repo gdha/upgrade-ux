@@ -4,10 +4,12 @@
 # the status of the last will be stored in variable CURRENT_STATUS
 # at each phase in the process we will change the value of CURRENT_STATUS
 
+# at the end of this stage change the current status in our variable CURRENT_STATUS 
+CURRENT_STATUS="$(Stamp)$stage:ended"
+# write the current status to the $STATUS_FILE
+SetCurrentStatus "$STATUS_FILE"
 
-echo "$(Stamp)$stage:ended" >> $VAR_DIR/status
-# read the last line of the status file (as we will append our data)
-CURRENT_STATUS=$(tail -1 $VAR_DIR/status | awk '{print $3}')
+# CURRENT_STATUS=$( ReadCurrentStatus "$STATUS_FILE" )
 
 Log "Current status is $CURRENT_STATUS"
 
