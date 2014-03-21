@@ -205,3 +205,15 @@ function Cleanup {
     return 0
 }
 
+# ------------------------------------------------------------------------------
+function SurroundingGrep {
+    # grep string ($3) in file $4 and print #lines before ($1) and #lines after ($2) the matched string ($3)
+    # usage: echo $(SurroundingGrep 0 3 'Quorum' /tmp/cmviewcl.txt)
+    typeset -i b=$1
+    typeset -i a=$2
+    typeset s="$3"
+    fl=$4
+    [[ ! -f $fl ]] && Error "Input file $fl not found"
+    awk 'c-->0;$0~s{if(b)for(c=b+1;c>1;c--)print r[(NR-c+1)%b];print;c=a}b{r[NR%b]=$0}' b=$b a=$a s=$s $fl
+}
+
