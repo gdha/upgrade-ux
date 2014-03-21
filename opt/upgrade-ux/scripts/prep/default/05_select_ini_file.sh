@@ -1,5 +1,5 @@
 # 05_select_ini_file.sh
-# read and analyze the $ETC_DIR/$OS-$OS_VERSION.ini file
+# select the proper INI file for this OS - the $ETC_DIR/$OS-$OS_VERSION.ini file
 if [[ -z "$INI_FILE" ]]; then
     case "$OS" in
         "HP-UX"|"SunOS") INI_FILE="$ETC_DIR/${OS}-${OS_VERSION}-$(date '+%Y').ini" ;;
