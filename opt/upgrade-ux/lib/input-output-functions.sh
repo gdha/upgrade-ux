@@ -241,13 +241,12 @@ function ReadCurrentStatus {
 function SetCurrentStatus {
     # append the content of $CURRENT_STATUS (exported var) to the $STATUS_FILE
     # input arg is $STATUS_FILE; output 0 success or 1 failure)
+    [[ -z "$CURRENT_STATUS" ]] && CURRENT_STATUS="$stage:start"
     if [[ ! -f $1 ]]; then
         # first time we ever run this tool
-	Log "Initialize $1 with status \"$stage:start\""
-	echo "$(Stamp)$stage:start" > $1
-	CURRENT_STATUS="$stage:start"
-    else
-	echo "$CURRENT_STATUS" >> $1
+	Log "Initialize $1 with status \"$CURRENT_STATUS\""
     fi
+    # 2014-03-20 13:23:59 prep:ended
+    echo "$(Stamp)$CURRENT_STATUS" >> $1
 }
 
