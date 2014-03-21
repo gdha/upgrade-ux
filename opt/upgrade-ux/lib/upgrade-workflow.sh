@@ -5,4 +5,5 @@ set -A WORKFLOWS ${WORKFLOWS[@]} "upgrade"
 
 function WORKFLOW_upgrade {
     SourceStage "prep"
+    SourceStage "cleanup"
 }

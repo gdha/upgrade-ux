@@ -5,7 +5,7 @@
 # at each phase in the process we will change the value of CURRENT_STATUS
 
 # at the end of this stage change the current status in our variable CURRENT_STATUS 
-CURRENT_STATUS="$(Stamp)$stage:ended"
+CURRENT_STATUS="$stage:ended"
 # write the current status to the $STATUS_FILE
 SetCurrentStatus "$STATUS_FILE"
 
