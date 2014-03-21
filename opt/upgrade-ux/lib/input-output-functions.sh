@@ -234,7 +234,7 @@ function ProgressInfo {
 
 function ReadCurrentStatus {
     # read the last line of the $STATUS_FILE (input arg1; output status as string)
-    [[ ! -f $1 ]] && Error "Status File $1 not found"
+    [[ ! -f $1 ]] && SetCurrentStatus "$1"
     tail -1 $1 | awk '{print $3}'
 }
 
