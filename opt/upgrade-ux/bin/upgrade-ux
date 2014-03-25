@@ -197,7 +197,7 @@ BUILD_DIR="$(mktemp)"
 StopIfError "Could not create build area '$BUILD_DIR'"
 QuietAddExitTask cleanup_build_area_and_end_program
 Log "Using build area '$BUILD_DIR'"
-
+TMP_DIR=$BUILD_DIR
 
 # Check for and run the requested workflow
 if has_binary WORKFLOW_$WORKFLOW; then
