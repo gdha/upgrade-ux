@@ -192,14 +192,6 @@ the GNU General Public License at: http://www.gnu.org/licenses/gpl.html
 Build date: $(date '+%a, %d %b %Y %X %z')
 "
 
-# create temporary work area and register removal exit task
-BUILD_DIR="$(mktemp)"
-StopIfError "Could not create build area '$BUILD_DIR'"
-QuietAddExitTask cleanup_build_area_and_end_program
-Log "Using build area '$BUILD_DIR'"
-TMP_DIR=$BUILD_DIR
-[[ ! -d $TMP_DIR ]] &&  mkdir -p $TMP_DIR
-
 # Check for and run the requested workflow
 if has_binary WORKFLOW_$WORKFLOW; then
     Log "Running $WORKFLOW workflow"
