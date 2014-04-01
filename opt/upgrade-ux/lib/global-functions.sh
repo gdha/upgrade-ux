@@ -119,11 +119,6 @@ function ReleaseLock {
 }
 
 # ------------------------------------------------------------------------------
-function IsDigit {
-    expr "$1" + 1 > /dev/null 2>&1  # sets the exit to non-zero if $1 non-numeric
-}
-
-# ------------------------------------------------------------------------------
 function GetHostnameFromIP {
     # input is IP address; output hostname
     case ${platform} in
@@ -139,7 +134,6 @@ function GetHostnameFromIP {
 }
 
 # ------------------------------------------------------------------------------
-
 function IsVolumeGroupActive {
     # input arg: VG; output:0=VG active, or 1=VG not active)
     typeset VG=$1
