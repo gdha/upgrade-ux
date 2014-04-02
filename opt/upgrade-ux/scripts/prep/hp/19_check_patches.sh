@@ -3,7 +3,7 @@
 
 [[ ! -x /usr/contrib/bin/check_patches ]] && return
 
-if [[ -f "$CHECK_PATCHES_BEFORE" ]]; then # we already have the output
+if [[ ! -f "$CHECK_PATCHES_BEFORE" ]]; then # we already have the output
     /usr/contrib/bin/check_patches 
     mv /tmp/check_patches.report "$CHECK_PATCHES_BEFORE"
     LogPrint "Result of check_patches saved as $CHECK_PATCHES_BEFORE"
