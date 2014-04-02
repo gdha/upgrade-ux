@@ -29,11 +29,11 @@ function SetOSVendorAndVersion  {
                 fi
                 ;;
         HP-UX)  OS_VENDOR="hp"
-		OS_VERSION=$osVer
-		;;
+                OS_VERSION=$osVer
+                ;;
         SunOS)  OS_VENDOR="oracle"
-		OS_VERSION=$osVer
-		;;
+                OS_VERSION=$osVer
+                ;;
         *)      # AIX, others....
                 OS_VENDOR="$platform"
                 OS_VERSION=$osVer
@@ -125,12 +125,13 @@ function ParseIniFile {
         # # comment line 1
         # ; comment line 2
         # [remove]
-        # command         =       $SWREMOVE
-        # options         =       "-x mount_all_filesystems=false  -x enforce_dependencies=false"
+        # command[0]      =       $SWREMOVE
+        # options[0]      =       "-x mount_all_filesystems=false  -x enforce_dependencies=false"
         # bundle[0]       =       CFG2HTML
         # version[0]      =       C.06.00         ; cfg2html
         # bundle[1]       =       DUPRO
         # version[1]      =       A.01.0          ; dupro
+        #
         # [preinstall]
         # command[0]      =       shutdown -h 0
         # command[1]      =       any-news
@@ -145,13 +146,13 @@ function ParseIniFile {
         # unset options
         # unset bundle
         # unset version
-        # 
+        #
         # parse_ini_file $ini
         # cmdline="$command $options $bundle,r=$version"
         # echo $cmdline
         # done
 
-    typeset INI_SECTION="$1"
+    INI_SECTION="$1"
     eval `sed -e 's/[[:space:]]*\=[[:space:]]*/=/g' \
         -e 's/;.*$//' \
         -e 's/[[:space:]]*$//' \
@@ -161,7 +162,7 @@ function ParseIniFile {
         | sed -n -e "/^\[$INI_SECTION\]/,/^\s*\[/{/^[^;].*\=.*/p;}"`
 
     # ${command[@]} : array of commands
-    # $options      : array of options for commands array
+    # ${options[@]} : array of options for commands array
     # ${bundle[@]}  : array of the software bundle we want to install, remove, upgrade
     # ${version[@]} : array of the expected version of above mentioned bundle array
     # be aware that bundle[0] and version [0] belong together
