@@ -7,6 +7,7 @@ elif [[ ! -f $PREVIEW_FILE ]]; then
     date > $PREVIEW_FILE
     PREVIEW_MODE=1
     Log "Forcing preview mode with variable PREVIEW_MODE=1"
+    Log "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
 else
     Log "Last preview run was executed on $(cat $PREVIEW_FILE)"
 fi
