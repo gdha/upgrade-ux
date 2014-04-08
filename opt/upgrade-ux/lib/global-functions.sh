@@ -203,11 +203,45 @@ function Cleanup {
 function SurroundingGrep {
     # grep string ($3) in file $4 and print #lines before ($1) and #lines after ($2) the matched string ($3)
     # usage: echo $(SurroundingGrep 0 3 'Quorum' /tmp/cmviewcl.txt)
-    typeset -i b=$1
-    typeset -i a=$2
-    typeset s="$3"
+    b=$1
+    a=$2
+    s="$3"
     fl=$4
     [[ ! -f $fl ]] && Error "Input file $fl not found"
     awk 'c-->0;$0~s{if(b)for(c=b+1;c>1;c--)print r[(NR-c+1)%b];print;c=a}b{r[NR%b]=$0}' b=$b a=$a s=$s $fl
+}
+
+function proceed_to_next_stage {
+    # input argument is stage we want to enter
+    # we will check the current status
+    next_stage="$1"  # the stage we would like to enter
+    prev_stage=$( echo $CURRENT_STATUS | cut -d: -f1 )
+    prev_status=$( echo $CURRENT_STATUS | cut -d: -f2 )
+    case "$next_stage" in
+        "init"   ) return 0 ;;  # should always be ok
+	"prep"   )
+            if [[ "$prev_stage" = "init" ]] && [[ "$prev_status" = "ended" ]]; then
+	       return 0 # yes you may
+	    else
+	       return 1 # no you may not
+	    fi
+            ;;
+        "preremove" )	
+            if [[ "$prev_stage" = "prep" ]] && [[ "$prev_status" = "ended" ]]; then
+	       return 0 # yes you may
+	    else
+	       return 1 # no you may not
+	    fi
+            ;;
+        "preinstall" )
+            if [[ "$prev_stage" = "preremove" ]] && [[ "$prev_status" = "ended" ]]; then
+	       return 0 # yes you may
+	    else
+	       return 1 # no you may not
+	    fi
+            ;;
+
+
+    esac
 }
 
