@@ -13,6 +13,9 @@ if [[ "$CURRENT_STATUS" = "prep:ended" ]]; then
     # nice we will now update our stage to "preremove:start"
     CURRENT_STATUS="$stage:start"
     SetCurrentStatus "$STATUS_FILE"  # write it to our STATUS_FILE
+elif [[ "$CURRENT_STATUS" = "preremove:start" ]]; then
+    # ok we restarted the upgrade-ux
+    Log "Seems we restarted $PRODUCT and are still in status $CURRENT_STATUS"
 else
     Error "$CURRENT_STATUS is not in the correct state to start with stage $stage"
 fi

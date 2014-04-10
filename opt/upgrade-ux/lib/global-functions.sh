@@ -220,7 +220,9 @@ function proceed_to_next_stage {
     case "$next_stage" in
         "init"   ) return 0 ;;  # should always be ok
 	"prep"   )
-            if [[ "$prev_stage" = "init" ]] && [[ "$prev_status" = "ended" ]]; then
+            if [[ "$prev_stage" = "init" ]] && [[ "$prev_status" = "start" ]]; then
+	       return 0 # yes you may
+            elif [[ "$prev_stage" = "prep" ]] && [[ "$prev_status" = "start" ]]; then
 	       return 0 # yes you may
 	    else
 	       return 1 # no you may not
@@ -229,6 +231,8 @@ function proceed_to_next_stage {
         "preremove" )	
             if [[ "$prev_stage" = "prep" ]] && [[ "$prev_status" = "ended" ]]; then
 	       return 0 # yes you may
+            elif [[ "$prev_stage" = "preremove" ]] && [[ "$prev_status" = "start" ]]; then
+	       return 0 # yes you may
 	    else
 	       return 1 # no you may not
 	    fi
@@ -236,11 +240,63 @@ function proceed_to_next_stage {
         "preinstall" )
             if [[ "$prev_stage" = "preremove" ]] && [[ "$prev_status" = "ended" ]]; then
 	       return 0 # yes you may
+            elif [[ "$prev_stage" = "preinstall" ]] && [[ "$prev_status" = "start" ]]; then
+	       return 0 # yes you may
+	    else
+	       return 1 # no you may not
+	    fi
+            ;;
+        "install" )
+            if [[ "$prev_stage" = "preremove" ]] && [[ "$prev_status" = "ended" ]]; then
+	       return 0 # yes you may
+            elif [[ "$prev_stage" = "preinstall" ]] && [[ "$prev_status" = "start" ]]; then
+	       return 0 # yes you may
 	    else
 	       return 1 # no you may not
 	    fi
             ;;
 
+	"postinstall" )
+            if [[ "$prev_stage" = "install" ]] && [[ "$prev_status" = "ended" ]]; then
+	       return 0 # yes you may
+            elif [[ "$prev_stage" = "postinstall" ]] && [[ "$prev_status" = "start" ]]; then
+	       return 0 # yes you may
+	    else
+	       return 1 # no you may not
+	    fi
+            ;;
+
+	"postremove" )
+            if [[ "$prev_stage" = "postinstall" ]] && [[ "$prev_status" = "ended" ]]; then
+	       return 0 # yes you may
+            elif [[ "$prev_stage" = "postremove" ]] && [[ "$prev_status" = "start" ]]; then
+	       return 0 # yes you may
+	    else
+	       return 1 # no you may not
+	    fi
+            ;;
+
+	"configure" )
+            if [[ "$prev_stage" = "postremove" ]] && [[ "$prev_status" = "ended" ]]; then
+	       return 0 # yes you may
+            elif [[ "$prev_stage" = "configure" ]] && [[ "$prev_status" = "start" ]]; then
+	       return 0 # yes you may
+	    else
+	       return 1 # no you may not
+	    fi
+            ;;
+
+	"postexecute" )
+            if [[ "$prev_stage" = "configure" ]] && [[ "$prev_status" = "ended" ]]; then
+	       return 0 # yes you may
+            elif [[ "$prev_stage" = "postexecute" ]] && [[ "$prev_status" = "start" ]]; then
+	       return 0 # yes you may
+	    else
+	       return 1 # no you may not
+	    fi
+            ;;
+
+	"cleanup" ) return 0 ;;  # should always be ok
 
     esac
 }
