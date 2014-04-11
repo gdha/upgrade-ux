@@ -7,5 +7,5 @@
 # flag looks like e.g.: 2014-03-20 13:23:59 init:ended
 
 CURRENT_STATUS=$( ReadCurrentStatus "$STATUS_FILE" )
-Log "Current status is $CURRENT_STATUS"
+#Log "Current status is $CURRENT_STATUS"
 
