@@ -247,9 +247,9 @@ function proceed_to_next_stage {
 	    fi
             ;;
         "install" )
-            if [[ "$prev_stage" = "preremove" ]] && [[ "$prev_status" = "ended" ]]; then
+            if [[ "$prev_stage" = "preinstall" ]] && [[ "$prev_status" = "ended" ]]; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" = "preinstall" ]] && [[ "$prev_status" = "start" ]]; then
+            elif [[ "$prev_stage" = "install" ]] && [[ "$prev_status" = "start" ]]; then
 	       return 0 # yes you may
 	    else
 	       return 1 # no you may not
