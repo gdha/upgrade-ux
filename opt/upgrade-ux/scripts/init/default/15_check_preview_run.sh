@@ -13,7 +13,7 @@ elif [[ ! -f $PREVIEW_FILE ]]; then
 else
     Log "Last preview run was executed on $(cat $PREVIEW_FILE)"
     # check if PREVIEW_FILE contain tag "preview ended successfully" = reset CURRENT_STATUS to "init:start"
-    grep -q "preview ended successfully" $PREVIEW_FILE
+    tail -15 $PREVIEW_FILE | grep -q "preview ended successfully"
     if [[ $? -eq 0 ]]; then
         CURRENT_STATUS="init:start"
 	SetCurrentStatus "$STATUS_FILE"

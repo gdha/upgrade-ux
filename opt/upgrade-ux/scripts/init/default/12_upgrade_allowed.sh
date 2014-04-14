@@ -9,7 +9,7 @@ fi
 #prev_stage=$( echo $CURRENT_STATUS | cut -d: -f1 )
 #prev_status=$( echo $CURRENT_STATUS | cut -d: -f2 )
 
-grep -q "preview ended successfully" $PREVIEW_FILE
+tail -10 $PREVIEW_FILE | grep -q "preview ended successfully"
 if [[ $? -ne 0 ]]; then
     PREVIEW_MODE=1
     LogPrint "Preview mode activated as it was not ended successfully (yet)"
