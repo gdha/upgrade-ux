@@ -220,7 +220,9 @@ function proceed_to_next_stage {
     case "$next_stage" in
         "init"   ) return 0 ;;  # should always be ok
 	"prep"   )
-            if [[ "$prev_stage" = "init" ]] && [[ "$prev_status" = "start" ]]; then
+	    if test "$SIMULATE" ; then
+	       return 0 # yes you may
+            elif [[ "$prev_stage" = "init" ]] && [[ "$prev_status" = "start" ]]; then
 	       return 0 # yes you may
             elif [[ "$prev_stage" = "prep" ]] && [[ "$prev_status" = "start" ]]; then
 	       return 0 # yes you may
@@ -229,7 +231,9 @@ function proceed_to_next_stage {
 	    fi
             ;;
         "preremove" )	
-            if [[ "$prev_stage" = "prep" ]] && [[ "$prev_status" = "ended" ]]; then
+	    if test "$SIMULATE" ; then
+	       return 0 # yes you may
+            elif [[ "$prev_stage" = "prep" ]] && [[ "$prev_status" = "ended" ]]; then
 	       return 0 # yes you may
             elif [[ "$prev_stage" = "preremove" ]] && [[ "$prev_status" = "start" ]]; then
 	       return 0 # yes you may
@@ -238,7 +242,9 @@ function proceed_to_next_stage {
 	    fi
             ;;
         "preinstall" )
-            if [[ "$prev_stage" = "preremove" ]] && [[ "$prev_status" = "ended" ]]; then
+	    if test "$SIMULATE" ; then
+	       return 0 # yes you may
+            elif [[ "$prev_stage" = "preremove" ]] && [[ "$prev_status" = "ended" ]]; then
 	       return 0 # yes you may
             elif [[ "$prev_stage" = "preinstall" ]] && [[ "$prev_status" = "start" ]]; then
 	       return 0 # yes you may
@@ -247,7 +253,9 @@ function proceed_to_next_stage {
 	    fi
             ;;
         "install" )
-            if [[ "$prev_stage" = "preinstall" ]] && [[ "$prev_status" = "ended" ]]; then
+	    if test "$SIMULATE" ; then
+	       return 0 # yes you may
+            elif [[ "$prev_stage" = "preinstall" ]] && [[ "$prev_status" = "ended" ]]; then
 	       return 0 # yes you may
             elif [[ "$prev_stage" = "install" ]] && [[ "$prev_status" = "start" ]]; then
 	       return 0 # yes you may
@@ -257,7 +265,9 @@ function proceed_to_next_stage {
             ;;
 
 	"postinstall" )
-            if [[ "$prev_stage" = "install" ]] && [[ "$prev_status" = "ended" ]]; then
+	    if test "$SIMULATE" ; then
+	       return 0 # yes you may
+            elif [[ "$prev_stage" = "install" ]] && [[ "$prev_status" = "ended" ]]; then
 	       return 0 # yes you may
             elif [[ "$prev_stage" = "postinstall" ]] && [[ "$prev_status" = "start" ]]; then
 	       return 0 # yes you may
@@ -267,7 +277,9 @@ function proceed_to_next_stage {
             ;;
 
 	"postremove" )
-            if [[ "$prev_stage" = "postinstall" ]] && [[ "$prev_status" = "ended" ]]; then
+	    if test "$SIMULATE" ; then
+	       return 0 # yes you may
+            elif [[ "$prev_stage" = "postinstall" ]] && [[ "$prev_status" = "ended" ]]; then
 	       return 0 # yes you may
             elif [[ "$prev_stage" = "postremove" ]] && [[ "$prev_status" = "start" ]]; then
 	       return 0 # yes you may
@@ -277,7 +289,9 @@ function proceed_to_next_stage {
             ;;
 
 	"configure" )
-            if [[ "$prev_stage" = "postremove" ]] && [[ "$prev_status" = "ended" ]]; then
+	    if test "$SIMULATE" ; then
+	       return 0 # yes you may
+            elif [[ "$prev_stage" = "postremove" ]] && [[ "$prev_status" = "ended" ]]; then
 	       return 0 # yes you may
             elif [[ "$prev_stage" = "configure" ]] && [[ "$prev_status" = "start" ]]; then
 	       return 0 # yes you may
@@ -287,7 +301,9 @@ function proceed_to_next_stage {
             ;;
 
 	"postexecute" )
-            if [[ "$prev_stage" = "configure" ]] && [[ "$prev_status" = "ended" ]]; then
+	    if test "$SIMULATE" ; then
+	       return 0 # yes you may
+            elif [[ "$prev_stage" = "configure" ]] && [[ "$prev_status" = "ended" ]]; then
 	       return 0 # yes you may
             elif [[ "$prev_stage" = "postexecute" ]] && [[ "$prev_status" = "start" ]]; then
 	       return 0 # yes you may
