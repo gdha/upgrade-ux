@@ -5,10 +5,13 @@ i=0
 while (( $i < $count ))
 do
     if (( PREVIEW )) ; then
+        Log "${command[i]} -vp ${options[i]} ${bundle[i]},r=${version[i]}"
         ${command[i]} -vp ${options[i]} ${bundle[i]},r=${version[i]} >&2
     else
-        ${command[i]} -vp ${options[i]} ${bundle[i]},r=${version[i]} >&2
+        Log "${command[i]} -v ${options[i]} ${bundle[i]},r=${version[i]}"
+        ${command[i]} -v ${options[i]} ${bundle[i]},r=${version[i]} >&2
     fi
+    SwJob ${command[i]} >&2
     i=$((i+1))
 done
 

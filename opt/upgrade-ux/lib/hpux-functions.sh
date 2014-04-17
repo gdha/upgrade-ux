@@ -19,3 +19,13 @@ function FindJobId {
 }
 # ------------------------------------------------------------------------------
 
+function SwJob {
+    # input argument is SWINSTALL or SWREMOVE variable; according cmd we will select
+    # the proper log file to investigate with swjob
+    [[ -z "$1" ]] && return   # no argument - no output
+    # $1=/usr/sbin/swinstall => /var/adm/sw/swinstall.log
+    swlogfile=/var/adm/sw/${1##*/}.log
+    swjob_cmd="$( tail -10 $swlogfile | grep swjob | sed -e 's/command//' -e 's/\.$//' -e 's/\"//g' -e 's/^[ \t]*//' )"
+    Log "Output: $swjob_cmd"
+    echo $swjob_cmd | sh -
+}
