@@ -66,7 +66,7 @@ SIMULATE=
 VERBOSE=
 DEBUG=
 KEEP_BUILD_DIR=
-PREVIEW_MODE=
+PREVIEW=
 
 CMD_OPTS="$*"
 
@@ -80,7 +80,7 @@ while getopts "c:dDhsSpvV" opt; do
        (D) DEBUGSCRIPTS=1;;
        (s) SIMULATE=1; VERBOSE=1;;
        (S) STEPBYSTEP=1;;
-       (p) PREVIEW_MODE=1;;
+       (p) PREVIEW=1;;
        (*) WORKFLOW="help";;
     esac
 done

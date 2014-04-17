@@ -24,7 +24,7 @@ if [[ $? -eq 0 ]]; then
 else
     LogPrint "Virtual Partition [vPar] software installed, but version is < A.04.04.04"
     LogPrint "Reboot into nPar mode (# vparenv -m nPar) or (MON> reboot nPars)"
-    if (( PREVIEW_MODE )) ; then
+    if (( PREVIEW )) ; then
         LogPrint "[preview mode] we continue"
     else
         Error "First reboot in nPar mode and then restart $PRODUCT"

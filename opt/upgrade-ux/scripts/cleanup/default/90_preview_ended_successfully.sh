@@ -3,7 +3,7 @@
 
 [[ "$CURRENT_STATUS" != "postexecute:ended" ]] && return
 
-if (( PREVIEW_MODE )) ; then
+if (( PREVIEW )) ; then
     LogPrint "Preview mode ended successfully"
     echo "$(date)  (preview ended successfully)" > "$PREVIEW_FILE"
 fi

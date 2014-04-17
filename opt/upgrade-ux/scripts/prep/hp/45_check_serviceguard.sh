@@ -25,7 +25,7 @@ SGpatchnr=${SGpatch#PHSS_}              # PHSS_43094 => 43094
 Log "Cluster $CLNAME (version $SGversion - latest patch $SGpatch) is ${CLstatus}"
 
 if [[ "${NodeStatus}" = "up" ]]; then
-    if (( PREVIEW_MODE )) ; then
+    if (( PREVIEW )) ; then
         Log "The node ($HOSTNAME) cluster status (${NodeStatus}) should be \"down\" when running $PRODUCT"
     else
         LogPrint "The node ($HOSTNAME) cluster status (${NodeStatus}) should be \"down\" when running $PRODUCT"

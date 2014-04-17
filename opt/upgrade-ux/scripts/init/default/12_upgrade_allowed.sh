@@ -1,8 +1,7 @@
 # 12_upgrade_allowed.sh
 #######################
 # according the CURRENT_STATUS read previously we can decide if upgrade is allowed or?
-
-if (( PREVIEW_MODE )) ; then
+if (( PREVIEW )) ; then
     return   # we have -p enabled on command line
 fi
 
@@ -11,6 +10,6 @@ fi
 
 tail -10 $PREVIEW_FILE | grep -q "preview ended successfully"
 if [[ $? -ne 0 ]]; then
-    PREVIEW_MODE=1
+    PREVIEW=1
     LogPrint "Preview mode activated as it was not ended successfully (yet)"
 fi

@@ -13,7 +13,7 @@ if [[ -f "$VAR_DIR/${HOSTNAME}_global_patch_bundles_before.${DS}" ]]; then
     LastYear=$(( ThisYear - 1 ))
     grep -q $LastYear "$VAR_DIR/${HOSTNAME}_global_patch_bundles_before.${DS}"
     if (( $? > 0 )) ; then
-	if (( PREVIEW_MODE )) ; then
+	if (( PREVIEW )) ; then
             LogPrint  "WARNING: I am afraid the global patch bundle of last year ($LastYear) was not yet installed"
 	else
             #Error "I am afraid the global patch bundle of last year ($LastYear) was not yet installed"
