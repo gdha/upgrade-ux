@@ -317,3 +317,10 @@ function proceed_to_next_stage {
     esac
 }
 
+# ------------------------------------------------------------------------------
+function KillProc {
+    # input argument is "process name" (program) to be killed
+    Log "Stopping $1"
+    pid=$( ps -e | grep "$1" | sed -e 's/^[ \t]*//' -e 's/ .*//' )
+    [[ ! -z "$pid" ]] && kill $pid
+}
