@@ -324,3 +324,22 @@ function KillProc {
     pid=$( ps -e | grep "$1" | sed -e 's/^[ \t]*//' -e 's/ .*//' )
     [[ ! -z "$pid" ]] && kill $pid
 }
+
+# ------------------------------------------------------------------------------
+function PingSystem {
+    case $OS in
+        Linux|Darwin)
+	    i=$(ping -c 2 ${1} | grep "packet loss" | cut -d, -f3 | awk '{print $1}' | cut -d% -f1 | cut -d. -f1)
+	    ;;
+	HP-UX|CYGWIN_NT-5.1)
+	    i=$(ping ${1} -n 2 | grep "packet loss" | cut -d, -f3 | awk '{print $1}' | cut -d% -f1 | cut -d. -f1)
+	    ;;
+	SunOS)
+            i=$(ping ${1} >/dev/null 2>&2; echo $?)
+	    ;;
+    esac
+    [ -z "$i" ] && i=2      # when ping returns "host unknown error"
+    # i=1 : not reachable
+    # i=0 : reachable
+    echo $i
+}
