@@ -7,5 +7,9 @@
 # flag looks like e.g.: 2014-03-20 13:23:59 prep:ended
 
 CURRENT_STATUS=$( ReadCurrentStatus "$STATUS_FILE" )
-LogPrint "Current status is $CURRENT_STATUS"
 
+if [[ "$CURRENT_STATUS" = "init:ended" ]]; then
+    CURRENT_STATUS="$stage:start"
+    SetCurrentStatus "$STATUS_FILE"
+fi
+LogPrint "Current status is $CURRENT_STATUS"
