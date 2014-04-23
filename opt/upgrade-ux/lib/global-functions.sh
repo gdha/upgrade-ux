@@ -222,7 +222,7 @@ function proceed_to_next_stage {
 	"prep"   )
 	    if test "$SIMULATE" ; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" = "init" ]] && [[ "$prev_status" = "start" ]]; then
+            elif [[ "$prev_stage" = "init" ]] && [[ "$prev_status" = "ended" ]]; then
 	       return 0 # yes you may
             elif [[ "$prev_stage" = "prep" ]] && [[ "$prev_status" = "start" ]]; then
 	       return 0 # yes you may
