@@ -208,7 +208,7 @@ function SurroundingGrep {
     s="$3"
     fl=$4
     [[ ! -f $fl ]] && Error "Input file $fl not found"
-    awk 'c-->0;$0~s{if(b)for(c=b+1;c>1;c--)print r[(NR-c+1)%b];print;c=a}b{r[NR%b]=$0}' b=$b a=$a s=$s $fl
+    awk 'c-->0;$0~s{if(b)for(c=b+1;c>1;c--)print r[(NR-c+1)%b];print;c=a}b{r[NR%b]=$0}' b=$b a=$a s="$s" $fl
 }
 
 function proceed_to_next_stage {

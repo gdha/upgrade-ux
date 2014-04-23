@@ -1,0 +1,41 @@
+# 30_install_bundles.sh
+count=${#bundle[@]}
+i=0
+
+# we need to retrieve the correct OEM version of HP-UX as we need it for update-ux
+OEMVER=$( $SWLIST -l bundle -a os_release | grep HPUX11i | awk '{print $1}' )
+LogPrint "System $lhost has HP-UX version $OEMVER installed"
+
+while (( $i < $count ))
+do
+    if [[ "${command[i]}" = "/usr/sbin/update-ux" ]]; then
+        my_bundle="${OEMVER}${bundle[i]}"
+    else
+        my_bundle="${bundle[i]}"
+    fi
+
+    if (( PREVIEW )) ; then
+        LogPrint "${command[i]} -p -v ${options[i]} ${source[i]} $my_bundle"
+	${command[i]} -p -v ${options[i]} ${source[i]} $my_bundle
+	rc=$?
+    else
+        LogPrint "${command[i]} -v ${options[i]} ${source[i]} $my_bundle"
+        ${command[i]} -v ${options[i]} ${source[i]} $my_bundle
+	rc=$?
+    fi
+
+    if [[ $rc -gt 0 ]]; then
+        LogPrint "Error detected: ${command[i]} -v ${options[i]} ${source[i]} $my_bundle"
+    fi
+
+    # if command=swinstall the run SwJob; if command=update-ux show update-ux.log
+    if [[ "${command[i]}" = "$SWINSTALL" ]]; then
+	SwJob ${command[i]} >&2
+    elif [[ "${command[i]}" = "/usr/sbin/update-ux" ]]; then
+	TODAY=$(date | awk '{print $1, $2, $3}')
+        #echo $(SurroundingGrep 0 1000 "$TODAY" /var/adm/sw/update-ux.log) >&2
+        #tail -20 /var/adm/sw/update-ux.log >&2
+        tail -20 /var/opt/swm/swm.log >&2
+    fi
+    i=$((i+1))
+done
