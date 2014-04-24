@@ -7,7 +7,8 @@
 /usr/sbin/icapstatus -s 2>/dev/null > "$TMP_DIR/icapstatus_snapshot.txt"
 
 if [[ -s "$TMP_DIR/icapstatus_snapshot.txt" ]]; then
-    /usr/sbin/icapstatus > "$ICAPSTATUS_BEFORE"
+    # we remove the line that contains a date and hour (easier to compare after reboot)
+    /usr/sbin/icapstatus | grep -v "Local nPartition Status" > "$ICAPSTATUS_BEFORE"
     # save the snapshot info as well
     cp "$TMP_DIR/icapstatus_snapshot.txt" "$VAR_DIR/${HOSTNAME}_icapstatus_snapshot.${DS}"
 fi
