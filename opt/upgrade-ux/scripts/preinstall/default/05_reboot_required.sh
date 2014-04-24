@@ -1,6 +1,9 @@
 # 5_reboot_required.sh
 # if the uptime of the system is higher then 30 days then we propose to reboot first
 
+# when uptime is not expressed in days then we probably just rebooted our system
+uptime | grep -q days || return
+
 daysup=$( uptime | awk '{print $3}' )
 IsDigit $daysup || daysup=$( w | head -1 | awk '{print $3}' )  # alternative method
 IsDigit $daysup || daysup=0
