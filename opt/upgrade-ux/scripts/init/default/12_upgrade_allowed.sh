@@ -8,8 +8,15 @@ fi
 #prev_stage=$( echo $CURRENT_STATUS | cut -d: -f1 )
 #prev_status=$( echo $CURRENT_STATUS | cut -d: -f2 )
 
-tail -10 $PREVIEW_FILE | grep -q "preview ended successfully"
-if [[ $? -ne 0 ]]; then
+# first time run $PREVIEW_FILE does not yet exist
+if [[ -f $PREVIEW_FILE ]]; then
+    tail -10 $PREVIEW_FILE | grep -q "preview ended successfully"
+    rc=$?
+else
+    rc=1  # first run => force preview if not given
+fi
+
+if [[ $rc -ne 0 ]]; then
     PREVIEW=1
     LogPrint "Preview mode activated as it was not ended successfully (yet)"
 fi
