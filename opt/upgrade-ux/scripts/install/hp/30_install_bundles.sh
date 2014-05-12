@@ -19,17 +19,17 @@ do
 
     if (( PREVIEW )) ; then
         LogPrint "${command[i]} -p -v ${options[i]} ${source[i]} $my_bundle"
-	printf "${command[i]} -p -v ${options[i]} ${source[i]} $my_bundle" >> $VAR_DIR/sw_installation_in_progress.$DS
+	printf "${command[i]} -p -v ${options[i]} ${source[i]} $my_bundle" >> $VAR_DIR/$DS/sw_installation_in_progress
 	${command[i]} -p -v ${options[i]} ${source[i]} $my_bundle
 	rc=$?
     else
         LogPrint "${command[i]} -v ${options[i]} ${source[i]} $my_bundle"
-	printf "${command[i]} -v ${options[i]} ${source[i]} $my_bundle" >> $VAR_DIR/sw_installation_in_progress.$DS
+	printf "${command[i]} -v ${options[i]} ${source[i]} $my_bundle" >> $VAR_DIR/$DS/sw_installation_in_progress
         ${command[i]} -v ${options[i]} ${source[i]} $my_bundle
 	rc=$?
     fi
 
-    printf " rc=$rc\n" >> $VAR_DIR/sw_installation_in_progress.$DS
+    printf " rc=$rc\n" >> $VAR_DIR/$DS/sw_installation_in_progress
     if [[ $rc -gt 0 ]]; then
         LogPrint "Error detected: ${command[i]} -v ${options[i]} ${source[i]} $my_bundle"
     fi

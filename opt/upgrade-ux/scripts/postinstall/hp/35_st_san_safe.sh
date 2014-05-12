@@ -1,7 +1,8 @@
 # 35_st_san_safe.sh
 #
-# if HP has local tape devices in use we should check tape devices
-[[ ! -f "$VAR_DIR/tape_devices" ]] && return
+# when local tape devices are in use we should check tape devices for st_san_safe setting
+
+[[ ! -f "$VAR_DIR/$DS/tape_devices" ]] && return
 
 case "$OS_VERSION" in
     11.11)

@@ -4,11 +4,11 @@
 
 case "$OS_VERSION" in
     11.11|11.23)
-        ioscan -kfnC tape > $TMP_DIR/tape_devices
+        ioscan -kfnC tape > "$TMP_DIR/tape_devices"
         ;;
 
     11.31)
-        ioscan -kfnNC tape > $TMP_DIR/tape_devices
+        ioscan -kfnNC tape > "$TMP_DIR/tape_devices"
         ;;
 
 	*) # OS not supported
@@ -16,11 +16,12 @@ case "$OS_VERSION" in
 	;;
 esac
 
-if [[ ! -s $TMP_DIR/tape_devices ]]; then
+if [[ ! -s "$TMP_DIR/tape_devices" ]]; then
     # empty file = no tape devices present
     Log "System $lhost has no local tape devices"
 else
     # tape devices found, save the file for postinstall phase
-    cp $TMP_DIR/tape_devices $VAR_DIR/tape_devices
+    cp "$TMP_DIR/tape_devices"  "$VAR_DIR/$DS/tape_devices"
+    Log "Local tape devices are saved in $VAR_DIR/$DS/tape_devices"
 fi
 

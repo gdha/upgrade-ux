@@ -2,7 +2,7 @@
 # Veritas Cluster Server software versions < 5.0 are no longer supported and we
 # then advise not to patch anymore to avoid bringing the old CVS in danger
 
-grep -q VRTSvcs "$VAR_DIR/${HOSTNAME}_swlist_before.${DS}" || return  # no VCS installed
+grep -q VRTSvcs "$VAR_DIR/$DS/${HOSTNAME}_swlist.before" || return  # no VCS installed
 
 $SWLIST VRTSvcs,r\>=5.0 >/dev/null 2>&1
 if [[ $? -ne 0 ]]; then

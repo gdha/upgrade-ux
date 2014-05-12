@@ -2,16 +2,15 @@
 # this is a typically script for one customer only
 # check the global patch bundles already installed and verify if the one of last year is installed
 
-$SWLIST | grep gpb > "$TMP_DIR/${HOSTNAME}_global_patch_bundles_before.${DS}"
-if [[ -s "$TMP_DIR/${HOSTNAME}_global_patch_bundles_before.${DS}" ]]; then
-    mv "$TMP_DIR/${HOSTNAME}_global_patch_bundles_before.${DS}" "$VAR_DIR/${HOSTNAME}_global_patch_bundles_before.${DS}"
-    Log "Saved overview of all installed global patch bundles as $VAR_DIR/${HOSTNAME}_global_patch_bundles_before.${DS}"
+$SWLIST | grep gpb > "$TMP_DIR/${HOSTNAME}_global_patch_bundles.before"
+if [[ -s "$TMP_DIR/${HOSTNAME}_global_patch_bundles.before" ]]; then
+    mv "$TMP_DIR/${HOSTNAME}_global_patch_bundles.before" "$VAR_DIR/$DS/${HOSTNAME}_global_patch_bundles.before"
+    Log "Saved overview of all installed global patch bundles as $VAR_DIR/$DS/${HOSTNAME}_global_patch_bundles.before"
 fi
 
-if [[ -f "$VAR_DIR/${HOSTNAME}_global_patch_bundles_before.${DS}" ]]; then
-    ThisYear=$( date +%Y )
-    LastYear=$(( ThisYear - 1 ))
-    grep -q $LastYear "$VAR_DIR/${HOSTNAME}_global_patch_bundles_before.${DS}"
+if [[ -f "$VAR_DIR/$DS/${HOSTNAME}_global_patch_bundles.before" ]]; then
+    LastYear=$(( YEAR - 1 ))
+    grep -q $LastYear "$VAR_DIR/$DS/${HOSTNAME}_global_patch_bundles.before"
     if (( $? > 0 )) ; then
 	if (( PREVIEW )) ; then
             LogPrint  "WARNING: I am afraid the global patch bundle of last year ($LastYear) was not yet installed"

@@ -9,5 +9,5 @@
 if [[ -s "$TMP_DIR/icapstatus_snapshot.txt" ]]; then
     /usr/sbin/icapstatus | grep -v "Local nPartition Status" > "$ICAPSTATUS_AFTER"
     # save the snapshot info as well
-    cp "$TMP_DIR/icapstatus_snapshot.txt" "$VAR_DIR/${HOSTNAME}_icapstatus_snapshot_after.${DS}"
+    cp "$TMP_DIR/icapstatus_snapshot.txt" "$VAR_DIR/$DS/${HOSTNAME}_icapstatus_snapshot.after"
 fi

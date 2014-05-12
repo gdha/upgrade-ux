@@ -2,6 +2,6 @@
 ###########################
 # save the output of command setboot into $VAR_DIR/setboot
 
-[[ -f $VAR_DIR/setboot.output ]] && return   # the output was already captured
+[[ -f $VAR_DIR/$DS/setboot.output ]] && return   # the output was already captured
 
-/usr/sbin/setboot > $VAR_DIR/setboot.output
+/usr/sbin/setboot > $VAR_DIR/$DS/setboot.output
