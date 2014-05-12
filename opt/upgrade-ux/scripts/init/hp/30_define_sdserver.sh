@@ -4,8 +4,11 @@
 # For sanity reason we built in a ping test to warn the end-user if the SDSERVER is not available
 # so he/she can defines it manually in the site.conf or local.conf file
 
-secdig=$(/usr/bin/netstat -rn | /usr/bin/awk '/default/ && /UG/ { print $2 | "/usr/bin/tail -1" }' | /usr/bin/cut -d. -f2)
-case $secdig in
+if [[ -z "$SDSERVER" ]]; then
+
+    secdig=$(/usr/bin/netstat -rn | /usr/bin/awk '/default/ && /UG/ { print $2 | "/usr/bin/tail -1" }' | /usr/bin/cut -d. -f2)
+
+    case $secdig in
     +([0-9]))
         if (( $secdig == 0 )); then
             SDSERVER=10.0.11.237  # lab (hplabx1)
@@ -26,13 +29,19 @@ case $secdig in
     *)
 	SDSERVER=10.36.96.94  # default (itsblp02)
 	;;
-esac
+
+    esac
+    Log "Defined variable SDSERVER=$SDSERVER (as our Software Depot Server)"
+
+fi
+
 
 x=$( PingSystem $SDSERVER )
 if [[ $x -eq 1 ]]; then
     Error "SD Server $SDSERVER not reachable from $lhost"
 elif [[ $x -eq 2 ]]; then
-    Error "SD Server $SDSERVER unknown - define SDSERVER in local.conf"
+    Error "SD Server $SDSERVER unknown - please define SDSERVER in local.conf"
 else
-    Log "Defined variable SDSERVER=$SDSERVER (as our Software Depot Server)"
+   Log "Software Depot Server $SDSERVER is reachable via ping"
 fi
+
