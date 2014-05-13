@@ -17,6 +17,11 @@ do
         my_bundle="${bundle[i]}"
     fi
 
+    # if version[i] is not empty we should add ",r=version[i]" to my_bundle
+    if [[ ! -z "${version[i]}" ]]; then
+        my_bundle="$my_bundle,r=${version[i]}"
+    fi
+
     if (( PREVIEW )) ; then
         LogPrint "${command[i]} -p -v ${options[i]} ${source[i]} $my_bundle"
 	printf "${command[i]} -p -v ${options[i]} ${source[i]} $my_bundle" >> $VAR_DIR/$DS/sw_installation_in_progress

@@ -5,7 +5,7 @@
 # a dummy script tag has been set in the INI file
 
 # script 10_configure_commands.sh would touch below file if required
-[[ ! -f "TMP_DIR/uncomment_cfg2html_in_crontab" ]] && return   # nothing to do
+[[ ! -f "$TMP_DIR/uncomment_cfg2html_in_crontab" ]] && return   # nothing to do
 
 # ok now check crontab entries ($VAR_DIR/$DS/crontab.after)
 [[ ! -f "$VAR_DIR/$DS/crontab.after" ]] && return              # we missed the crontab file??
