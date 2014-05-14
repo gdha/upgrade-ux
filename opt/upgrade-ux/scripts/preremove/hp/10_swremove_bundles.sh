@@ -4,6 +4,7 @@ count=${#bundle[@]}
 i=0
 while (( $i < $count ))
 do
+    [[ -z "${command[i]}" ]] && continue   # command seems to be empty
     if (( PREVIEW )) ; then
         Log "${command[i]} -vp ${options[i]} ${bundle[i]},r=${version[i]}"
         ${command[i]} -vp ${options[i]} ${bundle[i]},r=${version[i]} >&2
