@@ -4,6 +4,13 @@
 
 UNIX95= ps -ef | grep cmenqord | grep -v -q grep > "$TMP_DIR/cmenqord"
 
-[[ -s "$TMP_DIR/cmenqord" ]] &&  KillProc cmenqord
+if [[ -s "$TMP_DIR/cmenqord" ]]; then
 
+    if (( PREVIEW )) ; then
+        Log "Kill the cmenqord daemon [not in preview mode]"
+    else
+        Log "Kill the cmenqord daemon"
+        KillProc cmenqord
+    fi
 
+fi
