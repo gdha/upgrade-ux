@@ -3,7 +3,7 @@
 
 count=${#command[@]}
 i=0
-set -x
+
 while (( $i < $count ))
 do
     if [[ -z "${command[i]}" ]]; then
