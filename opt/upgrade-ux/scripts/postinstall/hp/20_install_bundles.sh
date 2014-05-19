@@ -6,18 +6,25 @@ i=0
 while (( $i < $count ))
 do
 
+    my_bundle="${bundle[i]}"
+
+    # if version[i] is not empty we should add ",r=version[i]" to my_bundle
+    if [[ ! -z "${version[i]}" ]]; then
+        my_bundle="$my_bundle,r=${version[i]}"
+    fi
+
     if (( PREVIEW )) ; then
-        LogPrint "${command[i]} -p -v ${options[i]} ${source[i]} ${bundle[i]}"
-	${command[i]} -p -v ${options[i]} ${source[i]} ${bundle[i]}
+        LogPrint "${command[i]} -p -v ${options[i]} ${source[i]} $my_bundle"
+	${command[i]} -p -v ${options[i]} ${source[i]} $my_bundle
 	rc=$?
     else
-        LogPrint "${command[i]} -v ${options[i]} ${source[i]} ${bundle[i]}"
-        ${command[i]} -v ${options[i]} ${source[i]} ${bundle[i]}
+        LogPrint "${command[i]} -v ${options[i]} ${source[i]} $my_bundle"
+        ${command[i]} -v ${options[i]} ${source[i]} $my_bundle
 	rc=$?
     fi
 
     if [[ $rc -gt 0 ]]; then
-        LogPrint "Error detected: ${command[i]} -v ${options[i]} ${source[i]} ${bundle[i]}"
+        LogPrint "Error detected: ${command[i]} -v ${options[i]} ${source[i]} $my_bundle"
     fi
 
     if [[ "${command[i]}" = "$SWINSTALL" ]]; then
