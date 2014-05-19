@@ -8,7 +8,8 @@ $CMVIEWCL -v 2>/dev/null > $VAR_DIR/$DS/cmviewcl.txt
 CLNAME=$( head -3 $VAR_DIR/$DS/cmviewcl.txt | tail -1 | awk '{print $1}' )
 CLstatus=$( head -3 $VAR_DIR/$DS/cmviewcl.txt | tail -1 | awk '{print $2}' )
 SGversion=$( $SWLIST | grep -E '(T1905BA|T1905CA|B3935DA)' | awk '{print $2}' )
-NodeStatus=$( $CMVIEWCL -f line -l node | grep status | cut -d= -f2 )
+#NodeStatus=$( $CMVIEWCL -f line -l node | grep status | cut -d= -f2 )      # only SG 11.19 and higher
+NodeStatus=$( $CMVIEWCL -n $HOSTNAME -l node | tail -1 | awk '{print $2}' ) # works on odler SG versions too
 
 # what is the highest SG patch installed
 if [[ -f $VAR_DIR/$DS/${HOSTNAME}_show_patches.before ]]; then
