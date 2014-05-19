@@ -25,12 +25,12 @@ do
     if (( PREVIEW )) ; then
         LogPrint "${command[i]} -p -v ${options[i]} ${source[i]} $my_bundle"
 	printf "${command[i]} -p -v ${options[i]} ${source[i]} $my_bundle" >> $VAR_DIR/$DS/sw_installation_in_progress
-	${command[i]} -p -v ${options[i]} ${source[i]} $my_bundle
+	${command[i]} -p -v ${options[i]} ${source[i]} "$my_bundle"
 	rc=$?
     else
         LogPrint "${command[i]} -v ${options[i]} ${source[i]} $my_bundle"
 	printf "${command[i]} -v ${options[i]} ${source[i]} $my_bundle" >> $VAR_DIR/$DS/sw_installation_in_progress
-        ${command[i]} -v ${options[i]} ${source[i]} $my_bundle
+        ${command[i]} -v ${options[i]} ${source[i]} "$my_bundle"
 	rc=$?
     fi
 
