@@ -21,7 +21,8 @@ clean:
 	echo "Depot directory [$(depot_dir)] successfully removed"
 
 man: ../../opt/upgrade-ux/man/upgrade-ux.8
-	@if [ -f ../../opt/upgrade-ux/man/upgrade-ux.8 ]; then cp -p ../../opt/upgrade-ux/man/upgrade-ux.8 ../../opt/upgrade-ux/man/upgrade-ux.8.txt; \
+	@echo "Build new man page on Linux (upgrade-ux.8.txt is the source)"
+	@if [ -f ../../opt/upgrade-ux/man/upgrade-ux.8 ]; then cp -p ../../opt/upgrade-ux/man/upgrade-ux.8 ../../opt/upgrade-ux/man/upgrade-ux.8.save; \
 	compress ../../opt/upgrade-ux/man/upgrade-ux.8 ; mv -f ../../opt/upgrade-ux/man/upgrade-ux.8.Z ../../opt/upgrade-ux/man/upgrade-ux.8 ; fi
 
 rewrite: $(psf_file)
@@ -41,7 +42,7 @@ depot: clean  man rewrite
 	/usr/sbin/swpackage -vv -d $$depot_file  -x target_type=tape -s $(depot_dir) \* ; \
 	echo "File depot location is $$depot_file" ; \
 	rm -f /tmp/upgrade-ux_bundle.psf ; \
-	mv -f ../../opt/upgrade-ux/man/upgrade-ux.8.txt ../../opt/upgrade-ux/man/upgrade-ux.8 ; \
+	mv -f ../../opt/upgrade-ux/man/upgrade-ux.8.save ../../opt/upgrade-ux/man/upgrade-ux.8 ; \
 	mv -f $(psf_file).save $(psf_file) ; \
 	echo "Done."
 
