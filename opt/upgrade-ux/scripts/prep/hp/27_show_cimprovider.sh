@@ -8,4 +8,5 @@ grep -v "^MODULE" "$VAR_DIR/$DS/${HOSTNAME}_cimprovider.before" | grep -vq "OK"
 if (( $? == 0 )) ; then
     LogPrint "Some cim provider agents have another status then OK:"
     grep -v "^MODULE" "$VAR_DIR/$DS/${HOSTNAME}_cimprovider.before" | grep -v "OK"
+    grep -v "^MODULE" "$VAR_DIR/$DS/${HOSTNAME}_cimprovider.before" | grep -v "OK" >&2
 fi

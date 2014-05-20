@@ -15,8 +15,6 @@ if [[ -f "$VAR_DIR/$DS/${HOSTNAME}_global_patch_bundles.before" ]]; then
 	if (( PREVIEW )) ; then
             LogPrint  "WARNING: I am afraid the global patch bundle of last year ($LastYear) was not yet installed"
 	else
-            #Error "I am afraid the global patch bundle of last year ($LastYear) was not yet installed"
-	    # if we are not that fast to install all patches in the same year...
             LogPrint "ERROR: I am afraid the global patch bundle of last year ($LastYear) was not yet installed"
 	fi
     fi

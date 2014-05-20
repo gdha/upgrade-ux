@@ -4,5 +4,5 @@
 
 [[ -f "$VAR_DIR/$DS/sshd_config.before" ]] && return  # we already have a copy
 
-cp /opt/ssh/etc/sshd_config "$VAR_DIR/$DS/sshd_config.before"
+cp -p /opt/ssh/etc/sshd_config "$VAR_DIR/$DS/sshd_config.before"
 
