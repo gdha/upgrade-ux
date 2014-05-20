@@ -13,7 +13,7 @@
 ##    /opt/ssh/etc/sshd_config: terminating, 3 bad configuration options
 ##    Fix: comment out above options
 
-grep -v ^\#  "$VAR_DIR/$DS/sshd_config.before" | grep -q Sftp
+grep -v ^\#  "$VAR_DIR/$DS/sshd_config.before" | grep -q -E '(SftpLog|LogSftp)'
 if [[ $? -eq 0 ]]; then
     # we must put these lines in comment
     rm -f "$VAR_DIR/$DS/sshd_config.after"
