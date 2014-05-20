@@ -1,6 +1,6 @@
 # 60_save_lan_speed.sh
 
-[[ -f "$VAR_TMP/$DS/lan_interfaces_speed.bofore" ]]  &&  return  # we already have the file
+[[ -f "$VAR_TMP/$DS/lan_interfaces_speed.before" ]]  &&  return  # we already have the file
 
 (
 
@@ -11,4 +11,4 @@ do
     echo " "
 done
 
-) > "$VAR_DIR/$DS/lan_interfaces_speed.txt"
+) > "$VAR_DIR/$DS/lan_interfaces_speed.before"

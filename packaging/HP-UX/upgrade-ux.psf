@@ -2,14 +2,14 @@
     title upgrade-ux
     description upgrade-ux
     copyright (c)Copyright GPL v3
-    number A.00.01
+    number A.00.02
 
 product
     tag upgrade-ux
     title upgrade-ux
     description upgrade-ux
     copyright (c)Copyright GPL v3
-    revision A.00.01
+    revision A.00.02
     architecture HP-UX_B.11_32/64
     machine_type *
     os_name HP-UX
@@ -27,7 +27,7 @@ product
     fileset
         tag upgrade-ux-SCRIPTS
         title upgrade-ux script
-        revision A.00.01
+        revision A.00.02
         description upgrade-ux script
 
         directory ../../opt/upgrade-ux/bin = /opt/upgrade-ux/bin
@@ -48,7 +48,7 @@ product
     fileset
         tag upgrade-ux-CONFIG
         title upgrade-ux configuration files
-        revision A.00.01
+        revision A.00.02
         description upgrade-ux configuration files
 
         directory ../../etc/opt/upgrade-ux = /etc/opt/upgrade-ux
@@ -59,7 +59,7 @@ product
     fileset
         tag upgrade-ux-VAR
 	title upgrade-ux var files
-	revision A.00.01
+	revision A.00.02
 	description upgrade-ux var files
 
 	directory ../../var/opt/upgrade-ux = /var/opt/upgrade-ux
