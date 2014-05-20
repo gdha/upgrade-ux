@@ -15,8 +15,12 @@ do
         LogPrint "Executing: ${command[i]}  ${options[i]} [not in preview mode]"
 	# ${command[i]}  ${options[i]}
     else
-        LogPrint "Executing: ${command[i]}  ${options[i]}"
-	${command[i]}  ${options[i]}
+	if [[ -x "${command[i]}" ]]; then
+            LogPrint "Executing: ${command[i]}  ${options[i]}"
+	    ${command[i]}  ${options[i]}
+	else
+            Log "Command ${command[i]} not found [skipping]"
+	fi
     fi
     i=$((i+1))
 done
