@@ -1,0 +1,186 @@
+= upgrade-ux(8)
+:version: v1.0
+:date: 11 May 2014
+:data-uri:
+:author: Gratien Dhaese
+:doctype: manpage
+:lang: en
+:quirks:
+
+== NAME
+upgrade-ux - a framework to update or patch a Unix system (Linux, HP-UX and Solaris)
+
+== SYNOPSIS
+*upgrade-ux* [*-dDsSpvV*] [*-c* _DIR_] _COMMAND_ [-- _ARGS_...]
+
+== DESCRIPTION
+Upgrade-ux is an Open Source upgrade framework to make patching and upgrades easy and repeatable.
+
+Extending upgrade-ux is made possible by its modular framework.
+Consistent logging and optionally extended output help understand the concepts
+behind Upgrade-ux and help debug during development.
+
+Upgrade-ux comes with ABSOLUTELY NO WARRANTY; for details see
+the GNU General Public License at: http://www.gnu.org/licenses/gpl.html
+
+== OPTIONS
+
+=== GLOBAL OPTIONS
+
+-p::
+    *preview mode* (we will not remove or install, update any software on this system)
+    A preview will be forced by *upgrade-ux* before we can actually run it for real!
+
+-d::
+    *debug mode* (log debug messages to log file)
+
+-D::
+    *debugscript mode* (log every function call)
+
+-s::
+    *simulation mode* (show what scripts rear would include)
+
+-S::
+    *step-by-step mode* (acknowledge each script individually)
+
+-v::
+    *verbose mode* (show progress output)
+
+-V::
+    version information
+
+=== COMMANDS
+
+*dump*::
+    dump configuration and system information; please run this to verify
+    your setup
+
+*help*::
+    print full list of commands and options
+
+*purgelogs*::
+    remove log files older then 30 days
+
+*mkdist*::
+    creates a tar archive of upgrade-ux
+
+*test*::
+    a simple test flow (stale NFS test)
+
+*upgrade*::
+    the default command (when no command given) which will launch the upgrade/update/patch procedure
+
+Use 'upgrade-ux -v help' for more advanced commands.
+
+== CONFIGURATION
+
+There are several configuration files available under (*/etc/opt/upgrade-ux/*):
+
+*default.conf*::
+    the default configuration file which defines parameters and variables. You should not change anything in here. If you need to modify a parameter then copy that line into the *local.conf* file.
+
+*local.conf*::
+    the local configuration file meant for the end-user. Remember, configuration files should be treated as shell scripts.
+
+*HP-UX.conf*::
+    parameters and settings only read by HP-UX systems
+
+*SunOS.conf*::
+    parameters and settings only read by Solaris systems
+
+*GNU/Linux.conf*::
+    parameters and settings only read by GNU/Linux systems
+
+You have the choice to create additional configuration files if required. Use the *upgrade-ux dump* and see the _configuration tree_ section to have a complete overview of all configuration files searched for (it is OK if these do not exist).
+
+
+== INI FILES
+
+Each Unix Operating System requires an _INI_ file which contains the sections the upgrade procedure will follow in sequence.
+The name of such _INI_ file is build as follow:
+
+*/etc/opt/upgrade-ux/$OS-$OS_VERSION-$(date +%Y).ini*
+
+The _INI_ file is build out of sections (a section can be empty):
+
+*[preremove]*::
+    Add here any specific command to remove specific software bundles before starting the upgrade, e.g. if some software cannot be upgrade and should be re-installed
+
+    command[0] = (command)
+    options[0] = (options for above command)
+    bundle[0]  = (which software to remove)
+    version[0] = (specific version of above software bundle to be removed)
+
+    command[1] = (command)
+    ...
+
+*[preinstall]*::
+    Add here any specific command you want to run
+
+    command[0] = (command)
+
+*[install]*::
+    Add here all commands required to install, upgrade or patch our systems. Use the syntax:
+
+    command[0] = (command)
+    options[0] = (options for above command)
+    source[0]  = (location of the software depot)
+    bundle[0]  = (which software to install, update)
+    version[0] = (specific version of above software bundle to be installed or updated)
+
+*[postinstall]*::
+    Add here all commands required to install additional software packages. Use the same syntax as for [install]
+
+*[postremove]*::
+    Add here commands to remove something that could not be prevented by [install]. Syntax is the same as with [preremove]
+
+*[configure]*::
+    Add here commands to configure something special such as cron entries. Use same syntax as [preinstall]
+
+*[cleanup]*::
+    Add here commands to cleanup, if required. Most likely it will be empty
+
+*[postexecute]*::
+    Add here commands to run some special, such as *cfg2html* (as an example)
+
+    command[0] = /opt/cfg2html/bin/cfg2html -2\%Y\%m\%d
+
+== EXIT STATUS
+0::
+    Successful program execution.
+>0::
+    Usage, syntax or execution errors. Check the log file in
+    _/var/opt/upgrade-ux/log/_ for more information.
+
+== FILES
+/opt/upgrade-ux/bin/upgrade-ux::
+The program itself.
+
+/etc/opt/upgrade-ux/default.conf::
+The default configuration file.
+
+/etc/opt/upgrade-ux/local.conf::
+System specific configuration can be set here.
+
+/var/opt/upgrade-ux/::
+Directory which contains all evidence files (preview and install phase) with timestamp.
+
+/var/opt/upgrade-ux/status::
+File containing time stamps when all sections were executed (as upgrade-ux may be restarted after a reboot and will continue where it was interrupted)
+
+/var/opt/upgrade-ux/log/::
+Directory containing all log files of each upgrade-ux run with timestamps
+
+/tmp/upgrade-ux.xxx::
+Upgrade-ux working directory. By default it is removed after each run. If upgrade-ux exits with an error you probably need to remove this directory ny hand. In debugging mode the directory will not be removed as aid in helping to debug this software.
+
+/opt/upgrade-ux/scripts::
+Each section will have its own directory (with the name of a section) under this directory. Under each section directory you will find sub-directories with $OS_VENDOR name. Finally, under the $OS_VENDOR directories you will find scripts (without the she-bang!) that will be executed according the flow of the script. To honor the sequence use a prefix number. To see all scripts to be executed use the simulate option:
+
+    # /opt/upgrade-ux/bin/upgrade-ux -s
+    upgrade-ux 0.1 / Git
+    Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140506-1037-LOGFILE.log
+    Source init/default/03_prepare_tmp_build_area.sh
+    Source init/default/05_select_ini_file.sh
+    Source init/default/10_check_current_status.sh
+    ...
