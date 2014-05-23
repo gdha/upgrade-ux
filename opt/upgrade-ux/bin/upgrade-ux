@@ -67,10 +67,11 @@ VERBOSE=
 DEBUG=
 KEEP_BUILD_DIR=
 PREVIEW=
+FORCED=
 
 CMD_OPTS="$*"
 
-while getopts "c:dDhsSpvV" opt; do
+while getopts "c:dDhsSpFvV" opt; do
     case "$opt" in
        (h) WORKFLOW="help";;
        (V) echo "$PRODUCT $VERSION / $RELEASE_DATE"; exit 0;;
@@ -81,6 +82,7 @@ while getopts "c:dDhsSpvV" opt; do
        (s) SIMULATE=1; VERBOSE=1;;
        (S) STEPBYSTEP=1;;
        (p) PREVIEW=1;;
+       (F) FORCED=1;;
        (*) WORKFLOW="help";;
     esac
 done

@@ -30,5 +30,5 @@ if (( $? == 0 )) ; then
     grep -i error $CHECK_PATCHES_BEFORE >&2
     # show error listed in swagent.log file - use special function ShowErrorsSwagentLog
     ShowErrorsSwagentLog >&2
-    EnterNextStageAllowed="N"
+    (( $FORCED )) || EnterNextStageAllowed="N"
 fi
