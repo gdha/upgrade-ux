@@ -1,6 +1,6 @@
 = upgrade-ux(8)
 :version: v1.0
-:date: 11 May 2014
+:date: 26 May 2014
 :data-uri:
 :author: Gratien Dhaese
 :doctype: manpage
@@ -11,7 +11,7 @@
 upgrade-ux - a framework to update or patch a Unix system (Linux, HP-UX and Solaris)
 
 == SYNOPSIS
-*upgrade-ux* [*-dDsSpvV*] [*-c* _DIR_] _COMMAND_ [-- _ARGS_...]
+*upgrade-ux* [*-dDsSpFvV*] [*-c* _DIR_] _COMMAND_ [-- _ARGS_...]
 
 == DESCRIPTION
 Upgrade-ux is an Open Source upgrade framework to make patching and upgrades easy and repeatable.
@@ -29,7 +29,7 @@ the GNU General Public License at: http://www.gnu.org/licenses/gpl.html
 
 -p::
     *preview mode* (we will not remove or install, update any software on this system)
-    A preview will be forced by *upgrade-ux* before we can actually run it for real!
+    A preview will be forced by *upgrade-ux* before we can start an upgrade for real!
 
 -d::
     *debug mode* (log debug messages to log file)
@@ -43,8 +43,11 @@ the GNU General Public License at: http://www.gnu.org/licenses/gpl.html
 -S::
     *step-by-step mode* (acknowledge each script individually)
 
+-F::
+    *forced* continuation during preview or upgrade mode when check_patches returns errors
+
 -v::
-    *verbose mode* (show progress output)
+    *verbose output* (show progress output)
 
 -V::
     version information
@@ -70,7 +73,7 @@ the GNU General Public License at: http://www.gnu.org/licenses/gpl.html
 *upgrade*::
     the default command (when no command given) which will launch the upgrade/update/patch procedure
 
-Use 'upgrade-ux -v help' for more advanced commands.
+// Use 'upgrade-ux -v help' for more advanced commands.
 
 == CONFIGURATION
 
@@ -118,6 +121,7 @@ The _INI_ file is build out of sections (a section can be empty):
     Add here any specific command you want to run
 
     command[0] = (command)
+    options[0] = (options for above command)
 
 *[install]*::
     Add here all commands required to install, upgrade or patch our systems. Use the syntax:
@@ -143,7 +147,8 @@ The _INI_ file is build out of sections (a section can be empty):
 *[postexecute]*::
     Add here commands to run some special, such as *cfg2html* (as an example)
 
-    command[0] = /opt/cfg2html/bin/cfg2html -2\%Y\%m\%d
+    command[0] = "/opt/cfg2html/bin/cfg2html"
+    options[0] = "-2\%Y\%m\%d"
 
 == EXIT STATUS
 0::
@@ -167,6 +172,9 @@ Directory which contains all evidence files (preview and install phase) with tim
 
 /var/opt/upgrade-ux/status::
 File containing time stamps when all sections were executed (as upgrade-ux may be restarted after a reboot and will continue where it was interrupted)
+
+/var/opt/upgrade-ux/<YYYY-MM-DD>/::
+Evidence files collected during _prep_ phase (the _before_ files) and _postinstall_ phase (the _after_ files) are stored under this directory.
 
 /var/opt/upgrade-ux/log/::
 Directory containing all log files of each upgrade-ux run with timestamps
