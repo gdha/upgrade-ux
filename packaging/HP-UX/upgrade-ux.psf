@@ -71,4 +71,15 @@ product
 	exclude *.log
     end
 
+    fileset
+	tag upgrade-ux-DOC
+	title upgrade-ux documentation
+	revision A.00.02
+	description upgrade-ux documentation
+
+	directory ../../opt/upgrade-ux/man = /opt/upgrade-ux/man
+	file_permissions -o root -g sys -m 755
+	file *
+    end
+
 end # of product
