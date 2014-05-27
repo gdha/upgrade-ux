@@ -34,9 +34,13 @@ if [[ -f "$VAR_DIR/$DS/mpt.before" ]]; then
     if [[ $? -eq 0 ]]; then
         # startup script was not yet adapted to lower the speed to ultra160 (contains still the old card types)
         sed -e 's/A6491A/A6961/g' < "$VAR_DIR/$DS/mpt.before" > "$VAR_DIR/$DS/mpt.after"
-	cp "$VAR_DIR/$DS/mpt.after" /sbin/init.d/mpt
-	chmod 555 /sbin/init.d/mpt
-	LogPrint "Modified /sbin/init.d/mpt to lower speed of A6961 cards to ultra160"
+	if (( PREVIEW )) ; then
+	    LogPrint "Modified /sbin/init.d/mpt to lower speed of A6961 cards to ultra160 [not in preview mode]"
+        else
+	    cp "$VAR_DIR/$DS/mpt.after" /sbin/init.d/mpt
+	    chmod 555 /sbin/init.d/mpt
+	    LogPrint "Modified /sbin/init.d/mpt to lower speed of A6961 cards to ultra160"
+	fi
 	Log "Original start-up file is saved as $VAR_DIR/$DS/mpt.before"
     fi
 fi
@@ -46,4 +50,4 @@ do
     # in case we need evidence to proof it was changed we go over the list once more
     /usr/sbin/mptconfig $hba > "$VAR_DIR/$DS/ultra320.${hba##*/}.after"
 done
-Log "Check the speed modification in the files $VAR_DIR/$DS/ultra320.mpt*.[before|after]"
+Log "Check the speed modification within the files $VAR_DIR/$DS/ultra320.mpt* [before|after]"
