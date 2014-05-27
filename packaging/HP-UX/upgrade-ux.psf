@@ -79,7 +79,8 @@ product
 
 	directory ../../opt/upgrade-ux/man = /opt/upgrade-ux/man
 	file_permissions -o root -g sys -m 755
-	file *
+	file -m 444 -o bin -g bin upgrade-ux.8
+	file -m 444 -o bin -g bin upgrade-ux.8.html
     end
 
 end # of product
