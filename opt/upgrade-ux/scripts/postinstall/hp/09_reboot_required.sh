@@ -7,6 +7,9 @@ if (( PREVIEW )) ; then
     : # in preview mode it is not required to wait
 else
     # upgrade mode - we sleep a bit
-    LogPrint "Waiting for the reboot..."
-    sleep 30
+    if [[ ! -f "$VAR_DIR/$DS/.rebooted" ]]; then
+	# this file is created by ./08_save_shutdownlog.sh
+        LogPrint "Waiting for the reboot (or to be certain) [30s] ..."
+        sleep 30
+    fi
 fi
