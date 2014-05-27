@@ -37,5 +37,6 @@ else
     LogPrint "Following lines will be disabled in /opt/ssh/etc/sshd_config"
     grep Sftp "$VAR_DIR/$DS/sshd_config.after" >&2
     cp "$VAR_DIR/$DS/sshd_config.after" /opt/ssh/etc/sshd_config
+    chmod 444 /opt/ssh/etc/sshd_config
     Log "Updated the /opt/ssh/etc/sshd_config file"
 fi
