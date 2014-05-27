@@ -1,6 +1,5 @@
 prefix = /opt/upgrade-ux
-datadir = $(prefix)/scripts
-mandir = $(datadir)/man
+mandir = $(prefix)/man
 
 txttargets = $(shell echo *.txt)
 htmltargets = $(patsubst %.txt, %.html, $(txttargets))
@@ -15,7 +14,7 @@ docs: upgrade-ux.8 $(htmltargets)
 	make -C user-guide docs
 
 install: upgrade-ux.8
-	install -Dp -m0644 upgrade-ux.8 $(DESTDIR)$(mandir)/man8/rear.8
+	install -Dp -m0644 upgrade-ux.8 $(DESTDIR)$(mandir)/man8/upgrade-ux.8
 
 clean:
 	rm -f unconv.8 *.html *.xml
