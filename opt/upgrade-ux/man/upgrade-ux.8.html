@@ -788,7 +788,7 @@ upgrade-ux(8) Manual Page
 <div class="sect1">
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
-<div class="paragraph"><p><strong>upgrade-ux</strong> [<strong>-dDsSpvV</strong>] [<strong>-c</strong> <em>DIR</em>] <em>COMMAND</em> [-- <em>ARGS</em>&#8230;]</p></div>
+<div class="paragraph"><p><strong>upgrade-ux</strong> [<strong>-dDsSpFvV</strong>] [<strong>-c</strong> <em>DIR</em>] <em>COMMAND</em> [-- <em>ARGS</em>&#8230;]</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -814,7 +814,7 @@ the GNU General Public License at: <a href="http://www.gnu.org/licenses/gpl.html
 <dd>
 <p>
     <strong>preview mode</strong> (we will not remove or install, update any software on this system)
-    A preview will be forced by <strong>upgrade-ux</strong> before we can actually run it for real!
+    A preview will be forced by <strong>upgrade-ux</strong> before we can start an upgrade for real!
 </p>
 </dd>
 <dt class="hdlist1">
@@ -850,11 +850,19 @@ the GNU General Public License at: <a href="http://www.gnu.org/licenses/gpl.html
 </p>
 </dd>
 <dt class="hdlist1">
+-F
+</dt>
+<dd>
+<p>
+    <strong>forced</strong> continuation during preview or upgrade mode when check_patches returns errors
+</p>
+</dd>
+<dt class="hdlist1">
 -v
 </dt>
 <dd>
 <p>
-    <strong>verbose mode</strong> (show progress output)
+    <strong>verbose output</strong> (show progress output)
 </p>
 </dd>
 <dt class="hdlist1">
@@ -920,7 +928,6 @@ the GNU General Public License at: <a href="http://www.gnu.org/licenses/gpl.html
 </p>
 </dd>
 </dl></div>
-<div class="paragraph"><p>Use <em>upgrade-ux -v help</em> for more advanced commands.</p></div>
 </div>
 </div>
 </div>
@@ -1010,7 +1017,8 @@ version[0] = (specific version of above software bundle to be removed)</code></p
 </p>
 <div class="literalblock">
 <div class="content">
-<pre><code>command[0] = (command)</code></pre>
+<pre><code>command[0] = (command)
+options[0] = (options for above command)</code></pre>
 </div></div>
 </dd>
 <dt class="hdlist1">
@@ -1070,7 +1078,8 @@ version[0] = (specific version of above software bundle to be installed or updat
 </p>
 <div class="literalblock">
 <div class="content">
-<pre><code>command[0] = /opt/cfg2html/bin/cfg2html -2\%Y\%m\%d</code></pre>
+<pre><code>command[0] = "/opt/cfg2html/bin/cfg2html"
+options[0] = "-2%Y%m%d"</code></pre>
 </div></div>
 </dd>
 </dl></div>
@@ -1133,7 +1142,7 @@ System specific configuration can be set here.
 </dt>
 <dd>
 <p>
-Directory which contains all evidence files (preview and install phase) with timestamp.
+Directory which contains all timestamped directories and log directory.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -1141,7 +1150,20 @@ Directory which contains all evidence files (preview and install phase) with tim
 </dt>
 <dd>
 <p>
-File containing time stamps when all sections were executed (as upgrade-ux may be restarted after a reboot and will continue where it was interrupted)
+File containing time stamps when all sections were executed (as upgrade-ux may be restarted after a reboot and will continue where it was interrupted). For example,
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>2014-05-27 09:35:00 postexecute:ended
+2014-05-27 09:35:00 preview:ended   (preview ended successfully)</code></pre>
+</div></div>
+</dd>
+<dt class="hdlist1">
+/var/opt/upgrade-ux/&lt;YYYY-MM-DD&gt;/
+</dt>
+<dd>
+<p>
+Evidence files collected during <em>prep</em> phase (the <em>before</em> files) and <em>postinstall</em> phase (the <em>after</em> files) are stored under this directory.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -1179,13 +1201,39 @@ Source init/default/10_check_current_status.sh
 </div></div>
 </dd>
 </dl></div>
+<div class="paragraph"><p>To run <code>upgrade-ux</code> in <em>preview</em> mode use the <code>-p</code> flag:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code># /opt/upgrade-ux/bin/upgrade-ux -vp</code></pre>
+</div></div>
+<div class="paragraph"><p>To run <code>upgrade-ux</code> in <em>upgrade</em> mode then do <em>not</em> use the <code>-p</code> flag:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code># /opt/upgrade-ux/bin/upgrade-ux -v</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bugs">BUGS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Feedback is welcome, please report any issues or improvements to our issue-tracker at: <a href="https://github.com/gdha/upgrade-ux/issues">https://github.com/gdha/upgrade-ux/issues</a>
+Furthermore, we welcome pull request via GitHub.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_copyright">COPYRIGHT</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>(c) 2014 -</p></div>
+<div class="paragraph"><p>Gratien Dhaese</p></div>
+<div class="paragraph"><p>Upgrade-ux comes with ABSOLUTELY NO WARRANTY; for details see the GNU General Public License at
+<a href="http://www.gnu.org/licenses/gpl.html">http://www.gnu.org/licenses/gpl.html</a></p></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-05-06 10:49:55 CEST
+Last updated 2014-05-28 13:13:30 CEST
 </div>
 </div>
 </body>

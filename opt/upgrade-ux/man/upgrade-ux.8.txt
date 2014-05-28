@@ -148,7 +148,7 @@ The _INI_ file is build out of sections (a section can be empty):
     Add here commands to run some special, such as *cfg2html* (as an example)
 
     command[0] = "/opt/cfg2html/bin/cfg2html"
-    options[0] = "-2\%Y\%m\%d"
+    options[0] = "-2%Y%m%d"
 
 == EXIT STATUS
 0::
@@ -168,10 +168,14 @@ The default configuration file.
 System specific configuration can be set here.
 
 /var/opt/upgrade-ux/::
-Directory which contains all evidence files (preview and install phase) with timestamp.
+Directory which contains all timestamped directories and log directory.
 
 /var/opt/upgrade-ux/status::
-File containing time stamps when all sections were executed (as upgrade-ux may be restarted after a reboot and will continue where it was interrupted)
+File containing time stamps when all sections were executed (as upgrade-ux may be restarted after a reboot and will continue where it was interrupted). For example,
+
+    2014-05-27 09:35:00 postexecute:ended
+    2014-05-27 09:35:00 preview:ended   (preview ended successfully)
+    
 
 /var/opt/upgrade-ux/<YYYY-MM-DD>/::
 Evidence files collected during _prep_ phase (the _before_ files) and _postinstall_ phase (the _after_ files) are stored under this directory.
@@ -192,3 +196,25 @@ Each section will have its own directory (with the name of a section) under this
     Source init/default/05_select_ini_file.sh
     Source init/default/10_check_current_status.sh
     ...
+
+To run +upgrade-ux+ in _preview_ mode use the +-p+ flag:
+
+    # /opt/upgrade-ux/bin/upgrade-ux -vp
+
+To run +upgrade-ux+ in _upgrade_ mode then do _not_ use the +-p+ flag:
+
+    # /opt/upgrade-ux/bin/upgrade-ux -v
+
+
+== BUGS
+Feedback is welcome, please report any issues or improvements to our issue-tracker at: https://github.com/gdha/upgrade-ux/issues
+Furthermore, we welcome pull request via GitHub.
+
+== COPYRIGHT
+(c) 2014 - 
+
+Gratien Dhaese
+
+Upgrade-ux comes with ABSOLUTELY NO WARRANTY; for details see the GNU General Public License at
+http://www.gnu.org/licenses/gpl.html
+

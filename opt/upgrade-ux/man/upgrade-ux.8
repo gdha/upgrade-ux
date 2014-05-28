@@ -256,7 +256,7 @@ Add here commands to run some special, such as
 .\}
 .nf
 command[0] = "/opt/cfg2html/bin/cfg2html"
-options[0] = "\-2\e%Y\e%m\e%d"
+options[0] = "\-2%Y%m%d"
 .fi
 .if n \{\
 .RE
@@ -294,12 +294,23 @@ System specific configuration can be set here\&.
 .PP
 /var/opt/upgrade\-ux/
 .RS 4
-Directory which contains all evidence files (preview and install phase) with timestamp\&.
+Directory which contains all timestamped directories and log directory\&.
 .RE
 .PP
 /var/opt/upgrade\-ux/status
 .RS 4
-File containing time stamps when all sections were executed (as upgrade\-ux may be restarted after a reboot and will continue where it was interrupted)
+File containing time stamps when all sections were executed (as upgrade\-ux may be restarted after a reboot and will continue where it was interrupted)\&. For example,
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+2014\-05\-27 09:35:00 postexecute:ended
+2014\-05\-27 09:35:00 preview:ended   (preview ended successfully)
+.fi
+.if n \{\
+.RE
+.\}
 .RE
 .PP
 /var/opt/upgrade\-ux/<YYYY\-MM\-DD>/
@@ -345,6 +356,40 @@ Source init/default/10_check_current_status\&.sh
 .RE
 .\}
 .RE
+.sp
+To run upgrade\-ux in \fIpreview\fR mode use the \-p flag:
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+# /opt/upgrade\-ux/bin/upgrade\-ux \-vp
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+To run upgrade\-ux in \fIupgrade\fR mode then do \fInot\fR use the \-p flag:
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+# /opt/upgrade\-ux/bin/upgrade\-ux \-v
+.fi
+.if n \{\
+.RE
+.\}
+.SH "BUGS"
+.sp
+Feedback is welcome, please report any issues or improvements to our issue\-tracker at: \m[blue]\fBhttps://github\&.com/gdha/upgrade\-ux/issues\fR\m[] Furthermore, we welcome pull request via GitHub\&.
+.SH "COPYRIGHT"
+.sp
+(c) 2014 \-
+.sp
+Gratien Dhaese
+.sp
+Upgrade\-ux comes with ABSOLUTELY NO WARRANTY; for details see the GNU General Public License at \m[blue]\fBhttp://www\&.gnu\&.org/licenses/gpl\&.html\fR\m[]
 .SH "AUTHOR"
 .PP
 \fBGratien Dhaese\fR
