@@ -2,6 +2,7 @@
 # inspect the /stand/bootconf file and verify that the boot-disk matches
 
 a=$(setboot | grep Primary | awk '{ print $4 }' | sed -e 's#/#\\/#g')
+[[ -z "$a" ]] && Error "setboot does not have a Primary disk!"
 
 case "$OS_VERSION" in
     11.11|11.23)
