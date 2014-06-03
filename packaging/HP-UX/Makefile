@@ -26,6 +26,13 @@ man: ../../opt/upgrade-ux/man/upgrade-ux.8
 	@if [ -f ../../opt/upgrade-ux/man/upgrade-ux.8 ]; then cp -p ../../opt/upgrade-ux/man/upgrade-ux.8 ../../opt/upgrade-ux/man/upgrade-ux.8.save; \
 	compress ../../opt/upgrade-ux/man/upgrade-ux.8 ; mv -f ../../opt/upgrade-ux/man/upgrade-ux.8.Z ../../opt/upgrade-ux/man/upgrade-ux.8 ; fi
 
+validate:
+	@echo "Validating the scripts"
+	find ../../etc/opt/upgrade-ux -name '*.conf' | xargs -n 1 ksh -n ; \
+	ksh -n $(main_script) ; \
+	find ../../opt/upgrade-ux/scripts -name "*.sh" | xargs -n 1 ksh -n ; \
+	echo "Scripts were successfully validated."
+
 rewrite: $(psf_file) $(main_script)
 	@echo "Update the $(psf_file) file"
 	ver=`/usr/bin/grep ^VERSION= $(main_script) | cut -d= -f2` ; \
@@ -36,7 +43,7 @@ rewrite: $(psf_file) $(main_script)
 	cp -p $(main_script) $(main_script).save ; \
 	sed -e 's#RELEASE_DATE=.*#RELEASE_DATE='$$today'#' < $(main_script).save > $(main_script);
 	
-depot: clean  man rewrite
+depot: clean validate man rewrite
 	@/usr/sbin/swpackage -vv -s $(psf_file) -x layout_version=1.0 -d $(depot_dir) ; \
 	rel=`/usr/bin/grep 'number' $(psf_file) | awk '{print $$2}'` ; \
 	ymd=`date +%Y%m%d` ; \
