@@ -21,7 +21,8 @@ if [[ -z "$SDSERVER" ]]; then
 	elif (( $secdig == 128 || $secdig <= 191 )); then
 	    SDSERVER=10.129.52.119 # EMEA (hpx261)
 	elif (( $secdig == 192 || $secdig <= 223 )); then
-	    SDSERVER=10.129.52.119 # ASPAC (hpx261)
+	    # what about Japan? 10.200.67.65 itsimgjp (new SD server)
+	    SDSERVER=10.208.75.43 # ASPAC (itsimgau)
 	else
 	    SDSERVER=10.36.96.94   # unknown region go to the default value
 	fi
