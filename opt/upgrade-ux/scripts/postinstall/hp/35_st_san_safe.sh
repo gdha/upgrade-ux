@@ -4,6 +4,10 @@
 
 [[ ! -f "$VAR_DIR/$DS/tape_devices" ]] && return
 
+if [[ -f "$VAR_DIR/$DS/kernel_parameters.after" ]]; then
+    grep -q st_san_safe "$VAR_DIR/$DS/kernel_parameters.after" ||  return  # kernel tunable not present; just return
+fi
+
 case "$OS_VERSION" in
     11.11)
         #/usr/sbin/kmtune -q st_san_safe
