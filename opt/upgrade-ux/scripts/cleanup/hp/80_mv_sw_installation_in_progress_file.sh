@@ -1,4 +1,4 @@
-# 20_rm_sw_installation_in_progress_file.sh
+# 80_rm_sw_installation_in_progress_file.sh
 # only to be run in preview mode - rename the $VAR_DIR/$DS/sw_installation_in_progress file
 # otherwise we might have the wrong count during sw installation - see issue #3
 
