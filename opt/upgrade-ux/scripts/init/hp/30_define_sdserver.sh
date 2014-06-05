@@ -39,9 +39,9 @@ fi
 
 x=$( PingSystem $SDSERVER )
 if [[ $x -eq 1 ]]; then
-    Error "SD Server $SDSERVER not reachable from $lhost"
+    Error "Software Depot Server $SDSERVER not reachable from $lhost"
 elif [[ $x -eq 2 ]]; then
-    Error "SD Server $SDSERVER unknown - please define SDSERVER in local.conf"
+    Error "Software Depot Server $SDSERVER unknown - please define SDSERVER in $ETC_DIR/local.conf"
 else
    Log "Software Depot Server $SDSERVER is reachable via ping"
 fi
