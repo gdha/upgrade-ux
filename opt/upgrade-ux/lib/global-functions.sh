@@ -167,29 +167,26 @@ function Timeout {
     # argument 1: integer in seconds
     [ "$DEBUG" ] && set -x
     TIMEOUT=$1
-    IsDigit $TIMEOUT || Error "Timeout value must be an integer [seconds]"
     shift
     COMMAND="$@"
     RET=0
     # Launch command in backgroup
-    #[ ! "$DEBUG" ] && exec 6>&2 # Link file descriptor #6 with stderr.
-    #[ ! "$DEBUG" ] && exec 2> /dev/null # Send stderr to null (avoid the Terminated messages)
-    ##$COMMAND 2>&1 >/dev/null &
-    $COMMAND  &
+    [ ! "$DEBUG" ] && exec 6>&2 # Link file descriptor #6 with stderr.
+    [ ! "$DEBUG" ] && exec 2> /dev/null # Send stderr to null (avoid the Terminated messages)
+    $COMMAND 2>&1 >/dev/null &
     COMMAND_PID=$!
-    [ "$DEBUG" ] && LogPrint "Background command pid $COMMAND_PID, parent pid $$"
+    [ "$DEBUG" ] && echo "Background command pid $COMMAND_PID, parent pid $$"
     # Timer that will kill the command if timesout
-    sleep $TIMEOUT && UNIX95= ps -p $COMMAND_PID -o pid,ppid |grep $$ | awk '{print $1}' | xargs kill &
+    sleep $TIMEOUT && UNIX95= ps -p $COMMAND_PID -o pid,ppid | awk -v parent=$$ '$2==parent {print $1}' | xargs kill &
     KILLER_PID=$!
-    [ "$DEBUG" ] && LogPrint "Killer command pid $KILLER_PID, parent pid $$"
+    [ "$DEBUG" ] && echo "Killer command pid $KILLER_PID, parent pid $$"
     wait $COMMAND_PID
     RET=$?
     # Kill the killer timer
-    [ "$DEBUG" ] && UNIX95= ps -e -o pid,ppid |grep $KILLER_PID | awk '{print $1}' | xargs LogPrint "Killing processes: "
-    UNIX95= ps -e -o pid,ppid |grep -v PID | grep $KILLER_PID | awk '{print $1}' | xargs kill
-    wait
-    sleep 1
-    #[ ! "$DEBUG" ] && exec 2>&6 6>&- # Restore stderr and close file descriptor #6.
+    [ "$DEBUG" ] && echo Listing proces that will be killed
+    [ "$DEBUG" ] && UNIX95= ps -p $KILLER_PID -o pid,ppid | awk -v parent=$$ '$2==parent {print $1}' | xargs ps -fp
+    UNIX95= ps -p $KILLER_PID -o pid,ppid | awk -v parent=$$ '$2==parent {print $1}' | xargs kill
+    [ ! "$DEBUG" ] && exec 2>&6 6>&- # Restore stderr and close file descriptor #6.
     return $RET
 }
 
