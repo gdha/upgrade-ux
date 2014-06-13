@@ -1,0 +1,27 @@
+= Upgrade-UX User Guide
+:author: Gratien Dhaese
+:version: 0.1 draft
+:data-uri:
+:doctype: book
+:encoding: UTF-8
+:numbered:
+:toc:
+:toclevels: 2
+
+//[width="10cm",height="10cm",align="left"]
+//image::upgrade-ux-sm.png[logo]
+++++
+<img src="http://www.it3.be/images/upgrade-ux.png">
+++++
+
+This document describes everything there is to know regarding
+Upgrade-UX, an Open Source upgrade and patching software designed to assister the system engineer in patching
+systems in a consistent way with evidence before and after the patching.
+
+:leveloffset: 1
+include::01-introduction.txt[]
+include::02-getting-started.txt[]
+include::03-configuration.txt[]
+include::04-workflows.txt[]
+include::05-upgrade.txt[]
+include::06-scripts.txt[]
