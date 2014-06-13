@@ -24,7 +24,7 @@ The support and development of the Upgrade-UX project takes place
 on Github:
 
 Upgrade-UX website::
-    http://www.it3.be/upgrade-ux/
+    http://www.it3.be/projects/upgrade-ux.html
 
 Github project::
     http://github.com/gdha/upgrade-ux/
