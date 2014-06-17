@@ -788,7 +788,7 @@ upgrade-ux(8) Manual Page
 <div class="sect1">
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
-<div class="paragraph"><p><strong>upgrade-ux</strong> [<strong>-dDsSpFvV</strong>] [<strong>-c</strong> <em>DIR</em>] <em>COMMAND</em> [-- <em>ARGS</em>&#8230;]</p></div>
+<div class="paragraph"><p><strong>upgrade-ux</strong> [<strong>-dDsSpFvV</strong>] <em>COMMAND</em> [-- <em>ARGS</em>&#8230;]</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -977,7 +977,8 @@ the GNU General Public License at: <a href="http://www.gnu.org/licenses/gpl.html
 </p>
 </dd>
 </dl></div>
-<div class="paragraph"><p>You have the choice to create additional configuration files if required. Use the <strong>upgrade-ux dump</strong> and see the <em>configuration tree</em> section to have a complete overview of all configuration files searched for (it is OK if these do not exist).</p></div>
+<div class="paragraph"><p>You have the choice to create additional configuration files if required. Use the <strong>upgrade-ux dump</strong> and check the <em>configuration tree</em> section to have a complete overview of all configuration files searched for (it is OK if these do not exist).</p></div>
+<div class="paragraph"><p>A typical variable might be the <code>YEAR</code> setting to define from which year (instead of the default <strong>$(date +%Y)</strong> [current year]) we want to install the patch bundles.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -985,7 +986,7 @@ the GNU General Public License at: <a href="http://www.gnu.org/licenses/gpl.html
 <div class="sectionbody">
 <div class="paragraph"><p>Each Unix Operating System requires an <em>INI</em> file which contains the sections the upgrade procedure will follow in sequence.
 The name of such <em>INI</em> file is build as follow:</p></div>
-<div class="paragraph"><p><strong>/etc/opt/upgrade-ux/$OS-$OS_VERSION-$(date +%Y).ini</strong></p></div>
+<div class="paragraph"><p><strong>/etc/opt/upgrade-ux/$OS-$OS_VERSION-$YEAR.ini</strong></p></div>
 <div class="paragraph"><p>The <em>INI</em> file is build out of sections (a section can be empty):</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1233,7 +1234,7 @@ Furthermore, we welcome pull request via GitHub.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-05-28 13:13:30 CEST
+Last updated 2014-06-17 10:41:46 CEST
 </div>
 </div>
 </body>

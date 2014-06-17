@@ -11,14 +11,12 @@ dist: docs
 man: upgrade-ux.8
 
 docs: upgrade-ux.8 $(htmltargets)
-	make -C user-guide docs
 
 install: upgrade-ux.8
 	install -Dp -m0644 upgrade-ux.8 $(DESTDIR)$(mandir)/man8/upgrade-ux.8
 
 clean:
 	rm -f unconv.8 *.html *.xml
-	make -C user-guide clean
 
 %.8.html: %.8.txt
 	asciidoc -d manpage $<

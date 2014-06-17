@@ -1,6 +1,6 @@
 = upgrade-ux(8)
 :version: v1.0
-:date: 26 May 2014
+:date: 17 june 2014
 :data-uri:
 :author: Gratien Dhaese
 :doctype: manpage
@@ -11,7 +11,7 @@
 upgrade-ux - a framework to update or patch a Unix system (Linux, HP-UX and Solaris)
 
 == SYNOPSIS
-*upgrade-ux* [*-dDsSpFvV*] [*-c* _DIR_] _COMMAND_ [-- _ARGS_...]
+*upgrade-ux* [*-dDsSpFvV*] _COMMAND_ [-- _ARGS_...]
 
 == DESCRIPTION
 Upgrade-ux is an Open Source upgrade framework to make patching and upgrades easy and repeatable.
@@ -94,7 +94,9 @@ There are several configuration files available under (*/etc/opt/upgrade-ux/*):
 *GNU/Linux.conf*::
     parameters and settings only read by GNU/Linux systems
 
-You have the choice to create additional configuration files if required. Use the *upgrade-ux dump* and see the _configuration tree_ section to have a complete overview of all configuration files searched for (it is OK if these do not exist).
+You have the choice to create additional configuration files if required. Use the *upgrade-ux dump* and check the _configuration tree_ section to have a complete overview of all configuration files searched for (it is OK if these do not exist).
+
+A typical variable might be the +YEAR+ setting to define from which year (instead of the default *$(date +%Y)* [current year]) we want to install the patch bundles. 
 
 
 == INI FILES
@@ -102,7 +104,7 @@ You have the choice to create additional configuration files if required. Use th
 Each Unix Operating System requires an _INI_ file which contains the sections the upgrade procedure will follow in sequence.
 The name of such _INI_ file is build as follow:
 
-*/etc/opt/upgrade-ux/$OS-$OS_VERSION-$(date +%Y).ini*
+*/etc/opt/upgrade-ux/$OS-$OS_VERSION-$YEAR.ini*
 
 The _INI_ file is build out of sections (a section can be empty):
 
