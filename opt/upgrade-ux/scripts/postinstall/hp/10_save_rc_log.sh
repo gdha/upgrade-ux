@@ -2,4 +2,4 @@
 
 [[ ! -f /etc/rc.log ]] && return
 
-cp /etc/rc.log  $VAR_DIR/$DS/rc.log
+cp -p /etc/rc.log  "$VAR_DIR/$DS/rc.log"
