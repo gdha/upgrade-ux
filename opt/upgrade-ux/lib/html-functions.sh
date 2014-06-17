@@ -101,7 +101,7 @@ function TableRow
         "OK")           color="#00CA00" ;;      # greenish
         "FAILED")       color="#FF0000" ;;      # redish
         "WARN")
-                if [[ "${columns[0]}" == "**" ]]; then
+                if [ "${columns[0]}" = "**" ]; then
                         color="#E8E800"         # yellow alike
                 else
                         color="#FB6104"         # orange alike
@@ -113,7 +113,7 @@ function TableRow
     echo "<tr bgcolor=\"$color\">"
 
     while (( c < ${#columns[@]} )); do
-        if [[ "$color" == "#FF0000" ]] || [[ "$color" == "#FB6104" ]] || [[ "$color" == "#000000" ]]; then
+        if [ "$color" = "#FF0000" ] || [ "$color" = "#FB6104" ] || [ "$color" = "#000000" ]; then
                 # foreground color white if background color is redish or orangish or black
                 echo "  <td align=left><font size=-1 color="white">\c"
         else

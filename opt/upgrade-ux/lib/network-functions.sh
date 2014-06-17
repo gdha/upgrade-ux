@@ -80,7 +80,7 @@ function GetNetworkAddress
     nm="$2"
 
     if [ -n "$ip" -a -n "$nm" ]; then
-        if [[ "$nm" == *.* ]]; then
+        if [ "$nm" = *.* ]; then
             :
         else
             nm=$( PrefixNetmask ${nm} )
