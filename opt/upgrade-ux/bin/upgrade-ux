@@ -61,13 +61,13 @@ LOG_DIR="${VAR_DIR}/log"
 
 
 # initialize defaults
-STEPBYSTEP=
-SIMULATE=
-VERBOSE=
-DEBUG=
+STEPBYSTEP=0
+SIMULATE=0
+VERBOSE=0
+DEBUG=0
 KEEP_BUILD_DIR=
-PREVIEW=
-FORCED=
+PREVIEW=0
+FORCED=0
 
 CMD_OPTS="$*"
 
@@ -144,7 +144,7 @@ case "$WORKFLOW" in
     (*)
        LogPrint "$PRODUCT $VERSION / $RELEASE_DATE"
        Log "Command line options: $0 ${CMD_OPTS[@]}"
-       if (( "$VERBOSE" )); then
+       if (( VERBOSE )); then
           LogPrint "Using log file: $LOGFILE"
        fi
        ;;
@@ -153,14 +153,14 @@ esac
 v=""
 verbose=""
 # enable progress subsystem only in verbose mode, set some stuff that others can use
-if (( "$VERBOSE" )); then
+if (( VERBOSE )); then
     Source $LIB_DIR/progresssubsystem.nosh
     v="-v"
     verbose="--verbose"
 fi
 
 # enable debug output of the progress pipe
-if (( "$DEBUG" )); then
+if (( DEBUG )); then
     KEEP_BUILD_DIR=1
 fi
 

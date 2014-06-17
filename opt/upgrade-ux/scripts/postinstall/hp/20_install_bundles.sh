@@ -3,7 +3,7 @@
 count=${#bundle[@]}
 i=0
 
-while (( i < $count ))
+while (( i < count ))
 do
 
     my_bundle="${bundle[i]}"
@@ -23,7 +23,7 @@ do
 	rc=$?
     fi
 
-    if (( $rc > 0 )) ; then
+    if (( rc > 0 )) ; then
         LogPrint "Error detected: ${command[i]} -v ${options[i]} ${source[i]} $my_bundle"
     fi
 

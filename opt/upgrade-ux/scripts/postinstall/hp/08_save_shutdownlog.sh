@@ -5,7 +5,7 @@
 if [[ -f "$VAR_DIR/$DS/shutdownlog.before" ]]; then
     cp -p /etc/shutdownlog "$VAR_DIR/$DS/shutdownlog.after"
     cmp -s "$VAR_DIR/$DS/shutdownlog.after" "$VAR_DIR/$DS/shutdownlog.before"
-    if [[ $? -eq 1 ]]; then
+    if (( $? == 1 )) ; then
         LogPrint "Last shutdown: $(tail -1 $VAR_DIR/$DS/shutdownlog.after)"
 	touch "$VAR_DIR/$DS/.rebooted"
     fi

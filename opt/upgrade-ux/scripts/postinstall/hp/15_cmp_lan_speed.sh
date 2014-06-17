@@ -14,7 +14,7 @@ done
 ) > "$VAR_DIR/$DS/lan_interfaces_speed.after"
 
 cmp -s "$VAR_TMP/$DS/lan_interfaces_speed.before" "$VAR_DIR/$DS/lan_interfaces_speed.after"
-if [[ $? -eq 1 ]]; then
+if (( $? == 1 )) ; then
     LogPrint "WARNING: lan speed seems to be different after the reboot!"
     sdiff -s "$VAR_TMP/$DS/lan_interfaces_speed.before" "$VAR_DIR/$DS/lan_interfaces_speed.after"
     sdiff -s "$VAR_TMP/$DS/lan_interfaces_speed.before" "$VAR_DIR/$DS/lan_interfaces_speed.after"  >&2

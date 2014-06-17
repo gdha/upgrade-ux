@@ -9,7 +9,7 @@ i=0
 OEMVER=$( $SWLIST -l bundle -a os_release | grep HPUX11i | awk '{print $1}' )
 LogPrint "System $lhost has HP-UX version $OEMVER installed"
 
-while (( i < $count ))
+while (( i < count ))
 do
     if [[ "${command[i]}" == "/usr/sbin/update-ux" ]]; then
         my_bundle="${OEMVER} ${bundle[i]}"
