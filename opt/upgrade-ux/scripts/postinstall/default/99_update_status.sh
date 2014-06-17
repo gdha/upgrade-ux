@@ -7,7 +7,7 @@
 # at the end of this stage change the current status in our variable CURRENT_STATUS 
 # TODO: which criterium will be use to decide we have succeeded this stage successfully?
 
-if [[ "$EnterNextStageAllowed" = "N" ]]; then
+if [[ "$EnterNextStageAllowed" == "N" ]]; then
     Error "As the variable EnterNextStageAllowed is set to \"N\" we cannot proceed to the next stage"
 else
     CURRENT_STATUS="$stage:ended"
