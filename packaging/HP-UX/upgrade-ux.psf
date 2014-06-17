@@ -81,6 +81,13 @@ product
 	file_permissions -o root -g sys -m 755
 	file -m 444 -o bin -g bin upgrade-ux.8
 	file -m 444 -o bin -g bin upgrade-ux.8.html
+
+	directory ../../opt/upgrade-ux/doc/user-guide = /opt/upgrade-ux/doc
+	file_permissions -o root -g sys -m 755
+	file -m 444 -o bin -g bin upgrade-ux-user-guide.html
+
+	directory ../.. = /opt/upgrade-ux/doc
+	file -m 444 -o bin -g bin LICENSE
     end
 
 end # of product
