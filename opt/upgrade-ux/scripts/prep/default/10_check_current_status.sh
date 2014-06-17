@@ -8,7 +8,7 @@
 
 CURRENT_STATUS=$( ReadCurrentStatus "$STATUS_FILE" )
 
-if [[ "$CURRENT_STATUS" == "init:ended" ]]; then
+if [ "$CURRENT_STATUS" = "init:ended" ]; then
     CURRENT_STATUS="$stage:start"
     SetCurrentStatus "$STATUS_FILE"
 fi

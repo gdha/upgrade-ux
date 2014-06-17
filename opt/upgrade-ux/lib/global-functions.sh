@@ -60,7 +60,7 @@ function CreateLockDir {
             OTHERPID=$(<$PIDFILE)
             if kill -s 0 ${OTHERPID} 2>/dev/null ; then
                 Log "locked on ${OTHERPID} - try again"
-            return 1
+                return 1
             else
                 Log "lock is stale (${OTHERPID}) - will continue"
             fi
@@ -103,7 +103,7 @@ function AcquireLock {
 function ReleaseLock {
     # remove the lock only if PID is current one
     CHECKPID=$(<$PIDFILE)
-    if [[ ${PID} == ${CHECKPID} ]]; then
+    if (( PID == CHECKPID )); then
         # ok we are sure if is our lock
         rm -rf "${LOCKDIR}"
         if (( $? == 0 )) ; then
@@ -219,9 +219,9 @@ function proceed_to_next_stage {
 	"prep"   )
 	    if test "$SIMULATE" ; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" == "init" ]] && [[ "$prev_status" == "ended" ]]; then
+            elif [ "$prev_stage" = "init" ] && [ "$prev_status" = "ended" ]; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" == "prep" ]] && [[ "$prev_status" == "start" ]]; then
+            elif [ "$prev_stage" = "prep" ] && [ "$prev_status" = "start" ]; then
 	       return 0 # yes you may
 	    else
 	       return 1 # no you may not
@@ -230,9 +230,9 @@ function proceed_to_next_stage {
         "preremove" )	
 	    if test "$SIMULATE" ; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" == "prep" ]] && [[ "$prev_status" == "ended" ]]; then
+            elif [ "$prev_stage" = "prep" ] && [ "$prev_status" = "ended" ]; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" == "preremove" ]] && [[ "$prev_status" == "start" ]]; then
+            elif [ "$prev_stage" = "preremove" ] && [ "$prev_status" = "start" ]; then
 	       return 0 # yes you may
 	    else
 	       return 1 # no you may not
@@ -241,9 +241,9 @@ function proceed_to_next_stage {
         "preinstall" )
 	    if test "$SIMULATE" ; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" == "preremove" ]] && [[ "$prev_status" == "ended" ]]; then
+            elif [ "$prev_stage" = "preremove" ] && [ "$prev_status" = "ended" ]; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" == "preinstall" ]] && [[ "$prev_status" == "start" ]]; then
+            elif [ "$prev_stage" = "preinstall" ] && [ "$prev_status" = "start" ]; then
 	       return 0 # yes you may
 	    else
 	       return 1 # no you may not
@@ -252,9 +252,9 @@ function proceed_to_next_stage {
         "install" )
 	    if test "$SIMULATE" ; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" == "preinstall" ]] && [[ "$prev_status" == "ended" ]]; then
+            elif [ "$prev_stage" = "preinstall" ] && [ "$prev_status" = "ended" ]; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" == "install" ]] && [[ "$prev_status" == "start" ]]; then
+            elif [ "$prev_stage" = "install" ] && [ "$prev_status" = "start" ]; then
 	       return 0 # yes you may
 	    else
 	       return 1 # no you may not
@@ -264,9 +264,9 @@ function proceed_to_next_stage {
 	"postinstall" )
 	    if test "$SIMULATE" ; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" == "install" ]] && [[ "$prev_status" == "ended" ]]; then
+            elif [ "$prev_stage" = "install" ] && [ "$prev_status" = "ended" ]; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" == "postinstall" ]] && [[ "$prev_status" == "start" ]]; then
+            elif [ "$prev_stage" = "postinstall" ] && [ "$prev_status" = "start" ]; then
 	       return 0 # yes you may
 	    else
 	       return 1 # no you may not
@@ -276,9 +276,9 @@ function proceed_to_next_stage {
 	"postremove" )
 	    if test "$SIMULATE" ; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" == "postinstall" ]] && [[ "$prev_status" == "ended" ]]; then
+            elif [ "$prev_stage" = "postinstall" ] && [ "$prev_status" = "ended" ]; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" == "postremove" ]] && [[ "$prev_status" == "start" ]]; then
+            elif [ "$prev_stage" = "postremove" ] && [ "$prev_status" = "start" ]; then
 	       return 0 # yes you may
 	    else
 	       return 1 # no you may not
@@ -288,9 +288,9 @@ function proceed_to_next_stage {
 	"configure" )
 	    if test "$SIMULATE" ; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" == "postremove" ]] && [[ "$prev_status" == "ended" ]]; then
+            elif [ "$prev_stage" = "postremove" ] && [ "$prev_status" = "ended" ]; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" == "configure" ]] && [[ "$prev_status" == "start" ]]; then
+            elif [ "$prev_stage" = "configure" ] && [ "$prev_status" = "start" ]; then
 	       return 0 # yes you may
 	    else
 	       return 1 # no you may not
@@ -300,9 +300,9 @@ function proceed_to_next_stage {
 	"postexecute" )
 	    if test "$SIMULATE" ; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" == "configure" ]] && [[ "$prev_status" == "ended" ]]; then
+            elif [ "$prev_stage" = "configure" ] && [ "$prev_status" = "ended" ]; then
 	       return 0 # yes you may
-            elif [[ "$prev_stage" == "postexecute" ]] && [[ "$prev_status" == "start" ]]; then
+            elif [ "$prev_stage" = "postexecute" ] && [ "$prev_status" = "start" ]; then
 	       return 0 # yes you may
 	    else
 	       return 1 # no you may not
