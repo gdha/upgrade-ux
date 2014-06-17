@@ -13,7 +13,7 @@ function Source {
             LogPrint "Source $relname"
         else
             # step-by-step mode or breakpoint if needed
-            if [[ "$STEPBYSTEP" -eq 1 ]]; then
+            if (( STEPBYSTEP == 1 )) ; then
                 read -p "Press ENTER to include '$1' ..." 2>&1
             fi
 

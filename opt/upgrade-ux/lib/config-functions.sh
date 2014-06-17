@@ -153,13 +153,13 @@ function ParseIniFile {
         # done
 
     INI_SECTION="$1"
-    eval `sed -e 's/[[:space:]]*\=[[:space:]]*/=/g' \
+    eval $( sed -e 's/[[:space:]]*\=[[:space:]]*/=/g' \
         -e 's/;.*$//' \
         -e 's/[[:space:]]*$//' \
         -e 's/^[[:space:]]*//' \
         -e "s/^\(.*\)=\([^\"']*\)$/\1=\"\2\"/" \
         < $INI_FILE \
-        | sed -n -e "/^\[$INI_SECTION\]/,/^\s*\[/{/^[^;].*\=.*/p;}"`
+        | sed -n -e "/^\[$INI_SECTION\]/,/^\s*\[/{/^[^;].*\=.*/p;}" )
 
     # ${command[@]} : array of commands
     # ${options[@]} : array of options for commands array

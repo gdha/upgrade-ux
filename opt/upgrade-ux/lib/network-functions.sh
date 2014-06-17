@@ -21,7 +21,7 @@ function MyIPcalc
 
     if [[ ! -z "$2" ]]; then
         typeset -i i=0 DEC MASK="$(Ip2Num "$2")"
-        while [[ $i -le 32 ]]; do
+        while (( i < 32 )) ; do
              DEC=${MASKS[$i]}
              (( MASK == DEC )) && break
              i=$(( i + 1))
@@ -40,7 +40,7 @@ function Quad2Num
 {
     # usage : Quad2Num 192 168 10 20
     #         3232238100
-    if [ $# -eq 4 ]; then
+    if (( $# == 4 )) ; then
         let n="${1} << 24 | ${2} << 16 | ${3} << 8 | ${4}"
         echo "${n}"
         return 0
@@ -80,7 +80,7 @@ function GetNetworkAddress
     nm="$2"
 
     if [ -n "$ip" -a -n "$nm" ]; then
-        if [[ "$nm" = *.* ]]; then
+        if [[ "$nm" == *.* ]]; then
             :
         else
             nm=$( PrefixNetmask ${nm} )

@@ -6,7 +6,7 @@ function MailHeaders
     echo "Subject: $*"
     echo "Content-type: text/html"
     echo "$*" | grep -q "FAILED"
-    if [[ $? -eq 0 ]]; then
+    if (( $? == 0 )) ; then
         echo "Importance: high"
         echo "X-Priority: 1"
     else
@@ -90,7 +90,7 @@ function TableRow
     esac
     columns[1]=$( echo "$row" |  sed -e 's/\(.*\)\[.*/\1/' )   # the text with ** and [ ... ]
     echo "$row" | grep -q '\['
-    if [[ $? -eq 0 ]]; then
+    if (( $? == 0 )) ; then
         columns[2]=$( echo "$row" | sed -e 's/.*\(\[.*\]\)/\1/' )  # contains [  OK  ]
     else
         columns[2]=""
@@ -101,7 +101,7 @@ function TableRow
         "OK")           color="#00CA00" ;;      # greenish
         "FAILED")       color="#FF0000" ;;      # redish
         "WARN")
-                if [[ "${columns[0]}" = "**" ]]; then
+                if [[ "${columns[0]}" == "**" ]]; then
                         color="#E8E800"         # yellow alike
                 else
                         color="#FB6104"         # orange alike
@@ -112,8 +112,8 @@ function TableRow
 
     echo "<tr bgcolor=\"$color\">"
 
-    while (( $c < ${#columns[@]} )); do
-        if [[ "$color" = "#FF0000" ]] || [[ "$color" = "#FB6104" ]] || [[ "$color" = "#000000" ]]; then
+    while (( c < ${#columns[@]} )); do
+        if [[ "$color" == "#FF0000" ]] || [[ "$color" == "#FB6104" ]] || [[ "$color" == "#000000" ]]; then
                 # foreground color white if background color is redish or orangish or black
                 echo "  <td align=left><font size=-1 color="white">\c"
         else
@@ -121,7 +121,7 @@ function TableRow
         fi
 
 	str=$( echo "${columns[c]}" | sed -e 's/^[:blank:]*//;s/[:blank:]*$//' )  # remove leading/trailing spaces
-        [[ $c -eq 1 ]] && printf "<b>$str</b>" || printf "$str"
+        (( c == 1 )) && printf "<b>$str</b>" || printf "$str"
         echo "</td>"
         c=$((c + 1))
     done
