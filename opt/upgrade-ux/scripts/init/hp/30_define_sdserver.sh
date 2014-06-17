@@ -10,17 +10,17 @@ if [[ -z "$SDSERVER" ]]; then
 
     case $secdig in
     +([0-9]))
-        if (( $secdig == 0 )); then
+        if (( secdig == 0 )); then
             SDSERVER=10.0.11.237  # lab (hplabx1)
-        elif (( $secdig == 56 || $secdig == 57 )); then
+        elif (( secdig == 56 || secdig == 57 )); then
 	    SDSERVER=10.36.96.94  # Dr site (itsblp02)
-        elif (( $secdig == 1 || $secdig <= 95 )); then
+        elif (( secdig == 1 || secdig <= 95 )); then
 	    SDSERVER=10.36.96.94  # NA (itsblp02)
-	elif (( $secdig == 96 || $secdig <= 127 )); then
+	elif (( secdig == 96 || secdig <= 127 )); then
 	    SDSERVER=10.36.96.94  # LA (itsblp02)
-	elif (( $secdig == 128 || $secdig <= 191 )); then
+	elif (( secdig == 128 || secdig <= 191 )); then
 	    SDSERVER=10.129.52.119 # EMEA (hpx261)
-	elif (( $secdig == 192 || $secdig <= 223 )); then
+	elif (( secdig == 192 || secdig <= 223 )); then
 	    # what about Japan? 10.200.67.65 itsimgjp (new SD server)
 	    SDSERVER=10.208.75.43 # ASPAC (itsimgau)
 	else
@@ -38,9 +38,9 @@ fi
 
 
 x=$( PingSystem $SDSERVER )
-if [[ $x -eq 1 ]]; then
+if (( x == 1 )); then
     Error "Software Depot Server $SDSERVER not reachable from $lhost"
-elif [[ $x -eq 2 ]]; then
+elif (( x == 2 )); then
     Error "Software Depot Server $SDSERVER unknown - please define SDSERVER in $ETC_DIR/local.conf"
 else
    Log "Software Depot Server $SDSERVER is reachable via ping"

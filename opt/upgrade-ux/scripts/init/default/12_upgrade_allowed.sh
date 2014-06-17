@@ -13,7 +13,7 @@ else
     rc=1  # first run => force preview if not given
 fi
 
-if [[ $rc -ne 0 ]]; then
+if (( $rc > 0 )); then
     PREVIEW=1
     LogPrint "Preview mode activated as it was not ended successfully (yet)"
 fi
