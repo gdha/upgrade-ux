@@ -27,7 +27,7 @@ do
         LogPrint "Error detected: ${command[i]} -v ${options[i]} ${source[i]} $my_bundle"
     fi
 
-    if [[ "${command[i]}" == "$SWINSTALL" ]]; then
+    if [ "${command[i]}" = "$SWINSTALL" ]; then
 	SwJob ${command[i]} >&2
     fi
     i=$((i+1))

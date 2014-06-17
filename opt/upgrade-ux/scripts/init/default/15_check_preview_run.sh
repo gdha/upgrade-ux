@@ -20,7 +20,7 @@ else
     # CURRENT_STATUS="preview:ended" as forced by cleanup/default/90_preview_ended_successfully.sh ??
     #tail -15 $STATUS_FILE | grep -q "preview ended successfully"
     #if [[ $? -eq 0 ]]; then
-    if [[ "$CURRENT_STATUS" == "preview:ended" ]]; then
+    if [ "$CURRENT_STATUS" = "preview:ended" ]; then
         CURRENT_STATUS="init:start"
 	SetCurrentStatus "$STATUS_FILE"
     fi
