@@ -3,7 +3,7 @@
 [[ ! -f "$VAR_DIR/$DS/inetd_conf.after" ]] && cp -p /etc/inetd.conf "$VAR_DIR/$DS/inetd_conf.after"
 
 grep -v \# "$VAR_DIR/$DS/inetd_conf.after" | grep -q ^swat
-if [[ $? -eq 0 ]]; then
+if (( $? == 0 )); then
     # we found an active entry; we should disable it. We will create a inetd_conf.new first
     LogPrint "Disable the swat line in inetd.conf file"
     sed -e 's/^swat/#swat/g' < "$VAR_DIR/$DS/inetd_conf.after"  > "$VAR_DIR/$DS/inetd_conf.new"

@@ -4,7 +4,7 @@
 
 if [[ ! -f "$VAR_TMP/$DS/pam.conf" ]]; then
     cmp -s /etc/pam.conf "$VAR_TMP/$DS/pam.conf"
-    if [[ $? -eq 1 ]]; then
+    if (( $? == 1 )) ; then
 	LogPrint "The /etc/pam.conf has been modified (see log file)"
         sdiff -s /etc/pam.conf "$VAR_TMP/$DS/pam.conf" >&2
     else

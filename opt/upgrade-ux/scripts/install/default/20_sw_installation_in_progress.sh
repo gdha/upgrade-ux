@@ -15,7 +15,7 @@ else
 	# at the moment we rebooted the system
         count=${#bundle[@]}    # items to install
         count_sw_installed=$( wc -l $VAR_DIR/$DS/sw_installation_in_progress | awk '{print $1}' )
-        if [[ $count -eq $count_sw_installed ]]; then
+        if (( $count == $count_sw_installed )); then
             CURRENT_STATUS="$stage:ended"
 	    SetCurrentStatus "$STATUS_FILE"  # and write it into status file
         fi

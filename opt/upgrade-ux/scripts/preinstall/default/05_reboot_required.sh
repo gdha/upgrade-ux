@@ -11,7 +11,7 @@ daysup=$( uptime | awk '{print $3}' )
 IsDigit $daysup || daysup=$( w | head -1 | awk '{print $3}' )  # alternative method
 IsDigit $daysup || daysup=0
 
-if [[ $daysup -gt $DAYSUPTIME ]]; then
+if (( $daysup > $DAYSUPTIME )) ; then
     if (( PREVIEW )) ; then
         LogPrint "Uptime of system is $daysup (>$DAYSUPTIME days) - recommend to reboot before patching"
     else

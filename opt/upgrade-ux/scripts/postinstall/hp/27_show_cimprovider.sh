@@ -4,7 +4,7 @@
 
 # need to check if cimserver is running - see issue #9
 ps -ef | grep cimservermain | grep -vq grep
-if [[ $? -eq 1 ]] ; then
+if (( $? == 1 )) ; then
     # start cimserver
     Log "Note: cimserver was not running - starting it now"
     [[ -x /opt/wbem/sbin/cimserver ]] && /opt/wbem/sbin/cimserver  >&2

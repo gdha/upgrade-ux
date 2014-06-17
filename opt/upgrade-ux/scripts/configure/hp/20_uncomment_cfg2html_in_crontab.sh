@@ -15,7 +15,7 @@ grep "/usr/sbin/cfg2html" "$VAR_DIR/$DS/crontab.after" > "$TMP_DIR/current.cfg2h
 if [[ -s "$TMP_DIR/current.cfg2html.entry.in.crontab" ]]; then
     # we found a cfg2html entry in crontab
     grep -q "^\#" "$TMP_DIR/current.cfg2html.entry.in.crontab"
-    if [[ $? -eq 0 ]]; then
+    if (( $? == 0 )) ; then
         # line was commented; so redefine it (by first removing the old lines)
 	crontab -l | grep -v "cfg2html" > "$TMP_DIR/crontab.new"
 	# then adding the new cfg2html lines again

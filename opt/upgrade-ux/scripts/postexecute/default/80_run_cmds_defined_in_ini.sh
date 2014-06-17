@@ -4,7 +4,7 @@
 count=${#command[@]}
 i=0
 
-while (( $i < $count ))
+while (( i < $count ))
 do
     if [[ -z "${command[i]}" ]]; then
         i=$((i+1))

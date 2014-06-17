@@ -4,7 +4,7 @@
 [[ ! -f /etc/default/tz ]]          && return
 
 cmp -s /etc/default/tz "$VAR_DIR/$DS/tz.before"
-if [[ $? -eq 1 ]]; then
+if (( $? == 1 )); then
     LogPrint "Timezone entry was modified:"
     sdiff -s /etc/default/tz "$VAR_DIR/$DS/tz.before" >&2
     LogPrint "Copy back the original one:"

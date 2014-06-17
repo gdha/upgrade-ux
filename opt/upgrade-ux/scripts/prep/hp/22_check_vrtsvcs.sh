@@ -5,10 +5,10 @@
 grep -q VRTSvcs "$VAR_DIR/$DS/${HOSTNAME}_swlist.before" || return  # no VCS installed
 
 $SWLIST VRTSvcs,r\>=5.0 >/dev/null 2>&1
-if [[ $? -ne 0 ]]; then
+if (( $? > 0 )) ; then
     LogPrint "Veritas Cluster Server software has reached EOL and is not supported anymore"
-    if (( PREVIEW_MODE )) ; then
-	LogPrint "We strongly discourage running $PRODUCT on this system"
+    if (( PREVIEW )) ; then
+	LogPrint "We strongly discourage running $PRODUCT on this system!"
     else
         Error "Due to EOL reached patching is not allowed anymore"
     fi

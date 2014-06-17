@@ -14,7 +14,7 @@
 ##    Fix: comment out above options
 
 grep -v ^\#  "$VAR_DIR/$DS/sshd_config.before" | grep -q -E '(SftpLog|LogSftp)'
-if [[ $? -eq 0 ]]; then
+if (( $? == 0 )) ; then
     # we must put these lines in comment
     rm -f "$VAR_DIR/$DS/sshd_config.after"
     cat "$VAR_DIR/$DS/sshd_config.before" | while read LINE

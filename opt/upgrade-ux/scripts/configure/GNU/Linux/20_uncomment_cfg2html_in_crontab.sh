@@ -14,7 +14,7 @@ grep "/usr/sbin/cfg2html" "/etc/cron.d/cfg2html" > "$TMP_DIR/current.cfg2html.en
 if [[ -s "$TMP_DIR/current.cfg2html.entry.in.crontab" ]]; then
     # we found a cfg2html entry in crontab
     grep -q "^\#" "$TMP_DIR/current.cfg2html.entry.in.crontab"
-    if [[ $? -eq 0 ]]; then
+    if (( $? == 0 )) ; then
         # line was commented; so redefine it
 	echo "# Comment next line to disable cfg2html runs (changed on $(date '+%d %b %Y') )" >> "$TMP_DIR/cron.cfg2html.new"
 	cut -c2- "$TMP_DIR/current.cfg2html.entry.in.crontab" >> "$TMP_DIR/cron.cfg2html.new"

@@ -6,7 +6,7 @@
 [[ ! -f /usr/newconfig/usr/lib/tztab ]]          && return
 
 cmp -s /usr/newconfig/usr/lib/tztab  /usr/lib/tztab
-if [[ $? -eq 1 ]]; then
+if (( $? == 1 )); then
     LogPrint "Timezone table was not updated by patch (due to manual updates most likely)"
     sdiff -s /usr/newconfig/usr/lib/tztab  /usr/lib/tztab >&2
     case "$OS_VERSION" in

@@ -6,7 +6,7 @@ else
     [[ -x /sbin/init.d/hpsmh ]] && /sbin/init.d/hpsmh stop >&2
     # as SMH caused update-ux to hang we do a 2th check
     netstat -a | grep -q 2301
-    if [[ $? -eq 0 ]]; then
+    if (( $? == 0 )) ; then
         LogPrint "smh is still running - force a kill of smh"
 	KillProc smh
     fi

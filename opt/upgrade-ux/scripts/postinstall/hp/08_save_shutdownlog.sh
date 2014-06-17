@@ -11,12 +11,12 @@ if [[ -f "$VAR_DIR/$DS/shutdownlog.before" ]]; then
     fi
 else
     tail -1 /etc/shutdownlog | grep -q "$(date '+%a %b %d, %Y.')"            # e.g. Tue May 27, 2014.
-    if [[ $? -eq 0 ]]; then
+    if (( $? == 0 )); then
         _SHOUR=$(tail -1 /etc/shutdownlog | awk '{print $1}' | cut -d: -f1)  # e.g. 10 (shutdown hour)
 	_CHOUR=$(date '+%H')                                                 # e.g. 04 (current hour)
 	_sHOUR=$(expr $_SHOUR + 0)                                           # to get rid of leading 0
 	_cHOUR=$(expr $_CHOUR + 0)                                           # to get rid of leading 0
-	if (( $_cHOUR == $_sHOUR )) || (( $_sHOUR == $((_cHOUR - 1)) )) ; then
+	if (( _cHOUR == _sHOUR )) || (( _sHOUR == $(( _cHOUR - 1 )) )) ; then
             # last reboot was on the same hour or max 1 hour back (in case we crossed hour boundaries)
 	    LogPrint "Last shutdown: $(tail -1 /etc/shutdownlog)"
 	    touch "$VAR_DIR/$DS/.rebooted"

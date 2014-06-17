@@ -20,7 +20,7 @@ do
     if (( $? > 0 )) ; then
         # there are disks presents; now check speed
         grep -q -i ultra320 "$VAR_DIR/$DS/ultra320.${hba##*/}.before"
-	if [[ $? -eq 0 ]]; then
+	if (( $? == 0 )) ; then
             # HBA speed is ultra320 - redine to ultra160
 	    LogPrint "Ultra320 device $hba SCSI rate is ultra320 - lower it to ultra160"
 	    echo y | /usr/sbin/mptconfig -r ultra160 $hba >&2
@@ -31,7 +31,7 @@ done
 
 if [[ -f "$VAR_DIR/$DS/mpt.before" ]]; then
     grep class_device "$VAR_DIR/$DS/mpt.before" | grep -q A6491A
-    if [[ $? -eq 0 ]]; then
+    if (( $? == 0 )) ; then
         # startup script was not yet adapted to lower the speed to ultra160 (contains still the old card types)
         sed -e 's/A6491A/A6961/g' < "$VAR_DIR/$DS/mpt.before" > "$VAR_DIR/$DS/mpt.after"
 	if (( PREVIEW )) ; then

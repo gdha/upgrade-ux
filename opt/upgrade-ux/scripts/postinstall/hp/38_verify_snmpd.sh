@@ -10,7 +10,7 @@ fi
 
 # check for a proper get-community-name definition
 grep -q ^get-community-name /etc/SnmpAgent.d/snmpd.conf
-if [[ $? -eq 1 ]]; then
+if (( $? == 1 )); then
     LogPrint "No Community Name was defined in /etc/SnmpAgent.d/snmpd.conf"
     LogPrint "Please do the needfull and restart the snmpd process manually"
 fi

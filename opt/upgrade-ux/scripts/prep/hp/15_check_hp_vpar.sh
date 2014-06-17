@@ -8,7 +8,7 @@ if [[ ! -f /sbin/vecheck ]] ; then
     return  # no vpar sw available
 else
     /sbin/vecheck
-    if [[ $? -eq 0 ]]; then
+    if (( $? == 0 )) ; then
         Log "vecheck(1m) confirms server IS running in virtual partition (vPars) environment"
 	HP_VM_MODE=vpar
     else
@@ -19,7 +19,7 @@ else
 fi
 
 $SWLIST T1335[ABD]C,r\>=A.04.04.04 >/dev/null  2>&1
-if [[ $? -eq 0 ]]; then
+if (( $? == 0 )) ; then
     Log "vPar software version is >=A.04.04.04, so there is no need to go into nPar mode"
 else
     LogPrint "Virtual Partition [vPar] software installed, but version is < A.04.04.04"

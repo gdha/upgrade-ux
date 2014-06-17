@@ -16,7 +16,7 @@ case "$OS_VERSION" in
 	#st_san_safe                 1  -  1
 
 	/usr/sbin/kmtune -q st_san_safe 2>/dev/null | tail -1 | grep -q 1
-        if [[ $? -eq 0 ]]; then
+        if (( $? == 0 )); then
             Log "Kernel tunable st_san_safe is set to 1 [ok]"
 	else
             LogPrint "WARNING: Kernel tunable st_san_safe is not set to 1"
@@ -26,7 +26,7 @@ case "$OS_VERSION" in
         ;;
     11.23|11.31)
         /usr/sbin/kctune -q st_san_safe 2>/dev/null | tail -1 | grep -q 1
-	if [[ $? -eq 0 ]]; then
+	if (( $? == 0 )); then
             Log "Kernel tunable st_san_safe is set to 1 [ok]"
 	else
             LogPrint "WARNING: Kernel tunable st_san_safe is not set to 1"

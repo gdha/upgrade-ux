@@ -4,7 +4,7 @@
 [[ ! -f "$VAR_DIR/$DS/crontab.after" ]]  && return
 
 cmp -s "$VAR_DIR/$DS/crontab.before" "$VAR_DIR/$DS/crontab.after"
-if [[ $? -eq 1 ]]; then
+if (( $? == 1 )); then
     LogPrint "Following crontab entries are new or modified:"
     sdiff -s "$VAR_DIR/$DS/crontab.before" "$VAR_DIR/$DS/crontab.after"
     sdiff -s "$VAR_DIR/$DS/crontab.before" "$VAR_DIR/$DS/crontab.after" >&2

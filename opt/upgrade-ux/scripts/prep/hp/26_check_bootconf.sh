@@ -36,12 +36,12 @@ else
     countbcfg=$(wc -l /stand/bootconf 2>/dev/null | awk '{print $1}')
     [[ -z "$countbcfg" ]] && countbcfg=0
 
-    if (( $countbdsk != $countbcfg )) ; then
+    if (( countbdsk != countbcfg )) ; then
         LogPrint "The primary bootpath does not match the entry in /stand/bootconf"
         for disk in $(echo ${BootableDisks[@]})
         do
             grep -q $disk /stand/bootconf
-	    if [[ $? -ne 0 ]]; then
+	    if (( $? > 0 )) ; then
                 LogPrint "The /stand/bootconf file is missing the following line"
 	        LogPrint "  l  $disk"
     	    fi

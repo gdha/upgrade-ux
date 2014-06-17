@@ -1,7 +1,7 @@
 # 10_configure_commands.sh
 count=${#command[@]}
 i=0
-while (( $i < $count ))
+while (( i < count ))
 do
 
     [[ -z "${command[i]}" ]] && continue   # command seems to be empty

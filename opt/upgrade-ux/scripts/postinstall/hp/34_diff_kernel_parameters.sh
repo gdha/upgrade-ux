@@ -4,7 +4,7 @@
 [[ ! -f "$VAR_DIR/$DS/kernel_parameters.after" ]]  && return
 
 cmp -s "$VAR_DIR/$DS/kernel_parameters.before" "$VAR_DIR/$DS/kernel_parameters.after"
-if [[ $? -eq 1 ]]; then
+if (( $? == 1 )) ; then
     LogPrint "Following kernel parameters are new or modified:"
     sdiff -s "$VAR_DIR/$DS/kernel_parameters.before" "$VAR_DIR/$DS/kernel_parameters.after"
     sdiff -s "$VAR_DIR/$DS/kernel_parameters.before" "$VAR_DIR/$DS/kernel_parameters.after" >&2
