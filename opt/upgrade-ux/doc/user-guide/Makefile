@@ -1,6 +1,4 @@
 prefix = /opt/upgrade-ux
-datadir = $(prefix)/share
-mandir = $(datadir)/man
 
 txttargets = upgrade-ux-user-guide.txt
 htmltargets = $(patsubst %.txt, %.html, $(txttargets))
