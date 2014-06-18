@@ -47,7 +47,7 @@ function CreateLockDir {
     mkdir "${LOCKDIR}" >/dev/null 2>/dev/null
     if (( $? == 0 )) ; then
         # create the PIDFILE now
-        if echo $PID > $PIDFILE ; then
+        if echo $PID > "$PIDFILE" ; then
             Log "lock succeeded: $PID - $PIDFILE"
         else
             Log "Cannot create $PIDFILE (rc=$?)"
@@ -55,9 +55,9 @@ function CreateLockDir {
         fi
     else # else part of mkdir test
         # LOCKDIR already exists
-        if [ -f $PIDFILE ]; then
+        if [ -f "$PIDFILE" ]; then
             Log "Found $PIDFILE file - we could be locked..."
-            OTHERPID=$(<$PIDFILE)
+            OTHERPID=$(< "$PIDFILE" )
             if kill -s 0 ${OTHERPID} 2>/dev/null ; then
                 Log "locked on ${OTHERPID} - try again"
                 return 1
@@ -65,7 +65,7 @@ function CreateLockDir {
                 Log "lock is stale (${OTHERPID}) - will continue"
             fi
         fi
-        if echo $PID > $PIDFILE ; then
+        if echo $PID > "$PIDFILE" ; then
             Log "lock succeeded: $PID - $PIDFILE"
         else
             Log "lock failed: $LOCK with rc=$?"
@@ -75,7 +75,7 @@ function CreateLockDir {
     fi  # end of mkdir test
 
     ## check if PIDFILE contains our PID
-    CHECKPID=$(<$PIDFILE)
+    CHECKPID=$(< "$PIDFILE" )
     [[ ${PID} != ${CHECKPID} ]] && return 1   # not successful; try again
 
     # our PID is effectivily written in the PIFDILE
@@ -102,7 +102,7 @@ function AcquireLock {
 # ------------------------------------------------------------------------------
 function ReleaseLock {
     # remove the lock only if PID is current one
-    CHECKPID=$(<$PIDFILE)
+    CHECKPID=$(< "$PIDFILE" )
     if (( PID == CHECKPID )); then
         # ok we are sure if is our lock
         rm -rf "${LOCKDIR}"

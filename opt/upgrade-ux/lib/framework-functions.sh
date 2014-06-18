@@ -13,8 +13,9 @@ function Source {
             LogPrint "Source $relname"
         else
             # step-by-step mode or breakpoint if needed
-            if (( STEPBYSTEP == 1 )) ; then
-                read -p "Press ENTER to include '$1' ..." 2>&1
+            if (( $STEPBYSTEP )) ; then
+                printf "Press ENTER to include '$1'" 2>&1
+		read
             fi
 
             Log "Including ${1##$SHARE_DIR/}"
