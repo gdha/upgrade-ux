@@ -8,12 +8,8 @@
 #          - The same version of the following software is already installed (to
 #            select this software, set '-x reinstall=true' and try again):
 #            - HPUX11i-VSE-OE,r=B.11.31.1403
+
 [[ "$OS_VERSION" != "11.31" ]]  &&  return   # is only meant for HP-UX 11.31
-
-if (( PREVIEW )) ; then
-    return  # do nothing
-fi
-
 
 [[ ! -d /usr/lbin/sw/pre_reboot ]] &&  return  # no target directory; silently return
     
@@ -23,8 +19,8 @@ cat > /usr/lbin/sw/pre_reboot/add_install_ended_mark <<EOF
 export PATH=/bin:/usr/lbin/sw/bin:/sbin
 
 if [[ -f /var/opt/upgrade-ux/status ]] ; then
-   echo "$(date +'%Y-%m-%d %H:%M:%S ')install:ended" >> /var/opt/upgrade-ux/status
-   echo "    * Added 'install:ended' mark in /var/opt/upgrade-ux/status file"
+   echo "\$(date +'%Y-%m-%d %H:%M:%S ')install:ended" >> /var/opt/upgrade-ux/status
+   echo " Added 'install:ended' mark in /var/opt/upgrade-ux/status file"
 fi
 EOF
 chmod 744 /usr/lbin/sw/pre_reboot/add_install_ended_mark
