@@ -15,8 +15,8 @@
 ++++
 
 This document describes everything there is to know regarding
-Upgrade-UX, an Open Source upgrade and patching software designed to assister the system engineer in patching
-systems in a consistent way with evidence before and after the patching.
+*Upgrade-UX*, an Open Source upgrade and patching framework designed to assist the UNIX system engineer in patching or upgrading
+systems in a consistent and repeatable way with evidence before and after the running +upgrade-ux+.
 
 :leveloffset: 1
 include::01-introduction.txt[]

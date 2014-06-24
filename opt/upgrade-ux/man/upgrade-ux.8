@@ -31,7 +31,7 @@
 upgrade-ux \- a framework to update or patch a Unix system (Linux, HP\-UX and Solaris)
 .SH "SYNOPSIS"
 .sp
-\fBupgrade\-ux\fR [\fB\-dDsSpFvV\fR] \fICOMMAND\fR [\-\- \fIARGS\fR\&...]
+\fBupgrade\-ux\fR [\fB\-dDsSpFvV\fR] [\fB\-c DIR\fR] \fICOMMAND\fR [\-\- \fIARGS\fR\&...]
 .SH "DESCRIPTION"
 .sp
 Upgrade\-ux is an Open Source upgrade framework to make patching and upgrades easy and repeatable\&.
@@ -41,6 +41,11 @@ Extending upgrade\-ux is made possible by its modular framework\&. Consistent lo
 Upgrade\-ux comes with ABSOLUTELY NO WARRANTY; for details see the GNU General Public License at: \m[blue]\fBhttp://www\&.gnu\&.org/licenses/gpl\&.html\fR\m[]
 .SH "OPTIONS"
 .SS "GLOBAL OPTIONS"
+.PP
+\-c DIR
+.RS 4
+alternative config directory; instead of /etc/opt/upgrade\-ux
+.RE
 .PP
 \-p
 .RS 4

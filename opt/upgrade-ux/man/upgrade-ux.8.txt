@@ -11,7 +11,7 @@
 upgrade-ux - a framework to update or patch a Unix system (Linux, HP-UX and Solaris)
 
 == SYNOPSIS
-*upgrade-ux* [*-dDsSpFvV*] _COMMAND_ [-- _ARGS_...]
+*upgrade-ux* [*-dDsSpFvV*] [*-c DIR*] _COMMAND_ [-- _ARGS_...]
 
 == DESCRIPTION
 Upgrade-ux is an Open Source upgrade framework to make patching and upgrades easy and repeatable.
@@ -26,6 +26,9 @@ the GNU General Public License at: http://www.gnu.org/licenses/gpl.html
 == OPTIONS
 
 === GLOBAL OPTIONS
+
+-c DIR::
+    alternative config directory; instead of /etc/opt/upgrade-ux
 
 -p::
     *preview mode* (we will not remove or install, update any software on this system)

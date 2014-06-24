@@ -23,10 +23,10 @@ A good example of such variable is the +YEAR+. In the +default.conf+ it is defin
     YEAR=$(date '+%Y')
     
 
-However, in some case as mentioned above, if in the year 2015 you still want to install patch bundles of 2014 then it is necessary to define the +YEAR+ variable in the +local.conf+ file, as +YEAR=2014+ (or whatever, the year might be).
+However, in some cases as mentioned above, if you are in the year 2015 and you still want to install patch bundles of 2014 then it is necessary to define the +YEAR+ variable in the +local.conf+ file, as +YEAR=2014+ (or whatever, the year might be).
 
 === Local configuration file local.conf
-The +local.conf+ should only contain variables which you want to overrule, as desctibed in previous section (of the +default.conf+ file). It is important to know that the +local.conf+ file is the last configuration file which is read by +upgrade-ux+ and therefore, the variables defined are the ones that will be used.
+The +local.conf+ should only contain variables which you want to overrule, as described in previous section (of the +default.conf+ file). It is important to know that the +local.conf+ file is the last configuration file read by +upgrade-ux+ script and therefore, the variables defined in there are the last ones that will be used.
 
 === Operating Specific configuration files
 
@@ -36,21 +36,23 @@ On each OS you have specific OS related configuration files, e.g.
     GNU/Linux.conf
     SunOS.conf
 
-These configuration files typically contain variables which has only a meaning that specific OS, e.g. on HP-UX
+These configuration files typically contain variables which have only a meaning within that specific OS, e.g. on HP-UX
 
     SWINSTALL=/usr/sbin/swinstall
 
 
 == The INI files
 
-The INI files are OS specific (always) and contain the definitions of which patch bundles should be installed or removed, and so on.
-It follows also the different stages
+The INI files are always OS specific and contain the definitions of which patch bundles should be installed or removed, and so on.
+The INI files are kept under the +/etc/opt/upgrade-ux+ or +$HOME/project/upgrade-ux/etc/opt/upgrade-ux/+ directory and are typically called +$OS-$OS_VERSION-$YEAR.ini+
+
+It follows also the different stages known within +upgrade-ux+ and these are best explained with an example INI file (below you see the INI file for HP-UX 11.11 systems):
 
     # HP-UX-11.11-2014.ini file
     ###########################
     #
     ###################
-    # section preremove - which sd depots must be removed before we install the latest one (or even run updata-ux)
+    # section preremove - which sd depots must be removed before we install the latest one (or even run update-ux)
     ###################
     [preremove]
         command[0]      =       $SWREMOVE
@@ -134,4 +136,57 @@ It follows also the different stages
         options[0]      =       "-2%Y%m%d"
     
 
+=== The INI syntax
+You can use as many comments as you like, but it should start with +#+ or +;+ sign.
+
+A stage or section is started with +[section]+ header. The name within a section is known as a _stage_ within +upgrade-ux+.
+
+A section may be empty or may contain arrays (some of those may be left out and will be treated as empty strings). An array will always be treated as a string by the way. The content of arrays are wiped out when you enter a new stage (or section) by +upgrade-ux+.
+
+The following arrays are known to +upgrade-ux+:
+
+ - command[] - add the command to be executed (it can be a variable name, e.g. $SWINSTALL)
+ - options[] - add here specific options required by command[]
+ - source[] - should be the source location where the software bundle reside
+ - bundle[] - the name of the software bundle
+ - version[] - the specific version to be installed/removed (can contain +*+ or may be empty as well)
+
+If you do not need all arrays in a certain section then it is fine to leave these empty (or not mentioning these in the INI file)
+
+Be careful although that you define the array index correctly in the INI file (see example above).
+
+=== Section preremove
+In the +preremove+ section you typically define lines of software bundles that should be removed for one of other reason, e.g. when upgrading these would be problematic (in the way the software was designed - read badly).
+As said, if not needed leave this section empty.
+
+=== Section preinstall
+In the +preinstall+ section we could define some commands that need to be run, but in most case we write small scripts to do specific tasks in this stage (or section) such as stopping some daemons, saving evidence of software inventory and so on. More about thiese scripts in Chapter 6 (The Upgrade-ux scripts).
+
+=== Section install
+In the +install+ section you typically only define the software bundles that should be installed and in the right order. For example, for update the installation software (+update-ux+ or +yum+) before the new updates. In this stage we do not have much special scripts.
+
+=== Section postinstall
+In the +postinstall+ section we define the software pieces that were missing in the +install+ section for some specific reason (if any). Furthermore, in this stage we capture lots of evidence again and compare these via special scripts. Again see Chapter 6 (The Upgrade-ux scripts).
+
+=== Section postremove
+In the +postremove+ section you could remove software bundles taht were in the big update round of the +install+ section, but should not stay on this particular platform for some reason. Again, you may leave it empty if not needed.
+
+=== Section configure
+In the +configure+ section you could define scripts or commands to be executed by +upgrade-ux+ to configure or add something in cron.
+See also the example shown above with +uncomment_cfg2html_in_crontab+, which is a toggle meant for a script called +/opt/upgrade-ux/scripts/configure/default/10_configure_commands.sh+ that simply touches a file under +$TMP_DIR+
+
+Another way to had this defined would have been:
+
+    command[0]="touch"
+    options[0]="$TMP_DIR/uncomment_cfg2html_in_crontab"
+
+
+=== Section cleanup
+In the +cleanup+ section we could add commands to remove some old log files (of older software bundles), or you can also use it to report errors or any other message. The section is typically empty, but you could add some special scripts under +/opt/upgrade-ux/scripts/cleanup/default/+
+
+=== Section postexecute
+In the +postexecute+ section you could define commands and options of things you want to execute, e.g.
+
+    command[0]      =       "/opt/cfg2html/bin/cfg2html"
+    options[0]      =       "-2%Y%m%d"
 

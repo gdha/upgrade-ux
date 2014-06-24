@@ -743,25 +743,28 @@ asciidoc.install(2);
 <div class="sectionbody">
 <img src="http://www.it3.be/images/upgrade-ux.png">
 <div class="paragraph"><p>This document describes everything there is to know regarding
-Upgrade-UX, an Open Source upgrade and patching software designed to assister the system engineer in patching
-systems in a consistent way with evidence before and after the patching.</p></div>
+<strong>Upgrade-UX</strong>, an Open Source upgrade and patching framework designed to assist the UNIX system engineer in patching or upgrading
+systems in a consistent and repeatable way with evidence before and after the running <code>upgrade-ux</code>.</p></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_introduction">1. Introduction</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Upgrade-UX is a framework to update or patch a Unix system (Linux,
+<div class="paragraph"><p><strong>Upgrade-UX</strong> is ai software framework to update or patch lots of Unix systems (Linux,
 HP-UX, AIX and Solaris).</p></div>
 <div class="paragraph"><p>In professional environments it is not allowed
 to just blindly update an UNIX system without testing this first out on a development
 system, pre-production and so on. The upgrade-ux product allows you to repeat
-this process consistent and as many times as you like on any system.
-The upgrade-ux uses configuration files which describes what a particilar Unix Operating
+this process in a consistent way and as many times as you like on any system.
+Upgrade-ux understands two states:
+- preview mode: will go through the whole process without actually doing the update
+- upgrade mode: will do it for real (the update)</p></div>
+<div class="paragraph"><p>The upgrade-ux uses configuration files which describes what a particilar Unix Operating
 System requires to be upgraded in the way you want it (or designed it). Doing
 it this way allows you to <strong>exactly</strong> define how a system should look like after
 the upgrade or patching. Nothing else can be installed, removed or configured.</p></div>
 <div class="paragraph"><p>Furthermore, many checks can be build-in via adding simple scripts (see chapter
-"Adding your scripts"). We also keep of each run an unique log file and we keep
+"Adding your scripts"). We also keep of each run an unique log file, and furthermore, we keep
 evidence before and after patching in a special directory. Months later we can still
 inspect these logs and evidence directories to verify what happened or what has
 changed in the meantime.</p></div>
@@ -775,7 +778,7 @@ Upgrade-UX website
 </dt>
 <dd>
 <p>
-    <a href="http://www.it3.be/upgrade-ux/">http://www.it3.be/upgrade-ux/</a>
+    <a href="http://www.it3.be/projects/upgrade-ux.html">http://www.it3.be/projects/upgrade-ux.html</a>
 </p>
 </dd>
 <dt class="hdlist1">
@@ -852,7 +855,7 @@ Is written in standard Korn Shell (which makes it highly portable)
 </li>
 <li>
 <p>
-Is Operating System independent as OS specific tasks reside in their own directory structures
+Is UNIX Operating System independent as OS specific tasks reside in their own directory structures
 </p>
 </li>
 <li>
@@ -862,7 +865,7 @@ Is easy extendable with your own scripts
 </li>
 <li>
 <p>
-Is <code>upgrade-ux</code> command leaves a trace in its own log file
+The <code>upgrade-ux</code> command leaves a trace in its own log file
 </p>
 </li>
 <li>
@@ -943,7 +946,12 @@ The following is the output of the command <code>swinstall -s SDserver:/var/opt/
 <div class="paragraph"><p>When the RPM is available you could install it via the command:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>rpm -ivh upgrade-ux.rpm</code></pre>
+<pre><code>rpm -ivh upgrade-ux-1.0-1.el7.noarch.rpm</code></pre>
+</div></div>
+<div class="paragraph"><p>Or, in case you would liek to upgrade a version via <code>yum</code> you could do the following:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>rpm -Uvh upgrade-ux-1.1-1.el7.noarch.rpm</code></pre>
 </div></div>
 </div>
 </div>
@@ -971,11 +979,11 @@ The following is the output of the command <code>swinstall -s SDserver:/var/opt/
 # in the local.conf file. E.g. when running upgrade-ux in 2015 but still installing patches from 2014 then define: YEAR=2014
 YEAR=$(date '+%Y')</code></pre>
 </div></div>
-<div class="paragraph"><p>However, in some case as mentioned above, if in the year 2015 you still want to install patch bundles of 2014 then it is necessary to define the <code>YEAR</code> variable in the <code>local.conf</code> file, as <code>YEAR=2014</code> (or whatever, the year might be).</p></div>
+<div class="paragraph"><p>However, in some cases as mentioned above, if you are in the year 2015 and you still want to install patch bundles of 2014 then it is necessary to define the <code>YEAR</code> variable in the <code>local.conf</code> file, as <code>YEAR=2014</code> (or whatever, the year might be).</p></div>
 </div>
 <div class="sect3">
 <h4 id="_local_configuration_file_local_conf">3.1.2. Local configuration file local.conf</h4>
-<div class="paragraph"><p>The <code>local.conf</code> should only contain variables which you want to overrule, as desctibed in previous section (of the <code>default.conf</code> file). It is important to know that the <code>local.conf</code> file is the last configuration file which is read by <code>upgrade-ux</code> and therefore, the variables defined are the ones that will be used.</p></div>
+<div class="paragraph"><p>The <code>local.conf</code> should only contain variables which you want to overrule, as described in previous section (of the <code>default.conf</code> file). It is important to know that the <code>local.conf</code> file is the last configuration file read by <code>upgrade-ux</code> script and therefore, the variables defined in there are the last ones that will be used.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_operating_specific_configuration_files">3.1.3. Operating Specific configuration files</h4>
@@ -986,7 +994,7 @@ YEAR=$(date '+%Y')</code></pre>
 GNU/Linux.conf
 SunOS.conf</code></pre>
 </div></div>
-<div class="paragraph"><p>These configuration files typically contain variables which has only a meaning that specific OS, e.g. on HP-UX</p></div>
+<div class="paragraph"><p>These configuration files typically contain variables which have only a meaning within that specific OS, e.g. on HP-UX</p></div>
 <div class="literalblock">
 <div class="content">
 <pre><code>SWINSTALL=/usr/sbin/swinstall</code></pre>
@@ -995,15 +1003,16 @@ SunOS.conf</code></pre>
 </div>
 <div class="sect2">
 <h3 id="_the_ini_files">3.2. The INI files</h3>
-<div class="paragraph"><p>The INI files are OS specific (always) and contain the definitions of which patch bundles should be installed or removed, and so on.
-It follows also the different stages</p></div>
+<div class="paragraph"><p>The INI files are always OS specific and contain the definitions of which patch bundles should be installed or removed, and so on.
+The INI files are kept under the <code>/etc/opt/upgrade-ux</code> or <code>$HOME/project/upgrade-ux/etc/opt/upgrade-ux/</code> directory and are typically called <code>$OS-$OS_VERSION-$YEAR.ini</code></p></div>
+<div class="paragraph"><p>It follows also the different stages known within <code>upgrade-ux</code> and these are best explained with an example INI file (below you see the INI file for HP-UX 11.11 systems):</p></div>
 <div class="literalblock">
 <div class="content">
 <pre><code># HP-UX-11.11-2014.ini file
 ###########################
 #
 ###################
-# section preremove - which sd depots must be removed before we install the latest one (or even run updata-ux)
+# section preremove - which sd depots must be removed before we install the latest one (or even run update-ux)
 ###################
 [preremove]
     command[0]      =       $SWREMOVE
@@ -1106,6 +1115,87 @@ version[3]      =       ""</code></pre>
     command[0]      =       "/opt/cfg2html/bin/cfg2html"
     options[0]      =       "-2%Y%m%d"</code></pre>
 </div></div>
+<div class="sect3">
+<h4 id="_the_ini_syntax">3.2.1. The INI syntax</h4>
+<div class="paragraph"><p>You can use as many comments as you like, but it should start with <code>#</code> or <code>;</code> sign.</p></div>
+<div class="paragraph"><p>A stage or section is started with <code>[section]</code> header. The name within a section is known as a <em>stage</em> within <code>upgrade-ux</code>.</p></div>
+<div class="paragraph"><p>A section may be empty or may contain arrays (some of those may be left out and will be treated as empty strings). An array will always be treated as a string by the way. The content of arrays are wiped out when you enter a new stage (or section) by <code>upgrade-ux</code>.</p></div>
+<div class="paragraph"><p>The following arrays are known to <code>upgrade-ux</code>:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+command[] - add the command to be executed (it can be a variable name, e.g. $SWINSTALL)
+</p>
+</li>
+<li>
+<p>
+options[] - add here specific options required by command[]
+</p>
+</li>
+<li>
+<p>
+source[] - should be the source location where the software bundle reside
+</p>
+</li>
+<li>
+<p>
+bundle[] - the name of the software bundle
+</p>
+</li>
+<li>
+<p>
+version[] - the specific version to be installed/removed (can contain <code>*</code> or may be empty as well)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>If you do not need all arrays in a certain section then it is fine to leave these empty (or not mentioning these in the INI file)</p></div>
+<div class="paragraph"><p>Be careful although that you define the array index correctly in the INI file (see example above).</p></div>
+</div>
+<div class="sect3">
+<h4 id="_section_preremove">3.2.2. Section preremove</h4>
+<div class="paragraph"><p>In the <code>preremove</code> section you typically define lines of software bundles that should be removed for one of other reason, e.g. when upgrading these would be problematic (in the way the software was designed - read badly).
+As said, if not needed leave this section empty.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_section_preinstall">3.2.3. Section preinstall</h4>
+<div class="paragraph"><p>In the <code>preinstall</code> section we could define some commands that need to be run, but in most case we write small scripts to do specific tasks in this stage (or section) such as stopping some daemons, saving evidence of software inventory and so on. More about thiese scripts in Chapter 6 (The Upgrade-ux scripts).</p></div>
+</div>
+<div class="sect3">
+<h4 id="_section_install">3.2.4. Section install</h4>
+<div class="paragraph"><p>In the <code>install</code> section you typically only define the software bundles that should be installed and in the right order. For example, for update the installation software (<code>update-ux</code> or <code>yum</code>) before the new updates. In this stage we do not have much special scripts.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_section_postinstall">3.2.5. Section postinstall</h4>
+<div class="paragraph"><p>In the <code>postinstall</code> section we define the software pieces that were missing in the <code>install</code> section for some specific reason (if any). Furthermore, in this stage we capture lots of evidence again and compare these via special scripts. Again see Chapter 6 (The Upgrade-ux scripts).</p></div>
+</div>
+<div class="sect3">
+<h4 id="_section_postremove">3.2.6. Section postremove</h4>
+<div class="paragraph"><p>In the <code>postremove</code> section you could remove software bundles taht were in the big update round of the <code>install</code> section, but should not stay on this particular platform for some reason. Again, you may leave it empty if not needed.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_section_configure">3.2.7. Section configure</h4>
+<div class="paragraph"><p>In the <code>configure</code> section you could define scripts or commands to be executed by <code>upgrade-ux</code> to configure or add something in cron.
+See also the example shown above with <code>uncomment_cfg2html_in_crontab</code>, which is a toggle meant for a script called <code>/opt/upgrade-ux/scripts/configure/default/10_configure_commands.sh</code> that simply touches a file under <code>$TMP_DIR</code></p></div>
+<div class="paragraph"><p>Another way to had this defined would have been:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>command[0]="touch"
+options[0]="$TMP_DIR/uncomment_cfg2html_in_crontab"</code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_section_cleanup">3.2.8. Section cleanup</h4>
+<div class="paragraph"><p>In the <code>cleanup</code> section we could add commands to remove some old log files (of older software bundles), or you can also use it to report errors or any other message. The section is typically empty, but you could add some special scripts under <code>/opt/upgrade-ux/scripts/cleanup/default/</code></p></div>
+</div>
+<div class="sect3">
+<h4 id="_section_postexecute">3.2.9. Section postexecute</h4>
+<div class="paragraph"><p>In the <code>postexecute</code> section you could define commands and options of things you want to execute, e.g.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>command[0]      =       "/opt/cfg2html/bin/cfg2html"
+options[0]      =       "-2%Y%m%d"</code></pre>
+</div></div>
+</div>
 </div>
 </div>
 </div>
@@ -1128,7 +1218,7 @@ version[3]      =       ""</code></pre>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-06-13 13:30:08 CEST
+Last updated 2014-06-24 11:25:50 CEST
 </div>
 </div>
 </body>

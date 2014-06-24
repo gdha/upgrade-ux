@@ -1,19 +1,23 @@
 = Introduction
 
-Upgrade-UX is a framework to update or patch a Unix system (Linux,
+*Upgrade-UX* is ai software framework to update or patch lots of Unix systems (Linux,
 HP-UX, AIX and Solaris).
 
 In professional environments it is not allowed
 to just blindly update an UNIX system without testing this first out on a development
 system, pre-production and so on. The upgrade-ux product allows you to repeat
-this process consistent and as many times as you like on any system.
+this process in a consistent way and as many times as you like on any system.
+Upgrade-ux understands two states:
+- preview mode: will go through the whole process without actually doing the update
+- upgrade mode: will do it for real (the update)
+
 The upgrade-ux uses configuration files which describes what a particilar Unix Operating
 System requires to be upgraded in the way you want it (or designed it). Doing
 it this way allows you to *exactly* define how a system should look like after
 the upgrade or patching. Nothing else can be installed, removed or configured.
 
 Furthermore, many checks can be build-in via adding simple scripts (see chapter 
-"Adding your scripts"). We also keep of each run an unique log file and we keep
+"Adding your scripts"). We also keep of each run an unique log file, and furthermore, we keep
 evidence before and after patching in a special directory. Months later we can still
 inspect these logs and evidence directories to verify what happened or what has
 changed in the meantime.
@@ -56,9 +60,9 @@ Upgrade-UX has a wide range of features:
  - Has a _preview_ mode (to dry-run an upgrade without doing it) and an _upgrade_ mode
  - Is customisable via +local.conf+ file
  - Is written in standard Korn Shell (which makes it highly portable)
- - Is Operating System independent as OS specific tasks reside in their own directory structures
+ - Is UNIX Operating System independent as OS specific tasks reside in their own directory structures
  - Is easy extendable with your own scripts
- - Is +upgrade-ux+ command leaves a trace in its own log file
+ - The +upgrade-ux+ command leaves a trace in its own log file
  - Running in preview or upgrade mode always creates evidence files
  - Has a man page
  - Has user documentation (you are reading it)
