@@ -954,6 +954,10 @@ The following is the output of the command <code>swinstall -s SDserver:/var/opt/
 <pre><code>rpm -Uvh upgrade-ux-1.1-1.el7.noarch.rpm</code></pre>
 </div></div>
 </div>
+<div class="sect2">
+<h3 id="_prerequisites">2.4. Prerequisites</h3>
+<div class="paragraph"><p>Be aware, that upgrade-ux is completely written in Korn Shell, therefore, you must have the <code>ksh</code> executable on your UNIX system. To be sure you could type <code>which ksh</code>. If it is not present please install it first (most likely on Linux where it is not a standard package in base OS).</p></div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1124,7 +1128,7 @@ version[3]      =       ""</code></pre>
 <div class="ulist"><ul>
 <li>
 <p>
-command[] - add the command to be executed (it can be a variable name, e.g. $SWINSTALL)
+command[] - add the command to be executed (it can be a variable name, e.g. <code>$SWINSTALL</code>)
 </p>
 </li>
 <li>
@@ -1202,6 +1206,89 @@ options[0]      =       "-2%Y%m%d"</code></pre>
 <div class="sect1">
 <h2 id="_workflows">4. Workflows</h2>
 <div class="sectionbody">
+<div class="paragraph"><p>The workflows (or commands) available can be listed with the <code>-h</code> option:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>upgrade-ux -h
+....
+List of commands:
+ dump            dump configuration and system information
+ mkdist          create a compressed tar archive distribution
+ purgelogs       purge the LOG [/home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log] directory
+ test            a simple test workflow
+ upgrade         upgrade the operating system</code></pre>
+</div></div>
+<div class="sect2">
+<h3 id="_dump_workflow">4.1. Dump workflow</h3>
+<div class="paragraph"><p>The dump workflow was already discussed during the configuration chapter:</p></div>
+<iframe src="http://showterm.io/62ac55fded60bff1518f4" width="740" height="480"></iframe>
+<div class="paragraph"><p>The first part displays the system definitions, such as OS, hardware type and OS version.
+The second part shows the configuration part and which files it could find (or you may define, create and/or use). They do not need to exist.</p></div>
+<div class="paragraph"><p>The following example shows the dump on a RHEl 7 system:</p></div>
+<iframe src="http://showterm.io/2ceacc1648315313cf0d3" width="740" height="480"></iframe>
+<div class="paragraph"><p>These configuration files live under the <code>/etc/opt/upgrade-ux</code> or <code>./upgrade-ux/etc/opt/upgrade-ux</code> (relative path) directory.
+At this moment we have the following configuration files present (however, it will grow over time):</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>#-&gt; ls -lR
+total 112
+drwxr-xr-x   2 gdhaese1   users         8192 Mar  6 13:39 GNU
+-rw-r--r--   1 gdhaese1   users         2919 Jun  3 15:07 HP-UX-11.11-2014.ini
+-rw-r--r--   1 gdhaese1   users         2918 Jun  3 15:07 HP-UX-11.23-2014.ini
+-rw-r--r--   1 gdhaese1   users         3687 Jun  3 15:06 HP-UX-11.31-2014.ini
+-rw-r--r--   1 gdhaese1   users         1068 May 12 10:52 HP-UX.conf
+-rw-r--r--   1 gdhaese1   users         4571 Jun 13 14:58 default.conf
+-rw-r--r--   1 gdhaese1   users          790 May 21 09:48 local.conf</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>./GNU:
+total 48
+-rw-r--r--   1 gdhaese1   users          102 Mar  6 13:39 Linux-fedora-20-2014.ini
+-rw-r--r--   1 gdhaese1   users          111 Mar  6 13:39 Linux-suse-11-2014.ini
+-rw-r--r--   1 gdhaese1   users           74 Mar  6 10:43 Linux.conf</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_mkdist_workflow">4.2. Mkdist workflow</h3>
+<div class="paragraph"><p>The mkdist workflow creates a compressed tar file of the current development tree, which only makes sense when you are using the <code>git clone</code> version of upgrade-ux. The compressed tar file is stored under <code>/tmp</code> file system and is called <code>/tmp/upgrade-ux-0.9.tar.gz</code> (the version can be different of course).</p></div>
+</div>
+<div class="sect2">
+<h3 id="_purgelogs_workflow">4.3. Purgelogs workflow</h3>
+<div class="paragraph"><p>The purgelogs workflow just has a simple function and that is to purge log files which are older than 30 days. It will display the logs it has purged (only when you are using the option <code>-v</code>):</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>#-&gt; opt/upgrade-ux/bin/upgrade-uxi -v purgelogs</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_test_workflow">4.4. Test workflow</h3>
+<div class="paragraph"><p>The test workflow is a very simplistic test (use option <code>-v</code> to see something):</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>#-&gt; opt/upgrade-ux/bin/upgrade-ux -v test
+upgrade-ux 0.9 / Git
+Using log file: /home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log/upgrade-ux-20140625-1354-LOGFILE.log
+no stale NFS mount points found</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_upgrade_workflow">4.5. Upgrade workflow</h3>
+<div class="paragraph"><p>The upgrade workflow is the real work horse here and in fact is the default workflow (meaning if no workflow is mentioned we will assume you mean <code>upgrade</code>).</p></div>
+<div class="paragraph"><p>The upgrade workflow has two modes:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>preview mode</em>: is going through the complete flow checking all software and simulating an update of the system. Is a perfect way to examine your system to see whether any underlying issues could prevent a successful upgrade. You can do the preview (option <code>-p</code>) any time and as much as you like. However, before doing the <em>upgrade mode</em> you are forced to go through a successful <em>preview mode</em> as well.
+</p>
+</li>
+<li>
+<p>
+<em>upgrade mode</em>: is doing again all the checks, writing evidence and applying all the patch bundles or doing the upgrade. The system might reboot. After the reboot you can continue with retyping <code>/opt/upgrade-ux/bin/upgrade-ux -v</code> and it will continue from the point it was interrupted by the reboot as upgrade-ux keeps track of it stages.
+</p>
+</li>
+</ul></div>
+</div>
 </div>
 </div>
 <div class="sect1">

@@ -145,7 +145,7 @@ A section may be empty or may contain arrays (some of those may be left out and 
 
 The following arrays are known to +upgrade-ux+:
 
- - command[] - add the command to be executed (it can be a variable name, e.g. $SWINSTALL)
+ - command[] - add the command to be executed (it can be a variable name, e.g. +$SWINSTALL+)
  - options[] - add here specific options required by command[]
  - source[] - should be the source location where the software bundle reside
  - bundle[] - the name of the software bundle
