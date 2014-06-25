@@ -10,8 +10,8 @@ function SetOSVendorAndVersion  {
     case $platform in
         Linux)
                 if [ -f /etc/os-release ] ; then
-                    ID=$( grep ^ID /etc/os-release | cut -d= -f2 | sed -e 's/"//g' )
-                    VERSION_ID=$( grep ^VERSION_ID /etc/os-release | cut -d= -f2 | sed -e 's/"//g' | cut -d. -f1 )
+                    ID=$( grep "^ID=" /etc/os-release | cut -d= -f2 | sed -e 's/"//g' )
+                    VERSION_ID=$( grep "^VERSION_ID=" /etc/os-release | cut -d= -f2 | sed -e 's/"//g' | cut -d. -f1 )
                     OS_VENDOR="$ID"
                     OS_VERSION="$VERSION_ID"
                 elif [ -f /etc/SuSE-release ] ; then
