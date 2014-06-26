@@ -11,7 +11,7 @@ The workflows (or commands) available can be listed with the +-h+ option:
      upgrade         upgrade the operating system
     
 == Dump workflow
-The dump workflow was already discussed during the configuration chapter:
+The dump workflow was already discussed during the configuration chapter. The output of `/opt/upgrade-ux/bin/upgrade-ux dump`:
 ++++
 <iframe src="http://showterm.io/62ac55fded60bff1518f4" width="740" height="480"></iframe>
 ++++
@@ -50,17 +50,22 @@ The mkdist workflow creates a compressed tar file of the current development tre
 == Purgelogs workflow
 The purgelogs workflow just has a simple function and that is to purge log files which are older than 30 days. It will display the logs it has purged (only when you are using the option +-v+):
 
-    #-> opt/upgrade-ux/bin/upgrade-uxi -v purgelogs
-    
+[source,bash]
+----
+# opt/upgrade-ux/bin/upgrade-uxi -v purgelogs
+----
 
 == Test workflow
 The test workflow is a very simplistic test (use option +-v+ to see something):
 
-    #-> opt/upgrade-ux/bin/upgrade-ux -v test
-    upgrade-ux 0.9 / Git
-    Using log file: /home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log/upgrade-ux-20140625-1354-LOGFILE.log
-    no stale NFS mount points found
-    
+[source,bash]
+----
+#-> opt/upgrade-ux/bin/upgrade-ux -v test
+upgrade-ux 0.9 / Git
+Using log file: /home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log/upgrade-ux-20140625-1354-LOGFILE.log
+no stale NFS mount points found
+----
+
 == Upgrade workflow
 The upgrade workflow is the real work horse here and in fact is the default workflow (meaning if no workflow is mentioned we will assume you mean +upgrade+).
 

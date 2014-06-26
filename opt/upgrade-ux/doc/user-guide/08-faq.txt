@@ -1,0 +1,20 @@
+= Frequently Asked Questions
+
+== Upgrade-ux not found
+If you get the following error when you try to run +upgrade-ux+
+
+[source,bash]
+----
+# upgrade-ux
+sh: upgrade-ux:  not found.
+----
+
+The reason is that the absolute path +/opt/upgrade-ux/bin+ is not added the the +PATH+ variable. This is done on purpose to avoid mistakes! Therefore, always use the full path +/opt/upgrade-ux/bin/upgrade-ux+
+
+== How do we install a patch bundle from 1 or 2 years ago?
+The +YEAR+ variable defines the current year ( +$(date +%Y)+ ) of the patch bundles in the +/etc/opt/upgrade-ux/default.conf+ file. However, suppose we are in the year 2015 and still would like to install the patch bundle of 2014? The easiest way is to overrule the +YEAR+ variable in the +/etc/opt/upgrade-ux/local.conf+ as
+[source,bash]
+----
+YEAR=2014
+----
+
