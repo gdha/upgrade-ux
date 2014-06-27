@@ -11,6 +11,10 @@ sh: upgrade-ux:  not found.
 
 The reason is that the absolute path +/opt/upgrade-ux/bin+ is not added the the +PATH+ variable. This is done on purpose to avoid mistakes! Therefore, always use the full path +/opt/upgrade-ux/bin/upgrade-ux+
 
+== Why upgrade-ux as we know update-ux
+This question is only valid for HP-UX 11i systems which can be upgraded to a newer version of the Operation System (say HP-UX 11.23 to HP-UX 11.31), or even using +update-ux+ to upgrade software bundles on the same OS version. 
+We have encountered situations where the UNIX engineer by accident started +update-ux+ on HP-UX 11.23 to patch with HP-UX 11.23 bundles, but using the HP-UX 11.31 depot, and therefore, +update-ux+ started the upgrade process to HP-UX 11.31. As a result we needed to recover from an Ignite/UX image before restarting the patching round again. By using +upgrade-ux+ this simply becomes impossible as all update paths are described in the configuration files.
+
 == How do we install a patch bundle from 1 or 2 years ago?
 The +YEAR+ variable defines the current year ( +$(date +%Y)+ ) of the patch bundles in the +/etc/opt/upgrade-ux/default.conf+ file. However, suppose we are in the year 2015 and still would like to install the patch bundle of 2014? The easiest way is to overrule the +YEAR+ variable in the +/etc/opt/upgrade-ux/local.conf+ as
 [source,bash]

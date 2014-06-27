@@ -1,2 +1,50 @@
 = The upgrade-ux scripts
 
+The scripts that are sourced by the main script `upgrade-ux` reside under `/opt/upgrade-ux/scripts/` directory and the easiest way to know what will be sourced is by running `/opt/upgrade-ux/bin/upgrade-ux -s`:
+
+++++
+<iframe src="http://showterm.io/ef83a18e4477fb2598d73" width="740" height="480"></iframe>
+++++
+
+NOTE: It depends on the OS architecture (see `dump` workflow) which scripts will be sources. In above example it was on HP hardware.
+
+In every _stage_ directory you will find minumum a `default` directory which is sourced by every OS and a hardware specific directory, such as:
+
+ - hp
+ - GNU/Linux
+ - sunos
+ - aix
+
+The scripts found under these directories are only sourced when you run `upgrade-ux` on those HW architectures (make sense, no?).
+If you need new scripts just write a small script called `my_script.sh` (the `.sh` is important!) and it will be picked up the next time automatically.
+
+NOTE: there is no need to make these small scripts executable (nor is it required to start with `#!/bin/sh` or whatever).
+
+An example of such a script is `/opt/upgrade-ux/scripts/preinstall/default/05_reboot_required.sh`
+[source,bash]
+----
+# cat preinstall/default/05_reboot_required.sh
+# 05_reboot_required.sh
+# if the uptime of the system is higher then 30 days then we propose to reboot first
+
+# pre-define daysup as 0 (we can check this variable later [after a reboot])
+daysup=0
+
+# when uptime is not expressed in days then we probably just rebooted our system
+uptime | grep -q days || return
+
+daysup=$( uptime | awk '{print $3}' )
+IsDigit $daysup || daysup=$( w | head -1 | awk '{print $3}' )  # alternative method
+IsDigit $daysup || daysup=0
+
+if [[ $daysup -gt $DAYSUPTIME ]]; then
+    if (( PREVIEW )) ; then
+        LogPrint "Uptime of system is $daysup (>$DAYSUPTIME days) - recommend to reboot before patching"
+    else
+        Error "Uptime of system is $daysup (>$DAYSUPTIME days) - reboot is required before patching with $PRODUCT"
+    fi
+fi
+----
+
+Now it is up to you! If you wish to add new scripts it is always usefull to first make a new issue at GitHub: https://github.com/gdha/upgrade-ux/issues
+
