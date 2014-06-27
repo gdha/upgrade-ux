@@ -14,3 +14,7 @@ clean:
 
 %.html: %.txt
 	asciidoc $<
+
+upload: $(htmltargets)
+	lftp -e 'put -O /wwwroot/projects $(htmltargets) ; bye' apache07.hostbasket.com
+
