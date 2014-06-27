@@ -340,3 +340,18 @@ function PingSystem {
     # i=0 : reachable
     echo $i
 }
+
+# ------------------------------------------------------------------------------
+function GenerateTempDirName {
+    # the mktemp command differs between HP-UX, Linux, and other Unixes
+    # so we generate a generic function for it
+    # input args: $1 base directory to create temp dir in (e.g. /tmp
+    #             $2 base name (we will append a RANDOM number to it)
+    # output arg: directory name we generated
+    DIR1="$1"
+    DIR2="$2"
+    [[ ! -d "$DIR1" ]] && DIR1=/tmp  # when not existing use /tmp as default
+    [[ -z "$DIR2" ]] && DIR2="$PROGRAM"
+    echo "${DIR1}/${DIR2}_${RANDOM}"
+
+}
