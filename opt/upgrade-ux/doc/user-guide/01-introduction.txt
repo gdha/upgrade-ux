@@ -8,10 +8,11 @@ to just blindly update an UNIX system without testing this first out on a develo
 system, pre-production and so on. The upgrade-ux product allows you to repeat
 this process in a consistent way and as many times as you like on any system.
 Upgrade-ux understands two states:
-- preview mode: will go through the whole process without actually doing the update
-- upgrade mode: will do it for real (the update)
 
-The upgrade-ux uses configuration files which describes what a particilar Unix Operating
+ - preview mode: will go through the whole process without actually doing the update
+ - upgrade mode: will do it for real (the update)
+
+The upgrade-ux uses configuration files which describes what a particular Unix Operating
 System requires to be upgraded in the way you want it (or designed it). Doing
 it this way allows you to *exactly* define how a system should look like after
 the upgrade or patching. Nothing else can be installed, removed or configured.
@@ -58,7 +59,7 @@ Upgrade-UX has a wide range of features:
 
  - Simple to use
  - Has a _preview_ mode (to dry-run an upgrade without doing it) and an _upgrade_ mode
- - Is customisable via +local.conf+ file
+ - Is customisable via +local.conf+ configuration file
  - Is written in standard Korn Shell (which makes it highly portable)
  - Is UNIX Operating System independent as OS specific tasks reside in their own directory structures
  - Is easy extendable with your own scripts
