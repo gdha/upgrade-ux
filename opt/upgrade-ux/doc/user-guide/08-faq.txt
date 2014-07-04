@@ -22,3 +22,29 @@ The +YEAR+ variable defines the current year ( +$(date +%Y)+ ) of the patch bund
 YEAR=2014
 ----
 
+== How gets the SDSERVER variable defined
+You might wonder how we define the +SDSERVER+? And, is it possible to overrule it with your preference? The +SDSERVER+ variable is used a lot in the INI files and points to an IP address or FQDN of an software depot server where the software depots are stored.
+
+The +SDSERVER+ variable is defined by a script +scripts/init/hp/30_define_sdserver.sh+ and tries to figure out the region you are located in. Be aware, this script only works well for _one_ particular customer (the sponsor of this project).
+
+Therefore, for other users, you need to define the +SDSERVER+ variable in the +/etc/opt/upgrade-ux/local.conf+ file as
+[source,bash]
+----
+SDSERVER=my_sdserver.company.com
+----
+
+Obviously, you need to replace the name _my_sdserver.company.com_ with the correct name of the software depot server.
+
+== Upgrade-ux forces me to reboot the server if system is running for more then 30 days
+The forced reboot was introduced into upgrade-ux, because sometimes servers got patches after running over 1 year without a single reboot and to avoid pin-points to bad patch bundles we decided a recent reboot was required (by default 30 days uptime is the maximum we tolerate).
+
+However, in rare cases, some customers want to extend this period to 60 days. So, how to do this?
+
+The variable which defines the uptime is called +DAYSUPTIME+ and is defined in +/etc/opt/upgrade-ux/default.conf+. As you should know by now, you can overrule this by defining a new value in the +/etc/opt/upgrade-ux/local.conf+ file as
+[source,bash]
+----
+DAYSUPTIME=60
+----
+
+However, be aware, if you increase this value then do not file an issue against upgrade-ux!
+
