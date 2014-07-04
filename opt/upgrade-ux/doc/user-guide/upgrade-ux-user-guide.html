@@ -1,0 +1,1720 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.8" />
+<title>Upgrade-UX User Guide</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="book">
+<div id="header">
+<h1>Upgrade-UX User Guide</h1>
+<span id="author">Gratien Dhaese</span><br />
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<img src="http://www.it3.be/images/upgrade-ux.png">
+<div class="paragraph"><p>This document describes everything there is to know regarding
+<strong>Upgrade-UX</strong>, an Open Source upgrade and patching framework designed to assist the UNIX system engineer in patching or upgrading
+systems in a consistent and repeatable way with evidence before and after the running <code>upgrade-ux</code>.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction">1. Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>Upgrade-UX</strong> is ai software framework to update or patch lots of Unix systems (Linux,
+HP-UX, AIX and Solaris).</p></div>
+<div class="paragraph"><p>In professional environments it is not allowed
+to just blindly update an UNIX system without testing this first out on a development
+system, pre-production and so on. The upgrade-ux product allows you to repeat
+this process in a consistent way and as many times as you like on any system.
+Upgrade-ux understands two states:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+preview mode: will go through the whole process without actually doing the update
+</p>
+</li>
+<li>
+<p>
+upgrade mode: will do it for real (the update)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>The upgrade-ux uses configuration files which describes what a particular Unix Operating
+System requires to be upgraded in the way you want it (or designed it). Doing
+it this way allows you to <strong>exactly</strong> define how a system should look like after
+the upgrade or patching. Nothing else can be installed, removed or configured.</p></div>
+<div class="paragraph"><p>Furthermore, many checks can be build-in via adding simple scripts (see chapter
+"Adding your scripts"). We also keep of each run an unique log file, and furthermore, we keep
+evidence before and after patching in a special directory. Months later we can still
+inspect these logs and evidence directories to verify what happened or what has
+changed in the meantime.</p></div>
+<div class="sect2">
+<h3 id="_upgrade_ux_project">1.1. Upgrade-UX project</h3>
+<div class="paragraph"><p>The support and development of the Upgrade-UX project takes place
+on Github:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+Upgrade-UX website
+</dt>
+<dd>
+<p>
+    <a href="http://www.it3.be/projects/upgrade-ux.html">http://www.it3.be/projects/upgrade-ux.html</a>
+</p>
+</dd>
+<dt class="hdlist1">
+Github project
+</dt>
+<dd>
+<p>
+    <a href="http://github.com/gdha/upgrade-ux/">http://github.com/gdha/upgrade-ux/</a>
+</p>
+</dd>
+</dl></div>
+<div class="paragraph"><p>In case you have questions, ideas or feedback about this document, you
+can contact the development team at:
+<a href="mailto:gratien.dhaese@gmail.com">gratien.dhaese@gmail.com</a>.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_design_concepts">1.2. Design concepts</h3>
+<div class="paragraph"><p>Based on experience from previous projects, a set of design principles were
+defined, and improved over time:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Focus on easy and repeatable tasks
+</p>
+</li>
+<li>
+<p>
+Modular design, focused on system administrators
+</p>
+</li>
+<li>
+<p>
+For Unix operating systems
+</p>
+</li>
+<li>
+<p>
+Few external dependencies (ksh and standard Unix tools)
+</p>
+</li>
+<li>
+<p>
+Easy to use and easy to extend
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>The goal is to make Upgrade-UX as least demanding as possible, it will
+require only the applications necessary to fulfill the job upgrade-ux
+is configured for.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_features_and_functionality">1.3. Features and functionality</h3>
+<div class="paragraph"><p>Upgrade-UX has a wide range of features:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Simple to use
+</p>
+</li>
+<li>
+<p>
+Has a <em>preview</em> mode (to dry-run an upgrade without doing it) and an <em>upgrade</em> mode
+</p>
+</li>
+<li>
+<p>
+Is customisable via <code>local.conf</code> configuration file
+</p>
+</li>
+<li>
+<p>
+Is written in standard Korn Shell (which makes it highly portable)
+</p>
+</li>
+<li>
+<p>
+Is UNIX Operating System independent as OS specific tasks reside in their own directory structures
+</p>
+</li>
+<li>
+<p>
+Is easy extendable with your own scripts
+</p>
+</li>
+<li>
+<p>
+The <code>upgrade-ux</code> command leaves a trace in its own log file
+</p>
+</li>
+<li>
+<p>
+Running in preview or upgrade mode always creates evidence files
+</p>
+</li>
+<li>
+<p>
+Has a man page
+</p>
+</li>
+<li>
+<p>
+Has user documentation (you are reading it)
+</p>
+</li>
+<li>
+<p>
+Can be used to install patch bundles of previous years with the <code>YEAR</code> variable
+</p>
+</li>
+<li>
+<p>
+Does understand Serviceguard clusters
+</p>
+</li>
+<li>
+<p>
+Can be programmed to bail out on settings you think are too serious to continue
+</p>
+</li>
+<li>
+<p>
+Can trigger remote alarms, syslog, monitors,&#8230;
+</p>
+</li>
+<li>
+<p>
+Can do a basis health check of your system - it is all up to you
+</p>
+</li>
+<li>
+<p>
+Has excellent support by its author
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started">2. Getting started</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>You can use upgrade-ux via installing the sources or the software depot (HP-UX, Linux,&#8230;)</p></div>
+<div class="sect2">
+<h3 id="_clone_the_sources_via_github">2.1. Clone the sources via GitHub</h3>
+<div class="paragraph"><p>The latest sources are available at <a href="https://github.com/gdha/upgrade-ux">GitHub</a> and to clone
+the sources on your local Unix you could use</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>git clone git@github.com:gdha/upgrade-ux.git</code></pre>
+</div></div>
+<div class="paragraph"><p>To enter the directory use the command</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>cd upgrade-ux/opt/upgrade-ux</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_installing_the_software_depot_on_hp_ux">2.2. Installing the software depot on HP-UX</h3>
+<div class="paragraph"><p>If the software depot was already been made available by the system administrator then you can use <code>swinstall</code> to do the job.
+The following is the output of the command <code>swinstall -s SDserver:/var/opt/ignite/depots/GLOBAL/tools/11i UPGRADE-UX</code></p></div>
+<iframe src="http://showterm.io/fbf1fa17d0577fa886ea0" width="740" height="480"></iframe>
+</div>
+<div class="sect2">
+<h3 id="_installing_the_rpm_package_on_linux_rhel_sles">2.3. Installing the RPM package on Linux (RHEL, SLES)</h3>
+<div class="paragraph"><p>When the RPM is available you could install it via the command:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>rpm -ivh upgrade-ux-1.0-1.el7.noarch.rpm</code></pre>
+</div></div>
+<div class="paragraph"><p>Or, in case you would liek to upgrade a version via <code>yum</code> you could do the following:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>rpm -Uvh upgrade-ux-1.1-1.el7.noarch.rpm</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_prerequisites">2.4. Prerequisites</h3>
+<div class="paragraph"><p>Be aware, that upgrade-ux is completely written in Korn Shell, therefore, you must have the <code>ksh</code> executable on your UNIX system. To be sure you could type <code>which ksh</code>. If it is not present please install it first (most likely on Linux where it is not a standard package in base OS).</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration">3. Configuration</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_upgrade_ux_related_configuration_files">3.1. Upgrade-ux related configuration files</h3>
+<div class="paragraph"><p>The configuration files that <code>upgrade-ux</code> uses are basically just shell scripts and should be treated as such.</p></div>
+<div class="paragraph"><p>The default location of the configuration files is <code>/etc/opt/upgrade-ux/</code>. However, if you are working with the sources (e.g. via git clone) then it is perfectly possible to use the relative paths, e.g.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>ls $HOME/project/upgrade-ux/etc/opt/upgrade-ux/</code></pre>
+</div></div>
+<div class="paragraph"><p>The easiest way to explain which configuration files are possible is by showing the output of the <code>upgrade-ux dump</code> command:</p></div>
+<iframe src="http://showterm.io/62ac55fded60bff1518f4" width="740" height="480"></iframe>
+<div class="sect3">
+<h4 id="_default_configuration_file_default_conf">3.1.1. Default configuration file default.conf</h4>
+<div class="paragraph"><p>The <code>default.conf</code> contains lots of variables which should not be changed by the end-user. If you wish to modify one just redefine it in the <code>local.conf</code> file.</p></div>
+<div class="paragraph"><p>A good example of such variable is the <code>YEAR</code>. In the <code>default.conf</code> it is defined as:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code># The default year to use with our patch bundle is *current year* [ $(date '+%Y') ] - to overrule define it manually
+# in the local.conf file. E.g. when running upgrade-ux in 2015 but still installing patches from 2014 then define: YEAR=2014
+YEAR=$(date '+%Y')</code></pre>
+</div></div>
+<div class="paragraph"><p>However, in some cases as mentioned above, if you are in the year 2015 and you still want to install patch bundles of 2014 then it is necessary to define the <code>YEAR</code> variable in the <code>local.conf</code> file, as <code>YEAR=2014</code> (or whatever, the year might be).</p></div>
+</div>
+<div class="sect3">
+<h4 id="_local_configuration_file_local_conf">3.1.2. Local configuration file local.conf</h4>
+<div class="paragraph"><p>The <code>local.conf</code> should only contain variables which you want to overrule, as described in previous section (of the <code>default.conf</code> file). It is important to know that the <code>local.conf</code> file is the last configuration file read by <code>upgrade-ux</code> script and therefore, the variables defined in there are the last ones that will be used.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_operating_specific_configuration_files">3.1.3. Operating Specific configuration files</h4>
+<div class="paragraph"><p>On each OS you have specific OS related configuration files, e.g.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>HP-UX.conf
+GNU/Linux.conf
+SunOS.conf</code></pre>
+</div></div>
+<div class="paragraph"><p>These configuration files typically contain variables which have only a meaning within that specific OS, e.g. on HP-UX</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>SWINSTALL=/usr/sbin/swinstall</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_ini_files">3.2. The INI files</h3>
+<div class="paragraph"><p>The INI files are always OS specific and contain the definitions of which patch bundles should be installed or removed, and so on.
+The INI files are kept under the <code>/etc/opt/upgrade-ux</code> or <code>$HOME/project/upgrade-ux/etc/opt/upgrade-ux/</code> directory and are typically called <code>$OS-$OS_VERSION-$YEAR.ini</code></p></div>
+<div class="paragraph"><p>It follows also the different stages known within <code>upgrade-ux</code> and these are best explained with an example INI file (below you see the INI file for HP-UX 11.11 systems):</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code># HP-UX-11.11-2014.ini file
+###########################
+#
+###################
+# section preremove - which sd depots must be removed before we install the latest one (or even run update-ux)
+###################
+[preremove]
+    command[0]      =       $SWREMOVE
+    options[0]      =       "-x mount_all_filesystems=false  -x enforce_dependencies=false"
+    bundle[0]       =       CFG2HTML
+    version[0]      =       "C.06.*"         ; cfg2html</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>command[1]      =       $SWREMOVE
+options[1]      =       "-x mount_all_filesystems=false  -x enforce_dependencies=false"
+bundle[1]       =       NCS_UTILS
+version[1]      =       "*"</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>####################
+# section preinstall - anything to do before running the installation of patches, software or update-ux
+####################
+[preinstall]</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>#################
+# section install - what shall we do during the installation phase
+#################
+# please list the software bundles which do not require a reboot first!!!
+[install]
+    # SecureShell
+    command[0]      =       $SWINSTALL
+    options[0]      =       "-x mount_all_filesystems=false"
+    source[0]       =       "-s $SDSERVER:/var/opt/ignite/depots/GLOBAL/SSH/11.11"
+    bundle[0]       =       T1471AA
+    version[0]      =       A.06.20.004</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code># the centrifyDC is the same for all HP-UX 11i versions
+command[1]      =       $SWINSTALL
+options[1]      =       "-x mount_all_filesystems=false"
+source[1]       =       "-s $SDSERVER:/var/opt/ignite/depots/GLOBAL/centrify/11.11/V5"
+bundle[1]       =       "CentrifyDC"
+version[1]      =       "5.1.1-831"</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>command[2]      =       $SWINSTALL
+options[2]      =       "-x mount_all_filesystems=false"
+source[2]       =       "-s $SDSERVER:/var/opt/ignite/depots/GLOBAL/centrify/11.31/V5"
+bundle[2]       =       "Centrify_conf"
+version[2]      =       "5.1.x"</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>command[3]      =       $SWINSTALL
+options[3]      =       "-x mount_all_filesystems=false -x autoreboot=true"
+source[3]       =       "-s $SDSERVER:/var/opt/ignite/depots/GLOBAL/jnjdrv11-11-may2014"
+bundle[3]       =       "*"
+version[3]      =       ""</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>#####################
+# section postinstall
+#####################
+# Use this section for additional (internal) software bundles - we assume no reboots are required
+[postinstall]</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>####################
+# section postremove
+####################
+[postremove]</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>###################
+# section configure
+###################
+# or define explicit commands (real cmds) with options or define script tag [string] which
+# may be picked up by a script (under scripts/configure/default/)
+[configure]
+    command[0]      =       uncomment_cfg2html_in_crontab
+    options[0]      =       ""</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>#################
+# section cleanup
+#################
+[cleanup]</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>#####################
+# section postexecute
+#####################
+[postexecute]
+    command[0]      =       "/opt/cfg2html/bin/cfg2html"
+    options[0]      =       "-2%Y%m%d"</code></pre>
+</div></div>
+<div class="sect3">
+<h4 id="_the_ini_syntax">3.2.1. The INI syntax</h4>
+<div class="paragraph"><p>You can use as many comments as you like, but it should start with <code>#</code> or <code>;</code> sign.</p></div>
+<div class="paragraph"><p>A stage or section is started with <code>[section]</code> header. The name within a section is known as a <em>stage</em> within <code>upgrade-ux</code>.</p></div>
+<div class="paragraph"><p>A section may be empty or may contain arrays (some of those may be left out and will be treated as empty strings). An array will always be treated as a string by the way. The content of arrays are wiped out when you enter a new stage (or section) by <code>upgrade-ux</code>.</p></div>
+<div class="paragraph"><p>The following arrays are known to <code>upgrade-ux</code>:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+command[] - add the command to be executed (it can be a variable name, e.g. <code>$SWINSTALL</code>)
+</p>
+</li>
+<li>
+<p>
+options[] - add here specific options required by command[]
+</p>
+</li>
+<li>
+<p>
+source[] - should be the source location where the software bundle reside
+</p>
+</li>
+<li>
+<p>
+bundle[] - the name of the software bundle
+</p>
+</li>
+<li>
+<p>
+version[] - the specific version to be installed/removed (can contain <code>*</code> or may be empty as well)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>If you do not need all arrays in a certain section then it is fine to leave these empty (or not mentioning these in the INI file)</p></div>
+<div class="paragraph"><p>Be careful although that you define the array index correctly in the INI file (see example above).</p></div>
+</div>
+<div class="sect3">
+<h4 id="_section_preremove">3.2.2. Section preremove</h4>
+<div class="paragraph"><p>In the <code>preremove</code> section you typically define lines of software bundles that should be removed for one of other reason, e.g. when upgrading these would be problematic (in the way the software was designed - read badly).
+As said, if not needed leave this section empty.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_section_preinstall">3.2.3. Section preinstall</h4>
+<div class="paragraph"><p>In the <code>preinstall</code> section we could define some commands that need to be run, but in most case we write small scripts to do specific tasks in this stage (or section) such as stopping some daemons, saving evidence of software inventory and so on. More about thiese scripts in Chapter 6 (The Upgrade-ux scripts).</p></div>
+</div>
+<div class="sect3">
+<h4 id="_section_install">3.2.4. Section install</h4>
+<div class="paragraph"><p>In the <code>install</code> section you typically only define the software bundles that should be installed and in the right order. For example, for update the installation software (<code>update-ux</code> or <code>yum</code>) before the new updates. In this stage we do not have much special scripts.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_section_postinstall">3.2.5. Section postinstall</h4>
+<div class="paragraph"><p>In the <code>postinstall</code> section we define the software pieces that were missing in the <code>install</code> section for some specific reason (if any). Furthermore, in this stage we capture lots of evidence again and compare these via special scripts. Again see Chapter 6 (The Upgrade-ux scripts).</p></div>
+</div>
+<div class="sect3">
+<h4 id="_section_postremove">3.2.6. Section postremove</h4>
+<div class="paragraph"><p>In the <code>postremove</code> section you could remove software bundles taht were in the big update round of the <code>install</code> section, but should not stay on this particular platform for some reason. Again, you may leave it empty if not needed.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_section_configure">3.2.7. Section configure</h4>
+<div class="paragraph"><p>In the <code>configure</code> section you could define scripts or commands to be executed by <code>upgrade-ux</code> to configure or add something in cron.
+See also the example shown above with <code>uncomment_cfg2html_in_crontab</code>, which is a toggle meant for a script called <code>/opt/upgrade-ux/scripts/configure/default/10_configure_commands.sh</code> that simply touches a file under <code>$TMP_DIR</code></p></div>
+<div class="paragraph"><p>Another way to had this defined would have been:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>command[0]="touch"
+options[0]="$TMP_DIR/uncomment_cfg2html_in_crontab"</code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_section_cleanup">3.2.8. Section cleanup</h4>
+<div class="paragraph"><p>In the <code>cleanup</code> section we could add commands to remove some old log files (of older software bundles), or you can also use it to report errors or any other message. The section is typically empty, but you could add some special scripts under <code>/opt/upgrade-ux/scripts/cleanup/default/</code></p></div>
+</div>
+<div class="sect3">
+<h4 id="_section_postexecute">3.2.9. Section postexecute</h4>
+<div class="paragraph"><p>In the <code>postexecute</code> section you could define commands and options of things you want to execute, e.g.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>command[0]      =       "/opt/cfg2html/bin/cfg2html"
+options[0]      =       "-2%Y%m%d"</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_workflows">4. Workflows</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The workflows (or commands) available can be listed with the <code>-h</code> option:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># /opt/upgrade-ux/bin/upgrade-ux -h</span></span>
+    <span style="color: #990000">....</span>
+    List of commands<span style="color: #990000">:</span>
+     dump            dump configuration and system information
+     mkdist          create a compressed tar archive distribution
+     purgelogs       purge the LOG <span style="color: #990000">[</span>/home/gdhaese<span style="color: #993399">1</span>/projects/upgrade-ux/var/opt/upgrade-ux/log<span style="color: #990000">]</span> directory
+     <span style="font-weight: bold"><span style="color: #0000FF">test</span></span>            a simple <span style="font-weight: bold"><span style="color: #0000FF">test</span></span> workflow
+     upgrade         upgrade the operating system</tt></pre></div></div>
+<div class="sect2">
+<h3 id="_dump_workflow">4.1. Dump workflow</h3>
+<div class="paragraph"><p>The dump workflow was already discussed during the configuration chapter. The output of <code>/opt/upgrade-ux/bin/upgrade-ux dump</code>:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># /opt/upgrade-ux/bin/upgrade-ux dump</span></span>
+upgrade-ux <span style="color: #993399">0.7</span> <span style="color: #990000">/</span> <span style="color: #993399">03</span>-Jun-<span style="color: #993399">2014</span>
+Using log file<span style="color: #990000">:</span> /var/opt/upgrade-ux/log/upgrade-ux-<span style="color: #993399">20140626</span>-<span style="color: #993399">1656</span>-LOGFILE<span style="color: #990000">.</span>log
+Dumping out configuration and system information
+System definition<span style="color: #990000">:</span>
+                                    ARCH <span style="color: #990000">=</span> HP-UX-ia<span style="color: #993399">64</span>
+                                      OS <span style="color: #990000">=</span> HP-UX
+                        OS_MASTER_VENDOR <span style="color: #990000">=</span>
+                       OS_MASTER_VERSION <span style="color: #990000">=</span>
+                   OS_MASTER_VENDOR_ARCH <span style="color: #990000">=</span>
+                OS_MASTER_VENDOR_VERSION <span style="color: #990000">=</span>
+           OS_MASTER_VENDOR_VERSION_ARCH <span style="color: #990000">=</span>
+                               OS_VENDOR <span style="color: #990000">=</span> hp
+                              OS_VERSION <span style="color: #990000">=</span> <span style="color: #993399">11.31</span>
+                          OS_VENDOR_ARCH <span style="color: #990000">=</span> hp/ia<span style="color: #993399">64</span>
+                       OS_VENDOR_VERSION <span style="color: #990000">=</span> hp<span style="color: #990000">/</span><span style="color: #993399">11.31</span>
+                  OS_VENDOR_VERSION_ARCH <span style="color: #990000">=</span> hp<span style="color: #990000">/</span><span style="color: #993399">11.31</span>/ia<span style="color: #993399">64</span>
+Configuration tree<span style="color: #990000">:</span>
+                         HP-UX-ia<span style="color: #993399">64</span><span style="color: #990000">.</span>conf <span style="color: #990000">:</span> missing/empty
+                              HP-UX<span style="color: #990000">.</span>conf <span style="color: #990000">:</span> OK
+                                 hp<span style="color: #990000">.</span>conf <span style="color: #990000">:</span> missing/empty
+                            hp/ia<span style="color: #993399">64</span><span style="color: #990000">.</span>conf <span style="color: #990000">:</span> missing/empty
+                           hp<span style="color: #990000">/</span><span style="color: #993399">11.31</span><span style="color: #990000">.</span>conf <span style="color: #990000">:</span> missing/empty
+                      hp<span style="color: #990000">/</span><span style="color: #993399">11.31</span>/ia<span style="color: #993399">64</span><span style="color: #990000">.</span>conf <span style="color: #990000">:</span> missing/empty
+                               site<span style="color: #990000">.</span>conf <span style="color: #990000">:</span> missing/empty
+                              <span style="font-weight: bold"><span style="color: #0000FF">local</span></span><span style="color: #990000">.</span>conf <span style="color: #990000">:</span> OK</tt></pre></div></div>
+<div class="paragraph"><p>The first part displays the system definitions, such as OS, hardware type and OS version.
+The second part shows the configuration part and which files it could find (or you may define, create and/or use). They do not need to exist.</p></div>
+<div class="paragraph"><p>The following example shows the dump on a RHEL 7 system:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># /opt/upgrade-ux/bin/upgrade-ux dump</span></span>
+upgrade-ux <span style="color: #993399">0.9</span> <span style="color: #990000">/</span> Git
+Using log file<span style="color: #990000">:</span> /var/opt/upgrade-ux/log/upgrade-ux-<span style="color: #993399">20140626</span>-<span style="color: #993399">1859</span>-LOGFILE<span style="color: #990000">.</span>log
+Dumping out configuration and system information
+This is a <span style="color: #FF0000">'Linux-x86_64'</span> system<span style="color: #990000">,</span> compatible with <span style="color: #FF0000">'Linux-i386'</span><span style="color: #990000">.</span>
+System definition<span style="color: #990000">:</span>
+                                    ARCH <span style="color: #990000">=</span> Linux-i<span style="color: #993399">386</span>
+                                      OS <span style="color: #990000">=</span> GNU/Linux
+                        OS_MASTER_VENDOR <span style="color: #990000">=</span> fedora
+                       OS_MASTER_VERSION <span style="color: #990000">=</span> <span style="color: #993399">7</span>
+                   OS_MASTER_VENDOR_ARCH <span style="color: #990000">=</span> fedora/x86_64
+                OS_MASTER_VENDOR_VERSION <span style="color: #990000">=</span> fedora<span style="color: #990000">/</span><span style="color: #993399">7</span>
+           OS_MASTER_VENDOR_VERSION_ARCH <span style="color: #990000">=</span> fedora<span style="color: #990000">/</span><span style="color: #993399">7</span>/x86_64
+                               OS_VENDOR <span style="color: #990000">=</span> rhel
+                              OS_VERSION <span style="color: #990000">=</span> <span style="color: #993399">7</span>
+                          OS_VENDOR_ARCH <span style="color: #990000">=</span> rhel/x86_64
+                       OS_VENDOR_VERSION <span style="color: #990000">=</span> rhel<span style="color: #990000">/</span><span style="color: #993399">7</span>
+                  OS_VENDOR_VERSION_ARCH <span style="color: #990000">=</span> rhel<span style="color: #990000">/</span><span style="color: #993399">7</span>/x86_64
+Configuration tree<span style="color: #990000">:</span>
+                         Linux-i<span style="color: #993399">386</span><span style="color: #990000">.</span>conf <span style="color: #990000">:</span> missing/empty
+                          GNU/Linux<span style="color: #990000">.</span>conf <span style="color: #990000">:</span> OK
+                             fedora<span style="color: #990000">.</span>conf <span style="color: #990000">:</span> missing/empty
+                      fedora/x86_64<span style="color: #990000">.</span>conf <span style="color: #990000">:</span> missing/empty
+                           fedora<span style="color: #990000">/</span><span style="color: #993399">7</span><span style="color: #990000">.</span>conf <span style="color: #990000">:</span> missing/empty
+                    fedora<span style="color: #990000">/</span><span style="color: #993399">7</span>/x86_64<span style="color: #990000">.</span>conf <span style="color: #990000">:</span> missing/empty
+                               rhel<span style="color: #990000">.</span>conf <span style="color: #990000">:</span> missing/empty
+                        rhel/x86_64<span style="color: #990000">.</span>conf <span style="color: #990000">:</span> missing/empty
+                             rhel<span style="color: #990000">/</span><span style="color: #993399">7</span><span style="color: #990000">.</span>conf <span style="color: #990000">:</span> missing/empty
+                      rhel<span style="color: #990000">/</span><span style="color: #993399">7</span>/x86_64<span style="color: #990000">.</span>conf <span style="color: #990000">:</span> missing/empty
+                               site<span style="color: #990000">.</span>conf <span style="color: #990000">:</span> missing/empty
+                              <span style="font-weight: bold"><span style="color: #0000FF">local</span></span><span style="color: #990000">.</span>conf <span style="color: #990000">:</span> OK</tt></pre></div></div>
+<div class="paragraph"><p>These configuration files live under the <code>/etc/opt/upgrade-ux</code> or <code>./upgrade-ux/etc/opt/upgrade-ux</code> (relative path) directory.
+At this moment we have the following configuration files present (however, it will grow over time):</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>    <span style="font-style: italic"><span style="color: #9A1900"># ls -lR</span></span>
+    total <span style="color: #993399">112</span>
+    drwxr-xr-x   <span style="color: #993399">2</span> gdhaese1   users         <span style="color: #993399">8192</span> Mar  <span style="color: #993399">6</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">39</span> GNU
+    -rw-r--r--   <span style="color: #993399">1</span> gdhaese1   users         <span style="color: #993399">2919</span> Jun  <span style="color: #993399">3</span> <span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">07</span> HP-UX-<span style="color: #993399">11.11</span>-<span style="color: #993399">2014</span><span style="color: #990000">.</span>ini
+    -rw-r--r--   <span style="color: #993399">1</span> gdhaese1   users         <span style="color: #993399">2918</span> Jun  <span style="color: #993399">3</span> <span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">07</span> HP-UX-<span style="color: #993399">11.23</span>-<span style="color: #993399">2014</span><span style="color: #990000">.</span>ini
+    -rw-r--r--   <span style="color: #993399">1</span> gdhaese1   users         <span style="color: #993399">3687</span> Jun  <span style="color: #993399">3</span> <span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">06</span> HP-UX-<span style="color: #993399">11.31</span>-<span style="color: #993399">2014</span><span style="color: #990000">.</span>ini
+    -rw-r--r--   <span style="color: #993399">1</span> gdhaese1   users         <span style="color: #993399">1068</span> May <span style="color: #993399">12</span> <span style="color: #993399">10</span><span style="color: #990000">:</span><span style="color: #993399">52</span> HP-UX<span style="color: #990000">.</span>conf
+    -rw-r--r--   <span style="color: #993399">1</span> gdhaese1   users         <span style="color: #993399">4571</span> Jun <span style="color: #993399">13</span> <span style="color: #993399">14</span><span style="color: #990000">:</span><span style="color: #993399">58</span> default<span style="color: #990000">.</span>conf
+    -rw-r--r--   <span style="color: #993399">1</span> gdhaese1   users          <span style="color: #993399">790</span> May <span style="color: #993399">21</span> <span style="color: #993399">09</span><span style="color: #990000">:</span><span style="color: #993399">48</span> <span style="font-weight: bold"><span style="color: #0000FF">local</span></span><span style="color: #990000">.</span>conf
+
+    <span style="color: #990000">.</span>/GNU<span style="color: #990000">:</span>
+    total <span style="color: #993399">48</span>
+    -rw-r--r--   <span style="color: #993399">1</span> gdhaese1   users          <span style="color: #993399">102</span> Mar  <span style="color: #993399">6</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">39</span> Linux-fedora-<span style="color: #993399">20</span>-<span style="color: #993399">2014</span><span style="color: #990000">.</span>ini
+    -rw-r--r--   <span style="color: #993399">1</span> gdhaese1   users          <span style="color: #993399">111</span> Mar  <span style="color: #993399">6</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">39</span> Linux-suse-<span style="color: #993399">11</span>-<span style="color: #993399">2014</span><span style="color: #990000">.</span>ini
+    -rw-r--r--   <span style="color: #993399">1</span> gdhaese1   users           <span style="color: #993399">74</span> Mar  <span style="color: #993399">6</span> <span style="color: #993399">10</span><span style="color: #990000">:</span><span style="color: #993399">43</span> Linux<span style="color: #990000">.</span>conf</tt></pre></div></div>
+</div>
+<div class="sect2">
+<h3 id="_mkdist_workflow">4.2. Mkdist workflow</h3>
+<div class="paragraph"><p>The mkdist workflow creates a compressed tar file of the current development tree, which only makes sense when you are using the <code>git clone</code> version of upgrade-ux. The compressed tar file is stored under <code>/tmp</code> file system and is called <code>/tmp/upgrade-ux-0.9.tar.gz</code> (the version can be different of course).</p></div>
+</div>
+<div class="sect2">
+<h3 id="_purgelogs_workflow">4.3. Purgelogs workflow</h3>
+<div class="paragraph"><p>The purgelogs workflow just has a simple function and that is to purge log files which are older than 30 days. It will display the logs it has purged (only when you are using the option <code>-v</code>):</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># opt/upgrade-ux/bin/upgrade-ux -v purgelogs</span></span></tt></pre></div></div>
+</div>
+<div class="sect2">
+<h3 id="_test_workflow">4.4. Test workflow</h3>
+<div class="paragraph"><p>The test workflow is a very simplistic test (use option <code>-v</code> to see something):</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># opt/upgrade-ux/bin/upgrade-ux -v test</span></span>
+upgrade-ux <span style="color: #993399">0.9</span> <span style="color: #990000">/</span> Git
+Using log file<span style="color: #990000">:</span> /home/gdhaese<span style="color: #993399">1</span>/projects/upgrade-ux/var/opt/upgrade-ux/log/upgrade-ux-<span style="color: #993399">20140625</span>-<span style="color: #993399">1354</span>-LOGFILE<span style="color: #990000">.</span>log
+no stale NFS mount points found</tt></pre></div></div>
+</div>
+<div class="sect2">
+<h3 id="_upgrade_workflow">4.5. Upgrade workflow</h3>
+<div class="paragraph"><p>The upgrade workflow is the real work horse here and in fact is the default workflow (meaning if no workflow is mentioned we will assume you mean <code>upgrade</code>).</p></div>
+<div class="paragraph"><p>The upgrade workflow has two modes:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>preview mode</em>: is going through the complete flow checking all software and simulating an update of the system. Is a perfect way to examine your system to see whether any underlying issues could prevent a successful upgrade. You can do the preview (option <code>-p</code>) any time and as much as you like. However, before doing the <em>upgrade mode</em> you are forced to go through a successful <em>preview mode</em> as well.
+</p>
+</li>
+<li>
+<p>
+<em>upgrade mode</em>: is doing again all the checks, writing evidence and applying all the patch bundles or doing the upgrade. The system might reboot. After the reboot you can continue with retyping <code>/opt/upgrade-ux/bin/upgrade-ux -v</code> and it will continue from the point it was interrupted by the reboot as upgrade-ux keeps track of it stages.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_basic_usage">5. Basic Usage</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Before digging deeper in <code>upgrade-ux</code> lets explain the basic usage. The option help (<code>-h</code>) will produce the following:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># /opt/upgrade-ux/bin/upgrade-ux -h</span></span>
+Usage<span style="color: #990000">:</span> upgrade-ux <span style="color: #990000">[</span>-dDFsSpvV<span style="color: #990000">]</span> <span style="color: #990000">[</span>-c DIR <span style="color: #990000">]</span> COMMAND <span style="color: #990000">[</span>-- ARGS<span style="color: #990000">...]</span>
+
+upgrade-ux comes with ABSOLUTELY NO WARRANTY<span style="color: #990000">;</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> details see
+the GNU General Public License at<span style="color: #990000">:</span> http<span style="color: #990000">:</span>//www<span style="color: #990000">.</span>gnu<span style="color: #990000">.</span>org/licenses/gpl<span style="color: #990000">.</span>html
+
+Available options<span style="color: #990000">:</span>
+ -c DIR       alternative config directory<span style="color: #990000">;</span> instead of /etc/opt/upgrade-ux
+ -d           debug mode<span style="color: #990000">;</span> log debug messages
+ -D           debugscript mode<span style="color: #990000">;</span> log every <span style="font-weight: bold"><span style="color: #000000">function call</span></span>
+ -F           forcing preview or upgrade to <span style="font-weight: bold"><span style="color: #0000FF">continue</span></span> when entering next stage is not allowed
+ -s           simulation mode<span style="color: #990000">;</span> show what scripts upgrade-ux would include
+ -S           step-by-step mode<span style="color: #990000">;</span> acknowledge each script individually
+ -p           preview mode<span style="color: #990000">;</span> run all install or other commands <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> preview
+ -v           verbose mode<span style="color: #990000">;</span> show more output
+ -V           version information
+
+List of commands<span style="color: #990000">:</span>
+ dump            dump configuration and system information
+ mkdist          create a compressed tar archive distribution
+ purgelogs       purge the LOG <span style="color: #990000">[</span>/var/opt/upgrade-ux/log<span style="color: #990000">]</span> directory
+ <span style="font-weight: bold"><span style="color: #0000FF">test</span></span>            a simple <span style="font-weight: bold"><span style="color: #0000FF">test</span></span> workflow
+ upgrade         upgrade the operating system</tt></pre></div></div>
+<div class="paragraph"><p>Keep in mind that upgrade-ux has an excellent man page too. See <code>man 8 upgrade-ux</code></p></div>
+<div class="paragraph"><p>It is important to know that <code>upgrade-ux</code> is a quiet program and will not show any output if you do not request for it with the verbose option (<code>-v</code>). Another point of interest is its excellent logging facilities as under <code>/var/opt/upgrade-ux/log</code> directory <code>upgrade-ux</code> keep a log file of each run. The log files are composed as follow <code>upgrade-ux-&lt;YYYYMMDD&gt;-&lt;HHMM&gt;-LOGFILE.log</code></p></div>
+<div class="paragraph"><p>We already mentioned the evidence files which are kept under <code>/var/opt/upgrade-ux/&lt;YYYY-MM-DD&gt;/</code> directory. The type of files you find under there are of course different according the OS, OS version and which software is installed. Furthermore, <em>preview</em> and <em>upgrade</em> mode may result in more or less evidence files.</p></div>
+<div class="paragraph"><p>Starting up the program should be done by referencing the full path <code>/opt/upgrade-ux/bin/upgrade-ux</code> as the directory is not part of the <code>PATH</code> variable, and we prefer to keep it this way to avoid accidents.</p></div>
+<div class="paragraph"><p>You probably understood by now that <code>upgrade-ux</code> must be started in <em>preview</em> mode first before we can run it in <em>upgrade</em> mode. However, we prefer that you always use the option <code>-p</code> (<em>preview</em> mode) to make it clear to yourself and other (when they need to dig into the log files for some reason) what you meant. Furthermore, in the log file there is always a trace of in which mode the program was running:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>2014-06-10 15:22:45 Check if our PID (11950) is locked
+2014-06-10 15:22:45 Found /tmp/upgrade-ux-LOCKDIR/upgrade-ux-PIDFILE file - we could be locked...
+2014-06-10 15:22:45 lock is stale (6607) - will continue
+2014-06-10 15:22:45 lock succeeded: 11950 - /tmp/upgrade-ux-LOCKDIR/upgrade-ux-PIDFILE
+2014-06-10 15:22:47 upgrade-ux 0.7 / 03-Jun-2014
+2014-06-10 15:22:47 Command line options: /opt/upgrade-ux/bin/upgrade-ux -v
+2014-06-10 15:22:47 Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140610-1522-LOGFILE.log
+2014-06-10 15:22:47 Including /opt/upgrade-ux/lib/progresssubsystem.nosh
+2014-06-10 15:22:47 Including /etc/opt/upgrade-ux/HP-UX.conf
+2014-06-10 15:22:47 Including /etc/opt/upgrade-ux/local.conf
+2014-06-10 15:22:47 Running upgrade workflow
+2014-06-10 15:22:47 Running 'init' stage
+2014-06-10 15:22:47 Including init/default/03_prepare_tmp_build_area.sh
+2014-06-10 15:22:47 Including init/default/04_create_var_dir.sh
+2014-06-10 15:22:47 Including init/default/05_select_ini_file.sh
+2014-06-10 15:22:47 Found ini file /etc/opt/upgrade-ux/HP-UX-11.11-2014.ini
+2014-06-10 15:22:47 Including init/default/08_set_preview_var.sh
+2014-06-10 15:22:47 Including init/default/10_check_current_status.sh
+2014-06-10 15:22:47 Including init/default/12_upgrade_allowed.sh
+2014-06-10 15:22:47 Including init/default/15_check_preview_run.sh
+2014-06-10 15:22:47 Last preview run was executed on Tue Jun 10 14:28:36 METDST 2014  (preview ended successfully)
+2014-06-10 15:22:47 Running in "upgrade mode"
+2014-06-10 15:22:47 =-=-=-=-=-=-=-=-=-=-=-=-=</code></pre>
+</div></div>
+<div class="paragraph"><p>From the Chapter "Workflow" you probably remember that the default workflow is <strong>upgrade</strong> (even if you did not mention it). So, as example running <code>upgrade-ux</code> in preview mode with verbose option is done as <code>/opt/upgrade-ux/bin/upgrade-ux -vp</code></p></div>
+<iframe src="http://showterm.io/451a145f991d517bd2a66" width="740" height="480"></iframe>
+<div class="paragraph"><p>The last option that we bring to your attention in this Chapter is the force option (<code>-F</code>) which is handy in situation that for some reasons <code>upgrade-ux</code> does not want to continue due to serious software (patches) problems. For example, within HP-UX we run the <code>check_patches</code> command which when errors are detected will force an exit from <code>upgrade-ux</code> so that the System Administrator can first fix these patches (or any other issue) before re-running <code>upgrade-ux</code> again.
+We have seen cases it was impossible to get everything fixed and for that reason you may use the force option, but please do not use it by default.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">We advise to run the <em>preview</em> mode a few weeks in advance, but on a given day we must run the <em>preview</em> first again before we can run in <em>upgrade</em> mode. This is done on purpose to avoid mistakes.</td>
+</tr></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_upgrade_operation">6. Upgrade Operation</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The <strong>upgrade</strong> operation (or workflow) is the default one and does not need to be mentioned explecitely on the command line.
+The upgrade operation goes through different stages to accomplish a successful upgrade or patch installation. The stages in use are:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+init
+</dt>
+<dd>
+<p>
+        The <em>init</em> stage is what we call the initialization stage where we create a temporary work directory, read the INI file, decides if we are running in <em>preview</em> or <em>upgrade</em> mode, read the current status
+</p>
+</dd>
+<dt class="hdlist1">
+prep
+</dt>
+<dd>
+<p>
+        The <em>prep</em> stage is the preparation stage where we can save, copy lots of files as evidence (before we start patching). You could also use it to investigate if the health of the system is good enough to start with an upgrade and if not, warn the user and exit.
+</p>
+</dd>
+<dt class="hdlist1">
+preremove
+</dt>
+<dd>
+<p>
+        The <em>prepremove</em> stage is doing what its name applies - remove software before upgrading. It may be a handy if you know old pieces of software could lead to inconsistencies. Usually, we make sure that a more recent version gets installed during or after the upgrade.
+</p>
+</dd>
+<dt class="hdlist1">
+preinstall
+</dt>
+<dd>
+<p>
+        The <em>preinstall</em> stage is used by scripts to stop daemons and other processes which may generate conflicts during the upgrade.
+</p>
+</dd>
+<dt class="hdlist1">
+install
+</dt>
+<dd>
+<p>
+        The <em>install</em> stage is the part where we actually install software, do the patching or start with the updates of software bundles and drivers. This part must be described in the INI file (install section).
+</p>
+</dd>
+<dt class="hdlist1">
+postinstall
+</dt>
+<dd>
+<p>
+        The <em>postinstall</em> stage is mainly used to install extra software bundles which were mot part of the global patch bundles or update depots. Also here, these must be described in the INI file (postinstall section). Furthermore, we tend to save evidence during this stage (as we did in the prep stage) so we can compare if something trial was modified and if so, warn the user about it.
+</p>
+</dd>
+<dt class="hdlist1">
+postremove
+</dt>
+<dd>
+<p>
+        The <em>postremove</em> stage is just there in case some software bundles must be removed again to avoid conflicts. Usually, this stage is empty.
+</p>
+</dd>
+<dt class="hdlist1">
+configure
+</dt>
+<dd>
+<p>
+        The <em>configure</em> stage is used to setup cron entries, user permission or whatever  you can think of.
+</p>
+</dd>
+<dt class="hdlist1">
+postexecute
+</dt>
+<dd>
+<p>
+        The <em>postexecute</em> stage is used to execute some program, such as <code>cfg2html</code> to grab a new base point of the system. Again, you can run other programs as well such as <code>HPSIM-HealthCheck.sh</code> and so on
+</p>
+</dd>
+</dl></div>
+<div class="paragraph"><p>Every time you enter or leave a stage the <code>/var/opt/upgrade-ux/status</code> gets updated with a timestamp and the <em>stage</em> name with an addtional notification of <em>start</em> or <em>ended</em>. Upgrade-ux will not delete this status file, but will always append to it so you get a nice historic view of all the runs.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># cat /var/opt/upgrade-ux/status</span></span>
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">12</span><span style="color: #990000">:</span><span style="color: #993399">26</span> init<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">12</span><span style="color: #990000">:</span><span style="color: #993399">27</span> init<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">12</span><span style="color: #990000">:</span><span style="color: #993399">27</span> prep<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">12</span><span style="color: #990000">:</span><span style="color: #993399">36</span> prep<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">12</span><span style="color: #990000">:</span><span style="color: #993399">36</span> preremove<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">12</span><span style="color: #990000">:</span><span style="color: #993399">45</span> preremove<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">12</span><span style="color: #990000">:</span><span style="color: #993399">45</span> preinstall<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">12</span><span style="color: #990000">:</span><span style="color: #993399">51</span> preinstall<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">12</span><span style="color: #990000">:</span><span style="color: #993399">51</span> install<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">25</span><span style="color: #990000">:</span><span style="color: #993399">30</span> install<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">25</span><span style="color: #990000">:</span><span style="color: #993399">30</span> postinstall<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">27</span><span style="color: #990000">:</span><span style="color: #993399">41</span> postinstall<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">27</span><span style="color: #990000">:</span><span style="color: #993399">41</span> postremove<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">27</span><span style="color: #990000">:</span><span style="color: #993399">41</span> postremove<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">27</span><span style="color: #990000">:</span><span style="color: #993399">41</span> configure<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">27</span><span style="color: #990000">:</span><span style="color: #993399">41</span> configure<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">27</span><span style="color: #990000">:</span><span style="color: #993399">41</span> postexecute<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">28</span><span style="color: #990000">:</span><span style="color: #993399">19</span> postexecute<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">28</span><span style="color: #990000">:</span><span style="color: #993399">19</span> preview<span style="color: #990000">:</span>ended   <span style="color: #990000">(</span>preview ended successfully<span style="color: #990000">)</span>
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">34</span><span style="color: #990000">:</span><span style="color: #993399">09</span> init<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">34</span><span style="color: #990000">:</span><span style="color: #993399">10</span> init<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">34</span><span style="color: #990000">:</span><span style="color: #993399">10</span> prep<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">34</span><span style="color: #990000">:</span><span style="color: #993399">19</span> prep<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">34</span><span style="color: #990000">:</span><span style="color: #993399">19</span> preremove<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">34</span><span style="color: #990000">:</span><span style="color: #993399">31</span> preremove<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">34</span><span style="color: #990000">:</span><span style="color: #993399">31</span> preinstall<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">35</span><span style="color: #990000">:</span><span style="color: #993399">56</span> preinstall<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">13</span><span style="color: #990000">:</span><span style="color: #993399">35</span><span style="color: #990000">:</span><span style="color: #993399">56</span> install<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">36</span><span style="color: #990000">:</span><span style="color: #993399">57</span> install<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">36</span><span style="color: #990000">:</span><span style="color: #993399">58</span> postinstall<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">45</span><span style="color: #990000">:</span><span style="color: #993399">49</span> postinstall<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">45</span><span style="color: #990000">:</span><span style="color: #993399">49</span> postremove<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">45</span><span style="color: #990000">:</span><span style="color: #993399">49</span> postremove<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">45</span><span style="color: #990000">:</span><span style="color: #993399">49</span> configure<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">45</span><span style="color: #990000">:</span><span style="color: #993399">49</span> configure<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">45</span><span style="color: #990000">:</span><span style="color: #993399">49</span> postexecute<span style="color: #990000">:</span>start
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">55</span><span style="color: #990000">:</span><span style="color: #993399">21</span> postexecute<span style="color: #990000">:</span>ended
+<span style="color: #993399">2014</span>-<span style="color: #993399">06</span>-<span style="color: #993399">13</span> <span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">55</span><span style="color: #990000">:</span><span style="color: #993399">21</span> upgrade<span style="color: #990000">:</span>ended   <span style="color: #990000">(</span>upgrade ended successfully<span style="color: #990000">)</span></tt></pre></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_upgrade_ux_scripts">7. The upgrade-ux scripts</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The scripts that are sourced by the main script <code>upgrade-ux</code> reside under <code>/opt/upgrade-ux/scripts/</code> directory and the easiest way to know what will be sourced is by running <code>/opt/upgrade-ux/bin/upgrade-ux -s</code>:</p></div>
+<iframe src="http://showterm.io/ef83a18e4477fb2598d73" width="740" height="480"></iframe>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">It depends on the OS architecture (see <code>dump</code> workflow) which scripts will be sources. In above example it was on HP hardware.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>In every <em>stage</em> directory you will find minumum a <code>default</code> directory which is sourced by every OS and a hardware specific directory, such as:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+hp
+</p>
+</li>
+<li>
+<p>
+GNU/Linux
+</p>
+</li>
+<li>
+<p>
+sunos
+</p>
+</li>
+<li>
+<p>
+aix
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>The scripts found under these directories are only sourced when you run <code>upgrade-ux</code> on those HW architectures (make sense, no?).
+If you need new scripts just write a small script called <code>my_script.sh</code> (the <code>.sh</code> is important!) and it will be picked up the next time automatically.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">there is no need to make these small scripts executable (nor is it required to start with <code>#!/bin/sh</code> or whatever).</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>An example of such a script is <code>/opt/upgrade-ux/scripts/preinstall/default/05_reboot_required.sh</code></p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># cat preinstall/default/05_reboot_required.sh</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># 05_reboot_required.sh</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># if the uptime of the system is higher then 30 days then we propose to reboot first</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900"># pre-define daysup as 0 (we can check this variable later [after a reboot])</span></span>
+<span style="color: #009900">daysup</span><span style="color: #990000">=</span><span style="color: #993399">0</span>
+
+<span style="font-style: italic"><span style="color: #9A1900"># when uptime is not expressed in days then we probably just rebooted our system</span></span>
+uptime <span style="color: #990000">|</span> grep -q days <span style="color: #990000">||</span> <span style="font-weight: bold"><span style="color: #0000FF">return</span></span>
+
+<span style="color: #009900">daysup</span><span style="color: #990000">=</span><span style="color: #009900">$(</span> uptime <span style="color: #990000">|</span> awk <span style="color: #FF0000">'{print $3}'</span> <span style="color: #990000">)</span>
+IsDigit <span style="color: #009900">$daysup</span> <span style="color: #990000">||</span> <span style="color: #009900">daysup</span><span style="color: #990000">=</span><span style="color: #009900">$(</span> w <span style="color: #990000">|</span> head -<span style="color: #993399">1</span> <span style="color: #990000">|</span> awk <span style="color: #FF0000">'{print $3}'</span> <span style="color: #990000">)</span>  <span style="font-style: italic"><span style="color: #9A1900"># alternative method</span></span>
+IsDigit <span style="color: #009900">$daysup</span> <span style="color: #990000">||</span> <span style="color: #009900">daysup</span><span style="color: #990000">=</span><span style="color: #993399">0</span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">[[</span> <span style="color: #009900">$daysup</span> -gt <span style="color: #009900">$DAYSUPTIME</span> <span style="color: #990000">]];</span> <span style="font-weight: bold"><span style="color: #0000FF">then</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">((</span> PREVIEW <span style="color: #990000">))</span> <span style="color: #990000">;</span> <span style="font-weight: bold"><span style="color: #0000FF">then</span></span>
+        LogPrint <span style="color: #FF0000">"Uptime of system is $daysup (&gt;$DAYSUPTIME days) - recommend to reboot before patching"</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">else</span></span>
+        Error <span style="color: #FF0000">"Uptime of system is $daysup (&gt;$DAYSUPTIME days) - reboot is required before patching with $PRODUCT"</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">fi</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">fi</span></span></tt></pre></div></div>
+<div class="paragraph"><p>Now it is up to you! If you wish to add new scripts it is always usefull to first make a new issue at GitHub: <a href="https://github.com/gdha/upgrade-ux/issues">https://github.com/gdha/upgrade-ux/issues</a></p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_frequently_asked_questions">8. Frequently Asked Questions</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_upgrade_ux_not_found">8.1. Upgrade-ux not found</h3>
+<div class="paragraph"><p>If you get the following error when you try to run <code>upgrade-ux</code></p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># upgrade-ux</span></span>
+sh<span style="color: #990000">:</span> upgrade-ux<span style="color: #990000">:</span>  not found<span style="color: #990000">.</span></tt></pre></div></div>
+<div class="paragraph"><p>The reason is that the absolute path <code>/opt/upgrade-ux/bin</code> is not added the the <code>PATH</code> variable. This is done on purpose to avoid mistakes! Therefore, always use the full path <code>/opt/upgrade-ux/bin/upgrade-ux</code></p></div>
+</div>
+<div class="sect2">
+<h3 id="_why_upgrade_ux_as_we_know_update_ux">8.2. Why upgrade-ux as we know update-ux</h3>
+<div class="paragraph"><p>This question is only valid for HP-UX 11i systems which can be upgraded to a newer version of the Operation System (say HP-UX 11.23 to HP-UX 11.31), or even using <code>update-ux</code> to upgrade software bundles on the same OS version.
+We have encountered situations where the UNIX engineer by accident started <code>update-ux</code> on HP-UX 11.23 to patch with HP-UX 11.23 bundles, but using the HP-UX 11.31 depot, and therefore, <code>update-ux</code> started the upgrade process to HP-UX 11.31. As a result we needed to recover from an Ignite/UX image before restarting the patching round again. By using <code>upgrade-ux</code> this simply becomes impossible as all update paths are described in the configuration files.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_how_do_we_install_a_patch_bundle_from_1_or_2_years_ago">8.3. How do we install a patch bundle from 1 or 2 years ago?</h3>
+<div class="paragraph"><p>The <code>YEAR</code> variable defines the current year ( <code>$(date +%Y)</code> ) of the patch bundles in the <code>/etc/opt/upgrade-ux/default.conf</code> file. However, suppose we are in the year 2015 and still would like to install the patch bundle of 2014? The easiest way is to overrule the <code>YEAR</code> variable in the <code>/etc/opt/upgrade-ux/local.conf</code> as</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #009900">YEAR</span><span style="color: #990000">=</span><span style="color: #993399">2014</span></tt></pre></div></div>
+</div>
+<div class="sect2">
+<h3 id="_how_gets_the_sdserver_variable_defined">8.4. How gets the SDSERVER variable defined</h3>
+<div class="paragraph"><p>You might wonder how we define the <code>SDSERVER</code>? And, is it possible to overrule it with your preference? The <code>SDSERVER</code> variable is used a lot in the INI files and points to an IP address or FQDN of an software depot server where the software depots are stored.</p></div>
+<div class="paragraph"><p>The <code>SDSERVER</code> variable is defined by a script <code>scripts/init/hp/30_define_sdserver.sh</code> and tries to figure out the region you are located in. Be aware, this script only works well for <em>one</em> particular customer (the sponsor of this project).</p></div>
+<div class="paragraph"><p>Therefore, for other users, you need to define the <code>SDSERVER</code> variable in the <code>/etc/opt/upgrade-ux/local.conf</code> file as</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #009900">SDSERVER</span><span style="color: #990000">=</span>my_sdserver<span style="color: #990000">.</span>company<span style="color: #990000">.</span>com</tt></pre></div></div>
+<div class="paragraph"><p>Obviously, you need to replace the name <em>my_sdserver.company.com</em> with the correct name of the software depot server.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_upgrade_ux_forces_me_to_reboot_the_server_if_system_is_running_for_more_then_30_days">8.5. Upgrade-ux forces me to reboot the server if system is running for more then 30 days</h3>
+<div class="paragraph"><p>The forced reboot was introduced into upgrade-ux, because sometimes servers got patches after running over 1 year without a single reboot and to avoid pin-points to bad patch bundles we decided a recent reboot was required (by default 30 days uptime is the maximum we tolerate).</p></div>
+<div class="paragraph"><p>However, in rare cases, some customers want to extend this period to 60 days. So, how to do this?</p></div>
+<div class="paragraph"><p>The variable which defines the uptime is called <code>DAYSUPTIME</code> and is defined in <code>/etc/opt/upgrade-ux/default.conf</code>. As you should know by now, you can overrule this by defining a new value in the <code>/etc/opt/upgrade-ux/local.conf</code> file as</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #009900">DAYSUPTIME</span><span style="color: #990000">=</span><span style="color: #993399">60</span></tt></pre></div></div>
+<div class="paragraph"><p>However, be aware, if you increase this value then do not file an issue against upgrade-ux!</p></div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2014-06-26 14:40:17 CEST
+</div>
+</div>
+</body>
+</html>
