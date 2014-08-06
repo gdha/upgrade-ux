@@ -6,7 +6,7 @@ count=${#bundle[@]}
 i=0
 
 # we need to retrieve the correct OEM version of HP-UX as we need it for update-ux
-OEMVER=$( $SWLIST -l bundle -a os_release | grep HPUX11i | awk '{print $1}' )
+OEMVER=$( $SWLIST -l bundle -a os_release 2>/dev/null | grep HPUX11i | head -1 | awk '{print $1}' )
 LogPrint "System $lhost has HP-UX version $OEMVER installed"
 
 while (( i < count ))
