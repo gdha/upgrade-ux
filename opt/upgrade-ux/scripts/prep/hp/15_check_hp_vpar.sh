@@ -1,6 +1,6 @@
 # 15_check_hp_vpar.sh
 #####################
-# check if HP vPar is running on this host, and if yes, if version is > 04.04
+# check if HP vPar is running on this host, and if yes, if version is > 04
 # define variable HP_VM_MODE
 
 if [[ ! -f /sbin/vecheck ]] ; then
@@ -18,11 +18,11 @@ else
     fi
 fi
 
-$SWLIST T1335[ABD]C,r\>=A.04.04.04 >/dev/null  2>&1
+$SWLIST T1335[ABD]C,r\>=A.04 >/dev/null  2>&1
 if (( $? == 0 )) ; then
-    Log "vPar software version is >=A.04.04.04, so there is no need to go into nPar mode"
+    Log "vPar software version is >=A.04, so there is no need to go into nPar mode"
 else
-    LogPrint "Virtual Partition [vPar] software installed, but version is < A.04.04.04"
+    LogPrint "Virtual Partition [vPar] software installed, but version is < A.04"
     LogPrint "Reboot into nPar mode (# vparenv -m nPar) or (MON> reboot nPars)"
     if (( PREVIEW )) ; then
         LogPrint "[preview mode] we continue"
