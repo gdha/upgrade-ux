@@ -2,4 +2,8 @@
 
 [[ ! -f /etc/rc.log ]] && return
 
-cp -p /etc/rc.log  "$VAR_DIR/$DS/rc.log"
+if (( PREVIEW )) ; then
+    :
+else
+    cp -p /etc/rc.log  "$VAR_DIR/$DS/rc.log.after"
+fi
