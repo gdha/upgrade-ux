@@ -16,8 +16,7 @@ else
     echo "/sbin/init.d/ipfboot stop"                            > "$VAR_DIR/$DS/ipf-fix.script"
     echo "ch_rc -a -p IPF_START=0 /etc/rc.config.d/ipfconf"    >> "$VAR_DIR/$DS/ipf-fix.script"
     echo "ch_rc -a -p IPMON_START=0 /etc/rc.config.d/ipfconf"  >> "$VAR_DIR/$DS/ipf-fix.script"
-    echo "[[ -s /etc/opt/ipf/ipf.conf ]] && cp -p /etc/opt/ipf/ipf.conf /etc/opt/ipf/ipf.conf.\$(date '+%Y%m%d')" >> "$VAR_DIR/$DS/i
-pf-fix.script"
+    echo "[[ -s /etc/opt/ipf/ipf.conf ]] && cp -p /etc/opt/ipf/ipf.conf /etc/opt/ipf/ipf.conf.\$(date +%Y%m%d)" >> "$VAR_DIR/$DS/ipf-fix.script"
     echo "[[ -s /etc/opt/ipf/ipf.conf ]] && > /etc/opt/ipf/ipf.conf" >> "$VAR_DIR/$DS/ipf-fix.script"
     chmod 755 "$VAR_DIR/$DS/ipf-fix.script"
     LogPrint "Created IPF fix script to be executed automatically after patching"
