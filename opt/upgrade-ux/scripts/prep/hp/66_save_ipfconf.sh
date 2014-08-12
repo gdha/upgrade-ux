@@ -23,6 +23,5 @@ else
 fi
 
 # check the current activity with ipfstat and save this also
-[[ -x /sbin/ipfstat ]] && /sbin/ipfstat > "$VAR_DIR/$DS/ipfstat.before"                # HP-UX 11.23
-[[ -x /opt/ipf/bin/ipfstat ]] && /opt/ipf/bin/ipfstat > "$VAR_DIR/$DS/ipfstat.before"  # HP-UX 11.31
+[[ -x /sbin/ipfstat ]] && /sbin/ipfstat 2>/dev/null >"$VAR_DIR/$DS/ipfstat.before"                # HP-UX 11.23/31
 
