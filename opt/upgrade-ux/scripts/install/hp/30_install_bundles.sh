@@ -12,7 +12,7 @@ LogPrint "System $lhost has HP-UX version $OEMVER installed"
 while (( i < count ))
 do
     if [ "${command[i]}" = "/usr/sbin/update-ux" ]; then
-        my_bundle="${OEMVER} ${bundle[i]}"
+        my_bundle="${OEMVER} ${bundle[i]} ${driver_bundles}"
     else
         my_bundle="${bundle[i]}"
     fi
