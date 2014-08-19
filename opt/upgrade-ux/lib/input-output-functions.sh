@@ -212,25 +212,6 @@ function LogPrintIfError {
 exec 8>/dev/null # start ProgressPipe listening at fd 8
 QuietAddExitTask "exec 8>&-" # new method, close fd 8 at exit
 
-function ProgressStart {
-    : ;
-}
-
-function ProgressStop {
-    : ;
-}
-
-function ProgressError {
-    : ;
-}
-
-function ProgressStep {
-    : ;
-}
-
-function ProgressInfo {
-    : ;
-}
 
 function ReadCurrentStatus {
     # read the last line of the $STATUS_FILE (input arg1; output status as string)
@@ -244,7 +225,7 @@ function SetCurrentStatus {
     [[ -z "$CURRENT_STATUS" ]] && CURRENT_STATUS="$stage:start"
     if [[ ! -f $1 ]]; then
         # first time we ever run this tool
-	Log "Initialize $1 with status \"$CURRENT_STATUS\""
+        Log "Initialize $1 with status \"$CURRENT_STATUS\""
     fi
     # 2014-03-20 13:23:59 prep:ended
     echo "$(Stamp)$CURRENT_STATUS" >> $1

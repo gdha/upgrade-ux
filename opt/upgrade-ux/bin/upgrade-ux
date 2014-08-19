@@ -24,7 +24,7 @@
 PRODUCT="upgrade-ux"
 PROGRAM=${0##*/}
 PRGDIR=${0%/*}
-VERSION=1.1
+VERSION=1.2
 RELEASE_DATE=Git
 STARTTIME=$SECONDS
 
@@ -154,7 +154,6 @@ v=""
 verbose=""
 # enable progress subsystem only in verbose mode, set some stuff that others can use
 if (( "$VERBOSE" )); then
-    #Source $LIB_DIR/progresssubsystem.nosh
     v="-v"
     verbose="--verbose"
 fi
