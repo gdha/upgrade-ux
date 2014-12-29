@@ -15,6 +15,20 @@ distversion = $(version)
 debrelease = 0
 rpmrelease = %nil
 
+### Get the branch information from git
+ifeq ($(OFFICIAL),)
+ifneq ($(shell which git),)
+git_date := $(shell git log -n 1 --format="%ai")
+git_ref := $(shell git symbolic-ref -q HEAD)
+git_branch = $(lastword $(subst /, ,$(git_ref)))
+endif
+else
+git_branch = rear-$(version)
+endif
+git_branch ?= master
+
+date := $(shell date --date="$(git_date)" +%Y%m%d%H%M)
+release_date := $(shell date --date="$(git_date)" +%Y-%m-%d)
 
 
 
@@ -60,6 +74,12 @@ rewrite: $(specfile) $(main_script)
 	cp -p $(main_script) $(main_script).save ; \
 	sed -e 's#RELEASE_DATE=.*#RELEASE_DATE='$$today'#' < $(main_script).save > $(main_script);
 
+restore:
+	echo -e "\033[1m== Restoring $(specfile) and $(rearbin) ==\033[0;0m"
+	mv -f $(specfile).save $(specfile)
+	mv -f $(dscfile).save $(dscfile)
+	mv -f $(main_script).save $(main_script)
+
 rpm: dist
 	@echo -e "\033[1m== Building RPM package $(name)-$(distversion) ==\033[0;0m"
 	rpmbuild -tb --clean \
@@ -68,4 +88,13 @@ rpm: dist
 		--define "_rpmdir %(pwd)" $(name)-$(distversion).tar.gz
 
 dist: clean validate man doc rewrite $(name)-$(distversion).tar.gz restore
+
+$(name)-$(distversion).tar.gz:
+	@echo -e "\033[1m== Building archive $(name)-$(distversion) ==\033[0;0m"
+	cd ../.. ; \
+	git checkout $(git_branch) ; \
+	git ls-tree -r --name-only --full-tree $(git_branch) | grep -v -E '(^hpux|^aix|^bsd|^sunos)'  \
+		tar -czf $(name)-$(distversion).tar.gz --transform='s,^,$(name)-$(distversion)/,S' --files-from=-
+
+
 
