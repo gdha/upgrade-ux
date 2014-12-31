@@ -69,13 +69,16 @@ rewrite: $(specfile) $(main_script)
 	@echo "Update the $(specfile) file"
 	cp -p $(specfile) $(specfile).save ; \
 	sed -e 's#number.*#number '$$version'#' -e 's#revision.*#revision '$$version'#g' < $(specfile).save >$(specfile); 
+	@echo "Update the $(dscfile) file"
+	cp -p $(dscfile) $(dscfile).save ; \
+	sed -e 's#number.*#number '$$version'#' -e 's#revision.*#revision '$$version'#g' < $(dscfile).save > $(dscfile) ;
 	@echo "Update the $(main_script) script with current date"
 	today=`date +'%d-%b-%Y'` ; \
 	cp -p $(main_script) $(main_script).save ; \
 	sed -e 's#RELEASE_DATE=.*#RELEASE_DATE='$$today'#' < $(main_script).save > $(main_script);
 
 restore:
-	echo -e "\033[1m== Restoring $(specfile) and $(rearbin) ==\033[0;0m"
+	echo -e "\033[1m== Restoring $(specfile) and $(main_script) ==\033[0;0m"
 	mv -f $(specfile).save $(specfile)
 	mv -f $(dscfile).save $(dscfile)
 	mv -f $(main_script).save $(main_script)
@@ -85,7 +88,7 @@ rpm: dist
 	rpmbuild -tb --clean \
 		--define "_rpmfilename %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm" \
 		--define "debug_package %{nil}" \
-		--define "_rpmdir %(pwd)" $(name)-$(distversion).tar.gz
+		--define "_rpmdir %(pwd)" ../../$(name)-$(distversion).tar.gz
 
 dist: clean validate man doc rewrite $(name)-$(distversion).tar.gz restore
 
@@ -93,8 +96,17 @@ $(name)-$(distversion).tar.gz:
 	@echo -e "\033[1m== Building archive $(name)-$(distversion) ==\033[0;0m"
 	cd ../.. ; \
 	git checkout $(git_branch) ; \
-	git ls-tree -r --name-only --full-tree $(git_branch) | grep -v -E '(^hpux|^aix|^bsd|^sunos)'  \
+	git ls-tree -r --name-only --full-tree $(git_branch) | grep -v -E '(HP-UX|/hp/|/aix/|/bsd/|/sunos/)' | \
 		tar -czf $(name)-$(distversion).tar.gz --transform='s,^,$(name)-$(distversion)/,S' --files-from=-
 
+
+deb: dist
+	@echo -e "\033[1m== Building DEB package $(name)-$(distversion) ==\033[0;0m"
+	cp -r packaging/debian/ .
+	chmod 755 debian/rules
+	fakeroot debian/rules clean
+	fakeroot dh_install
+	fakeroot debian/rules binary
+	-rm -rf debian/
 
 

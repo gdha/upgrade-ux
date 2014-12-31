@@ -1,0 +1,13 @@
+Source: upgrade-ux
+Section: misc
+Priority: optional
+Maintainer: Gratien Dhaese <gratien.dhaese@hmail.com>
+Homepage: http://www.it3.be/projects/upgrade-ux.html
+
+Package: upgrade-ux
+Architecture: all
+Provides: upgrade-ux
+Build-Depends: debhelper (>> 5.0.0)
+Depends: binutils, gawk
+Description: Upgrade-UX is an open source framework developed to assist in patching
+             and/or updating Unix Operating Systems in a consistent and repeatable way

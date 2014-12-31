@@ -9,14 +9,14 @@
 %endif
 
 Name:		upgrade-ux
-Version:	1.0 
+Version:	1.2 
 Release:	1%{?rpmrelease}%{?dist}
 Summary:	Open Source framework to patch, update or upgrade UNIX systems
 
 Group:		Applications/File
 License:	GPLv3
 URL:		http://www.it3.be/projects/upgrade-ux.html
-Source:		upgrade-ux-1.0.tar.gz
+Source:		upgrade-ux-1.2.tar.gz
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch:	noarch
 
@@ -27,7 +27,7 @@ Requires:	ksh
 Upgrade-UX is an open source framework developed to assist in patching and/or updating Unix Operating Systems in a consistent and repeatable way
 
 %prep
-%setup -q -n upgrade-ux-1.0
+%setup -q -n upgrade-ux-1.2
 
 
 %build
@@ -43,9 +43,10 @@ Upgrade-UX is an open source framework developed to assist in patching and/or up
 
 %files
 %defattr(-, root, root, 0755)
-# %%doc linux/AUTHORS linux/COPYING linux/README linux/doc/*.txt linux/doc/*.html
+%doc  ../../../LICENSE ../../../README.md
 %doc %{_mandir}/man8/upgrade-ux.8*
 %{optdir}/upgrade-ux/bin/
+%{optdir}/upgrade-ux/lib/
 %{optdir}/upgrade-ux/scripts/
 %{varopt}/upgrade-ux/
 %config(noreplace) %{etcopt}/upgrade-ux/

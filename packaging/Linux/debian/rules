@@ -1,0 +1,75 @@
+#!/usr/bin/make -f
+# Sample debian/rules that uses debhelper.
+# GNU copyright 1997 to 1999 by Joey Hess.
+
+# to build on debian/ubuntu we need the following package:
+# sudo apt-get install debhelper
+
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
+
+# This is the debhelper compatibility version to use.
+export DH_COMPAT=5
+
+build: build-stamp
+build-stamp:
+	dh_testdir
+	# noop
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+	# noop
+	dh_clean
+
+# Build architecture-independent files here.
+binary-indep: build
+	dh_testdir
+	dh_testroot
+	dh_prep
+	dh_installdirs
+	
+	# The DESTDIR Has To Be Exactly debian/upgrade-ux
+	mkdir -vp \
+		debian/upgrade-ux/etc/opt/upgrade-ux/ \
+		debian/upgrade-ux/opt/upgrade-ux/bin/ \
+		debian/upgrade-ux/opt/upgrade-ux/lib/ \
+		debian/upgrade-ux/opt/upgrade-ux/scripts/ \
+		debian/upgrade-ux/usr/share/man/man8/ \
+		debian/upgrade-ux/var/opt/upgrade-ux/
+	
+	# copy upgrade-ux components into directories
+	cp -av ../../../etc/opt/upgrade-ux debian/upgrade-ux/etc/opt/upgrade-ux
+	cp -av ../../../upgrade-ux/bin debian/upgrade-ux/opt/upgrade/bin/
+	cp -av ../../../upgrade-ux/lib debian/upgrade-ux/opt/upgrade-ux/lib/
+	cp -av ../../../upgrade-ux/scripts debian/upgrade-ux/opt/upgrade-ux/scripts/
+	
+	# update man page with correct locations
+	install -Dp -m0644 ../../../upgrade-ux/doc/upgrade-ux.8 debian/upgrade-ux/usr/share/man/man8/upgrade-ux.8
+	
+	# --- end custom part for installing
+
+	dh_installdeb
+	dh_installdocs ../../../README* ../../../upgrade-ux/doc/*
+	dh_installchangelogs
+	# dh_installman usr/share/upgrade-ux/doc/upgrade-ux.8
+	find debian/upgrade-ux -name ".git*" -exec rm {} \;
+	rm debian/upgrade-ux/usr/share/doc/upgrade-ux/Makefile
+	rm debian/upgrade-ux/usr/share/doc/upgrade-ux/upgrade-ux.8.txt
+	rm debian/upgrade-ux/usr/share/doc/upgrade-ux/user-guide/Makefile
+	rm debian/upgrade-ux/usr/share/doc/upgrade-ux/upgrade-ux.8
+	dh_link
+	dh_strip
+	dh_fixperms
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+# Build architecture-dependent files here.
+binary-arch: build
+
+binary: binary-arch binary-indep
+.PHONY: build clean binary-indep binary-arch binary
