@@ -24,7 +24,8 @@ BuildArch:	noarch
 Requires:	ksh
 
 %description
-Upgrade-UX is an open source framework developed to assist in patching and/or updating Unix Operating Systems in a consistent and repeatable way
+Upgrade-UX is an open source framework developed to assist in patching and/or
+updating Unix Operating Systems in a consistent and repeatable way
 
 %prep
 %setup -q -n upgrade-ux-1.2
@@ -52,5 +53,5 @@ Upgrade-UX is an open source framework developed to assist in patching and/or up
 %config(noreplace) %{etcopt}/upgrade-ux/
 
 %changelog
-* Wed Dec  31 2014 Gratien D'haese <gratien.dhaese@gmail.com>
+* Wed Dec  31 2014 Gratien D'haese <gratien.dhaese@gmail.com> - 1.2
   initial spec file for upgrade-ux
