@@ -35,7 +35,7 @@ Upgrade-UX is an open source framework developed to assist in patching and/or up
 
 %install
 %{__rm} -rf %{buildroot}
-%{__make} install DESTDIR="%{buildroot}"
+%{__make} -C packaging/Linux install DESTDIR="%{buildroot}"
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -43,8 +43,8 @@ Upgrade-UX is an open source framework developed to assist in patching and/or up
 
 %files
 %defattr(-, root, root, 0755)
-%doc  ../../../LICENSE ../../../README.md
-%doc %{_mandir}/man8/upgrade-ux.8*
+%doc  LICENSE README.md
+%doc %{optdir}/upgrade-ux/man/man8/upgrade-ux.8*
 %{optdir}/upgrade-ux/bin/
 %{optdir}/upgrade-ux/lib/
 %{optdir}/upgrade-ux/scripts/

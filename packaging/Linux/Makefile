@@ -31,11 +31,11 @@ date := $(shell date --date="$(git_date)" +%Y%m%d%H%M)
 release_date := $(shell date --date="$(git_date)" +%Y-%m-%d)
 
 prefix = /opt/$(product)
-sysconfigdir = /etc/$(prefix)
+sysconfdir = /etc$(prefix)
 bindir = $(prefix)/bin
 scriptdir = $(prefix)/scripts
 libdir = $(prefix)/lib
-localstatedir = /var/$(prefix)
+localstatedir = /var$(prefix)
 
 
 
@@ -71,7 +71,7 @@ validate:
 	echo "Scripts were successfully validated."
 
 rewrite: $(specfile) $(main_script)
-	@echo "Update the $(specfile) file"
+	@echo  -e "\033[1m== Update the $(specfile) file==\033[0;0m"
 	cp -p $(specfile) $(specfile).save ; \
 	sed -e 's#number.*#number '$$version'#' -e 's#revision.*#revision '$$version'#g' < $(specfile).save >$(specfile); 
 	@echo "Update the $(dscfile) file"
@@ -119,15 +119,21 @@ install-config:
 	install -d -m0700 $(DESTDIR)$(sysconfdir)
 	-[[ ! -e $(DESTDIR)$(sysconfdir)/local.conf ]] && \
 		install -Dp -m0600 ../../etc/opt/upgrade-ux/local.conf $(DESTDIR)$(sysconfdir)/local.conf
+	cp -a ../../etc/opt/upgrade-ux/. $(DESTDIR)$(sysconfdir)/
 	-find $(DESTDIR)$(sysconfdir)/ -name '.gitignore' -exec rm -rf {} \; &>/dev/null
 
 install-bin:
 	@echo -e "\033[1m== Installing binary ==\033[0;0m"
 	install -Dp -m0755 $(main_script) $(DESTDIR)$(bindir)/$(product)
 
+install-lib:
+	@echo -e "\033[1m== Installing library functions ==\033[0;0m"
+	install -d -m0755 $(DESTDIR)/$(libdir)
+	cp -a ../../opt/upgrade-ux/lib/. $(DESTDIR)/$(libdir)/
+
 install-data:
 	@echo -e "\033[1m== Installing scripts ==\033[0;0m"
-	install -d -m0755 $(DESTDIR)$(scriptdir)/
+	install -d -m0755 $(DESTDIR)$(scriptdir)
 	cp -a ../../opt/upgrade-ux/scripts/. $(DESTDIR)$(scriptdir)/
 
 install-var:
@@ -138,5 +144,5 @@ install-doc:
 	@echo -e "\033[1m== Installing documentation ==\033[0;0m"
 	make -C ../../opt/upgrade-ux/man install
 
-install: validate man doc install-config rewrite install-bin restore install-data install-var install-doc
+install: validate man doc install-config rewrite install-bin restore install-lib install-data install-var install-doc
 
