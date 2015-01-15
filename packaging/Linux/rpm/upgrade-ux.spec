@@ -35,7 +35,7 @@ Upgrade-UX is an open source framework developed to assist in patching and/or up
 
 %install
 %{__rm} -rf %{buildroot}
-%{__make} -C linux install DESTDIR="%{buildroot}"
+%{__make} install DESTDIR="%{buildroot}"
 
 %clean
 %{__rm} -rf %{buildroot}

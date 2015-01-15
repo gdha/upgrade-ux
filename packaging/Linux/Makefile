@@ -30,7 +30,12 @@ git_branch ?= master
 date := $(shell date --date="$(git_date)" +%Y%m%d%H%M)
 release_date := $(shell date --date="$(git_date)" +%Y-%m-%d)
 
-
+prefix = /opt/$(product)
+sysconfigdir = /etc/$(prefix)
+bindir = $(prefix)/bin
+scriptdir = $(prefix)/scripts
+libdir = $(prefix)/lib
+localstatedir = /var/$(prefix)
 
 
 
@@ -109,4 +114,29 @@ deb: dist
 	fakeroot debian/rules binary
 	-rm -rf debian/
 
+install-config:
+	@echo -e "\033[1m== Installing configuration ==\033[0;0m"
+	install -d -m0700 $(DESTDIR)$(sysconfdir)
+	-[[ ! -e $(DESTDIR)$(sysconfdir)/local.conf ]] && \
+		install -Dp -m0600 ../../etc/opt/upgrade-ux/local.conf $(DESTDIR)$(sysconfdir)/local.conf
+	-find $(DESTDIR)$(sysconfdir)/ -name '.gitignore' -exec rm -rf {} \; &>/dev/null
+
+install-bin:
+	@echo -e "\033[1m== Installing binary ==\033[0;0m"
+	install -Dp -m0755 $(main_script) $(DESTDIR)$(bindir)/$(product)
+
+install-data:
+	@echo -e "\033[1m== Installing scripts ==\033[0;0m"
+	install -d -m0755 $(DESTDIR)$(scriptdir)/
+	cp -a ../../opt/upgrade-ux/scripts/. $(DESTDIR)$(scriptdir)/
+
+install-var:
+	@echo -e "\033[1m== Installing working directory ==\033[0;0m"
+	install -d -m0755 $(DESTDIR)$(localstatedir)
+
+install-doc:
+	@echo -e "\033[1m== Installing documentation ==\033[0;0m"
+	make -C ../../opt/upgrade-ux/man install
+
+install: validate man doc install-config rewrite install-bin restore install-data install-var install-doc
 
