@@ -116,15 +116,12 @@ deb: dist
 
 install-config:
 	@echo -e "\033[1m== Installing configuration ==\033[0;0m"
-	install -d -m0700 $(DESTDIR)$(sysconfdir)
-	-[[ ! -e $(DESTDIR)$(sysconfdir)/local.conf ]] && \
-		install -Dp -m0600 ../../etc/opt/upgrade-ux/local.conf $(DESTDIR)$(sysconfdir)/local.conf
-	cp -a ../../etc/opt/upgrade-ux/. $(DESTDIR)$(sysconfdir)/
-	-find $(DESTDIR)$(sysconfdir)/ -name '.gitignore' -exec rm -rf {} \; &>/dev/null
+	install -d -m0700 $(DESTDIR)/$(sysconfdir)
+	cp -a ../../etc/opt/upgrade-ux/. $(DESTDIR)/$(sysconfdir)/
 
 install-bin:
 	@echo -e "\033[1m== Installing binary ==\033[0;0m"
-	install -Dp -m0755 $(main_script) $(DESTDIR)$(bindir)/$(product)
+	install -Dp -m0755 $(main_script) $(DESTDIR)/$(bindir)/$(product)
 
 install-lib:
 	@echo -e "\033[1m== Installing library functions ==\033[0;0m"
@@ -133,12 +130,12 @@ install-lib:
 
 install-data:
 	@echo -e "\033[1m== Installing scripts ==\033[0;0m"
-	install -d -m0755 $(DESTDIR)$(scriptdir)
-	cp -a ../../opt/upgrade-ux/scripts/. $(DESTDIR)$(scriptdir)/
+	install -d -m0755 $(DESTDIR)/$(scriptdir)
+	cp -a ../../opt/upgrade-ux/scripts/. $(DESTDIR)/$(scriptdir)/
 
 install-var:
 	@echo -e "\033[1m== Installing working directory ==\033[0;0m"
-	install -d -m0755 $(DESTDIR)$(localstatedir)
+	install -d -m0755 $(DESTDIR)/$(localstatedir)
 
 install-doc:
 	@echo -e "\033[1m== Installing documentation ==\033[0;0m"

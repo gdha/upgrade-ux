@@ -2,6 +2,7 @@
 %define optdir /opt
 %define etcopt /etc/opt
 %define varopt /var/opt
+%define mandir /usr/share/man
 
 ### Work-around the fact that OpenSUSE/SLES _always_ defined both :-/
 %if 0%{?sles_version} == 0
@@ -28,7 +29,7 @@ Upgrade-UX is an open source framework developed to assist in patching and/or
 updating Unix Operating Systems in a consistent and repeatable way
 
 %prep
-%setup -q -n upgrade-ux-1.2
+%setup -q -n upgrade-ux-%{version}
 
 
 %build
@@ -37,6 +38,9 @@ updating Unix Operating Systems in a consistent and repeatable way
 %install
 %{__rm} -rf %{buildroot}
 %{__make} -C packaging/Linux install DESTDIR="%{buildroot}"
+%{__mkdir} -m 755 -p %{buildroot}/%{mandir}/man8
+%{__cp} %{buildroot}/%{optdir}/upgrade-ux/man/man8/upgrade-ux.8  %{buildroot}/%{mandir}/man8/upgrade-ux.8
+gzip  %{buildroot}/%{mandir}/man8/upgrade-ux.8
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -45,6 +49,7 @@ updating Unix Operating Systems in a consistent and repeatable way
 %files
 %defattr(-, root, root, 0755)
 %doc  LICENSE README.md
+%doc %{mandir}/man8/upgrade-ux.8*
 %doc %{optdir}/upgrade-ux/man/man8/upgrade-ux.8*
 %{optdir}/upgrade-ux/bin/
 %{optdir}/upgrade-ux/lib/
