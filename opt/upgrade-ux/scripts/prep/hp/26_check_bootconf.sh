@@ -18,7 +18,7 @@ case "$OS_VERSION" in
         ;;
 esac
 
-set -A BootableDisks $( /usr/sbin/lvlnboot -v | grep "Boot Disk" | awk '{print $1}' )
+set -A BootableDisks $( /usr/sbin/lvlnboot -v 2>/dev/null | grep "Boot Disk" | awk '{print $1}' )
 
 if [[ ! -s $TMP_DIR/bootdisk ]]; then
     LogPrint "The /stand/bootconf file is missing and should contain"
