@@ -21,12 +21,12 @@ esac
 set -A BootableDisks $( /usr/sbin/lvlnboot -v 2>/dev/null | grep "Boot Disk" | awk '{print $1}' )
 
 if [[ ! -s $TMP_DIR/bootdisk ]]; then
-    LogPrint "The /stand/bootconf file is missing and should contain"
+    LogPrint "ERROR: The /stand/bootconf file is missing and should contain"
     for disk in $(echo ${BootableDisks[@]})
     do
         LogPrint "  l  $disk"
     done
-    EnterNextStageAllowed="N"
+    (( FORCED )) || EnterNextStageAllowed="N"
 fi
 
 if [[ ! -f /stand/bootconf ]]; then
@@ -42,10 +42,10 @@ else
         do
             grep -q $disk /stand/bootconf
 	    if (( $? > 0 )) ; then
-                LogPrint "The /stand/bootconf file is missing the following line"
+                LogPrint "ERROR: The /stand/bootconf file is missing the following line"
 	        LogPrint "  l  $disk"
     	    fi
         done
-        EnterNextStageAllowed="N"
+        (( FORCED )) || EnterNextStageAllowed="N"
     fi
 fi
