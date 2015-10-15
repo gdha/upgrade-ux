@@ -22,6 +22,8 @@ do
     grep "SSLCipherSuite" "$FILE" | grep -v "^#SSLCipherSuite" | grep -q "+EXP"
     if [[ $? -eq 0 ]]; then
         LogPrint "File $FILE is vulnerable with the OpenSSL LogJam (CVE-2015-4000) issue" 
+        # keep this in VAR_DIR as we need this file again in the configure phase
+        echo "$FILE" >> $VAR_DIR/$DS/OpenSSL_LogJam_EXP_vulnerable_httpd_conf_files
 	# we create a empty file CVE-2015-4000 as a mark-point during the configure phase
 	# to fix this
 	touch  "$VAR_DIR/$DS/CVE-2015-4000"
