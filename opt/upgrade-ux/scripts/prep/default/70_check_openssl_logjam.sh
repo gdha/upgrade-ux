@@ -4,7 +4,7 @@
 # list up all httpd related config files (apache, tomcat, hp smh, ....)
 find /usr -name "http*.conf" | grep -vE '(man|grep)' >  $TMP_DIR/list_httpd_conf_files.txt
 find /opt -name "http*.conf" | grep -vE '(man|grep)' >> $TMP_DIR/list_httpd_conf_files.txt
-[[ -s $TMP_DIR/list_httpd_conf_files.txt ]] && return   # no httpd.conf found = not vulnerable
+[[ ! -s $TMP_DIR/list_httpd_conf_files.txt ]] && return   # no httpd.conf found = not vulnerable
 
 # list up http conf files containing the keyword "SSLCipherSuite"
 for FILE in $(cat $TMP_DIR/list_httpd_conf_files.txt)
