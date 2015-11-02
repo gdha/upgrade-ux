@@ -9,7 +9,7 @@ log_dir = ../../var/opt/upgrade-ux/log
 DESTDIR =
 OFFICIAL =
 
-version := $(shell /usr/bin/grep ^VERSION= $(main_script) | cut -d= -f2)
+version := $(shell grep ^VERSION= $(main_script) | cut -d= -f2)
 
 distversion = $(version)
 debrelease = 0
