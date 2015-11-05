@@ -49,7 +49,7 @@ gzip  %{buildroot}/%{mandir}/man8/%{name}.8
 %files
 %defattr(-, root, root, 0755)
 %doc  LICENSE README.md
-%doc %{mandir}/man8/%{name}-ux.8*
+%doc %{mandir}/man8/%{name}.8*
 %doc %{optdir}/%{name}/man/man8/%{name}.8*
 %{optdir}/%{name}bin/
 %{optdir}/%{name}/lib/
