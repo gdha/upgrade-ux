@@ -73,10 +73,10 @@ validate:
 rewrite: $(specfile) $(main_script)
 	@echo  -e "\033[1m== Update the $(specfile) file==\033[0;0m"
 	cp -p $(specfile) $(specfile).save ; \
-	sed -e 's#number.*#number '$$version'#' -e 's#revision.*#revision '$$version'#g' < $(specfile).save >$(specfile); 
+	sed -e 's#^Version:.*#Version: $(version)#' -e 's#^%define rpmrelease.*#%define rpmrelease $(version)#g' < $(specfile).save >$(specfile);
 	@echo "Update the $(dscfile) file"
 	cp -p $(dscfile) $(dscfile).save ; \
-	sed -e 's#number.*#number '$$version'#' -e 's#revision.*#revision '$$version'#g' < $(dscfile).save > $(dscfile) ;
+	sed -e 's#^Version:.*#Version: $(version)#'  < $(dscfile).save > $(dscfile) ;
 	@echo "Update the $(main_script) script with current date"
 	today=`date +'%d-%b-%Y'` ; \
 	cp -p $(main_script) $(main_script).save ; \

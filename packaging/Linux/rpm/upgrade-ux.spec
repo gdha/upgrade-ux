@@ -1,4 +1,6 @@
-%define rpmrelease .git201312020913
+%define rpmrelease %{nil}
+%define debug_package %{nil}
+
 %define optdir /opt
 %define etcopt /etc/opt
 %define varopt /var/opt
@@ -19,7 +21,7 @@ License:	GPLv3
 URL:		http://www.it3.be/projects/upgrade-ux.html
 Source:		%{name}-%{version}.tar.gz
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
-BuildArch:	noarch
+ExclusiveArch:  %ix86 x86_64
 
 #BuildRequires:	
 Requires:	ksh
@@ -51,7 +53,7 @@ gzip  %{buildroot}/%{mandir}/man8/%{name}.8
 %doc  LICENSE README.md
 %doc %{mandir}/man8/%{name}.8*
 %doc %{optdir}/%{name}/man/man8/%{name}.8*
-%{optdir}/%{name}bin/
+%{optdir}/%{name}/bin/
 %{optdir}/%{name}/lib/
 %{optdir}/%{name}/scripts/
 %{varopt}/%{name}/
