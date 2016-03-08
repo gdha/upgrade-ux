@@ -5,7 +5,7 @@ Upgrade-UX
 
 Upgrade-ux is completely written in Korn Shell which is widely available on all UNIX Operating Systems from Linux, HP-UX, Solaris, AIX, and others. The nice thing about upgrade-ux is that the each OS follows its own track (via a directory tree structure) so they do not influence each other.
 
-Currently (July 2014), only the HP-UX tree is fully populated and we are starting with the Linux track. People who ever worked with [Relax-and-Recover](http://relax-and-recover.org) will immediately recognize the internals as it is an exact clone (however, reworked to make it fully Korn Shell aware).
+Currently, only the HP-UX tree is fully populated and we are starting with the Linux track. People who ever worked with [Relax-and-Recover](http://relax-and-recover.org) will immediately recognize the internals as it is an exact clone (however, reworked to make it fully Korn Shell aware).
 
 Upgrade-UX has a wide range of features:
 
