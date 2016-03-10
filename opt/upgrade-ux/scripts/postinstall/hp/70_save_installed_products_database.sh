@@ -5,7 +5,7 @@
 
 IPD=/var/adm/sw/products/
 pfiles=pfiles
-Report="$VAR_DIR/$DS/IPD_report.before"
+Report="$VAR_DIR/$DS/IPD_report.after"
 zero=0
 cnt=0
 errcnt=0
