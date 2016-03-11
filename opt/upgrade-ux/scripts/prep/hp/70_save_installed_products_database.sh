@@ -10,6 +10,8 @@ zero=0
 cnt=0
 errcnt=0
 
+[[ -f "$Report" ]] && return # no need to run it multiple times in preview
+
 Log "Looking for zero or missing INDEX/INFO/README files (IPD check)"
 
 for k in INDEX INFO README
