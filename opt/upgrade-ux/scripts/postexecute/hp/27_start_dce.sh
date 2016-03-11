@@ -1,4 +1,4 @@
-# 31_start_dce.sh
+# 27_start_dce.sh
 if (( PREVIEW )) ; then
     :
 else
