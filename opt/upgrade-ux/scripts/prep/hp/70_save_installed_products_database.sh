@@ -17,9 +17,8 @@ Log "Looking for zero or missing INDEX/INFO/README files (IPD check)"
 for k in INDEX INFO README
 do
     echo "Looking for zero-length $k files" >> $Report
-    i=0
     i=$(find $IPD -name $k -size 0c|wc -w)
-    if (( i = 0 )) ; then
+    if [ $i = $zero ] ; then
         echo "No zero-length $k files found" >> $Report
     else
 	errcnt=$((errcnt + 1))
@@ -83,12 +82,14 @@ done < $TMP_DIR/IPD.dirs.out
 
 if [ $cnt = $zero ] ; then
     echo "No missing INFO, INDEX, or README files" >> $Report
+    echo
 fi
 
 errcnt=$((errcnt + cnt))
 
 if (( errcnt > 0 )) ; then
 cat >>  ${Report}  <<EOF
+echo
 NOTE:   Any missing or zero-length files listed above should be
         replaced from backup or from a depot containing a valid
         version of the file.
