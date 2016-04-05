@@ -31,7 +31,7 @@ Log "Add entries to /etc/rc.config.d/nddconf to disable tcp_sack_enable"
 
 cp -p /etc/rc.config.d/nddconf "$VAR_DIR/$DS/nddconf.after"
 
-nddnr=$(grep -v \# /etc/rc.config.d/nddconf | tail -1 | cut -d[ -f2 | cut -d] -f1)
+nddnr=$(grep -v \# /etc/rc.config.d/nddconf | sed -e '/^$/d' | tail -1 | cut -d[ -f2 | cut -d] -f1)
 nddnr=$((nddnr + 1))
 PrintIfError "50_add_tcp_sack_in_nddconf.sh: could not grab last array number in /etc/rc.config.d/nddconf"
 
