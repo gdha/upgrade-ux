@@ -9,5 +9,6 @@
 cmp -s "$VAR_DIR/$DS/cimtrust.after" "$VAR_DIR/$DS/cimtrust.before"
 if (( $? == 1 )); then
     LogPrint "Cim X509 certificates differ:"
+    sdiff -s "$VAR_DIR/$DS/cimtrust.after" "$VAR_DIR/$DS/cimtrust.before"
     sdiff -s "$VAR_DIR/$DS/cimtrust.after" "$VAR_DIR/$DS/cimtrust.before" >&2
 fi
