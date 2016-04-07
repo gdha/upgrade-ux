@@ -21,7 +21,7 @@ echo "/tmp/cfg2html_*" >> "$VAR_DIR/$DS/exclude.list.after"
 cmp -s "$VAR_DIR/$DS/exclude.list.before" "$VAR_DIR/$DS/exclude.list.after"
 if (( $? == 1 )); then
     LogPrint "Following was added to /opt/uvscan/exclude.list"
-    sdiff -s $VAR_DIR/$DS/exclude.list.before" "$VAR_DIR/$DS/exclude.list.after"
-    sdiff -s $VAR_DIR/$DS/exclude.list.before" "$VAR_DIR/$DS/exclude.list.after" >&2
+    sdiff -s "$VAR_DIR/$DS/exclude.list.before" "$VAR_DIR/$DS/exclude.list.after"
+    sdiff -s "$VAR_DIR/$DS/exclude.list.before" "$VAR_DIR/$DS/exclude.list.after" >&2
     cp -p "$VAR_DIR/$DS/exclude.list.after" /opt/uvscan/exclude.list
 fi
