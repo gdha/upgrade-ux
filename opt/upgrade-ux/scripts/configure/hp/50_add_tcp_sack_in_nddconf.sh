@@ -19,6 +19,10 @@
 
 [[ "$OS_VERSION" = "11.11" ]]       && return    # HP-UX 11.11 is not impacted
 
+# before going further let us check it was not already disabled or defined
+# before (issue #54)
+grep -q tcp_sack_enable /etc/rc.config.d/nddconf   && return
+
 if (( PREVIEW )) ; then
     Log "tcp_sack_enable will not be disabled [not in preview mode]"
     return
