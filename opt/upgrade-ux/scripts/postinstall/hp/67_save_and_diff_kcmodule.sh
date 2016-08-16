@@ -20,4 +20,5 @@ cmp -s "$VAR_DIR/$DS/kcmodule.after" "$VAR_DIR/$DS/kcmodule.before"
 if (( $? == 1 )); then
     LogPrint "Kernel modules difference after patching:"
     sdiff -s "$VAR_DIR/$DS/kcmodule.after" "$VAR_DIR/$DS/kcmodule.before"
+    sdiff -s "$VAR_DIR/$DS/kcmodule.after" "$VAR_DIR/$DS/kcmodule.before" >&2  # save to log as well
 fi
