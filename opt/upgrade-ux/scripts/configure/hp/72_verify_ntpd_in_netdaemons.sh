@@ -25,24 +25,32 @@ grep -q XNTPD_NAME "$VAR_DIR/$DS/netdaemons.after"
 if (( $? == 1 )) ; then
     # entry is missing; so add it
     echo "export XNTPD_NAME=xntpd" >> "$VAR_DIR/$DS/netdaemons.after"
-    Log "\"export XNTPD_NAME=xntpd\" added in /etc/rc.config.d/netdaemons"
+    Log "Line \"export XNTPD_NAME=xntpd\" added in $VAR_DIR/$DS/netdaemons.after"
 else
     # if we get here then we need to replace ntpd with xntpd in /etc/rc.config.d/netdaemons
     Log "Found XNTPD_NAME=ntpd in /etc/rc.config.d/netdaemons - we will change it into xntpd"
     ch_rc -a -p XNTPD_NAME='xntpd' "$VAR_DIR/$DS/netdaemons.after"
 fi
+    
+Log "The following was modified in $VAR_DIR/$DS/netdaemons.after:" >&2
+sdiff -s "$VAR_DIR/$DS/netdaemons.after" "$VAR_DIR/$DS/netdaemons.before"
 
-cp -p "$VAR_DIR/$DS/netdaemons.after" /etc/rc.config.d/netdaemons
-Log "The following was modified in /etc/rc.config.d/netdaemons:" >&2
-sdiff -s /etc/rc.config.d/netdaemons "$VAR_DIR/$DS/netdaemons.before"
+if (( PREVIEW )) ; then
+    Log "Entry XNTPD_NAME=ntpd needs to become XNTPD_NAME=xntpd in /etc/rc.config.d/netdaemons [not in preview mode]"
+else
+    cp -p "$VAR_DIR/$DS/netdaemons.after" /etc/rc.config.d/netdaemons
+fi
 
-Log "NTP daemon name before restart was:"
+Log "NTP daemon name currenly running is:"
 ps -ef|grep ntpd|grep -v grep >&2
 
-Log "Restarting the ntpd process:"
-/sbin/init.d/ntpd stop >&2
-/sbin/init.d/ntpd start >&2
-
-Log "NTP daemon name after restart is:"
-ps -ef|grep ntpd|grep -v grep >&2
+if (( PREVIEW )) ; then
+    : # do nothing - no logging needed
+else
+    Log "Restarting the ntpd process:"
+    /sbin/init.d/ntpd stop >&2
+    /sbin/init.d/ntpd start >&2
+    Log "NTP daemon name after restart is:"
+    ps -ef|grep ntpd|grep -v grep >&2
+fi
 
