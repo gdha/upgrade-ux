@@ -33,7 +33,7 @@ else
 fi
     
 Log "The following was modified in $VAR_DIR/$DS/netdaemons.after:" >&2
-sdiff -s "$VAR_DIR/$DS/netdaemons.after" "$VAR_DIR/$DS/netdaemons.before"
+sdiff -s "$VAR_DIR/$DS/netdaemons.after" "$VAR_DIR/$DS/netdaemons.before"  >&2
 
 if (( PREVIEW )) ; then
     Log "Entry XNTPD_NAME=ntpd needs to become XNTPD_NAME=xntpd in /etc/rc.config.d/netdaemons [not in preview mode]"
