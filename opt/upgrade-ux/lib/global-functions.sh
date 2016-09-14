@@ -59,8 +59,15 @@ function CreateLockDir {
             Log "Found $PIDFILE file - we could be locked..."
             OTHERPID=$(< "$PIDFILE" )
             if kill -s 0 ${OTHERPID} 2>/dev/null ; then
-                Log "locked on ${OTHERPID} - try again"
-                return 1
+                # double check if the OTHERPID is not from another kind of process
+                # other then upgrade-ux that is
+                ps -ef | grep $OTHERPID | grep -q $PROGRAM
+                if [[ $? -eq 0 ]] ; then
+                    LogPrint "$PROGRAM locked on pid ${OTHERPID} - try again"
+                    return 1
+                else
+                    Log "lock is stale (${OTHERPID}) - will continue"
+                fi
             else
                 Log "lock is stale (${OTHERPID}) - will continue"
             fi
