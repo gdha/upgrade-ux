@@ -6,5 +6,5 @@ if (( PREVIEW )) ; then
     Log "Do not disable SSLv2 in hpsmh with OpenSSL A.01.00.02 [not in preview mode]"
 else
     Log "Do not disable SSLv2 in hpsmh with OpenSSL A.01.00.02"
-    /opt/hpsmh/conf/bin/smhconfig --disable-sslv2=false >&2
+    /opt/hpsmh/bin/smhconfig --disable-sslv2=false >&2
 fi
