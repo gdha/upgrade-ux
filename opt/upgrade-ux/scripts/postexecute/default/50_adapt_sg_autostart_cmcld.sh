@@ -30,7 +30,7 @@ else
         LogPrint "Changing variable AUTOSTART_CMCLD to 1 in $SGAUTOSTART [not in preview mode)"
     else
         LogPrint "Changing variable AUTOSTART_CMCLD to 1 in $SGAUTOSTART"
-        sed -e 's/^AUTOSTART_CMCLD=0/^AUTOSTART_CMCLD=1/' < "$VAR_DIR/$DS/$(basename $SGAUTOSTART).before" > "$VAR_DIR/$DS/$(basename $SGAUTOSTART).after"
+        sed -e 's/^AUTOSTART_CMCLD=0/AUTOSTART_CMCLD=1/' < "$VAR_DIR/$DS/$(basename $SGAUTOSTART).before" > "$VAR_DIR/$DS/$(basename $SGAUTOSTART).after"
         # when cmcluster.before had AUTOSTART_CMCLD=1 it won't be changed, so we can safely copy file cmcluster.after to $SGAUTOSTART
         cp "$VAR_DIR/$DS/$(basename $SGAUTOSTART).after" $SGAUTOSTART
         chown bin:bin $SGAUTOSTART  # apply correct ownership
