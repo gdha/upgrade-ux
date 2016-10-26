@@ -42,7 +42,7 @@ else
 fi
 
 Log "NTP daemon name currenly running is:"
-ps -ef|grep ntpd|grep -v grep >&2
+ps -ef|grep ntpd|grep -vE '(grep|ntpd_in_netdaemons)' >&2
 
 if (( PREVIEW )) ; then
     : # do nothing - no logging needed
@@ -51,6 +51,6 @@ else
     /sbin/init.d/ntpd stop >&2
     /sbin/init.d/ntpd start >&2
     Log "NTP daemon name after restart is:"
-    ps -ef|grep ntpd|grep -v grep >&2
+    ps -ef|grep ntpd|grep -vE '(grep|ntpd_in_netdaemons)' >&2
 fi
 
