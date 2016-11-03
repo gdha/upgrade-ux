@@ -16,9 +16,20 @@ SUDOVER=$( $SWLIST sudo 2>/dev/null | grep \# | tail -1 | awk '{print $3}' )
 if (( PREVIEW )) ; then
     Log "Copy back the original /etc/sudoers file [not in preview]"
 else
-    Log "Copy back the original /etc/sudoers file"
+    Log "Copy back the original /etc/sudoers file:"
     mv -f /etc/sudoers /etc/sudoers.$SUDOVER         # move the fresh sudoers file
-    cp -p "$VAR_DIR/$DS/sudoers.before" /etc/sudoers # re-instate the original sudoers
+    # we have 2 copies "$VAR_DIR/$DS/sudoers.before" and "/etc/sudoers.$PRODUCT.before"
+    # and these should be the same - if not only use "/etc/sudoers.$PRODUCT.before" to copy back
+    if [[ -f "/etc/sudoers.${PRODUCT}.before" ]] ; then
+        cmp -s "$VAR_DIR/$DS/sudoers.before" "/etc/sudoers.${PRODUCT}.before"
+        if (( $? == 1 )); then
+            Log "Using /etc/sudoers.${PRODUCT}.before to copy back to /etc/sudoers"
+            cp -p "/etc/sudoers.${PRODUCT}.before" /etc/sudoers
+        fi
+    else
+        Log "Using $VAR_DIR/$DS/sudoers.before to copy back to /etc/sudoers"
+        cp -p "$VAR_DIR/$DS/sudoers.before" /etc/sudoers # re-instate the original sudoers
+    fi
     chown root:root /etc/sudoers
     chmod 440 /etc/sudoers
 fi
