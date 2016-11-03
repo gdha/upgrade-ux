@@ -1,5 +1,5 @@
 # 72_verify_ntpd_in_netdaemons.sh
-# This is for HP-UX 11.31 only - see issue #56
+# This is for HP-UX 11.31 only - see issue #56 and #65
 # Before patching NTP version is 11.31 and after patching it becomes C.4.2.6.7.0
 # In fact it is NOT a problem of patching, but OVO osspi script is still looking
 # for xntpd daemon running or not and after patching the daemons is ntpd
@@ -18,39 +18,51 @@ if [[ "$(ch_rc -l -p XNTPD_NAME $VAR_DIR/$DS/netdaemons.before)"  =  "xntpd" ]] 
 fi
 
 # If we are here then the entry XNTPD_NAME should be modified or added
-cp -p "$VAR_DIR/$DS/netdaemons.before" "$VAR_DIR/$DS/netdaemons.after"
+#cp -p "$VAR_DIR/$DS/netdaemons.before" "$VAR_DIR/$DS/netdaemons.after"
 
 # check if the keyword is present (sometimes it is not)
-grep -q XNTPD_NAME "$VAR_DIR/$DS/netdaemons.after"
-if (( $? == 1 )) ; then
+#grep -q XNTPD_NAME "$VAR_DIR/$DS/netdaemons.after"
+#if (( $? == 1 )) ; then
     # entry is missing; so add it
-    echo "export XNTPD_NAME=xntpd" >> "$VAR_DIR/$DS/netdaemons.after"
-    Log "Line \"export XNTPD_NAME=xntpd\" added in $VAR_DIR/$DS/netdaemons.after"
-else
+#    echo "export XNTPD_NAME=xntpd" >> "$VAR_DIR/$DS/netdaemons.after"
+#    Log "Line \"export XNTPD_NAME=xntpd\" added in $VAR_DIR/$DS/netdaemons.after"
+#else
     # if we get here then we need to replace ntpd with xntpd in /etc/rc.config.d/netdaemons
-    Log "Found XNTPD_NAME=ntpd in /etc/rc.config.d/netdaemons - we will change it into xntpd"
-    ch_rc -a -p XNTPD_NAME='xntpd' "$VAR_DIR/$DS/netdaemons.after"
-fi
+#    Log "Found XNTPD_NAME=ntpd in /etc/rc.config.d/netdaemons - we will change it into xntpd"
+#    ch_rc -a -p XNTPD_NAME='xntpd' "$VAR_DIR/$DS/netdaemons.after"
+#fi
     
-Log "The following was modified in $VAR_DIR/$DS/netdaemons.after:" >&2
-sdiff -s "$VAR_DIR/$DS/netdaemons.after" "$VAR_DIR/$DS/netdaemons.before"  >&2
+#Log "The following was modified in $VAR_DIR/$DS/netdaemons.after:" >&2
+#sdiff -s "$VAR_DIR/$DS/netdaemons.after" "$VAR_DIR/$DS/netdaemons.before"  >&2
 
-if (( PREVIEW )) ; then
-    Log "Entry XNTPD_NAME=ntpd needs to become XNTPD_NAME=xntpd in /etc/rc.config.d/netdaemons [not in preview mode]"
-else
-    cp -p "$VAR_DIR/$DS/netdaemons.after" /etc/rc.config.d/netdaemons
-fi
+#if (( PREVIEW )) ; then
+#    Log "Entry XNTPD_NAME=ntpd needs to become XNTPD_NAME=xntpd in /etc/rc.config.d/netdaemons [not in preview mode]"
+#else
+#    Log "Copy $VAR_DIR/$DS/netdaemons.after to /etc/rc.config.d/netdaemons"
+#    cp -p "$VAR_DIR/$DS/netdaemons.after" /etc/rc.config.d/netdaemons
+#fi
 
 Log "NTP daemon name currenly running is:"
 ps -ef|grep ntpd|grep -vE '(grep|ntpd_in_netdaemons)' >&2
 
 if (( PREVIEW )) ; then
-    : # do nothing - no logging needed
+    cp -p /etc/rc.config.d/netdaemons "$VAR_DIR/$DS/netdaemons.after"
+    Log "Copy /etc/rc.config.d/netdaemons  to $VAR_DIR/$DS/netdaemons.after"
 else
     Log "Restarting the ntpd process:"
     /sbin/init.d/ntpd stop >&2
-    /sbin/init.d/ntpd start >&2
+    # by adding the option xntpd we tell the start-up script to start xntpd instead of ntpd
+    /sbin/init.d/ntpd start xntpd >&2
+    # And, the /etc/rc.config.d/netdaemons file will be modified by the daemon itself
     Log "NTP daemon name after restart is:"
     ps -ef|grep ntpd|grep -vE '(grep|ntpd_in_netdaemons)' >&2
+    # as the netdaemons file will probably be modified - take a copy so we can compare
+    cp -p /etc/rc.config.d/netdaemons "$VAR_DIR/$DS/netdaemons.after"
+    Log "Copy /etc/rc.config.d/netdaemons  to $VAR_DIR/$DS/netdaemons.after"
 fi
 
+cmp -s "$VAR_DIR/$DS/netdaemons.after" "$VAR_DIR/$DS/netdaemons.before"
+if (( $? == 1 )); then
+    Log "The following was modified in $VAR_DIR/$DS/netdaemons.after:" >&2
+    sdiff -s "$VAR_DIR/$DS/netdaemons.after" "$VAR_DIR/$DS/netdaemons.before"  >&2
+fi
