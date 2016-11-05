@@ -12,53 +12,42 @@
 
 [[ ! -f "$VAR_DIR/$DS/netdaemons.before" ]]  && cp -p /etc/rc.config.d/netdaemons  "$VAR_DIR/$DS/netdaemons.before"
 
+# is the following test conclusive enough?
 if [[ "$(ch_rc -l -p XNTPD_NAME $VAR_DIR/$DS/netdaemons.before)"  =  "xntpd" ]] ; then
     Log "Found XNTPD_NAME=xntpd in /etc/rc.config.d/netdaemons [OK]"
     return
 fi
 
-# If we are here then the entry XNTPD_NAME should be modified or added
-#cp -p "$VAR_DIR/$DS/netdaemons.before" "$VAR_DIR/$DS/netdaemons.after"
-
-# check if the keyword is present (sometimes it is not)
-#grep -q XNTPD_NAME "$VAR_DIR/$DS/netdaemons.after"
-#if (( $? == 1 )) ; then
-    # entry is missing; so add it
-#    echo "export XNTPD_NAME=xntpd" >> "$VAR_DIR/$DS/netdaemons.after"
-#    Log "Line \"export XNTPD_NAME=xntpd\" added in $VAR_DIR/$DS/netdaemons.after"
-#else
-    # if we get here then we need to replace ntpd with xntpd in /etc/rc.config.d/netdaemons
-#    Log "Found XNTPD_NAME=ntpd in /etc/rc.config.d/netdaemons - we will change it into xntpd"
-#    ch_rc -a -p XNTPD_NAME='xntpd' "$VAR_DIR/$DS/netdaemons.after"
-#fi
-    
-#Log "The following was modified in $VAR_DIR/$DS/netdaemons.after:" >&2
-#sdiff -s "$VAR_DIR/$DS/netdaemons.after" "$VAR_DIR/$DS/netdaemons.before"  >&2
-
-#if (( PREVIEW )) ; then
-#    Log "Entry XNTPD_NAME=ntpd needs to become XNTPD_NAME=xntpd in /etc/rc.config.d/netdaemons [not in preview mode]"
-#else
-#    Log "Copy $VAR_DIR/$DS/netdaemons.after to /etc/rc.config.d/netdaemons"
-#    cp -p "$VAR_DIR/$DS/netdaemons.after" /etc/rc.config.d/netdaemons
-#fi
+if (( PREVIEW )) ; then
+    Log "Entry XNTPD_NAME=ntpd needs to become XNTPD_NAME=xntpd in /etc/rc.config.d/netdaemons [not in preview mode]"
+else
+    Log "By restarting the ntdp the XNTPD_NAME entry will be automatically added to /etc/rc.config.d/netdaemons"
+    /sbin/init.d/ntpd stop >&2
+    # by adding the option xntpd we tell the start-up script to start xntpd instead of ntpd
+    # but still it will add a line "export XNTPD_NAME=ntpd" in the netdaemons file
+    /sbin/init.d/ntpd start >&2
+    # And, the /etc/rc.config.d/netdaemons file will be modified by the daemon itself (maybe)
+    # Replace the 'XNTPD_NAME=ntpd' by 'XNTPD_NAME=xntpd' with sed (we trust this tool better)
+    Log "Modify keyword 'XNTPD_NAME=ntpd' into 'XNTPD_NAME=xntpd' in $VAR_DIR/$DS/netdaemons.after"
+    sed -e 's/XNTPD_NAME=ntpd/XNTPD_NAME=xntpd/g' < /etc/rc.config.d/netdaemons >"$VAR_DIR/$DS/netdaemons.after"
+    Log "Copy $VAR_DIR/$DS/netdaemons.after to /etc/rc.config.d/netdaemons"
+    cp "$VAR_DIR/$DS/netdaemons.after" /etc/rc.config.d/netdaemons
+    chown bin:bin /etc/rc.config.d/netdaemons
+    chmod 444 /etc/rc.config.d/netdaemons
+fi
 
 Log "NTP daemon name currenly running is:"
 ps -ef|grep ntpd|grep -vE '(grep|ntpd_in_netdaemons)' >&2
 
 if (( PREVIEW )) ; then
     cp -p /etc/rc.config.d/netdaemons "$VAR_DIR/$DS/netdaemons.after"
-    Log "Copy /etc/rc.config.d/netdaemons  to $VAR_DIR/$DS/netdaemons.after"
+    Log "Copy /etc/rc.config.d/netdaemons to $VAR_DIR/$DS/netdaemons.after"
 else
-    Log "Restarting the ntpd process:"
+    Log "Restarting the ntpd process (again):"
     /sbin/init.d/ntpd stop >&2
-    # by adding the option xntpd we tell the start-up script to start xntpd instead of ntpd
-    /sbin/init.d/ntpd start xntpd >&2
-    # And, the /etc/rc.config.d/netdaemons file will be modified by the daemon itself
+    /sbin/init.d/ntpd start >&2
     Log "NTP daemon name after restart is:"
     ps -ef|grep ntpd|grep -vE '(grep|ntpd_in_netdaemons)' >&2
-    # as the netdaemons file will probably be modified - take a copy so we can compare
-    cp -p /etc/rc.config.d/netdaemons "$VAR_DIR/$DS/netdaemons.after"
-    Log "Copy /etc/rc.config.d/netdaemons  to $VAR_DIR/$DS/netdaemons.after"
 fi
 
 cmp -s "$VAR_DIR/$DS/netdaemons.after" "$VAR_DIR/$DS/netdaemons.before"
