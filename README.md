@@ -13,20 +13,27 @@ Upgrade-UX has a wide range of features:
  - Has a preview mode (to dry-run an upgrade without doing it) and an upgrade mode
  - Is customisable via local.conf configuration file
  - Is written in standard Korn Shell (which makes it highly portable)
+ - Is a complete modular framework where a script can be placed (directory structures according OS type)
  - Is UNIX Operating System independent as OS specific tasks reside in their own directory structures
+ - HP-UX is fully implemented
+ - Linux is not fully implemented, but can be easily extended
+ - AIX and SunOS are not (yet) implemented
  - Is easy extendable with your own scripts
  - The `upgrade-ux` command leaves a trace in its own log file
  - Running in preview or upgrade mode always creates evidence files
  - Has a man page
- - Has user documentation (you are reading it)
+ - Has user documentation (you are reading part of it)
  - Can be used to install patch bundles of previous years with the YEAR variable
- - Does understand Serviceguard clusters
+ - Does understand Serviceguard clusters (HP-UX and Linux)
  - Can be programmed to bail out on settings you think are too serious to continue
  - Can trigger remote alarms, syslog, monitors.
  - Can do a basis health check of your system - it is all up to you
- - Has excellent support by its author
- - The support and development of the Upgrade-UX project takes place on Github:
+ - Has excellent support by its author (Contact me for consultancy or programming tasks)
+ - The support and development of the Upgrade-UX project takes place on Github
 
 * [Upgrade-UX website](http://www.it3.be/projects/upgrade-ux.html)
 * [Github project](http://github.com/gdha/upgrade-ux)
 * [Upgrade-ux User Guide](http://www.it3.be/projects/upgrade-ux-user-guide.html)
+
+Author : Gratien D'haese
+[Company Project](http://www.it3.be/projects/upgrade-ux.html)
