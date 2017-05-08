@@ -5,6 +5,9 @@
 # would start scanning the complete cfg2html collection on the NAS filer which may bring down the
 # network on slower remote locations (factories)
 
+# If the /opt/uvscan/exclude.list is not present then we are not using Linux Shield
+[[ ! -f /opt/uvscan/exclude.list ]] && return
+
 # perhaps it was already added - check it first
 grep -q cfg2html /opt/uvscan/exclude.list && return  # nothing to be done
 

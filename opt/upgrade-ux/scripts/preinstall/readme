@@ -1,0 +1,6 @@
+preinstall phase
+----------------
+reserved nrs are 00-05 and 95-99 - used by upgrade-ux itself
+all nrs between 06-94 are free for scripts
+
+use bin/upgrade-ux -s   to see the all the scripts and in the order these will be executed

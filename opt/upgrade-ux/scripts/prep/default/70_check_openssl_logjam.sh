@@ -2,8 +2,9 @@
 # Script should work on all kind of UNIX flavours
 
 # list up all httpd related config files (apache, tomcat, hp smh, ....)
-find /usr -name "http*.conf" | grep -vE '(man|grep)' >  $TMP_DIR/list_httpd_conf_files.txt
-find /opt -name "http*.conf" | grep -vE '(man|grep)' >> $TMP_DIR/list_httpd_conf_files.txt
+# using option -xdev to avoid NAS filer search
+find /usr -xdev -name "http*.conf" | grep -vE '(man|grep)' >  $TMP_DIR/list_httpd_conf_files.txt
+find /opt -xdev -name "http*.conf" | grep -vE '(man|grep)' >> $TMP_DIR/list_httpd_conf_files.txt
 [[ ! -s $TMP_DIR/list_httpd_conf_files.txt ]] && return   # no httpd.conf found = not vulnerable
 
 # list up http conf files containing the keyword "SSLCipherSuite"
@@ -15,6 +16,9 @@ do
         echo "$FILE" >> $TMP_DIR/list_httpd_conf_files_containing_SSLCipherSuite_keyword
     fi
 done
+
+# if the $TMP_DIR/list_httpd_conf_files_containing_SSLCipherSuite_keyword is empty = nothing to do anymore
+[[ ! -s $TMP_DIR/list_httpd_conf_files_containing_SSLCipherSuite_keyword ]] && return
 
 # if we find argument +EXP as an option with keyword SSLCipherSuite then we are vulnerable
 for FILE in $(cat $TMP_DIR/list_httpd_conf_files_containing_SSLCipherSuite_keyword)

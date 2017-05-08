@@ -1,5 +1,6 @@
 # 36_check_virusscanner_linuxshield.sh
-rpm -q MFEcma
+Log "Check if Linux Shield virusscanner RPM is present (it should not be the case):"
+rpm -q MFEcma >&2
 if (( $? == 0 )) ; then
     LogPrint "Linux Shield is installed (is not allowed anymore)"
 
