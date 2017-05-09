@@ -6,5 +6,7 @@ fi
 if [[ ! -f /var/log/rear/rear-$HOSTNAME.log ]]; then
     LogPrint "WARNING: please create a disaster recovery image before patching with e.g. Relax-and-Recover (rear)"
 else
-    head -3 /var/log/rear/rear-$HOSTNAME.log > "$VAR_DIR/$DS/rear-$HOSTNAME-log.before"
+    Log "Version installed of $(rear -V)"
+    Log "Saving /var/log/rear/rear-$HOSTNAME.log"
+    cp -p /var/log/rear/rear-$HOSTNAME.log  "$VAR_DIR/$DS/rear-$HOSTNAME.log"
 fi
