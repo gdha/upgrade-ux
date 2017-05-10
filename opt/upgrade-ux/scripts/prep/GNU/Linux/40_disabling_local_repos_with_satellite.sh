@@ -13,10 +13,10 @@ Log "Is a RedHat Satellite Channel available?"
 if [[ "$registration_satellite" = "YES" ]] ; then
       for repo in $(ls /etc/yum.repos.d/*.repo) ; do
           if (( PREVIEW )) ; then
-              Log "Move ${repo} to ${repo}.$DS [not in preview mode]"
+              Log "Move ${repo} to ${repo##*/}.$DS [not in preview mode]"
           else
-              Log "Move ${repo} to ${repo}.$DS"
-              mv ${repo} ${repo}.$DS
+              Log "Move ${repo} to ${repo##*/}.$DS"
+              mv -f ${repo} ${repo}.$DS
           fi
       done
 fi
