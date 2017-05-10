@@ -15,6 +15,6 @@ if [[ -z $(eval "echo \$$configvar") ]]; then
     return
 else
     Log "Downloading script GAB-RHEL-RPO.sh"
-    wget ${dmlurl}/scripts/GAB-RHEL-RPO.sh -O $TMP_DIR/GAB-RHEL-RPO.sh >&2
+    wget --no-verbose ${dmlurl}/scripts/GAB-RHEL-RPO.sh -O $TMP_DIR/GAB-RHEL-RPO.sh >&2
     [[ -s "$TMP_DIR/GAB-RHEL-RPO.sh" ]] && bash "$TMP_DIR/GAB-RHEL-RPO.sh" >&2
 fi
