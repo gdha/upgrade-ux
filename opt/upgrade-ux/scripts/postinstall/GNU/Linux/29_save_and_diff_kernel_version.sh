@@ -6,7 +6,9 @@ else
     CURRENT_KERNEL=$(uname -r)   # assuming we did not yet reboot (most likely not the case)
 fi
 
-# TODO: this is for RHEL/SLES only for the moment
+# TODO: this is for RHEL/SLES only for the moment - next line should become a case statement
+[[ ! -x $RPM ]] && return  # rpm executable not available; just return
+
 AVAILABLE_KERNEL=$( $RPM -q --last kernel | awk '{print $1}' | cut -d- -f2- | head -1 )
 
 echo "$AVAILABLE_KERNEL" > "$VAR_DIR/$DS/kernel-version.after"
