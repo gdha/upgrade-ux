@@ -42,9 +42,12 @@ LogPrint "Do we need restarting of services or reboot?"
 if has_binary needs-restarting ; then
     needs-restarting > "$VAR_DIR/$DS/needs-restarting"
     if test -s "$VAR_DIR/$DS/needs-restarting" ; then
-       touch "$VAR_DIR/$DS/reboot-required"
-       LogPrint "** Reboot seems to be required **"
-       cat "$VAR_DIR/$DS/needs-restarting" >&2
+        touch "$VAR_DIR/$DS/reboot-required"
+        Log "Processes that require a restart:"
+        cat "$VAR_DIR/$DS/needs-restarting" >&2
+        LogPrint "*********************************"
+        LogPrint "** Reboot seems to be required **"
+        LogPrint "*********************************"
     else
        LogPrint "No reboot seems necessary"
     fi
@@ -53,8 +56,11 @@ else
     counter=$( cat "$VAR_DIR/$DS/dead-processes" | grep -v ora | wc -l )
     if (( counter > 1 )) ; then
         touch "$VAR_DIR/$DS/reboot-required"
-        LogPrint "** Reboot seems to be required **"
+        Log "Processes that are dead or need a restart:"
         cat "$VAR_DIR/$DS/dead-processes" >&2
+        LogPrint "*********************************"
+        LogPrint "** Reboot seems to be required **"
+        LogPrint "*********************************"
     else
         LogPrint "No reboot seems necessary"
     fi
