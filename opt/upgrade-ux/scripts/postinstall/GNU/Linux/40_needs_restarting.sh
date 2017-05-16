@@ -38,25 +38,24 @@
 # Another very interesting tool that is available in EPEL is "Tracer":
 # https://github.com/FrostyX/tracer
 # However, that is out-of-scope for upgrade-ux, but I thought still worth mentioning
-set -x
 LogPrint "Do we need restarting of services or reboot?"
 if has_binary needs-restarting ; then
-    needs-restarting >&2
-    if (( $? == 0 )) ; then
+    needs-restarting > "$VAR_DIR/$DS/needs-restarting"
+    if test -s "$VAR_DIR/$DS/needs-restarting" ; then
        touch "$VAR_DIR/$DS/reboot-required"
-       LogPrint "Reboot seems to be required"
+       LogPrint "** Reboot seems to be required **"
+       cat "$VAR_DIR/$DS/needs-restarting" >&2
     else
        LogPrint "No reboot seems necessary"
     fi
 else
-    lsof +c0 -d DEL | grep -v '\s/SYSV' |awk 'NR==1 || !/dev\/zero/ {print $2,$1,$4,$NF}' | column -t >&2
     lsof +c0 -d DEL | grep -v '\s/SYSV' |awk 'NR==1 || !/dev\/zero/ {print $2,$1,$4,$NF}' | column -t > "$VAR_DIR/$DS/dead-processes"
     counter=$( cat "$VAR_DIR/$DS/dead-processes" | grep -v ora | wc -l )
     if (( counter > 1 )) ; then
         touch "$VAR_DIR/$DS/reboot-required"
-        LogPrint "Reboot seems to be required"
+        LogPrint "** Reboot seems to be required **"
+        cat "$VAR_DIR/$DS/dead-processes" >&2
     else
         LogPrint "No reboot seems necessary"
     fi
 fi
-set +x
