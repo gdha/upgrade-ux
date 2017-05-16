@@ -11,8 +11,7 @@ find /opt -xdev -name "http*.conf" | grep -vE '(man|grep)' >> $TMP_DIR/list_http
 for FILE in $(cat $TMP_DIR/list_httpd_conf_files.txt)
 do
     [[ ! -f "$FILE" ]] && continue  # to be sure we are dealing with a file
-    grep -q "SSLCipherSuite" "$FILE" 
-    if [[ $? -eq 0 ]]; then
+    if grep -q "SSLCipherSuite" "$FILE" ; then
         echo "$FILE" >> $TMP_DIR/list_httpd_conf_files_containing_SSLCipherSuite_keyword
     fi
 done

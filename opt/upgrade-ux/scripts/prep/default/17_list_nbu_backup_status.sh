@@ -1,4 +1,4 @@
-# 17_list_nbu_backup_status.sh
+# prep/default/17_list_nbu_backup_status.sh
 
 [[ ! -x /usr/openv/netbackup/bin/bpclimagelist ]] && return   # no NBU sw installed - return
 
@@ -16,9 +16,9 @@ else
     LASTFULLSEC=$(date +%s -d $LASTFULL)
     NOWSEC=$(date +%s)
 
-    DIFFDAYS=$(( ($NOWSEC - $LASTFULLSEC) /86400 ))
+    DIFFDAYS=$(( (NOWSEC - LASTFULLSEC) /86400 ))
 
-    if (( $DIFFDAYS > 14 )); then
+    if (( DIFFDAYS > 14 )); then
         LogPrint "WARNING - Last full backup is $DIFFDAYS days old"
     else
         Log "Last full backup is $DIFFDAYS days old [OK]"

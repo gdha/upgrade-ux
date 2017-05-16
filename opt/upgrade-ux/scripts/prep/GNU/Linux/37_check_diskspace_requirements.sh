@@ -9,7 +9,7 @@
 diskspace_err=0
 
 disk_avail=$(df --direct -m / | tail -1 | awk '{print $4}')
-if [[ ${disk_avail} -lt 1000 ]] ; then
+if (( disk_avail < 1000 )) ; then
     if (( PREVIEW )) ; then
         LogPrint "ERROR: insufficient space available in / (available ${disk_avail}MB; required 1000 MB)"
         diskspace_err=$(( diskspace_err + 1 ))
@@ -19,7 +19,7 @@ if [[ ${disk_avail} -lt 1000 ]] ; then
 fi
 
 disk_avail=$(df --direct -m /boot | tail -1 | awk '{print $4}')
-if [[ ${disk_avail} -lt 20 ]] ; then
+if (( disk_avail < 20 )) ; then
     if (( PREVIEW )) ; then
         LogPrint "ERROR: insufficient space available in /boot (available ${disk_avail}MB; required 20 MB)"
         diskspace_err=$(( diskspace_err + 1 ))
@@ -29,7 +29,7 @@ if [[ ${disk_avail} -lt 20 ]] ; then
 fi
 
 disk_avail=$(df --direct -m /tmp | tail -1 | awk '{print $4}')
-if [[ ${disk_avail} -lt 1000 ]] ; then
+if (( disk_avail < 1000 )) ; then
     if (( PREVIEW )) ; then
         LogPrint "ERROR: insufficient space available in /tmp (available ${disk_avail}MB; required 1000 MB)"
         diskspace_err=$(( diskspace_err + 1 ))
@@ -39,7 +39,7 @@ if [[ ${disk_avail} -lt 1000 ]] ; then
 fi
 
 disk_avail=$(df --direct -m /var | tail -1 | awk '{print $4}')
-if [[ ${disk_avail} -lt 1200 ]] ; then
+if (( disk_avail < 1200 )) ; then
     if (( PREVIEW )) ; then
         LogPrint "ERROR: insufficient space available in /var (available ${disk_avail}MB; required 1200 MB)"
         diskspace_err=$(( diskspace_err + 1 ))
