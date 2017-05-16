@@ -8,5 +8,5 @@
 
 # We also do this in PREVIEW mode as we tested these during the 'yum check-updates'
 cd /etc/yum.repos.d
-PrintLog "Removing the patch repositories (used by upgrade-ux)"
+LogPrint "Removing the patch repositories (used by upgrade-ux)"
 rm -f $v *.repo

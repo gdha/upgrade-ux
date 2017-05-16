@@ -8,5 +8,5 @@
 
 # We also do this in PREVIEW mode so we can test the 'yum check-updates' later on
 cd /etc/yum.repos.d
-PrintLog "Removing the original repositories (during upgrade-ux run)"
+LogPrint "Removing the original repositories (during upgrade-ux run)"
 rm -f $v *.repo
