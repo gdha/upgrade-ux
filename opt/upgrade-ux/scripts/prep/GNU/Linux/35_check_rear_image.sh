@@ -9,4 +9,6 @@ else
     Log "Version installed of $(rear -V)"
     Log "Saving /var/log/rear/rear-$HOSTNAME.log"
     cp -p /var/log/rear/rear-$HOSTNAME.log  "$VAR_DIR/$DS/rear-$HOSTNAME.log"
+    Log "Last run of ReaR was:"
+    stat "$VAR_DIR/$DS/rear-$HOSTNAME.log" | grep -i change >&2
 fi
