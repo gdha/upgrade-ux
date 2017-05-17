@@ -10,3 +10,4 @@
 cd /etc/yum.repos.d
 LogPrint "Removing the original repositories (during upgrade-ux run)"
 rm -f $v *.repo
+cd - >/dev/null
