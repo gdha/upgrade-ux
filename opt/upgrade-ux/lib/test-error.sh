@@ -69,7 +69,7 @@ MASTER_PID=$$
 exec 7>&1
 QuietAddExitTask "exec 7>&-"
 # USR1 is used to abort on errors, not using Print to always print to the original STDOUT, even if quiet
-trap "echo 'Aborting due to an error, check $LOGFILE for details' >&7 ; kill -s QUIT $MASTER_PID" USR1
+trap "echo 'Aborting due to an error, check $LOGFILE for details' >&7 ; kill -s KILL $MASTER_PID" USR1
 
 
 # Check if any of the binaries/aliases exist
@@ -87,6 +87,7 @@ function get_path {
 }
 
 function Error {
+set -x
     # If first argument is numerical, use it as exit code
     if [ $1 -eq $1 ] 2>&8; then
         EXIT_CODE=$1
@@ -96,7 +97,9 @@ function Error {
     fi
     VERBOSE=1
     LogPrint "ERROR: $*"
-    kill -USR1 $MASTER_PID # make sure that Error exits the master process, even if called from child processes :-)
+    echo "Aborting due to an error, check $LOGFILE for details" >&7
+    kill -s TERM $MASTER_PID
+    #kill -USR1 $MASTER_PID # make sure that Error exits the master process, even if called from child processes :-)
 }
 
 function StopIfError {
