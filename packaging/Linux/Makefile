@@ -23,7 +23,7 @@ git_ref := $(shell git symbolic-ref -q HEAD)
 git_branch = $(lastword $(subst /, ,$(git_ref)))
 endif
 else
-git_branch = rear-$(version)
+git_branch = $(product)-$(version)
 endif
 git_branch ?= master
 
@@ -37,7 +37,13 @@ scriptdir = $(prefix)/scripts
 libdir = $(prefix)/lib
 localstatedir = /var$(prefix)
 
+ifeq ($(OFFICIAL),)
+	distversion = $(version)-git$(date)
+	debrelease = 0git$(date)
+	rpmrelease = .git$(date)
+endif
 
+.PHONY: clean
 
 all: help
 
@@ -49,7 +55,6 @@ help:
 	@echo "    clean: \"make clean\"  "
 	@echo "+-------------------------+"
 
-.PHONY: clean
 
 clean:
 	rm -f $(product)-$(distversion).tar.gz
@@ -73,7 +78,7 @@ validate:
 rewrite: $(specfile) $(main_script)
 	@echo  -e "\033[1m== Update the $(specfile) file==\033[0;0m"
 	cp -p $(specfile) $(specfile).save ; \
-	sed -e 's#^Version:.*#Version: $(version)#' -e 's#^%define rpmrelease.*#%define rpmrelease $(version)#g' < $(specfile).save >$(specfile);
+	sed -e 's#^Version:.*#Version: $(version)#' -e 's#^%define rpmrelease.*#%define rpmrelease $(rpmrelease)#g' < $(specfile).save >$(specfile);
 	@echo "Update the $(dscfile) file"
 	cp -p $(dscfile) $(dscfile).save ; \
 	sed -e 's#^Version:.*#Version: $(version)#'  < $(dscfile).save > $(dscfile) ;
