@@ -23,7 +23,8 @@ else
     wget --no-verbose ${dmlurl}/scripts/GAB-RHEL-RPO.sh -O $VAR_DIR/$DS/GAB-RHEL-RPO.sh >&2
 fi
 
-if [[ -s "$VAR_DIR/$DS/GAB-RHEL-RPO.sh" ]] ;
+if [[ -s "$VAR_DIR/$DS/GAB-RHEL-RPO.sh" ]] ; then
+
     checksum=$( cksum "$VAR_DIR/$DS/GAB-RHEL-RPO.sh" | awk '{print $1}' )
     Log "Checksum of script GAB-RHEL-RPO.sh is $checksum"
     grep -q $YEAR "$VAR_DIR/$DS/GAB-RHEL-RPO.sh"
@@ -32,12 +33,20 @@ if [[ -s "$VAR_DIR/$DS/GAB-RHEL-RPO.sh" ]] ;
         LogPrint "Repositories we will define to do patch management with are:"
         grep $YEAR "$VAR_DIR/$DS/GAB-RHEL-RPO.sh" | grep "^name=" | cut -d= -f2
         grep $YEAR "$VAR_DIR/$DS/GAB-RHEL-RPO.sh" | grep "^name=" | cut -d= -f2 >&2
+        # we think we have a good version of the script we can return now
+        return
     else
-        LogPrint "WARNING: No repositories found for year $YEAR"
-        # TODO: get correct script from an alternative location then?
-
+        Log "WARNING: No repositories found for year $YEAR in downloaded version of GAB-RHEL-RPO.sh"
+        # We continue after the if-block with the alternative method
     fi
 
-else
-    Error "GAB-RHEL-RPO.sh was not found or downloaded correctly"
 fi
+
+# Fail-safe location: we manually made sure the script was copied (ansible) to /usr/local/bin
+if [[ -x /usr/local/bin/GAB-RHEL-RPO.sh ]] ; then
+    Log "Found second copy : /usr/local/bin/GAB-RHEL-RPO.sh"
+    cp -f $v /usr/local/bin/GAB-RHEL-RPO.sh "$VAR_DIR/$DS/GAB-RHEL-RPO.sh"
+else
+    Error "GAB-RHEL-RPO.sh does not contain patches for year $YEAR (ask SDDC team)"
+fi
+
