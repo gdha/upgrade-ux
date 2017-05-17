@@ -98,7 +98,7 @@ set -x
     VERBOSE=1
     LogPrint "ERROR: $*"
     echo "Aborting due to an error, check $LOGFILE for details" >&7
-    kill -s TERM $MASTER_PID
+    kill -s QUIT $MASTER_PID
     #kill -USR1 $MASTER_PID # make sure that Error exits the master process, even if called from child processes :-)
 }
 
