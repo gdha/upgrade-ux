@@ -8,13 +8,8 @@
 
 # This is the location (http address) where we can find the script
 # to configure the location yum repos (RHEL or SLES)
-configvar=dmlurl
 
-if [[ -z $(eval "echo \$$configvar") ]]; then
-    LogPrint "No '$dmlurl' variable defined. We do 'not' add yum repos automatically."
-    return
-else
-    Log "Downloading script GAB-RHEL-RPO.sh"
-    wget --no-verbose ${dmlurl}/scripts/GAB-RHEL-RPO.sh -O $TMP_DIR/GAB-RHEL-RPO.sh >&2
-    [[ -s "$TMP_DIR/GAB-RHEL-RPO.sh" ]] && bash "$TMP_DIR/GAB-RHEL-RPO.sh" >&2
+if [[ -s "$VAR_DIR/$DS/GAB-RHEL-RPO.sh" ]] ;
+    Log "Executing script GAB-RHEL-RPO.sh"
+    bash "$VAR_DIR/$DS/GAB-RHEL-RPO.sh" >&2
 fi
