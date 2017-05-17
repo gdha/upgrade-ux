@@ -9,7 +9,7 @@
 # This is the location (http address) where we can find the script
 # to configure the location yum repos (RHEL or SLES)
 
-if [[ -s "$VAR_DIR/$DS/GAB-RHEL-RPO.sh" ]] ;
+if [[ -s "$VAR_DIR/$DS/GAB-RHEL-RPO.sh" ]] ; then
     Log "Executing script GAB-RHEL-RPO.sh"
     bash "$VAR_DIR/$DS/GAB-RHEL-RPO.sh" >&2
 fi

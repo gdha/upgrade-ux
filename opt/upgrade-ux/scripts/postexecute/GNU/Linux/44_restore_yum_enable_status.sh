@@ -12,9 +12,9 @@ while read repofile enabled ; do
         # just to be sure
         repo=$( basename $repofile ) # remove the path from the name
         repo=${repo%.*}   # cut off .repo from string
-        Log "(re-)Enable repository $repo"
+        Log "(Re-)enable repository $repo"
         if has_binary yum-config-manager ; then
-            yum-config-manager --enable $repo >&2
+            yum-config-manager --enable $repo >/dev/null
         else
             sed -i -e "s|^enabled=*|enabled=1|" $repofile
         fi
