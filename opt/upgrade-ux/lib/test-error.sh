@@ -69,7 +69,7 @@ MASTER_PID=$$
 exec 7>&1
 QuietAddExitTask "exec 7>&-"
 # USR1 is used to abort on errors, not using Print to always print to the original STDOUT, even if quiet
-trap "echo 'Aborting due to an error, check $LOGFILE for details' >&7 ; kill $MASTER_PID" USR1
+trap "echo 'Aborting due to an error, check $LOGFILE for details' >&7 ; kill -s QUIT $MASTER_PID" USR1
 
 
 # Check if any of the binaries/aliases exist
@@ -96,19 +96,6 @@ function Error {
     fi
     VERBOSE=1
     LogPrint "ERROR: $*"
-    if has_binary caller; then
-        # Print stack strace on errors in reverse order
-        (
-            echo "=== Stack trace ==="
-            c=0;
-            while caller $((c++)); do :; done | awk '
-                { l[NR]=$3":"$1" "$2 }
-                END { for (i=NR; i>0;) print "Trace "NR-i": "l[i--] }
-            '
-            echo "Message: $*"
-            echo "==================="
-        ) >&2
-    fi
     kill -USR1 $MASTER_PID # make sure that Error exits the master process, even if called from child processes :-)
 }
 
