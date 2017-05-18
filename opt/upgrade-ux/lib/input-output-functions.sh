@@ -97,7 +97,7 @@ function Error {
     fi
     VERBOSE=1
     LogPrint "ERROR: $*"
-    echo 'Aborting due to an error, check $LOGFILE for details' >&7
+    echo "Aborting due to an error, check $LOGFILE for details" >&7
     kill -QUIT $MASTER_PID
     # Do not use USR1
     #kill -USR1 $MASTER_PID # make sure that Error exits the master process, even if called from child processes :-)
