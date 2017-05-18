@@ -19,7 +19,8 @@ Summary:	Open Source framework to patch, update or upgrade UNIX systems
 Group:		Applications/File
 License:	GPLv3
 URL:		http://www.it3.be/projects/upgrade-ux.html
-Source:		%{name}-%{version}.tar.gz
+#Source:		%{name}-%{version}-%{distversion}.tar.gz
+Source:		%{name}-%{distversion}.tar.gz
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 ExclusiveArch:  %ix86 x86_64
 
@@ -31,7 +32,7 @@ Upgrade-UX is an open source framework developed to assist in patching and/or
 updating Unix Operating Systems in a consistent and repeatable way
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q -n %{name}-%{distversion}
 
 
 %build

@@ -98,6 +98,7 @@ rpm: dist
 	rpmbuild -tb --clean \
 		--define "_rpmfilename %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm" \
 		--define "debug_package %{nil}" \
+		--define "distversion $(distversion)" \
 		--define "_rpmdir %(pwd)" ../../$(name)-$(distversion).tar.gz
 
 dist: clean validate man doc rewrite $(name)-$(distversion).tar.gz restore
