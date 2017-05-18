@@ -8,7 +8,7 @@ cp /var/log/yum.log "$VAR_DIR/$DS/yum.log.after"
 
 cmp -s "$VAR_DIR/$DS/yum.log.after" "$VAR_DIR/$DS/yum.log.before"
 if ((  $? == 1 )); then
-    LogPrint "The difference in yum.log is:"
-    diff "$VAR_DIR/$DS/yum.log.after" "$VAR_DIR/$DS/yum.log.before"  | grep '^>' | cut -c2-
-    diff "$VAR_DIR/$DS/yum.log.after" "$VAR_DIR/$DS/yum.log.before"  | grep '^>' | cut -c2- >&2
+    # Log to logfile only (otherwise too much info on the screen going by)
+    Log "The differences in yum.log are:"
+    diff "$VAR_DIR/$DS/yum.log.after" "$VAR_DIR/$DS/yum.log.before"  | grep '^<' | cut -c2- >&2
 fi
