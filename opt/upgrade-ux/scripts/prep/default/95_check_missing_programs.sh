@@ -7,9 +7,12 @@
 # define an empty array MISSING_PROGS
 set -A MISSING_PROGS
 for f in "${REQUIRED_PROGS[@]}" ; do
-        if ! has_binary "$f"; then
-                set -A MISSING_PROGS "${MISSING_PROGS[@]}" "$f"
-        fi
+    # if ! has_binary "$f"; then  ## HP-UX does not like the ! has_binary
+    if has_binary "$f"; then
+        :  # stupid trip to please HP-UX
+    else
+        set -A MISSING_PROGS "${MISSING_PROGS[@]}" "$f"
+    fi
 done
 [[ -z "$MISSING_PROGS" ]]
 StopIfError "Cannot find required programs: ${MISSING_PROGS[@]}"
