@@ -1240,7 +1240,7 @@ http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-style: italic"><span style="color: #9A1900"># /opt/upgrade-ux/bin/upgrade-ux dump</span></span>
 upgrade-ux <span style="color: #993399">0.7</span> <span style="color: #990000">/</span> <span style="color: #993399">03</span>-Jun-<span style="color: #993399">2014</span>
-Using log file<span style="color: #990000">:</span> /var/opt/upgrade-ux/log/upgrade-ux-<span style="color: #993399">20140626</span>-<span style="color: #993399">1656</span>-LOGFILE<span style="color: #990000">.</span>log
+Using log file<span style="color: #990000">:</span> /var/opt/upgrade-ux/log/upgrade-ux-<span style="color: #993399">20140626</span>-<span style="color: #993399">1656</span>-hostname<span style="color: #990000">.</span>log
 Dumping out configuration and system information
 System definition<span style="color: #990000">:</span>
                                     ARCH <span style="color: #990000">=</span> HP-UX-ia<span style="color: #993399">64</span>
@@ -1274,7 +1274,7 @@ http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-style: italic"><span style="color: #9A1900"># /opt/upgrade-ux/bin/upgrade-ux dump</span></span>
 upgrade-ux <span style="color: #993399">0.9</span> <span style="color: #990000">/</span> Git
-Using log file<span style="color: #990000">:</span> /var/opt/upgrade-ux/log/upgrade-ux-<span style="color: #993399">20140626</span>-<span style="color: #993399">1859</span>-LOGFILE<span style="color: #990000">.</span>log
+Using log file<span style="color: #990000">:</span> /var/opt/upgrade-ux/log/upgrade-ux-<span style="color: #993399">20140626</span>-<span style="color: #993399">1859</span>-hostname<span style="color: #990000">.</span>log
 Dumping out configuration and system information
 This is a <span style="color: #FF0000">'Linux-x86_64'</span> system<span style="color: #990000">,</span> compatible with <span style="color: #FF0000">'Linux-i386'</span><span style="color: #990000">.</span>
 System definition<span style="color: #990000">:</span>
@@ -1350,7 +1350,7 @@ http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-style: italic"><span style="color: #9A1900"># opt/upgrade-ux/bin/upgrade-ux -v test</span></span>
 upgrade-ux <span style="color: #993399">0.9</span> <span style="color: #990000">/</span> Git
-Using log file<span style="color: #990000">:</span> /home/gdhaese<span style="color: #993399">1</span>/projects/upgrade-ux/var/opt/upgrade-ux/log/upgrade-ux-<span style="color: #993399">20140625</span>-<span style="color: #993399">1354</span>-LOGFILE<span style="color: #990000">.</span>log
+Using log file<span style="color: #990000">:</span> /home/gdhaese<span style="color: #993399">1</span>/projects/upgrade-ux/var/opt/upgrade-ux/log/upgrade-ux-<span style="color: #993399">20140625</span>-<span style="color: #993399">1354</span>-hostname<span style="color: #990000">.</span>log
 no stale NFS mount points found</tt></pre></div></div>
 </div>
 <div class="sect2">
@@ -1405,7 +1405,7 @@ List of commands<span style="color: #990000">:</span>
  <span style="font-weight: bold"><span style="color: #0000FF">test</span></span>            a simple <span style="font-weight: bold"><span style="color: #0000FF">test</span></span> workflow
  upgrade         upgrade the operating system</tt></pre></div></div>
 <div class="paragraph"><p>Keep in mind that upgrade-ux has an excellent man page too. See <code>man 8 upgrade-ux</code></p></div>
-<div class="paragraph"><p>It is important to know that <code>upgrade-ux</code> is a quiet program and will not show any output if you do not request for it with the verbose option (<code>-v</code>). Another point of interest is its excellent logging facilities as under <code>/var/opt/upgrade-ux/log</code> directory <code>upgrade-ux</code> keep a log file of each run. The log files are composed as follow <code>upgrade-ux-&lt;YYYYMMDD&gt;-&lt;HHMM&gt;-LOGFILE.log</code></p></div>
+<div class="paragraph"><p>It is important to know that <code>upgrade-ux</code> is a quiet program and will not show any output if you do not request for it with the verbose option (<code>-v</code>). Another point of interest is its excellent logging facilities as under <code>/var/opt/upgrade-ux/log</code> directory <code>upgrade-ux</code> keep a log file of each run. The log files are composed as follow <code>upgrade-ux-&lt;YYYYMMDD&gt;-&lt;HHMM&gt;-hostname.log</code></p></div>
 <div class="paragraph"><p>We already mentioned the evidence files which are kept under <code>/var/opt/upgrade-ux/&lt;YYYY-MM-DD&gt;/</code> directory. The type of files you find under there are of course different according the OS, OS version and which software is installed. Furthermore, <em>preview</em> and <em>upgrade</em> mode may result in more or less evidence files.</p></div>
 <div class="paragraph"><p>Starting up the program should be done by referencing the full path <code>/opt/upgrade-ux/bin/upgrade-ux</code> as the directory is not part of the <code>PATH</code> variable, and we prefer to keep it this way to avoid accidents.</p></div>
 <div class="paragraph"><p>You probably understood by now that <code>upgrade-ux</code> must be started in <em>preview</em> mode first before we can run it in <em>upgrade</em> mode. However, we prefer that you always use the option <code>-p</code> (<em>preview</em> mode) to make it clear to yourself and other (when they need to dig into the log files for some reason) what you meant. Furthermore, in the log file there is always a trace of in which mode the program was running:</p></div>
@@ -1417,7 +1417,7 @@ List of commands<span style="color: #990000">:</span>
 2014-06-10 15:22:45 lock succeeded: 11950 - /tmp/upgrade-ux-LOCKDIR/upgrade-ux-PIDFILE
 2014-06-10 15:22:47 upgrade-ux 0.7 / 03-Jun-2014
 2014-06-10 15:22:47 Command line options: /opt/upgrade-ux/bin/upgrade-ux -v
-2014-06-10 15:22:47 Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140610-1522-LOGFILE.log
+2014-06-10 15:22:47 Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140610-1522-hostname.log
 2014-06-10 15:22:47 Including /opt/upgrade-ux/lib/progresssubsystem.nosh
 2014-06-10 15:22:47 Including /etc/opt/upgrade-ux/HP-UX.conf
 2014-06-10 15:22:47 Including /etc/opt/upgrade-ux/local.conf
@@ -1713,7 +1713,7 @@ http://www.gnu.org/software/src-highlite -->
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-06-26 14:40:17 CEST
+Last updated 2016-12-16 09:27:34 CET
 </div>
 </div>
 </body>
