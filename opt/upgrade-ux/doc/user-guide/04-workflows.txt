@@ -20,7 +20,7 @@ The dump workflow was already discussed during the configuration chapter. The ou
 ----
 # /opt/upgrade-ux/bin/upgrade-ux dump
 upgrade-ux 0.7 / 03-Jun-2014
-Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140626-1656-LOGFILE.log
+Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140626-1656-hostname.log
 Dumping out configuration and system information
 System definition:
                                     ARCH = HP-UX-ia64
@@ -55,7 +55,7 @@ The following example shows the dump on a RHEL 7 system:
 ----
 # /opt/upgrade-ux/bin/upgrade-ux dump
 upgrade-ux 0.9 / Git
-Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140626-1859-LOGFILE.log
+Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140626-1859-hostname.log
 Dumping out configuration and system information
 This is a 'Linux-x86_64' system, compatible with 'Linux-i386'.
 System definition:
@@ -127,7 +127,7 @@ The test workflow is a very simplistic test (use option +-v+ to see something):
 ----
 # opt/upgrade-ux/bin/upgrade-ux -v test
 upgrade-ux 0.9 / Git
-Using log file: /home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log/upgrade-ux-20140625-1354-LOGFILE.log
+Using log file: /home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log/upgrade-ux-20140625-1354-hostname.log
 no stale NFS mount points found
 ----
 
