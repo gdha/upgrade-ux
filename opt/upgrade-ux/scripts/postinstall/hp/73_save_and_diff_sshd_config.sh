@@ -13,8 +13,6 @@ if (( $? == 1 )); then
     sdiff -s "$VAR_DIR/$DS/sshd_config.after" "$VAR_DIR/$DS/sshd_config.before"
     # to have the diffs in the log file as well repeat with sending to  >&2
     sdiff -s "$VAR_DIR/$DS/sshd_config.after" "$VAR_DIR/$DS/sshd_config.before"  >&2
-    LogPrint "Attention! Secure Shell connection may fail - please verify ASAP"
     LogPrint "The original /etc/opt/ssh/sshd_config was saved as $VAR_DIR/$DS/sshd_config.before"
-    LogPrint "******* Copy back the original sshd_config may be necessary *******"
 fi
 
