@@ -2,7 +2,7 @@
 
 # ON HP-UX 11.31 there is no --disable-sslv2 option available with smhconfig
 # See also issue #73
-[[ "$OS_VERSION"  == "11.31" ]]  && return   # no need to check
+[[ "$OS_VERSION"  = "11.31" ]]  && return   # no need to check
 
 # The purpose is to add in /opt/hpsmh/conf.common/smhpd.xml
 # <disable-sslv2>false</disable-sslv2><admin-kerberos/>
