@@ -17,5 +17,5 @@ if (( rhn_satellite_subscription )) ; then
 #      done
 fi
 
-# We will take another approach: tar all repos to VAR_DIR/DS and disable rhn during patching
-# After patching we will restore everything to its original state
+# If rhn-channel is in use then we should do not foresee anything special
+# as the channels will take care of it
