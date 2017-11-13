@@ -4,6 +4,11 @@
 
 [[ ! -f "$VAR_DIR/$DS/yum.repo.enable.status" ]] && return  # no file to work with
 
+# yum.repo.enable.status file contains entries like:
+# /etc/yum.repos.d/JNJ-rhel-x86_64-server-7_2.repo:enabled=1
+
+# NOTE: currently no file yum.repo.enable.status will be created as disabled in prep stage.
+
 OIFS=$IFS
 IFS=":"
 while read repofile enabled ; do
