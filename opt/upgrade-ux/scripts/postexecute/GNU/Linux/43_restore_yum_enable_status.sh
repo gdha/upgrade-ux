@@ -1,4 +1,4 @@
-# postexecute/GNU/Linux/44_restore_yum_enable_status.sh
+# postexecute/GNU/Linux/43_restore_yum_enable_status.sh
 
 [[ ! -d /etc/yum.repos.d ]] && return  # no /etc/yum.repos.d directory present
 
