@@ -14,7 +14,7 @@ do
     repo=${repofile%.*}   # cut off .repo from string
     Log "Enable non-RedHat related repository $repo"
     if has_binary yum-config-manager ; then
-        yum-config-manager --enable $repo >/dev/null
+        yum-config-manager --enable $repo >&2
     else
         sed -i -e "s|^enabled=*|enabled=1|" /etc/yum.repos.d/$repofile
     fi
