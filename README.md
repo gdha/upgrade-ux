@@ -9,14 +9,16 @@ Currently, only the HP-UX tree is fully populated and we are starting with the L
 
 Upgrade-UX has a wide range of features:
 
+ - Open Source with a GPL v3 license
+ - Free to use and pull requests are kindly accepted
  - Simple to use
  - Has a preview mode (to dry-run an upgrade without doing it) and an upgrade mode
- - Is customisable via local.conf configuration file
- - Is written in standard Korn Shell (which makes it highly portable)
+ - Is customisable via `local.conf` configuration file
+ - Is written in standard *Korn Shell* (which makes it highly portable)
  - Is a complete modular framework where a script can be placed (directory structures according OS type)
  - Is UNIX Operating System independent as OS specific tasks reside in their own directory structures
- - HP-UX is fully implemented
- - Linux is not fully implemented, but can be easily extended
+ - HP-UX is fully implemented (and has been used for over 4 years without much problems for one customer)
+ - Linux is fully implemented, but can still be easily extended (used by one customer to quarterly patch)
  - AIX and SunOS are not (yet) implemented
  - Is easy extendable with your own scripts
  - The `upgrade-ux` command leaves a trace in its own log file
@@ -27,13 +29,14 @@ Upgrade-UX has a wide range of features:
  - Does understand Serviceguard clusters (HP-UX and Linux)
  - Can be programmed to bail out on settings you think are too serious to continue
  - Can trigger remote alarms, syslog, monitors.
+ - Can force a clean reboot before patching or upgrade can start (definable)
  - Can do a basis health check of your system - it is all up to you
- - Has excellent support by its author (Contact me for consultancy or programming tasks)
+ - Has excellent support by its author (contact me for consultancy or programming tasks)
  - The support and development of the Upgrade-UX project takes place on Github
 
-* [Upgrade-UX website](http://www.it3.be/projects/upgrade-ux.html)
+* [Upgrade-UX website](http://www.it3.be/projects/upgrade-ux/)
 * [Github project](http://github.com/gdha/upgrade-ux)
-* [Upgrade-ux User Guide](http://www.it3.be/projects/upgrade-ux-user-guide.html)
+* [Upgrade-ux User Guide](http://www.it3.be/projects/pgrade-ux/upgrade-ux-user-guide.html)
 
 Author : Gratien D'haese
-[Company Project](http://www.it3.be/projects/upgrade-ux.html)
+[Company Project](http://www.it3.be/projects/upgrade-ux/)
