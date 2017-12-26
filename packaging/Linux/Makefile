@@ -110,6 +110,9 @@ $(name)-$(distversion).tar.gz:
 	git ls-tree -r --name-only --full-tree $(git_branch) | grep -v -E '(HP-UX|/hp/|/aix/|/bsd/|/sunos/)' | \
 		tar -czf $(name)-$(distversion).tar.gz --transform='s,^,$(name)-$(distversion)/,S' --files-from=-
 
+rpm-sign: rpm
+	@echo -e "\033[1m== Add signature to $(name)-$(distversion) rpm ==\033[0;0m"
+	rpm --resign $(name)-*.rpm
 
 deb: dist
 	@echo -e "\033[1m== Building DEB package $(name)-$(distversion) ==\033[0;0m"
