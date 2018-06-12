@@ -4,13 +4,11 @@
 
 if (( PREVIEW )) ; then
     grep -q ERROR $LOGFILE || return  # no ERRORs found; silently return
-    echo "
-******************************************************************************
+    echo "******************************************************************************
 WARNING - We found ERROR(s) during the PREVIEW run - please take care and retry
 
 "
 grep ERROR $LOGFILE
-echo"
-******************************************************************************"
+echo "******************************************************************************"
     
 fi
