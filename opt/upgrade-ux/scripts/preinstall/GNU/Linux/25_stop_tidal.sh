@@ -1,4 +1,4 @@
-# 20_stop_tidal.sh 
+# 25_stop_tidal.sh 
 if (( PREVIEW )) ; then
     Log "Stopping tidal daemon [not done in preview]"
 else
