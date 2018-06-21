@@ -3,12 +3,12 @@
 # found the the LOGFILE
 
 if (( PREVIEW )) ; then
-    grep -q ERROR $LOGFILE || return  # no ERRORs found; silently return
+    grep -q -i ERROR $LOGFILE || return  # no ERRORs found; silently return
     echo "******************************************************************************
 WARNING - We found ERROR(s) during the PREVIEW run - please take care and retry
 
 "
-grep ERROR $LOGFILE
+grep -i ERROR $LOGFILE
 echo "******************************************************************************"
     
 fi
