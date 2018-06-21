@@ -42,6 +42,9 @@ disk_avail=$(df --direct -m /var | tail -1 | awk '{print $4}')
 if (( disk_avail < 1200 )) ; then
     if (( PREVIEW )) ; then
         LogPrint "ERROR: insufficient space available in /var (available ${disk_avail}MB; required 1200 MB)"
+        LogPrint "ERROR: -> Try to clean up duplicates packages (use 'package-cleanup --cleandupes -y')"
+        Log "Show duplicate, or orphaned packages"
+        package-cleanup --dupes >&2
         diskspace_err=$(( diskspace_err + 1 ))
     else
         Error "Insufficient space available in /var (available ${disk_avail} MB; required 1200 MB)"
