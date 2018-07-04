@@ -4,6 +4,10 @@
 
 [[ "$OS_VERSION" != "11.31" ]]       && return    # is only meant for HP-UX 11.31
 
+# We should only execute this script when SecureShell supports the "+" with KexAlgorithms (release >A.07.30)
+# Next line will check the current version and return silently if lower then A.07.30
+$SWLIST SecureShell,r\<A.07.30 >/dev/null 2>&1 && return
+
 [[ ! -f "$VAR_DIR/$DS/sshd_config.before" ]] && cp /opt/ssh/etc/sshd_config "$VAR_DIR/$DS/sshd_config.before"
 
 ## Unable to negotiate with 10.140.63.34 port 50888: no matching key exchange method found. Their offer: diffie-hellman-group1-sha1,diffie-hellman-group-exchange-sha1
