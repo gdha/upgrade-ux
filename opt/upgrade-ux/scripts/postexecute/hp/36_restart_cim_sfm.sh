@@ -1,4 +1,10 @@
 # 26_restart_cim_sfm.sh
+
+if (( YEAR >= 2018 )) ; then
+    # IRS is in use so no need for HPSIM related tasks anymore
+    return
+fi
+
 if (( PREVIEW )) ; then
     :
 else
