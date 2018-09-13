@@ -18,14 +18,14 @@ if (( PREVIEW )) ; then
 else
     Log "Move the original /etc/sudoers file to /etc/sudoers.$SUDOVER"
     mv -f /etc/sudoers /etc/sudoers.$SUDOVER         # move the fresh sudoers file
-    # we have 2 copies "$VAR_DIR/$DS/sudoers.before" and "/etc/sudoers.$PRODUCT.before"
-    # and these should be the same - if not only use "/etc/sudoers.$PRODUCT.before" to copy back
-    if [[ -f "/etc/sudoers.${PRODUCT}.before" ]] ; then
-        cmp -s "$VAR_DIR/$DS/sudoers.before" "/etc/sudoers.${PRODUCT}.before"
+    # we have 2 copies "$VAR_DIR/$DS/sudoers.before" and "/etc/sudoers.$PRODUCT.$YEAR"
+    # and these should be the same - if not only use "/etc/sudoers.$PRODUCT.$YEAR" to copy back
+    if [[ -f "/etc/sudoers.${PRODUCT}.$YEAR" ]] ; then
+        cmp -s "$VAR_DIR/$DS/sudoers.before" "/etc/sudoers.${PRODUCT}.$YEAR"
         if (( $? == 1 )); then
-            # if these files are not the same use the /etc/sudoers.${PRODUCT}.before one
-            Log "Using /etc/sudoers.${PRODUCT}.before to copy back to /etc/sudoers"
-            cp -p "/etc/sudoers.${PRODUCT}.before" /etc/sudoers
+            # if these files are not the same use the /etc/sudoers.${PRODUCT}.$YEAR one
+            Log "Using /etc/sudoers.${PRODUCT}.$YEAR to copy back to /etc/sudoers"
+            cp -p "/etc/sudoers.${PRODUCT}.$YEAR" /etc/sudoers
         else
             Log "Using $VAR_DIR/$DS/sudoers.before to copy back to /etc/sudoers"
             cp -p "$VAR_DIR/$DS/sudoers.before" /etc/sudoers # re-instate the original sudoers

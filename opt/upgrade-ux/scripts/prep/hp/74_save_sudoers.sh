@@ -2,11 +2,12 @@
 
 [[ ! -f /etc/sudoers ]] && return  # no sudo installed
 
-[[ -f "$VAR_DIR/$DS/sudoers.before" ]] && return  # try to avoid overwrite the original copy
+if [[ ! -f "$VAR_DIR/$DS/sudoers.before" ]] ; then
+    cp -p /etc/sudoers "$VAR_DIR/$DS/sudoers.before"
+fi
 
-cp -p /etc/sudoers "$VAR_DIR/$DS/sudoers.before"
-
-# to protect ourself we will take a second copy in /etc/ directory itself
+# To protect ourselves we will take a second copy in /etc/ directory itself
 # and make sure it cannot be overwritten
-[[ -f  /etc/sudoers.${PRODUCT}.before ]] && return
-cp -p /etc/sudoers /etc/sudoers.${PRODUCT}.before
+if [[ ! -f  /etc/sudoers.${PRODUCT}.${YEAR} ]] ; then
+    cp -p /etc/sudoers /etc/sudoers.${PRODUCT}.${YEAR}
+fi
