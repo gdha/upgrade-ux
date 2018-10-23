@@ -2,12 +2,12 @@
 .\"     Title: upgrade-ux
 .\"    Author: Gratien Dhaese
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 17 june 2014
+.\"      Date: 23 October 2018
 .\"    Manual: \ \&
 .\"    Source: \ \&
 .\"  Language: English
 .\"
-.TH "UPGRADE\-UX" "8" "17 june 2014" "\ \&" "\ \&"
+.TH "UPGRADE\-UX" "8" "23 October 2018" "\ \&" "\ \&"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -156,6 +156,11 @@ parameters and settings only read by Solaris systems
 .RS 4
 parameters and settings only read by GNU/Linux systems
 .RE
+.PP
+\fBexclude\&.packages\fR
+.RS 4
+the file to add packages which need to be excluded from updating
+.RE
 .sp
 You have the choice to create additional configuration files if required\&. Use the \fBupgrade\-ux dump\fR and check the \fIconfiguration tree\fR section to have a complete overview of all configuration files searched for (it is OK if these do not exist)\&.
 .sp
@@ -299,6 +304,11 @@ The default configuration file\&.
 System specific configuration can be set here\&.
 .RE
 .PP
+/etc/opt/upgrade\-ux/exclude\&.packages
+.RS 4
+File contains packages to exclude from updating (one per line)\&.
+.RE
+.PP
 /var/opt/upgrade\-ux/
 .RS 4
 Directory which contains all timestamped directories and log directory\&.
@@ -389,7 +399,7 @@ To run upgrade\-ux in \fIupgrade\fR mode then do \fInot\fR use the \-p flag:
 .\}
 .SH "BUGS"
 .sp
-Feedback is welcome, please report any issues or improvements to our issue\-tracker at: \m[blue]\fBhttps://github\&.com/gdha/upgrade\-ux/issues\fR\m[] Furthermore, we welcome pull request via GitHub\&.
+Feedback is welcome, please report any issues or improvements to our issue\-tracker at: \m[blue]\fBhttps://github\&.com/gdha/upgrade\-ux/issues\fR\m[] Furthermore, we welcome pull requests via GitHub\&.
 .SH "COPYRIGHT"
 .sp
 (c) 2014 \-

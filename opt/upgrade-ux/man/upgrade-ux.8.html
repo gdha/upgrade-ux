@@ -984,6 +984,14 @@ the GNU General Public License at: <a href="http://www.gnu.org/licenses/gpl.html
     parameters and settings only read by GNU/Linux systems
 </p>
 </dd>
+<dt class="hdlist1">
+<strong>exclude.packages</strong>
+</dt>
+<dd>
+<p>
+    the file to add packages which need to be excluded from updating
+</p>
+</dd>
 </dl></div>
 <div class="paragraph"><p>You have the choice to create additional configuration files if required. Use the <strong>upgrade-ux dump</strong> and check the <em>configuration tree</em> section to have a complete overview of all configuration files searched for (it is OK if these do not exist).</p></div>
 <div class="paragraph"><p>A typical variable might be the <code>YEAR</code> setting to define from which year (instead of the default <strong>$(date +%Y)</strong> [current year]) we want to install the patch bundles.</p></div>
@@ -1147,6 +1155,14 @@ System specific configuration can be set here.
 </p>
 </dd>
 <dt class="hdlist1">
+/etc/opt/upgrade-ux/exclude.packages
+</dt>
+<dd>
+<p>
+File contains packages to exclude from updating (one per line).
+</p>
+</dd>
+<dt class="hdlist1">
 /var/opt/upgrade-ux/
 </dt>
 <dd>
@@ -1226,7 +1242,7 @@ Source init/default/10_check_current_status.sh
 <h2 id="_bugs">BUGS</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Feedback is welcome, please report any issues or improvements to our issue-tracker at: <a href="https://github.com/gdha/upgrade-ux/issues">https://github.com/gdha/upgrade-ux/issues</a>
-Furthermore, we welcome pull request via GitHub.</p></div>
+Furthermore, we welcome pull requests via GitHub.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -1242,7 +1258,7 @@ Furthermore, we welcome pull request via GitHub.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-02 17:08:28 CEST
+Last updated 2018-10-23 15:03:52 CEST
 </div>
 </div>
 </body>

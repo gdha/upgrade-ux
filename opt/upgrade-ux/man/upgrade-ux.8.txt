@@ -1,6 +1,6 @@
 = upgrade-ux(8)
-:version: v1.0
-:date: 17 june 2014
+:version: v1.1
+:date: 23 October 2018
 :data-uri:
 :author: Gratien Dhaese
 :doctype: manpage
@@ -97,6 +97,9 @@ There are several configuration files available under (*/etc/opt/upgrade-ux/*):
 *GNU/Linux.conf*::
     parameters and settings only read by GNU/Linux systems
 
+*exclude.packages*::
+    the file to add packages which need to be excluded from updating
+
 You have the choice to create additional configuration files if required. Use the *upgrade-ux dump* and check the _configuration tree_ section to have a complete overview of all configuration files searched for (it is OK if these do not exist).
 
 A typical variable might be the +YEAR+ setting to define from which year (instead of the default *$(date +%Y)* [current year]) we want to install the patch bundles. 
@@ -172,6 +175,9 @@ The default configuration file.
 /etc/opt/upgrade-ux/local.conf::
 System specific configuration can be set here.
 
+/etc/opt/upgrade-ux/exclude.packages::
+File contains packages to exclude from updating (one per line).
+
 /var/opt/upgrade-ux/::
 Directory which contains all timestamped directories and log directory.
 
@@ -213,10 +219,10 @@ To run +upgrade-ux+ in _upgrade_ mode then do _not_ use the +-p+ flag:
 
 == BUGS
 Feedback is welcome, please report any issues or improvements to our issue-tracker at: https://github.com/gdha/upgrade-ux/issues
-Furthermore, we welcome pull request via GitHub.
+Furthermore, we welcome pull requests via GitHub.
 
 == COPYRIGHT
-(c) 2014 - 
+(c) 2014 -
 
 Gratien Dhaese
 
