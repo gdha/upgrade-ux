@@ -1,3 +1,5 @@
 # If you need to exclude some software packages for HP-UX or Linux list them here one per line, e.g.
 # SecureShell (for HP-UX software depot package name)
 # or nmap (for Linux RPM package)
+docker*
+containerd*
