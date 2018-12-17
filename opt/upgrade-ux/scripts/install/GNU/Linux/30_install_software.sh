@@ -17,16 +17,16 @@ i=0
 while (( i < count ))
 do
     if (( PREVIEW )) ; then
-        LogPrint "${command[i]} ${options[i]} --assumeno ${bundle[i]}"
-        printf "${command[i]} ${options[i]} --assumeno ${bundle[i]}" >> "$VAR_DIR/$DS/sw_installation_in_progress"
-        ${command[i]} ${options[i]} --assumeno ${bundle[i]}
-        ${command[i]} ${options[i]} --assumeno ${bundle[i]} >&2
+        LogPrint "${command[i]} ${options[i]} --assumeno ${bundle[i]} ${exclude_packages}"
+        printf "${command[i]} ${options[i]} --assumeno ${bundle[i]} ${exclude_packages}" >> "$VAR_DIR/$DS/sw_installation_in_progress"
+        ${command[i]} ${options[i]} --assumeno ${bundle[i]} ${exclude_packages}
+        ${command[i]} ${options[i]} --assumeno ${bundle[i]} ${exclude_packages} >&2
         rc=$?
     else
-        LogPrint "${command[i]} ${options[i]} ${bundle[i]}"
-        printf "${command[i]} ${options[i]} --assumeyes ${bundle[i]}" >> "$VAR_DIR/$DS/sw_installation_in_progress"
-        ${command[i]} ${options[i]} --assumeno ${bundle[i]} >&2   # to catch the updates in the logfile
-        ${command[i]} ${options[i]} --assumeyes ${bundle[i]}      # to actually install the updates without manual intervention
+        LogPrint "${command[i]} ${options[i]} ${bundle[i]} ${exclude_packages}"
+        printf "${command[i]} ${options[i]} --assumeyes ${bundle[i]} ${exclude_packages}" >> "$VAR_DIR/$DS/sw_installation_in_progress"
+        ${command[i]} ${options[i]} --assumeno ${bundle[i]} ${exclude_packages} >&2   # to catch the updates in the logfile
+        ${command[i]} ${options[i]} --assumeyes ${bundle[i]} i${exclude_packages}     # to actually install the updates without manual intervention
         rc=$?
     fi
 
