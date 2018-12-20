@@ -1,9 +1,9 @@
 # install/hp/30_exclude_bundles_in_update_ux.sh
 # We read the content of the file $VAR_DIR/$DS/exclude.packages and mark it to exclude during the update-ux installation
 
-[[ ! -f "$VAR_DIR/$DS/exclude.packages" ]] && return  # nothing needs to be marked for exclusion
-
 exclude_bundles=""
+
+[[ ! -f "$VAR_DIR/$DS/exclude.packages" ]] && return  # nothing needs to be marked for exclusion
 
 cat "$VAR_DIR/$DS/exclude.packages" | while read bundle
 do
