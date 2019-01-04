@@ -9,4 +9,4 @@ Log "Verify RPM Packages integrity:"
 if (( $? > 0 )) ; then
     LogPrint "ERROR: RPM Packages verification failed - see https://people.redhat.com/berrange/notes/rpmrecovery.html"
 fi
-cd -
+cd - >/dev/null  # redirect to /dev/null to avoid printing the PWD

@@ -66,9 +66,10 @@ SIMULATE=
 VERBOSE=
 DEBUG=
 KEEP_BUILD_DIR=
-# treat the two next variables as numeric when testing - if (( PREVIEW ))
+# treat the three next variables as numeric when testing - if (( PREVIEW ))
 PREVIEW=0
 FORCED=0
+DOCKER=0
 
 CMD_OPTS="$*"
 
