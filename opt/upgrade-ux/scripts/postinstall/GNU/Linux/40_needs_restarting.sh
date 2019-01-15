@@ -38,10 +38,15 @@
 # Another very interesting tool that is available in EPEL is "Tracer":
 # https://github.com/FrostyX/tracer
 # However, that is out-of-scope for upgrade-ux, but I thought still worth mentioning
+rm -f "$VAR_DIR/$DS/reboot-required"
+
 LogPrint "Do we need restarting of services or reboot?"
 if has_binary needs-restarting ; then
-    needs-restarting > "$VAR_DIR/$DS/needs-restarting"
-    if test -s "$VAR_DIR/$DS/needs-restarting" ; then
+    # "needs-restarting -r" will always output something in the stdout; however $rc=1 means reboot is required
+    # but a bad yum repo will not result in a false positive (see #108)
+    needs-restarting -r > "$VAR_DIR/$DS/needs-restarting"
+    rc=$?
+    if (( rc )) ; then
         touch "$VAR_DIR/$DS/reboot-required"
         Log "Processes that require a restart:"
         cat "$VAR_DIR/$DS/needs-restarting" >&2
