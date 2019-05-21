@@ -28,6 +28,10 @@ However, in some cases as mentioned above, if you are in the year 2015 and you s
 === Local configuration file local.conf
 The +local.conf+ should only contain variables which you want to overrule, as described in previous section (of the +default.conf+ file). It is important to know that the +local.conf+ file is the last configuration file read by +upgrade-ux+ script and therefore, the variables defined in there are the last ones that will be used.
 
+=== Exclude packages from the update process
+The +/etc/opt/upgrade/exclude.packages+ file contains a list of packages you wish to exclude from the update. This file is the same for HP-UX or Linux. A safe-guard is built-in to remove packages which are not found (installed) on current system. Use one line per package you wish to exclude.
+This file is *not* mandatory, so it does not have to exist for upgrade-ux to work properly (nothing will be excluded then).
+
 === Operating Specific configuration files
 
 On each OS you have specific OS related configuration files, e.g.
