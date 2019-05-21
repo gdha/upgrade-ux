@@ -1000,7 +1000,12 @@ YEAR=$(date '+%Y')</code></pre>
 <div class="paragraph"><p>The <code>local.conf</code> should only contain variables which you want to overrule, as described in previous section (of the <code>default.conf</code> file). It is important to know that the <code>local.conf</code> file is the last configuration file read by <code>upgrade-ux</code> script and therefore, the variables defined in there are the last ones that will be used.</p></div>
 </div>
 <div class="sect3">
-<h4 id="_operating_specific_configuration_files">3.1.3. Operating Specific configuration files</h4>
+<h4 id="_exclude_packages_from_the_update_process">3.1.3. Exclude packages from the update process</h4>
+<div class="paragraph"><p>The <code>/etc/opt/upgrade/exclude.packages</code> file contains a list of packages you wish to exclude from the update. This file is the same for HP-UX or Linux. A safe-guard is built-in to remove packages which are not found (installed) on current system. Use one line per package you wish to exclude.
+This file is <strong>not</strong> mandatory, so it does not have to exist for upgrade-ux to work properly (nothing will be excluded then).</p></div>
+</div>
+<div class="sect3">
+<h4 id="_operating_specific_configuration_files">3.1.4. Operating Specific configuration files</h4>
 <div class="paragraph"><p>On each OS you have specific OS related configuration files, e.g.</p></div>
 <div class="literalblock">
 <div class="content">
@@ -1713,7 +1718,7 @@ http://www.gnu.org/software/src-highlite -->
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-05 10:21:51 CEST
+Last updated 2016-12-16 09:27:34 CET
 </div>
 </div>
 </body>
