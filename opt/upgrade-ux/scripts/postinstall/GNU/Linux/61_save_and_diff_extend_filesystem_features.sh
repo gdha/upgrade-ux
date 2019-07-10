@@ -5,8 +5,8 @@
 [[ ! -x /bin/findmnt ]] && return  # we need this command
 [[ ! -x /bin/lsblk ]]   && return  # we need this command
 
-VAR_DIR=/tmp
-DS=.
+#VAR_DIR=/tmp
+#DS=.
 
 lsblk -fipl > "$VAR_DIR/$DS/lsblk.after"
 
