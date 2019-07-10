@@ -11,5 +11,5 @@ rc=$?
 
 if (( rc > 0 )) ; then
  Log "WARNING: /var/opt/perf/alarmdef contains errors - see below"
- cat $VAR_DIR/$DS/alarmdef.err >> $LOGFILE
+ cat $VAR_DIR/$DS/alarmdef.err >&2
 fi
