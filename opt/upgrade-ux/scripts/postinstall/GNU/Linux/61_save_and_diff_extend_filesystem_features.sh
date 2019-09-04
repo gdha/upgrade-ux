@@ -5,8 +5,6 @@
 [[ ! -x /bin/findmnt ]] && return  # we need this command
 [[ ! -x /bin/lsblk ]]   && return  # we need this command
 
-#VAR_DIR=/tmp
-#DS=.
 
 lsblk -fipl > "$VAR_DIR/$DS/lsblk.after"
 
@@ -20,7 +18,7 @@ lsblk -fipl > "$VAR_DIR/$DS/lsblk.after"
 
 printf "%-20s %-30s %-9s %-22s %s\n" "TARGET" "SOURCE" "FSTYPE" "OPTIONS" "EXTEND FEATURES" > "$VAR_DIR/$DS/findmnt.after"
 
-while read target source fstype options
+/bin/findmnt -s | while read target source fstype options
 do
     case "$fstype" in
         FSTYPE) continue ;;
@@ -35,7 +33,7 @@ do
         *)     printf "%-20s %-30s %-9s %-22s\n" "$target" "$source" "$fstype" "$options" >> "$VAR_DIR/$DS/findmnt.after"
                ;;
     esac 
-done < <( /bin/findmnt -s )
+done
 
 # The DIFF part follows:
 cmp -s "$VAR_DIR/$DS/findmnt.before" "$VAR_DIR/$DS/findmnt.after"

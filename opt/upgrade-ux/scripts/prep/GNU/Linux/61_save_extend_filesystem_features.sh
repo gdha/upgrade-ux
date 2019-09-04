@@ -2,11 +2,9 @@
 # See https://github.com/gdha/upgrade-ux/issues/109
 # Purpose: we had issues with an ext3 file system where suddently an ext4 feauture got added and as a
 # result it could not mount this ext3 file system. We had to mount it as an ext4 file system.
+# Additional comment: reason was more then 32K directories on that mount point, and therefore, ext4 is forced
 [[ ! -x /bin/findmnt ]] && return  # we need this command
 [[ ! -x /bin/lsblk ]]   && return  # we need this command
-
-#VAR_DIR=/tmp
-#DS=.
 
 [[ ! -f "$VAR_DIR/$DS/lsblk.before" ]] && lsblk -fipl > "$VAR_DIR/$DS/lsblk.before"
 
@@ -20,7 +18,7 @@
 
 printf "%-20s %-30s %-9s %-22s %s\n" "TARGET" "SOURCE" "FSTYPE" "OPTIONS" "EXTEND FEATURES" > "$VAR_DIR/$DS/findmnt.before"
 
-while read target source fstype options
+/bin/findmnt -s | while read target source fstype options
 do
     case "$fstype" in
         FSTYPE) continue ;;
@@ -35,4 +33,4 @@ do
         *)     printf "%-20s %-30s %-9s %-22s\n" "$target" "$source" "$fstype" "$options" >> "$VAR_DIR/$DS/findmnt.before"
                ;;
     esac 
-done < <( /bin/findmnt -s )
+done
