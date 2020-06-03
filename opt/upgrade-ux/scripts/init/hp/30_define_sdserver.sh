@@ -11,24 +11,15 @@ if [[ -z "$SDSERVER" ]]; then
     case $secdig in
     +([0-9]))
         if (( secdig == 0 )); then
-            SDSERVER=10.0.11.237  # lab (hplabx1)
-        elif (( secdig == 56 || secdig == 57 )); then
-	    SDSERVER=10.36.96.94  # Dr site (itsblp02)
-        elif (( secdig == 1 || secdig <= 95 )); then
-	    SDSERVER=10.36.96.94  # NA (itsblp02)
-	elif (( secdig == 96 || secdig <= 127 )); then
-	    SDSERVER=10.36.96.94  # LA (itsblp02)
+            SDSERVER=10.0.54.159  # lab (bl870ci2)
 	elif (( secdig == 128 || secdig <= 191 )); then
-	    SDSERVER=10.129.52.119 # EMEA (hpx261)
-	elif (( secdig == 192 || secdig <= 223 )); then
-	    # what about Japan? 10.200.67.65 itsimgjp (new SD server)
-	    SDSERVER=10.208.75.43 # ASPAC (itsimgau)
+	    SDSERVER=10.130.47.84 # EMEA (hpx210)
 	else
-	    SDSERVER=10.36.96.94   # unknown region go to the default value
+	    SDSERVER=10.36.112.20   # all other regions go to itsblp02
 	fi
 	;;
     *)
-	SDSERVER=10.36.96.94  # default (itsblp02)
+	SDSERVER=10.36.112.20 # default (itsblp02)
 	;;
 
     esac
