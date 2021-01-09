@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgdha%2Fupgrade-ux.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgdha%2Fupgrade-ux?ref=badge_shield)
+
 Upgrade-UX
 ==========
 
@@ -40,3 +42,6 @@ Upgrade-UX has a wide range of features:
 
 Author : Gratien D'haese
 [Company Project](http://www.it3.be/projects/upgrade-ux/)
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgdha%2Fupgrade-ux.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgdha%2Fupgrade-ux?ref=badge_large)
