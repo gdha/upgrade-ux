@@ -6,7 +6,7 @@
 
 [[ ! -d /etc/yum.repos.d ]]  &&  return  # no YUM repository directory present
 
-ls /etc/yum.repos.d/ | grep -v -i -E '(rhel|redhat|testing)' | while read repofile
+ls /etc/yum.repos.d/*.repo | grep -v -i -E '(rhel|redhat|testing)' | cut -d/ -f4 | while read repofile
 do
     # input will look like:
     # epel.repo
