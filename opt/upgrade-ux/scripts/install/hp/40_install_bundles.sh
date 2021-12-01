@@ -1,4 +1,4 @@
-# 30_install_bundles.sh
+# 40_install_bundles.sh
 
 [ "$CURRENT_STATE" = "$stage:ended" ] && return  # after reboot perhaps
 
@@ -7,6 +7,13 @@ i=0
 
 # we need to retrieve the correct OEM version of HP-UX as we need it for update-ux
 OEMVER=$( $SWLIST -l bundle -a os_release 2>/dev/null | grep HPUX11i | head -1 | awk '{print $1}' )
+if [[ -z "$OEMVER" ]]; then
+    case "$OS_VERSION" in
+        11.11) ;;
+        11.23) ;;
+        11.31) OEMVER="HPUX11i-VSE-OE" ;;
+    esac
+fi
 LogPrint "System $lhost has HP-UX version $OEMVER installed"
 
 while (( i < count ))
