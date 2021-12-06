@@ -12,10 +12,10 @@ if [[ -z "$SDSERVER" ]]; then
     +([0-9]))
         if (( secdig == 0 )); then
             SDSERVER=10.0.54.159  # lab (bl870ci2)
-	elif (( secdig == 128 || secdig <= 191 )); then
-	    SDSERVER=10.130.47.84 # EMEA (hpx210)
+	elif (( secdig == 36 || secdig <= 19 )); then
+	    SDSERVER=10.36.112.20   # NA (itsblp02)
 	else
-	    SDSERVER=10.36.112.20   # all other regions go to itsblp02
+	    SDSERVER=10.130.47.84 # EMEA (hpx210)
 	fi
 	;;
     *)
@@ -27,13 +27,13 @@ if [[ -z "$SDSERVER" ]]; then
 
 fi
 
-
+SDHOSTNAME=$(/usr/bin/nslookup $SDSERVER | grep ^Name | awk '{print $2}')
 x=$( PingSystem $SDSERVER )
 if (( x == 1 )); then
-    Error "Software Depot Server $SDSERVER not reachable from $lhost"
+    Error "Software Depot Server $SDSERVER ($SDHOSTNAME) not reachable from $lhost"
 elif (( x == 2 )); then
-    Error "Software Depot Server $SDSERVER unknown - please define SDSERVER in $ETC_DIR/local.conf"
+    Error "Software Depot Server $SDSERVER ($SDHOSTNAME) unknown - please define SDSERVER in $ETC_DIR/local.conf"
 else
-   Log "Software Depot Server $SDSERVER is reachable via ping"
+   Log "Software Depot Server $SDSERVER ($SDHOSTNAME) is reachable via ping"
 fi
 
