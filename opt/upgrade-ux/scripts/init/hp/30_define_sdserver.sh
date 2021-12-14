@@ -14,6 +14,8 @@ if [[ -z "$SDSERVER" ]]; then
             SDSERVER=10.0.54.159  # lab (bl870ci2)
 	elif (( secdig == 36 || secdig <= 19 )); then
 	    SDSERVER=10.36.112.20   # NA (itsblp02)
+        elif (( secdig == 147 || secdig == 141 )); then
+            SDSERVER=10.147.212.63  # Swisse (ch00erp0027)
 	else
 	    SDSERVER=10.130.47.84 # EMEA (hpx210)
 	fi
