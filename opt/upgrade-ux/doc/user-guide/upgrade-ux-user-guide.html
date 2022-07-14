@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.8" />
+<meta name="generator" content="AsciiDoc 8.6.10" />
 <title>Upgrade-UX User Guide</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -94,7 +95,9 @@ ul > li > * { color: black; }
   padding: 0;
   margin: 0;
 }
-
+pre {
+  white-space: pre-wrap;
+}
 
 #author {
   color: #527bbd;
@@ -223,7 +226,7 @@ div.exampleblock > div.content {
 }
 
 div.imageblock div.content { padding-left: 0; }
-span.image img { border-style: none; }
+span.image img { border-style: none; vertical-align: text-bottom; }
 a.image:visited { color: white; }
 
 dl {
@@ -1223,7 +1226,7 @@ options[0]      =       "-2%Y%m%d"</code></pre>
 <div class="sectionbody">
 <div class="paragraph"><p>The workflows (or commands) available can be listed with the <code>-h</code> option:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1239,7 +1242,7 @@ http://www.gnu.org/software/src-highlite -->
 <h3 id="_dump_workflow">4.1. Dump workflow</h3>
 <div class="paragraph"><p>The dump workflow was already discussed during the configuration chapter. The output of <code>/opt/upgrade-ux/bin/upgrade-ux dump</code>:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1273,7 +1276,7 @@ Configuration tree<span style="color: #990000">:</span>
 The second part shows the configuration part and which files it could find (or you may define, create and/or use). They do not need to exist.</p></div>
 <div class="paragraph"><p>The following example shows the dump on a RHEL 7 system:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1311,7 +1314,7 @@ Configuration tree<span style="color: #990000">:</span>
 <div class="paragraph"><p>These configuration files live under the <code>/etc/opt/upgrade-ux</code> or <code>./upgrade-ux/etc/opt/upgrade-ux</code> (relative path) directory.
 At this moment we have the following configuration files present (however, it will grow over time):</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1339,7 +1342,7 @@ http://www.gnu.org/software/src-highlite -->
 <h3 id="_purgelogs_workflow">4.3. Purgelogs workflow</h3>
 <div class="paragraph"><p>The purgelogs workflow just has a simple function and that is to purge log files which are older than 30 days. It will display the logs it has purged (only when you are using the option <code>-v</code>):</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1349,7 +1352,7 @@ http://www.gnu.org/software/src-highlite -->
 <h3 id="_test_workflow">4.4. Test workflow</h3>
 <div class="paragraph"><p>The test workflow is a very simplistic test (use option <code>-v</code> to see something):</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1382,7 +1385,7 @@ no stale NFS mount points found</tt></pre></div></div>
 <div class="sectionbody">
 <div class="paragraph"><p>Before digging deeper in <code>upgrade-ux</code> lets explain the basic usage. The option help (<code>-h</code>) will produce the following:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1535,7 +1538,7 @@ postexecute
 </dl></div>
 <div class="paragraph"><p>Every time you enter or leave a stage the <code>/var/opt/upgrade-ux/status</code> gets updated with a timestamp and the <em>stage</em> name with an addtional notification of <em>start</em> or <em>ended</em>. Upgrade-ux will not delete this status file, but will always append to it so you get a nice historic view of all the runs.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1628,7 +1631,7 @@ If you need new scripts just write a small script called <code>my_script.sh</cod
 </div>
 <div class="paragraph"><p>An example of such a script is <code>/opt/upgrade-ux/scripts/preinstall/default/05_reboot_required.sh</code></p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1663,7 +1666,7 @@ IsDigit <span style="color: #009900">$daysup</span> <span style="color: #990000"
 <h3 id="_upgrade_ux_not_found">8.1. Upgrade-ux not found</h3>
 <div class="paragraph"><p>If you get the following error when you try to run <code>upgrade-ux</code></p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1680,7 +1683,7 @@ We have encountered situations where the UNIX engineer by accident started <code
 <h3 id="_how_do_we_install_a_patch_bundle_from_1_or_2_years_ago">8.3. How do we install a patch bundle from 1 or 2 years ago?</h3>
 <div class="paragraph"><p>The <code>YEAR</code> variable defines the current year ( <code>$(date +%Y)</code> ) of the patch bundles in the <code>/etc/opt/upgrade-ux/default.conf</code> file. However, suppose we are in the year 2015 and still would like to install the patch bundle of 2014? The easiest way is to overrule the <code>YEAR</code> variable in the <code>/etc/opt/upgrade-ux/local.conf</code> as</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1692,7 +1695,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="paragraph"><p>The <code>SDSERVER</code> variable is defined by a script <code>scripts/init/hp/30_define_sdserver.sh</code> and tries to figure out the region you are located in. Be aware, this script only works well for <em>one</em> particular customer (the sponsor of this project).</p></div>
 <div class="paragraph"><p>Therefore, for other users, you need to define the <code>SDSERVER</code> variable in the <code>/etc/opt/upgrade-ux/local.conf</code> file as</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1705,7 +1708,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="paragraph"><p>However, in rare cases, some customers want to extend this period to 60 days. So, how to do this?</p></div>
 <div class="paragraph"><p>The variable which defines the uptime is called <code>DAYSUPTIME</code> and is defined in <code>/etc/opt/upgrade-ux/default.conf</code>. As you should know by now, you can overrule this by defining a new value in the <code>/etc/opt/upgrade-ux/local.conf</code> file as</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1718,7 +1721,8 @@ http://www.gnu.org/software/src-highlite -->
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-12-16 09:27:34 CET
+Last updated
+ 2022-07-06 11:44:49 CEST
 </div>
 </div>
 </body>
