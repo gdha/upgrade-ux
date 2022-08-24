@@ -3,3 +3,4 @@
 # or nmap (for Linux RPM package)
 docker*
 containerd*
+rke2*
