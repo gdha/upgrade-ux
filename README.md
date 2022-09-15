@@ -41,6 +41,7 @@ Upgrade-UX has a wide range of features:
 * [Upgrade-ux User Guide](http://www.it3.be/projects/upgrade-ux/upgrade-ux-user-guide.html)
 
 Author : Gratien D'haese
+
 [Company Project](http://www.it3.be/projects/upgrade-ux/)
 
 
