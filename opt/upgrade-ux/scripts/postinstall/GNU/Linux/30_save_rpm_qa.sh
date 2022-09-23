@@ -2,5 +2,5 @@
 
 [[ ! -x $RPM ]] && return  # rpm executable not available; just return
 
-$RPM -qa > "$VAR_DIR/$DS/${HOSTNAME}_rpm_qa.after"
-Log "Saved the 'rpm -qa' output after patching in $VAR_DIR/$DS/${HOSTNAME}_rpm_qa.after"
+$RPM -qa --last > "$VAR_DIR/$DS/${HOSTNAME}_rpm_qa.after"
+Log "Saved the 'rpm -qa --last' output after patching in $VAR_DIR/$DS/${HOSTNAME}_rpm_qa.after"

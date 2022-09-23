@@ -4,4 +4,5 @@
 
 [[ ! -x $RPM ]] && return  # rpm executable not available; just return
 
-$RPM -qa > "$VAR_DIR/$DS/${HOSTNAME}_rpm_qa.before"
+$RPM -qa --last > "$VAR_DIR/$DS/${HOSTNAME}_rpm_qa.before"
+Log "Saved the 'rpm -qa --last' output before patching in $VAR_DIR/$DS/${HOSTNAME}_rpm_qa.before"

@@ -6,6 +6,6 @@ if test $RPM ; then
         Log "Running rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-* [not in preview mode]"
     else
         Log "Running rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-*"
-        rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-*
+        $RPM --import /etc/pki/rpm-gpg/RPM-GPG-KEY-*
     fi
 fi

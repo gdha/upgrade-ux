@@ -3,6 +3,8 @@
 # due to a rpmdb corruption. If that is the case then we may NOT proceed, but first
 # fix the rpmdb again.
 
+[[ ! -x $RPM ]] && return  # makes only sense if rpm binary is being used
+
 count_rpm_cmds=$(ps ax | grep rpm | grep -v grep | grep -v 54_check_on_hanging_rpm_cmds | wc -l)
 # The count_rpm_cmds should be 0 in most cases which means no hanging rpm commands
 # Sometime count_rpm_cmds=1 when a /usr/lib/rpm/rpmdb_verify Packages is running [OK]
