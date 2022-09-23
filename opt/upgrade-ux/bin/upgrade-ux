@@ -188,7 +188,7 @@ VERSION_INFO="
 $PRODUCT $VERSION / $RELEASE_DATE
 
 $PRODUCT comes with ABSOLUTELY NO WARRANTY; for details see
-the GNU General Public License at: http://www.gnu.org/licenses/gpl.html
+the GNU General Public License at: https://www.gnu.org/licenses/gpl.html
 
 Build date: $(date '+%a, %d %b %Y %X %z')
 "

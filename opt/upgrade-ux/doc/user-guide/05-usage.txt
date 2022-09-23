@@ -7,7 +7,7 @@ Before digging deeper in +upgrade-ux+ lets explain the basic usage. The option h
 Usage: upgrade-ux [-dDFsSpvV] [-c DIR ] COMMAND [-- ARGS...]
 
 upgrade-ux comes with ABSOLUTELY NO WARRANTY; for details see
-the GNU General Public License at: http://www.gnu.org/licenses/gpl.html
+the GNU General Public License at: https://www.gnu.org/licenses/gpl.html
 
 Available options:
  -c DIR       alternative config directory; instead of /etc/opt/upgrade-ux

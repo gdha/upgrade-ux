@@ -1,6 +1,6 @@
 # 26_fix_openssl_logjam.sh
 # in prep/default/70_check_openssl_logjam.sh we checked for the OpenSSL LogJam vulnerability
-# see CVE-2015-4000 : http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-4000
+# see CVE-2015-4000 : https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-4000
 
 # if the following file does not exist then we are not vulnerable (or have no http config files)
 [[ ! -f "$VAR_DIR/$DS/CVE-2015-4000" ]] && return

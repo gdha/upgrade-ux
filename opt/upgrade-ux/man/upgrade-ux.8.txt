@@ -21,7 +21,7 @@ Consistent logging and optionally extended output help understand the concepts
 behind Upgrade-ux and help debug during development.
 
 Upgrade-ux comes with ABSOLUTELY NO WARRANTY; for details see
-the GNU General Public License at: http://www.gnu.org/licenses/gpl.html
+the GNU General Public License at: https://www.gnu.org/licenses/gpl.html
 
 == OPTIONS
 
@@ -221,11 +221,14 @@ To run +upgrade-ux+ in _upgrade_ mode then do _not_ use the +-p+ flag:
 Feedback is welcome, please report any issues or improvements to our issue-tracker at: https://github.com/gdha/upgrade-ux/issues
 Furthermore, we welcome pull requests via GitHub.
 
+Be aware, that upgrade-ux is only fully developed on RHEL based Linux systems and HP-UX systems. For other GNU/Linux variants please
+create an issue with your wishlist. However, new development will only be carried out via sponsoring!
+
 == COPYRIGHT
-(c) 2014 -
+(c) 2014 - 2022
 
 Gratien Dhaese
 
 Upgrade-ux comes with ABSOLUTELY NO WARRANTY; for details see the GNU General Public License at
-http://www.gnu.org/licenses/gpl.html
+https://www.gnu.org/licenses/gpl.html
 

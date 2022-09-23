@@ -2,7 +2,7 @@ Source: upgrade-ux
 Section: misc
 Priority: optional
 Maintainer: Gratien Dhaese <gratien.dhaese@hmail.com>
-Homepage: http://www.it3.be/projects/upgrade-ux.html
+Homepage: https://www.it3.be/projects/upgrade-ux.html
 
 Package: upgrade-ux
 Architecture: all

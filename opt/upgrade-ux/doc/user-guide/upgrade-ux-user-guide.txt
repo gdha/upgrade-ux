@@ -1,6 +1,6 @@
 = Upgrade-UX User Guide
 :author: Gratien Dhaese
-:version: 0.1 draft
+:version: 0.2 draft
 :data-uri:
 :doctype: book
 :encoding: UTF-8
@@ -11,7 +11,7 @@
 //[width="10cm",height="10cm",align="left"]
 //image::upgrade-ux-sm.png[logo]
 ++++
-<img src="http://www.it3.be/images/upgrade-ux.png">
+<img src="https://www.it3.be/images/upgrade-ux.png">
 ++++
 
 This document describes everything there is to know regarding

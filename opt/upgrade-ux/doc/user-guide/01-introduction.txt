@@ -29,10 +29,10 @@ The support and development of the Upgrade-UX project takes place
 on Github:
 
 Upgrade-UX website::
-    http://www.it3.be/projects/upgrade-ux.html
+    https://www.it3.be/projects/upgrade-ux.html
 
 Github project::
-    http://github.com/gdha/upgrade-ux/
+    https://github.com/gdha/upgrade-ux/
 
 In case you have questions, ideas or feedback about this document, you
 can contact the development team at:

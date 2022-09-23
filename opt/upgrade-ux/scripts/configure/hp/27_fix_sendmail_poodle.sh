@@ -3,7 +3,7 @@
 # if we find $DS/CVE-2014-3566 file then we must fix the sendmail.cf file
 [[ ! -f "$VAR_DIR/$DS/CVE-2014-3566" ]] && return
 
-# See URL http://h20564.www2.hp.com/hpsc/doc/public/display?docId=emr_na-c04506802
+# See URL https://h20564.www2.hp.com/hpsc/doc/public/display?docId=emr_na-c04506802
 # for more details about the issue
 
 sed -e 's/^D{tls_version}.*/D{tls_version}TLSv1/' < "$VAR_DIR/$DS/sendmail.cf" > "$VAR_DIR/$DS/sendmail.cf.new"

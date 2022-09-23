@@ -6,7 +6,7 @@ function WORKFLOW_help  {
 Usage: $PROGRAM [-dDFsSpvV] [-c DIR ] COMMAND [-- ARGS...]
 
 $PRODUCT comes with ABSOLUTELY NO WARRANTY; for details see
-the GNU General Public License at: http://www.gnu.org/licenses/gpl.html
+the GNU General Public License at: https://www.gnu.org/licenses/gpl.html
 
 Available options:
  -c DIR       alternative config directory; instead of /etc/opt/$PROGRAM

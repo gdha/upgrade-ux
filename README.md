@@ -7,7 +7,7 @@ Upgrade-UX
 
 Upgrade-ux is completely written in Korn Shell which is widely available on all UNIX Operating Systems from Linux, HP-UX, Solaris, AIX, and others. The nice thing about upgrade-ux is that the each OS follows its own track (via a directory tree structure) so they do not influence each other.
 
-Currently, only the HP-UX and Linux (CentOS/RHEL) tree are fully populated. People who ever worked with [Relax-and-Recover](http://relax-and-recover.org) will immediately recognize the internals as it is an exact clone (however, reworked to make it fully Korn Shell aware).
+Currently, only the HP-UX and Linux (CentOS/RHEL) tree are fully populated. People who ever worked with [Relax-and-Recover](https://relax-and-recover.org) will immediately recognize the internals as it is an exact clone (however, reworked to make it fully Korn Shell aware).
 
 Upgrade-UX has a wide range of features:
 
@@ -36,13 +36,13 @@ Upgrade-UX has a wide range of features:
  - Has excellent support by its author (contact me for consultancy or programming tasks)
  - The support and development of the Upgrade-UX project takes place on Github
 
-* [Upgrade-UX website](http://www.it3.be/projects/upgrade-ux/)
-* [Github project](http://github.com/gdha/upgrade-ux)
-* [Upgrade-ux User Guide](http://www.it3.be/projects/upgrade-ux/upgrade-ux-user-guide.html)
+* [Upgrade-UX website](https://www.it3.be/projects/upgrade-ux/)
+* [Github project](https://github.com/gdha/upgrade-ux)
+* [Upgrade-ux User Guide](https://www.it3.be/projects/upgrade-ux/upgrade-ux-user-guide.html)
 
 Author : Gratien D'haese
 
-[Company Project](http://www.it3.be/projects/upgrade-ux/)
+[Company Project](https://www.it3.be/projects/upgrade-ux/)
 
 
 
