@@ -3,13 +3,14 @@
 [[ ! -x /usr/openv/netbackup/bin/bpclimagelist ]] && return   # no NBU sw installed - return
 
 BPARG=""
-LANG=C /usr/openv/netbackup/bin/bpclimagelist $BPARG  > "$VAR_DIR/$DS/netbackup_backup_list.output"
+# Issue #138 - to avoid long timeouts of approx 10 minutes work with a timeout of 10s
+timeout 10s /usr/openv/netbackup/bin/bpclimagelist $BPARG  > "$VAR_DIR/$DS/netbackup_backup_list.output"
 
 if [[ ! -s "$VAR_DIR/$DS/netbackup_backup_list.output" ]] ; then
     # If the file "$VAR_DIR/$DS/netbackup_backup_list.output" has size 0 then it could
     # be that this client is using snapshots (for VM). We will try if with -client option
     BPARG="-client $HOSTNAME"
-    LANG=C /usr/openv/netbackup/bin/bpclimagelist $BPARG > "$VAR_DIR/$DS/netbackup_backup_list.output"
+    timeout 10s /usr/openv/netbackup/bin/bpclimagelist $BPARG > "$VAR_DIR/$DS/netbackup_backup_list.output"
 fi
 
 if [[ ! -s "$VAR_DIR/$DS/netbackup_backup_list.output" ]] ; then
