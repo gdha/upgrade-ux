@@ -9,6 +9,9 @@ if [[ -z "$INI_FILE" ]]; then
 fi
 if [[ -f $INI_FILE ]]; then
     Log "Found ini file $INI_FILE"
+elif [[ -f "${ETC_DIR}/${OS}-${OS_VENDOR}-${OS_VERSION}.ini" ]]; then
+    INI_FILE="${ETC_DIR}/${OS}-${OS_VENDOR}-${OS_VERSION}.ini"
+    Log "Found ini file $INI_FILE"
 else
     Error "Missing ini file $INI_FILE"
 fi
