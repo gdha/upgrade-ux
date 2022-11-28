@@ -16,10 +16,7 @@ To enter the directory use the command
 == Installing the software depot on HP-UX
 
 If the software depot was already been made available by the system administrator then you can use +swinstall+ to do the job.
-The following is the output of the command `swinstall -s SDserver:/var/opt/ignite/depots/GLOBAL/tools/11i UPGRADE-UX`
-++++
-<iframe src="http://showterm.io/fbf1fa17d0577fa886ea0" width="740" height="480"></iframe>
-++++
+To install Upgrade-UX on HP-UX run the following command `swinstall -s SDserver:/var/opt/ignite/depots/GLOBAL/tools/11i UPGRADE-UX`
 
 == Installing the RPM package on Linux (RHEL, SLES)
 

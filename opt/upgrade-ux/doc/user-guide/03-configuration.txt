@@ -9,9 +9,39 @@ The default location of the configuration files is +/etc/opt/upgrade-ux/+. Howev
     ls $HOME/project/upgrade-ux/etc/opt/upgrade-ux/
 
 The easiest way to explain which configuration files are possible is by showing the output of the +upgrade-ux dump+ command:
-++++
-<iframe src="http://showterm.io/62ac55fded60bff1518f4" width="740" height="480"></iframe>
-++++
+
+    $ sudo /opt/upgrade-ux/bin/upgrade-ux dump
+    upgrade-ux 1.27 / 24-Aug-2022
+    Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20221128-1005-ITSGBHHLSP00741.log
+    Dumping out configuration and system information
+    This is a 'Linux-x86_64' system, compatible with 'Linux-i386'.
+    System definition:
+                                        ARCH = Linux-i386
+                                          OS = GNU/Linux
+                            OS_MASTER_VENDOR = fedora
+                           OS_MASTER_VERSION = 8
+                       OS_MASTER_VENDOR_ARCH = fedora/x86_64
+                    OS_MASTER_VENDOR_VERSION = fedora/8
+               OS_MASTER_VENDOR_VERSION_ARCH = fedora/8/x86_64
+                                   OS_VENDOR = rhel
+                                  OS_VERSION = 8
+                              OS_VENDOR_ARCH = rhel/x86_64
+                           OS_VENDOR_VERSION = rhel/8
+                      OS_VENDOR_VERSION_ARCH = rhel/8/x86_64
+    Configuration tree:
+                             Linux-i386.conf : missing/empty
+                              GNU/Linux.conf : OK
+                                 fedora.conf : OK
+                          fedora/x86_64.conf : missing/empty
+                               fedora/8.conf : missing/empty
+                        fedora/8/x86_64.conf : missing/empty
+                                   rhel.conf : missing/empty
+                            rhel/x86_64.conf : missing/empty
+                                 rhel/8.conf : missing/empty
+                          rhel/8/x86_64.conf : missing/empty
+                                   site.conf : missing/empty
+                                  local.conf : OK
+                       Linux-rhel-8-2022.ini : OK
 
 === Default configuration file default.conf
 The +default.conf+ contains lots of variables which should not be changed by the end-user. If you wish to modify one just redefine it in the +local.conf+ file. 

@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.8" />
+<meta name="generator" content="AsciiDoc 8.6.10" />
 <title>Upgrade-UX User Guide</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -94,7 +95,9 @@ ul > li > * { color: black; }
   padding: 0;
   margin: 0;
 }
-
+pre {
+  white-space: pre-wrap;
+}
 
 #author {
   color: #527bbd;
@@ -223,7 +226,7 @@ div.exampleblock > div.content {
 }
 
 div.imageblock div.content { padding-left: 0; }
-span.image img { border-style: none; }
+span.image img { border-style: none; vertical-align: text-bottom; }
 a.image:visited { color: white; }
 
 dl {
@@ -948,8 +951,7 @@ the sources on your local Unix you could use</p></div>
 <div class="sect2">
 <h3 id="_installing_the_software_depot_on_hp_ux">2.2. Installing the software depot on HP-UX</h3>
 <div class="paragraph"><p>If the software depot was already been made available by the system administrator then you can use <code>swinstall</code> to do the job.
-The following is the output of the command <code>swinstall -s SDserver:/var/opt/ignite/depots/GLOBAL/tools/11i UPGRADE-UX</code></p></div>
-<iframe src="http://showterm.io/fbf1fa17d0577fa886ea0" width="740" height="480"></iframe>
+To install Upgrade-UX on HP-UX run the following command <code>swinstall -s SDserver:/var/opt/ignite/depots/GLOBAL/tools/11i UPGRADE-UX</code></p></div>
 </div>
 <div class="sect2">
 <h3 id="_installing_the_rpm_package_on_linux_rhel_sles">2.3. Installing the RPM package on Linux (RHEL, SLES)</h3>
@@ -982,7 +984,41 @@ The following is the output of the command <code>swinstall -s SDserver:/var/opt/
 <pre><code>ls $HOME/project/upgrade-ux/etc/opt/upgrade-ux/</code></pre>
 </div></div>
 <div class="paragraph"><p>The easiest way to explain which configuration files are possible is by showing the output of the <code>upgrade-ux dump</code> command:</p></div>
-<iframe src="http://showterm.io/62ac55fded60bff1518f4" width="740" height="480"></iframe>
+<div class="literalblock">
+<div class="content">
+<pre><code>$ sudo /opt/upgrade-ux/bin/upgrade-ux dump
+upgrade-ux 1.27 / 24-Aug-2022
+Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20221128-1005-ITSGBHHLSP00741.log
+Dumping out configuration and system information
+This is a 'Linux-x86_64' system, compatible with 'Linux-i386'.
+System definition:
+                                    ARCH = Linux-i386
+                                      OS = GNU/Linux
+                        OS_MASTER_VENDOR = fedora
+                       OS_MASTER_VERSION = 8
+                   OS_MASTER_VENDOR_ARCH = fedora/x86_64
+                OS_MASTER_VENDOR_VERSION = fedora/8
+           OS_MASTER_VENDOR_VERSION_ARCH = fedora/8/x86_64
+                               OS_VENDOR = rhel
+                              OS_VERSION = 8
+                          OS_VENDOR_ARCH = rhel/x86_64
+                       OS_VENDOR_VERSION = rhel/8
+                  OS_VENDOR_VERSION_ARCH = rhel/8/x86_64
+Configuration tree:
+                         Linux-i386.conf : missing/empty
+                          GNU/Linux.conf : OK
+                             fedora.conf : OK
+                      fedora/x86_64.conf : missing/empty
+                           fedora/8.conf : missing/empty
+                    fedora/8/x86_64.conf : missing/empty
+                               rhel.conf : missing/empty
+                        rhel/x86_64.conf : missing/empty
+                             rhel/8.conf : missing/empty
+                      rhel/8/x86_64.conf : missing/empty
+                               site.conf : missing/empty
+                              local.conf : OK
+                   Linux-rhel-8-2022.ini : OK</code></pre>
+</div></div>
 <div class="sect3">
 <h4 id="_default_configuration_file_default_conf">3.1.1. Default configuration file default.conf</h4>
 <div class="paragraph"><p>The <code>default.conf</code> contains lots of variables which should not be changed by the end-user. If you wish to modify one just redefine it in the <code>local.conf</code> file.</p></div>
@@ -1223,7 +1259,7 @@ options[0]      =       "-2%Y%m%d"</code></pre>
 <div class="sectionbody">
 <div class="paragraph"><p>The workflows (or commands) available can be listed with the <code>-h</code> option:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1239,7 +1275,7 @@ http://www.gnu.org/software/src-highlite -->
 <h3 id="_dump_workflow">4.1. Dump workflow</h3>
 <div class="paragraph"><p>The dump workflow was already discussed during the configuration chapter. The output of <code>/opt/upgrade-ux/bin/upgrade-ux dump</code>:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1273,7 +1309,7 @@ Configuration tree<span style="color: #990000">:</span>
 The second part shows the configuration part and which files it could find (or you may define, create and/or use). They do not need to exist.</p></div>
 <div class="paragraph"><p>The following example shows the dump on a RHEL 7 system:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1311,7 +1347,7 @@ Configuration tree<span style="color: #990000">:</span>
 <div class="paragraph"><p>These configuration files live under the <code>/etc/opt/upgrade-ux</code> or <code>./upgrade-ux/etc/opt/upgrade-ux</code> (relative path) directory.
 At this moment we have the following configuration files present (however, it will grow over time):</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1339,7 +1375,7 @@ http://www.gnu.org/software/src-highlite -->
 <h3 id="_purgelogs_workflow">4.3. Purgelogs workflow</h3>
 <div class="paragraph"><p>The purgelogs workflow just has a simple function and that is to purge log files which are older than 30 days. It will display the logs it has purged (only when you are using the option <code>-v</code>):</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1349,7 +1385,7 @@ http://www.gnu.org/software/src-highlite -->
 <h3 id="_test_workflow">4.4. Test workflow</h3>
 <div class="paragraph"><p>The test workflow is a very simplistic test (use option <code>-v</code> to see something):</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1382,7 +1418,7 @@ no stale NFS mount points found</tt></pre></div></div>
 <div class="sectionbody">
 <div class="paragraph"><p>Before digging deeper in <code>upgrade-ux</code> lets explain the basic usage. The option help (<code>-h</code>) will produce the following:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1441,7 +1477,7 @@ List of commands<span style="color: #990000">:</span>
 2014-06-10 15:22:47 =-=-=-=-=-=-=-=-=-=-=-=-=</code></pre>
 </div></div>
 <div class="paragraph"><p>From the Chapter "Workflow" you probably remember that the default workflow is <strong>upgrade</strong> (even if you did not mention it). So, as example running <code>upgrade-ux</code> in preview mode with verbose option is done as <code>/opt/upgrade-ux/bin/upgrade-ux -vp</code></p></div>
-<iframe src="http://showterm.io/451a145f991d517bd2a66" width="740" height="480"></iframe>
+<iframe src="https://asciinema.org/a/me3i759tvbVp495rQwgMA0GG5" width="740" height="480"></iframe>
 <div class="paragraph"><p>The last option that we bring to your attention in this Chapter is the force option (<code>-F</code>) which is handy in situation that for some reasons <code>upgrade-ux</code> does not want to continue due to serious software (patches) problems. For example, within HP-UX we run the <code>check_patches</code> command which when errors are detected will force an exit from <code>upgrade-ux</code> so that the System Administrator can first fix these patches (or any other issue) before re-running <code>upgrade-ux</code> again.
 We have seen cases it was impossible to get everything fixed and for that reason you may use the force option, but please do not use it by default.</p></div>
 <div class="admonitionblock">
@@ -1535,7 +1571,7 @@ postexecute
 </dl></div>
 <div class="paragraph"><p>Every time you enter or leave a stage the <code>/var/opt/upgrade-ux/status</code> gets updated with a timestamp and the <em>stage</em> name with an addtional notification of <em>start</em> or <em>ended</em>. Upgrade-ux will not delete this status file, but will always append to it so you get a nice historic view of all the runs.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1584,7 +1620,152 @@ http://www.gnu.org/software/src-highlite -->
 <h2 id="_the_upgrade_ux_scripts">7. The upgrade-ux scripts</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>The scripts that are sourced by the main script <code>upgrade-ux</code> reside under <code>/opt/upgrade-ux/scripts/</code> directory and the easiest way to know what will be sourced is by running <code>/opt/upgrade-ux/bin/upgrade-ux -s</code>:</p></div>
-<iframe src="http://showterm.io/ef83a18e4477fb2598d73" width="740" height="480"></iframe>
+<div class="literalblock">
+<div class="content">
+<pre><code>$ sudo /opt/upgrade-ux/bin/upgrade-ux -s
+upgrade-ux 1.27 / 24-Aug-2022
+Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20221128-1008-ITSGBHHLSP00741.log
+Source init/default/02_print_host_info.sh
+Source init/default/03_parse_variables.sh
+Source init/default/03_prepare_tmp_build_area.sh
+Source init/default/04_create_var_dir.sh
+Source init/default/05_select_ini_file.sh
+Source init/default/08_set_preview_var.sh
+Source init/default/10_check_current_status.sh
+Source init/GNU/Linux/10_define_hostname.sh
+Source init/default/12_upgrade_allowed.sh
+Source init/default/15_check_preview_run.sh
+Source init/GNU/Linux/40_set_docker_var.sh
+Source init/default/85_set_current_state.sh
+Source init/default/90_show_current_state.sh
+Source prep/default/05_reboot_required.sh
+Source prep/default/05_source_cmcluster_conf.sh
+Source prep/default/10_check_current_status.sh
+Source prep/default/16_check_dp_backup.sh
+Source prep/default/16_check_nbu_backup.sh
+Source prep/default/16_check_nsr_backup.sh
+Source prep/default/16_check_tsm_backup.sh
+Source prep/default/17_list_nbu_backup_status.sh
+Source prep/GNU/Linux/20_wait_on_chef_client_completion.sh
+Source prep/GNU/Linux/27_save_grub_menu.sh
+Source prep/GNU/Linux/28_save_system_release.sh
+Source prep/GNU/Linux/29_save_kernel_version.sh
+Source prep/default/30_save_pam_conf.sh
+Source prep/GNU/Linux/30_save_rpm_qa.sh
+Source prep/default/31_save_env_output.sh
+Source prep/GNU/Linux/35_check_rear_image.sh
+Source prep/default/35_save_mount_output.sh
+Source prep/GNU/Linux/36_check_virusscanner_linuxshield.sh
+Source prep/GNU/Linux/37_check_diskspace_requirements.sh
+Source prep/GNU/Linux/38_save_satellite_info.sh
+Source prep/GNU/Linux/39_save_yum_history.sh
+Source prep/GNU/Linux/39_save_yum_log.sh
+Source prep/GNU/Linux/40_disabling_local_repos_with_satellite.sh
+Source prep/GNU/Linux/41_disable_rhn_satellite_subscription.sh
+Source prep/GNU/Linux/42_archive_yum_repos_dir.sh
+Source prep/GNU/Linux/43_save_yum_enable_status.sh
+Source prep/GNU/Linux/49_yum_repolist.sh
+Source prep/GNU/Linux/50_save_default_runlevel.sh
+Source prep/GNU/Linux/54_check_on_hanging_rpm_cmds.sh
+Source prep/GNU/Linux/55_verify_rpm_packages.sh
+Source prep/GNU/Linux/60_save_knife_node_output.sh
+Source prep/default/61_exclude_software_packages.sh
+Source prep/GNU/Linux/61_save_extend_filesystem_features.sh
+Source prep/default/62_sg_autostart_cmcld.sh
+Source prep/default/70_check_openssl_logjam.sh
+Source prep/default/72_save_uvscan_exclude_list.sh
+Source prep/default/95_check_missing_programs.sh
+Source prep/default/99_update_status.sh
+Source preremove/default/01_enter_stage_acceptable.sh
+Source preremove/default/05_read_section_from_inifile.sh
+Source preremove/default/99_update_status.sh
+Source preinstall/default/01_enter_stage_acceptable.sh
+Source preinstall/default/05_read_section_from_inifile.sh
+Source preinstall/GNU/Linux/06_yum_clean_all.sh
+Source preinstall/GNU/Linux/07_journalctl_flush.sh
+Source preinstall/GNU/Linux/08_clear_yum_cache.sh
+Source preinstall/GNU/Linux/09_import_rpm_gpg_keys.sh
+Source preinstall/GNU/Linux/10_stop_ds_agent.sh
+Source preinstall/GNU/Linux/10_stop_nails.sh
+Source preinstall/GNU/Linux/20_stop_cron.sh
+Source preinstall/default/22_shutdown_opcagt.sh
+Source preinstall/GNU/Linux/25_stop_tidal.sh
+Source preinstall/GNU/Linux/26_stop_ctmagent.sh
+Source preinstall/GNU/Linux/28_stop_docker.sh
+Source preinstall/GNU/Linux/30_disable_chef_client_in_crontab.sh
+Source preinstall/default/30_shutdown_quest.sh
+Source preinstall/GNU/Linux/32_stop_tanium.sh
+Source preinstall/GNU/Linux/33_stop_fluentbit.sh
+Source preinstall/GNU/Linux/34_stop_flexera.sh
+Source preinstall/GNU/Linux/35_stop_cisco_amp.sh
+Source preinstall/default/80_run_cmds_defined_in_ini.sh
+Source preinstall/default/99_update_status.sh
+Source install/default/01_enter_stage_acceptable.sh
+Source install/default/05_read_section_from_inifile.sh
+Source install/default/20_sw_installation_in_progress.sh
+Source install/GNU/Linux/29_exclude_packages.sh
+Source install/GNU/Linux/30_install_software.sh
+Source install/default/99_update_status.sh
+Source postinstall/default/01_enter_stage_acceptable.sh
+Source postinstall/default/05_read_section_from_inifile.sh
+Source postinstall/default/10_save_dmesg.sh
+Source postinstall/GNU/Linux/28_save_and_diff_system_release.sh
+Source postinstall/GNU/Linux/29_save_and_diff_kernel_version.sh
+Source postinstall/default/30_diff_pam_conf.sh
+Source postinstall/GNU/Linux/30_save_rpm_qa.sh
+Source postinstall/default/35_save_mount_output.sh
+Source postinstall/GNU/Linux/39_save_and_diff_yum_log.sh
+Source postinstall/GNU/Linux/40_needs_restarting.sh
+Source postinstall/GNU/Linux/61_save_and_diff_extend_filesystem_features.sh
+Source postinstall/default/99_update_status.sh
+Source postremove/default/01_enter_stage_acceptable.sh
+Source postremove/default/05_read_section_from_inifile.sh
+Source postremove/default/99_update_status.sh
+Source configure/default/01_enter_stage_acceptable.sh
+Source configure/default/05_read_section_from_inifile.sh
+Source configure/default/10_configure_commands.sh
+Source configure/GNU/Linux/20_uncomment_cfg2html_in_crontab.sh
+Source configure/default/26_fix_openssl_logjam.sh
+Source configure/default/55_fix_uvscan_exclude_list.sh
+Source configure/default/62_verify_sg_autostart_cmcld.sh
+Source configure/default/99_update_status.sh
+Source postexecute/default/01_enter_stage_acceptable.sh
+Source postexecute/default/05_read_section_from_inifile.sh
+Source postexecute/GNU/Linux/20_start_ds_agent.sh
+Source postexecute/GNU/Linux/20_start_nails.sh
+Source postexecute/GNU/Linux/25_start_crond.sh
+Source postexecute/GNU/Linux/25_start_ntpd.sh
+Source postexecute/GNU/Linux/25_start_tidal.sh
+Source postexecute/GNU/Linux/26_start_ctmagent.sh
+Source postexecute/GNU/Linux/28_start_docker.sh
+Source postexecute/GNU/Linux/29_start_tanium.sh
+Source postexecute/GNU/Linux/30_start_fluentbit.sh
+Source postexecute/GNU/Linux/31_start_flexera.sh
+Source postexecute/GNU/Linux/33_restart_apache.sh
+Source postexecute/default/37_start_opcagt.sh
+Source postexecute/default/38_start_quest.sh
+Source postexecute/GNU/Linux/40_enabling_local_repos_with_satellite.sh
+Source postexecute/GNU/Linux/43_restore_yum_enable_status.sh
+Source postexecute/GNU/Linux/44_enable_on_rhel_yum_repos.sh
+Source postexecute/GNU/Linux/45_enable_rhn_satellite_subscription.sh
+Source postexecute/default/50_adapt_sg_autostart_cmcld.sh
+Source postexecute/GNU/Linux/60_save_knife_node_output.sh
+Source postexecute/GNU/Linux/60_save_satellite_info.sh
+Source postexecute/GNU/Linux/65_remove_duplicate_packages.sh
+Source postexecute/GNU/Linux/70_define_default_runlevel.sh
+Source postexecute/default/80_run_cmds_defined_in_ini.sh
+Source postexecute/GNU/Linux/80_run_grub2_mkconfig.sh
+Source postexecute/GNU/Linux/82_enable_chef_client_in_crontab.sh
+Source postexecute/GNU/Linux/85_update_major_release_in_config.sh
+Source postexecute/GNU/Linux/95_reboot_required.sh
+Source postexecute/default/96_call_for_action_after_preview.sh
+Source postexecute/default/99_update_status.sh
+Source cleanup/default/05_read_section_from_inifile.sh
+Source cleanup/default/10_rm_old_cfg2html_reports.sh
+Source cleanup/default/20_rm_sap_db_tmp_file.sh
+Source cleanup/default/90_preview_ended_successfully.sh
+Source cleanup/default/95_show_logfile_location.sh</code></pre>
+</div></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -1628,7 +1809,7 @@ If you need new scripts just write a small script called <code>my_script.sh</cod
 </div>
 <div class="paragraph"><p>An example of such a script is <code>/opt/upgrade-ux/scripts/preinstall/default/05_reboot_required.sh</code></p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1663,7 +1844,7 @@ IsDigit <span style="color: #009900">$daysup</span> <span style="color: #990000"
 <h3 id="_upgrade_ux_not_found">8.1. Upgrade-ux not found</h3>
 <div class="paragraph"><p>If you get the following error when you try to run <code>upgrade-ux</code></p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1680,7 +1861,7 @@ We have encountered situations where the UNIX engineer by accident started <code
 <h3 id="_how_do_we_install_a_patch_bundle_from_1_or_2_years_ago">8.3. How do we install a patch bundle from 1 or 2 years ago?</h3>
 <div class="paragraph"><p>The <code>YEAR</code> variable defines the current year ( <code>$(date +%Y)</code> ) of the patch bundles in the <code>/etc/opt/upgrade-ux/default.conf</code> file. However, suppose we are in the year 2015 and still would like to install the patch bundle of 2014? The easiest way is to overrule the <code>YEAR</code> variable in the <code>/etc/opt/upgrade-ux/local.conf</code> as</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1692,7 +1873,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="paragraph"><p>The <code>SDSERVER</code> variable is defined by a script <code>scripts/init/hp/30_define_sdserver.sh</code> and tries to figure out the region you are located in. Be aware, this script only works well for <em>one</em> particular customer (the sponsor of this project).</p></div>
 <div class="paragraph"><p>Therefore, for other users, you need to define the <code>SDSERVER</code> variable in the <code>/etc/opt/upgrade-ux/local.conf</code> file as</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1705,7 +1886,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="paragraph"><p>However, in rare cases, some customers want to extend this period to 60 days. So, how to do this?</p></div>
 <div class="paragraph"><p>The variable which defines the uptime is called <code>DAYSUPTIME</code> and is defined in <code>/etc/opt/upgrade-ux/default.conf</code>. As you should know by now, you can overrule this by defining a new value in the <code>/etc/opt/upgrade-ux/local.conf</code> file as</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+<div class="content"><!-- Generator: GNU source-highlight
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1718,7 +1899,8 @@ http://www.gnu.org/software/src-highlite -->
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-23 14:56:29 CEST
+Last updated
+ 2022-09-23 14:56:29 CEST
 </div>
 </div>
 </body>

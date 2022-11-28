@@ -65,7 +65,7 @@ You probably understood by now that +upgrade-ux+ must be started in _preview_ mo
 From the Chapter "Workflow" you probably remember that the default workflow is *upgrade* (even if you did not mention it). So, as example running +upgrade-ux+ in preview mode with verbose option is done as `/opt/upgrade-ux/bin/upgrade-ux -vp`
 
 ++++
-<iframe src="http://showterm.io/451a145f991d517bd2a66" width="740" height="480"></iframe>
+<iframe src="https://asciinema.org/a/me3i759tvbVp495rQwgMA0GG5" width="740" height="480"></iframe>
 ++++
 
 The last option that we bring to your attention in this Chapter is the force option (+-F+) which is handy in situation that for some reasons +upgrade-ux+ does not want to continue due to serious software (patches) problems. For example, within HP-UX we run the +check_patches+ command which when errors are detected will force an exit from +upgrade-ux+ so that the System Administrator can first fix these patches (or any other issue) before re-running +upgrade-ux+ again.
