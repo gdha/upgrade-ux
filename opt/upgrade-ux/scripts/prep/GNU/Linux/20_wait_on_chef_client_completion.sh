@@ -4,7 +4,7 @@
 
 (( PREVIEW )) && return  # do not kill nor wait on chef-client runs during preview mode
 
-SLEEPTIME=15  # seconds
+SLEEPTIME=20  # seconds
 CHEFCLIENT="chef-client"
 
 # if we are still in sleeping mode we better kill this process
@@ -19,7 +19,7 @@ if [[ $chefclientrunning -eq 1 ]]; then
 fi
 
 # If chef-client is running wait to completion before continueing
-for iloop in $(seq 1 10)
+for iloop in $(seq 1 3)
 do
   chefclientrunning=$(ps ax | grep $CHEFCLIENT | grep -v grep | wc -l) # 0 when not found running
   if [[ $chefclientrunning -eq 0 ]]; then
@@ -32,4 +32,5 @@ done
 
 # When we came at this point means that after $SLEEPTIME * 10 secs chef-client was still busy
 # Perhaps it was hanging, therefore, we prefer to bail out with an error
-Error "$CHEFCLIENT was still busy after $((SLEEPTIME*10)) seconds. Please check and restart when ok"
+LogPrint "$CHEFCLIENT was still busy after $((SLEEPTIME*3)) seconds. We will now kill all chef-client processes."
+pidof chef-client | xargs -r kill -9 >&2
