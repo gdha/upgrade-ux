@@ -4,3 +4,5 @@
 docker*
 containerd*
 rke2*
+# For issue #146 we add observability-tools to the exclude list to avoid conflicts with jq package
+observability-tools
