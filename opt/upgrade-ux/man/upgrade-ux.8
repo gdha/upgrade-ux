@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: upgrade-ux
 .\"    Author: Gratien Dhaese
-.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 23 October 2018
+.\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
+.\"      Date: 23 April 2024
 .\"    Manual: \ \&
 .\"    Source: \ \&
 .\"  Language: English
 .\"
-.TH "UPGRADE\-UX" "8" "23 October 2018" "\ \&" "\ \&"
+.TH "UPGRADE\-UX" "8" "23 April 2024" "\ \&" "\ \&"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -28,7 +28,7 @@
 .\" * MAIN CONTENT STARTS HERE *
 .\" -----------------------------------------------------------------
 .SH "NAME"
-upgrade-ux \- a framework to update or patch a Unix system (Linux, HP\-UX and Solaris)
+upgrade-ux \- a framework to update or patch an Unix system (Linux, HP\-UX and Solaris)
 .SH "SYNOPSIS"
 .sp
 \fBupgrade\-ux\fR [\fB\-dDsSpFvV\fR] [\fB\-c DIR\fR] \fICOMMAND\fR [\-\- \fIARGS\fR\&...]
@@ -36,7 +36,7 @@ upgrade-ux \- a framework to update or patch a Unix system (Linux, HP\-UX and So
 .sp
 Upgrade\-ux is an Open Source upgrade framework to make patching and upgrades easy and repeatable\&.
 .sp
-Extending upgrade\-ux is made possible by its modular framework\&. Consistent logging and optionally extended output help understand the concepts behind Upgrade\-ux and help debug during development\&.
+Extending upgrade\-ux is made possible by its modular (ksh) framework\&. Consistent logging and optionally extended output help understand the concepts behind Upgrade\-ux and help debug during development\&.
 .sp
 Upgrade\-ux comes with ABSOLUTELY NO WARRANTY; for details see the GNU General Public License at: \m[blue]\fBhttps://www\&.gnu\&.org/licenses/gpl\&.html\fR\m[]
 .SH "OPTIONS"
@@ -171,7 +171,7 @@ Each Unix Operating System requires an \fIINI\fR file which contains the section
 .sp
 \fB/etc/opt/upgrade\-ux/$OS\-$OS_VERSION\-$YEAR\&.ini\fR
 .sp
-The \fIINI\fR file is build out of sections (a section can be empty):
+The \fIINI\fR file is build out of sections (a section can be empty, except for the \fB[install]\fR INI section):
 .PP
 \fB[preremove]\fR
 .RS 4
@@ -404,7 +404,7 @@ Feedback is welcome, please report any issues or improvements to our issue\-trac
 Be aware, that upgrade\-ux is only fully developed on RHEL based Linux systems and HP\-UX systems\&. For other GNU/Linux variants please create an issue with your wishlist\&. However, new development will only be carried out via sponsoring!
 .SH "COPYRIGHT"
 .sp
-(c) 2014 \- 2022
+(c) 2014 \- 2024
 .sp
 Gratien Dhaese
 .sp
