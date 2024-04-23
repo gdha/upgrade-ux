@@ -1,6 +1,6 @@
 = upgrade-ux(8)
-:version: v1.1
-:date: 23 October 2018
+:version: v1.2
+:date: 23 April 2024
 :data-uri:
 :author: Gratien Dhaese
 :doctype: manpage
@@ -8,7 +8,7 @@
 :quirks:
 
 == NAME
-upgrade-ux - a framework to update or patch a Unix system (Linux, HP-UX and Solaris)
+upgrade-ux - a framework to update or patch an Unix system (Linux, HP-UX and Solaris)
 
 == SYNOPSIS
 *upgrade-ux* [*-dDsSpFvV*] [*-c DIR*] _COMMAND_ [-- _ARGS_...]
@@ -16,7 +16,7 @@ upgrade-ux - a framework to update or patch a Unix system (Linux, HP-UX and Sola
 == DESCRIPTION
 Upgrade-ux is an Open Source upgrade framework to make patching and upgrades easy and repeatable.
 
-Extending upgrade-ux is made possible by its modular framework.
+Extending upgrade-ux is made possible by its modular (ksh) framework.
 Consistent logging and optionally extended output help understand the concepts
 behind Upgrade-ux and help debug during development.
 
@@ -112,7 +112,7 @@ The name of such _INI_ file is build as follow:
 
 */etc/opt/upgrade-ux/$OS-$OS_VERSION-$YEAR.ini*
 
-The _INI_ file is build out of sections (a section can be empty):
+The _INI_ file is build out of sections (a section can be empty, except for the *[install]* INI section):
 
 *[preremove]*::
     Add here any specific command to remove specific software bundles before starting the upgrade, e.g. if some software cannot be upgrade and should be re-installed
@@ -225,7 +225,7 @@ Be aware, that upgrade-ux is only fully developed on RHEL based Linux systems an
 create an issue with your wishlist. However, new development will only be carried out via sponsoring!
 
 == COPYRIGHT
-(c) 2014 - 2022
+(c) 2014 - 2024
 
 Gratien Dhaese
 
