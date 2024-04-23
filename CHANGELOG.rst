@@ -2,6 +2,21 @@ Changelog
 =========
 
 
+1.30 (2024-04-23)
+-----------------
+- Set version to 1.30 and release date to 23-Apr-2024. [gdha]
+- Man page looks good. [gdha]
+- Update man page slightly. [gdha]
+- Avoid false alerts from a missing Tidal agent #149. [gdha]
+- Avoid false alerts from a missing Control-M agent #148. [gdha]
+- Issue #147 stop/start telegraf service. [gdha]
+- For issue #146 we add observability-tools to the exclude list to avoid
+  conflicts with jq package. [gdha]
+- Issue #145: we will always refill the variable $exclude_packages (in
+  preview and upgrade mode) [gdha]
+- Add the gitchangelog functionality. [gdha]
+
+
 1.29 (2024-04-23)
 -----------------
 - Update date in upgrade-ux main script. [gdha]
