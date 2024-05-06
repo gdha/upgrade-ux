@@ -49,7 +49,7 @@ jobs:
 
       - name: Run rpmbuild on RPM spec to produce package
         id: rpm
-        uses: naveenrajm7/rpmbuild@master
+        uses: gdha/rpmbuild@master
         with:
           spec_file: ${{ vars.PKG_NAME }}.spec
 
