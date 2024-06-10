@@ -51,7 +51,7 @@ gzip  %{buildroot}/%{mandir}/man8/%{name}.8
 
 %files
 %defattr(-, root, root, 0755)
-%doc  LICENSE README.md
+%doc  LICENSE README.md CHANGELOG.rst
 %doc %{mandir}/man8/%{name}.8*
 %doc %{optdir}/%{name}/man/man8/%{name}.8*
 %{optdir}/%{name}/bin/
