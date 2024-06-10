@@ -10,9 +10,11 @@ jobs:
 
   build:
 
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        path: master
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag rpmbuild:$(date +%s)
