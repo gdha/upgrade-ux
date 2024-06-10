@@ -2,6 +2,36 @@ Changelog
 =========
 
 
+1.31 (2024-06-10)
+-----------------
+- #156 increasing version to 1.31 in upgrade-ux main script. [gdha]
+- #150 adding 62_save_failed_systemd_services.sh and
+  63_save_journal_errors.sh. [gdha]
+- Update author in .package file. [gdha]
+- Create docker-image.yml. [Gratien D'haese]
+- #156 adding HP-UX-11.31-2024.ini. [Gratien D'haese]
+- Add Dockerfile. [gdha]
+- El7 to el8 update. [gdha]
+- Merge pull request #153 from gdha/renovate/actions-checkout-4.x.
+  [Gratien D'haese]
+
+  Update actions/checkout action to v4
+- Update actions/checkout action to v4. [renovate[bot]]
+- Merge pull request #152 from gdha/renovate/major-github-artifact-
+  actions. [Gratien D'haese]
+
+  Update GitHub Artifact Actions to v4 (major)
+- Update GitHub Artifact Actions to v4. [renovate[bot]]
+- Merge pull request #151 from gdha/renovate/configure. [Gratien
+  D'haese]
+
+  Configure Renovate
+- Add renovate.json. [renovate[bot]]
+- Make workflows to publish rpm. [gdha]
+- Create publish.yml. [Gratien D'haese]
+- Update CHANGELOG. [gdha]
+
+
 1.30 (2024-04-23)
 -----------------
 - Set version to 1.30 and release date to 23-Apr-2024. [gdha]
