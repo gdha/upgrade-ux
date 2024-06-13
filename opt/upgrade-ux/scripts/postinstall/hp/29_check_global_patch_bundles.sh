@@ -16,7 +16,11 @@ if [[ -f "$VAR_DIR/$DS/${HOSTNAME}_global_patch_bundles.after" ]]; then
             #LogPrint  "WARNING: I am afraid the global patch bundle of year $YEAR was not (yet) installed"
             : # no sense in preview mode
 	else
-            LogPrint "ERROR: I am afraid the global patch bundle of year $YEAR was not yet installed"
+            # When YEAR => 2024 then the small patch bundle might not being applied (as not needed anymore)
+            # and to avoid false positive messages we add this extra if-block
+            if (( $YEAR < 2024 )) ; then
+                 LogPrint "ERROR: I am afraid the global patch bundle of year $YEAR was not yet installed"
+            fi
 	fi
     fi
 fi
