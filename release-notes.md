@@ -1,6 +1,3 @@
-Certainly! Here are the enhanced release notes in Markdown format:
-
-```markdown
 # Release Notes for Version 1.31
 
 ## New Features and Enhancements
@@ -40,6 +37,3 @@ Certainly! Here are the enhanced release notes in Markdown format:
 - renovate[bot]
 
 These release notes offer a detailed overview of the advancements in version 1.31, highlighting significant new features, extended platform support, improvements in continuous integration and deployment processes, and other miscellaneous updates. Our team is committed to delivering consistent improvements to enhance user experience and system performance.
-```
-
-This Markdown format ensures that the release notes are structured and easy to read when rendered on platforms that support Markdown.
