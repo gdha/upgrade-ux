@@ -1,8 +1,14 @@
 name: Build Linux Packages
 on:
+  schedule:
+    - cron: '25 23 * * *'
   push:
-    tags:
-      - "*.*"
+    branches: [ "master" ]
+    # Publish semver tags as releases.
+    tags: [ '*.*' ]
+  pull_request:
+    branches: [ "master" ]
+
 env:
   DIST: el8
   ARCH: noarch
