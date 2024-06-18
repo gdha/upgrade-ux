@@ -35,10 +35,15 @@ jobs:
           git_date=$(git log -n 1 --format="%ai")
           date=$(date --date="$git_date" +%Y%m%d%H%M)
           echo "DISTVERSION=$VERSION-git$date" >> $GITHUB_ENV
+          echo "GITDATE=git$date" >> $GITHUB_ENV
  
-      - name: Save DISTVERSION to GITHUB_OUTPUT to use in another job as well
-        id: distversion
-        run: echo "DISTVERSION=$DISTVERSION" >> $GITHUB_OUTPUT
+      - name: Save the VERSION to GITHUB_OUTPUT to use in job build_rpm
+        id: ver
+        run: echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Save GITDATE to GITHUB_OUTPUT to use in another job as well
+        id: gitdate
+        run: echo "GITDATE=$GITDATE" >> $GITHUB_OUTPUT
 
       - name: Replace version in RPM spec so correct source is downloaded when building RPM
         run: |
@@ -57,7 +62,8 @@ jobs:
     needs: build_tarball
     runs-on: ubuntu-latest
     env:
-      DISTVERSION: ${{ needs.build_tarball.outputs.distversion }}
+      GITDATE: ${{ needs.build_tarball.outputs.gitdate }}
+      VERSION: {{ needs.build_tarball.outputs.ver }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -76,7 +82,7 @@ jobs:
       - name: Upload .rpm package as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: upgrade-ux-${{ env.DISTVERSION }}-1.${{ env.DIST }}.${{ env.ARCH }}.rpm
+          name: upgrade-ux-${{ env.VERSION }}-1.${{ env.GITDATE }}.${{ env.DIST }}.${{ env.ARCH }}.rpm
           path: rpmbuild/RPMS/${{ env.ARCH }}/*.rpm
 
   build_deb:
