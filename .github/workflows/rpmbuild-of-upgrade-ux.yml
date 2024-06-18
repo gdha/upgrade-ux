@@ -20,6 +20,7 @@ jobs:
     outputs:
       ver: ${{ steps.ver.outputs.VERSION }}
       gitdate: ${{ steps.gitdate.outputs.GITDATE }}
+      distversion: ${{ steps.gitdate.outputs.DISTVERSION }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -38,6 +39,10 @@ jobs:
           echo "DISTVERSION=$VERSION-git$date" >> $GITHUB_ENV
           echo "GITDATE=git$date" >> $GITHUB_ENV
  
+      - name: Save the DISTVERSION to GITHUB_OUTPUT to use in job build_rpm
+        id: distversion
+        run: echo "DISTVERSION=$DISTVERSION" $GITHUB_OUTPUT
+
       - name: Save the VERSION to GITHUB_OUTPUT to use in job build_rpm
         id: ver
         run: echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
@@ -65,6 +70,7 @@ jobs:
     env:
       GITDATE: ${{ needs.build_tarball.outputs.gitdate }}
       VERSION: ${{ needs.build_tarball.outputs.ver }}
+      DISTVERSION: ${{ needs.build_tarball.outputs.distversion }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -72,14 +78,14 @@ jobs:
       - name: Replace version in RPM spec so correct source is downloaded when building RPM
         run: |
           cd packaging/Linux
-          sudo apt install -y ksh
+          sudo apt install -y ksh asciidoc xmlto
           make dist
 
       - name: Run rpmbuild on RPM spec to produce package
         id: rpm
         uses: gdha/rpmbuild@main
         with:
-          spec_file: rpm/upgrade-ux.spec
+          args: rpmbuild -ba SPECS/upgrade-ux.spec
 
       - name: Upload .rpm package as artifact
         uses: actions/upload-artifact@v4
@@ -94,12 +100,13 @@ jobs:
     env:
       GITDATE: ${{ needs.build_tarball.outputs.gitdate }}
       VERSION: ${{ needs.build_tarball.outputs.ver }}
+      DISTVERSION: ${{ needs.build_tarball.outputs.distversion }}
     steps:
       - name: Download .rpm artifact
         uses: actions/download-artifact@v4
         id: download
         with:
-          name: upgrade-ux-${{ env.DISTVERSION }}-1.${{ env.DIST }}.${{ env.ARCH }}.rpm
+          name: upgrade-ux-${{ env.VERSION }}-1.${{ env.DIST }}.${{ env.ARCH }}.rpm
 
       - name: find .
         run: find .
@@ -114,7 +121,7 @@ jobs:
       - name: Upload .deb package as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: upgrade-ux-${{ env.DISTVERSION }}-1.${{ env.DIST }}.${{ env.ARCH }}.deb
+          name: upgrade-ux-${{ env.VERSION }}-1.${{ env.DIST }}.${{ env.ARCH }}.deb
           path: upgrade-ux*.deb
 
   release:
@@ -133,5 +140,5 @@ jobs:
         with:
           files: |
             upgrade-ux-${{ env.DISTVERSION }}.tar.gz/*.tar.gz
-            upgrade-ux-${{ env.DISTVERSION }}-1.${{ env.DIST }}.${{ env.ARCH }}.rpm/**/*.rpm
-            upgrade-ux-${{ env.DISTVERSION }}-1.${{ env.DIST }}.${{ env.ARCH }}.deb/**/*.deb
+            upgrade-ux-${{ env.VERSION }}-1.${{ env.DIST }}.${{ env.ARCH }}.rpm/**/*.rpm
+            upgrade-ux-${{ env.VERSION }}-1.${{ env.DIST }}.${{ env.ARCH }}.deb/**/*.deb
