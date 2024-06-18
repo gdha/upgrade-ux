@@ -2,9 +2,9 @@ name: Build Linux Packages
 on:
   push:
     tags:
-      - "*.*.*"
+      - "*.*"
 env:
-  DIST: el7
+  DIST: el8
   ARCH: noarch
 
 jobs:
