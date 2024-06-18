@@ -32,7 +32,7 @@ jobs:
         run: |
           git_date=$(git log -n 1 --format="%ai")
           date=$(date --date="$git_date" +%Y%m%d%H%M)
-          echo "DISTVERSION=$VERSION-git$date" >> $GITHUB_ENV
+          echo "DISTVERSION=$VERSION-git$date" >> "$GITHUB_OUPUT"
  
       - name: Replace version in RPM spec so correct source is downloaded when building RPM
         run: |
