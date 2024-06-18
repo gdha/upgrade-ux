@@ -42,9 +42,11 @@ jobs:
 
       - name: Upload source archive as artifact
         uses: actions/upload-artifact@v4
+        env:
+          DISTVERSION: ${{ steps.version.outputs.DISTVERSION }}
         with:
-          name: upgrade-ux-${{ steps.version.outputs.DISTVERSION }}.tar.gz
-          path: upgrade-ux-${{ steps.version.outputs.DISTVERSION }}.tar.gz
+          name: upgrade-ux-$DISTVERSION.tar.gz
+          path: upgrade-ux-$DISTVERSION.tar.gz
 
   build_rpm:
     name: Build .rpm package
