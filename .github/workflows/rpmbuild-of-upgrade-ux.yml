@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITDATE: ${{ needs.build_tarball.outputs.gitdate }}
-      VERSION: {{ needs.build_tarball.outputs.ver }}
+      VERSION: ${{ needs.build_tarball.outputs.ver }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
