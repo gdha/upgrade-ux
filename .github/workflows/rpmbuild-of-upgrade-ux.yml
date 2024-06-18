@@ -72,13 +72,14 @@ jobs:
       - name: Replace version in RPM spec so correct source is downloaded when building RPM
         run: |
           cd packaging/Linux
-          make rpm
+          sudo apt install -y ksh
+          make dist
 
       - name: Run rpmbuild on RPM spec to produce package
         id: rpm
         uses: gdha/rpmbuild@main
         with:
-          spec_file: upgrade-ux.spec
+          spec_file: rpm/upgrade-ux.spec
 
       - name: Upload .rpm package as artifact
         uses: actions/upload-artifact@v4
