@@ -24,13 +24,14 @@ jobs:
       - name: Replace version in RPM spec so correct source is downloaded when building RPM
         run: |
           cd packaging/Linux
+          sudo apt install -y ksh
           make dist
 
       - name: Upload source archive as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: upgrade-ux-${{ github.ref_name }}.tar.gz
-          path: upgrade-ux-${{ github.ref_name }}.tar.gz
+          name: upgrade-ux-${{ github.GITHUB_RUN_ID }}.tar.gz
+          path: upgrade-ux-${{ github.GITHUB_RUN_ID }}.tar.gz
 
   build_rpm:
     name: Build .rpm package
@@ -54,7 +55,7 @@ jobs:
       - name: Upload .rpm package as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: upgrade-ux-${{ github.ref_name }}-1.${{ env.DIST }}.${{ env.ARCH }}.rpm
+          name: upgrade-ux-${{ github.GITHUB_RUN_ID }}-1.${{ env.DIST }}.${{ env.ARCH }}.rpm
           path: rpmbuild/RPMS/${{ env.ARCH }}/*.rpm
 
   build_deb:
@@ -66,7 +67,7 @@ jobs:
         uses: actions/download-artifact@v4
         id: download
         with:
-          name: upgrade-ux-${{ github.ref_name }}-1.${{ env.DIST }}.${{ env.ARCH }}.rpm
+          name: upgrade-ux-${{ github.GITHUB_RUN_ID }}-1.${{ env.DIST }}.${{ env.ARCH }}.rpm
 
       - name: find .
         run: find .
@@ -81,7 +82,7 @@ jobs:
       - name: Upload .deb package as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: upgrade-ux-${{ github.ref_name }}-1.${{ env.DIST }}.${{ env.ARCH }}.deb
+          name: upgrade-ux-${{ github.GITHUB_RUN_ID }}-1.${{ env.DIST }}.${{ env.ARCH }}.deb
           path: upgrade-ux*.deb
 
   release:
@@ -99,6 +100,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            upgrade-ux-${{ github.ref_name }}.tar.gz/*.tar.gz
-            upgrade-ux-${{ github.ref_name }}-1.${{ env.DIST }}.${{ env.ARCH }}.rpm/**/*.rpm
-            upgrade-ux-${{ github.ref_name }}-1.${{ env.DIST }}.${{ env.ARCH }}.deb/**/*.deb
+            upgrade-ux-${{ github.GITHUB_RUN_ID }}.tar.gz/*.tar.gz
+            upgrade-ux-${{ github.GITHUB_RUN_ID }}-1.${{ env.DIST }}.${{ env.ARCH }}.rpm/**/*.rpm
+            upgrade-ux-${{ github.GITHUB_RUN_ID }}-1.${{ env.DIST }}.${{ env.ARCH }}.deb/**/*.deb
