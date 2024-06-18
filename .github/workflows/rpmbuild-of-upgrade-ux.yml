@@ -11,7 +11,7 @@ on:
 
 env:
   DIST: el9
-  ARCH: noarch
+  ARCH: x86_64
 
 jobs:
   build_tarball:
