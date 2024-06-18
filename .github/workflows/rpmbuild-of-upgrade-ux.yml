@@ -38,7 +38,7 @@ jobs:
  
       - name: Save DISTVERSION to GITHUB_OUTPUT to use in another job as well
         id: distversion
-        run: echo "DISTVERSION=$DISTVERSION" >> $GITHUB_OUPUT
+        run: echo "DISTVERSION=$DISTVERSION" >> $GITHUB_OUTPUT
 
       - name: Replace version in RPM spec so correct source is downloaded when building RPM
         run: |
