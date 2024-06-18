@@ -17,6 +17,8 @@ jobs:
   build_tarball:
     name: Build source archive
     runs-on: ubuntu-latest
+    outputs:
+      distversion: ${{ steps.distversion.outputs.DISTVERSION }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,12 +30,16 @@ jobs:
           echo "VERSION=$(grep ^VERSION= opt/upgrade-ux/bin/upgrade-ux | cut -d= -f2)" >> $GITHUB_ENV
 
       - name: Set the DISTVERSION variable
-        id: distversion
+        id: distver
         run: |
           git_date=$(git log -n 1 --format="%ai")
           date=$(date --date="$git_date" +%Y%m%d%H%M)
           echo "DISTVERSION=$VERSION-git$date" >> $GITHUB_ENV
  
+      - name: Save DISTVERSION to GITHUB_OUTPUT to use in another job as well
+        id: distversion
+        run: echo "DISTVERSION=$DISTVERSION" >> $GITHUB_OUPUT
+
       - name: Replace version in RPM spec so correct source is downloaded when building RPM
         run: |
           cd packaging/Linux
@@ -50,6 +56,8 @@ jobs:
     name: Build .rpm package
     needs: build_tarball
     runs-on: ubuntu-latest
+    env:
+      DISTVERSION: ${{ needs.build_tarball.outputs.distversion }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
