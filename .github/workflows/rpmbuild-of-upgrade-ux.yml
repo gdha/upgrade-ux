@@ -10,7 +10,7 @@ on:
     branches: [ "master" ]
 
 env:
-  DIST: el8
+  DIST: el9
   ARCH: noarch
 
 jobs:
@@ -24,12 +24,16 @@ jobs:
       # Grab the versionnr to use in the main script
       - name: Grab the VERSION number in upgrade-ux main script
         id: version
-        run: >-
-          echo "::set-output name=VERSION::$(
-            grep ^VERSION opt/upgrade-ux/bin/upgrade-ux |
-            cut -d= -f2
-            )"
+        run: |
+          echo "VERSION=$(grep ^VERSION opt/upgrade-ux/bin/upgrade-ux | cut -d= -f2)" >> $GITHUB_ENV
 
+      - name: Set the DISTVERSION variable
+        id: distversion
+        run: |
+          git_date=$(git log -n 1 --format="%ai")
+          date=$(date --date="$git_date" +%Y%m%d%H%M)
+          echo "DISTVERSION=$VERSION-git$date" >> >> $GITHUB_ENV
+ 
       - name: Replace version in RPM spec so correct source is downloaded when building RPM
         run: |
           cd packaging/Linux
