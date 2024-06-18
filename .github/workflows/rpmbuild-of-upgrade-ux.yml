@@ -18,7 +18,8 @@ jobs:
     name: Build source archive
     runs-on: ubuntu-latest
     outputs:
-      distversion: ${{ steps.distversion.outputs.DISTVERSION }}
+      ver: ${{ steps.distversion.outputs.VERSION }}
+      gitdate: ${{ steps.distversion.outputs.GITDATE }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
