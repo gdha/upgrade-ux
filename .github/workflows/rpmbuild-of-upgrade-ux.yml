@@ -30,11 +30,10 @@ jobs:
             cut -d= -f2
             )"
 
-      # The build container is gdha/rpmbuild (using RockyLinux 9)
       - name: Replace version in RPM spec so correct source is downloaded when building RPM
         run: |
           cd packaging/Linux
-          sudo yum install -y ksh
+          sudo apt install -y ksh
           make dist
 
       - name: Upload source archive as artifact
