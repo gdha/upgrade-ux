@@ -85,6 +85,8 @@ jobs:
       - name: Run rpmbuild on RPM spec to produce package
         id: make_rpm
         run: |
+          cd packaging/Linux
+          sudo apt install -y --fix-missing ksh asciidoctor
           make rpm
 
       - name: Upload .rpm package as artifact
