@@ -130,6 +130,10 @@ jobs:
     name: Create release with all assets
     needs: [build_tarball, build_rpm, build_deb]
     runs-on: ubuntu-latest
+    env:
+      GITDATE: ${{ needs.build_tarball.outputs.gitdate }}
+      VERSION: ${{ needs.build_tarball.outputs.ver }}
+      DISTVERSION: ${{ needs.build_tarball.outputs.distversion }}
     steps:
       - name: Download .rpm artifact
         uses: actions/download-artifact@v4
