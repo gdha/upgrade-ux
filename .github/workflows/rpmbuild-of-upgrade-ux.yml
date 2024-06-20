@@ -79,7 +79,7 @@ jobs:
         id: make_dist
         run: |
           cd packaging/Linux
-          sudo apt install -y ksh asciidoc xmlto
+          sudo apt install -y --fix-missing ksh asciidoc xmlto
           make dist
 
       - name: Run rpmbuild on RPM spec to produce package
