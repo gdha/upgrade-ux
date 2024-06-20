@@ -1,7 +1,7 @@
 name: Build Linux Packages
 on:
-  schedule:
-    - cron: '25 23 * * *'
+        #  schedule:
+        #- cron: '25 23 * * *'
   push:
     branches: [ "master" ]
     # Publish semver tags as releases.
@@ -20,7 +20,7 @@ jobs:
     outputs:
       ver: ${{ steps.ver.outputs.VERSION }}
       gitdate: ${{ steps.gitdate.outputs.GITDATE }}
-      distversion: ${{ steps.gitdate.outputs.DISTVERSION }}
+      distversion: ${{ steps.distversion.outputs.DISTVERSION }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -76,16 +76,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Replace version in RPM spec so correct source is downloaded when building RPM
+        id: make_dist
         run: |
           cd packaging/Linux
           sudo apt install -y ksh asciidoc xmlto
           make dist
 
       - name: Run rpmbuild on RPM spec to produce package
-        id: rpm
-        uses: gdha/rpmbuild@main
-        with:
-          args: rpmbuild -ba SPECS/upgrade-ux.spec
+        id: make_rpm
+        run: |
+          make rpm
 
       - name: Upload .rpm package as artifact
         uses: actions/upload-artifact@v4
