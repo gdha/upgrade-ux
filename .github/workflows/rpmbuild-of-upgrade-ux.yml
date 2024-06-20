@@ -54,7 +54,7 @@ jobs:
       - name: Replace version in RPM spec so correct source is downloaded when building RPM
         run: |
           cd packaging/Linux
-          sudo apt install -y ksh
+          sudo apt-get -qq update && sudo apt-get -qq install asciidoctor ksh
           make dist
 
       - name: Upload source archive as artifact
@@ -79,14 +79,14 @@ jobs:
         id: make_dist
         run: |
           cd packaging/Linux
-          sudo apt install -y --fix-missing ksh asciidoctor
+          sudo apt-get -qq update && sudo apt-get -qq install asciidoctor ksh
           make dist
 
       - name: Run rpmbuild on RPM spec to produce package
         id: make_rpm
         run: |
           cd packaging/Linux
-          sudo apt install -y --fix-missing ksh asciidoctor xmlto
+          sudo apt-get -qq update && sudo apt-get -qq install asciidoctor ksh
           make rpm
 
       - name: Upload .rpm package as artifact
@@ -115,7 +115,7 @@ jobs:
 
       - name: Convert .rpm to .deb
         run: |
-          sudo apt install -y alien
+          sudo apt-get -qq update && sudo apt-get -qq install alien
           sudo alien -k --verbose --to-deb *.rpm
       - name: find .
         run: find . -exec readlink -f {} \;
