@@ -93,7 +93,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: upgrade-ux-${{ env.VERSION }}-1.${{ env.GITDATE }}.${{ env.DIST }}.${{ env.ARCH }}.rpm
-          path: ./*.rpm
+          path: packaging/Linux/*.rpm
 
   build_deb:
     name: Build .deb package
