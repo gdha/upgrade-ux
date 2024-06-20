@@ -79,14 +79,14 @@ jobs:
         id: make_dist
         run: |
           cd packaging/Linux
-          sudo apt install -y --fix-missing ksh asciidoctor asciidoc xmlto
+          sudo apt install -y --fix-missing ksh asciidoctor
           make dist
 
       - name: Run rpmbuild on RPM spec to produce package
         id: make_rpm
         run: |
           cd packaging/Linux
-          sudo apt install -y --fix-missing ksh asciidoctor
+          sudo apt install -y --fix-missing ksh asciidoctor xmlto
           make rpm
 
       - name: Upload .rpm package as artifact
