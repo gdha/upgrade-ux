@@ -23,7 +23,7 @@ PRODUCT="upgrade-ux"
 PROGRAM=${0##*/}
 PRGDIR=${0%/*}
 VERSION=1.31
-RELEASE_DATE=10-Jun-2024
+RELEASE_DATE=01-Jul-2024
 STARTTIME=$SECONDS
 
 # define PATH (required for SunOS)

@@ -1,6 +1,6 @@
 Format: 1.0
 Source: upgrade-ux
-Version: 1.2
+Version: 1.31
 Binary: upgrade-ux
 Maintainer: Gratien Dhaese <gratien.dhaese@gmail.com>
 Architecture: all

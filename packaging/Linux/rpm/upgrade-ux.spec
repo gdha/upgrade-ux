@@ -1,4 +1,4 @@
-%define rpmrelease %{nil}
+%define rpmrelease .git202406201726
 %define debug_package %{nil}
 
 %define optdir /opt
@@ -12,7 +12,7 @@
 %endif
 
 Name:		upgrade-ux
-Version:	1.2 
+Version: 1.31
 Release:	1%{?rpmrelease}%{?dist}
 Summary:	Open Source framework to patch, update or upgrade UNIX systems
 

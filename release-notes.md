@@ -14,10 +14,6 @@
 
 ## Continuous Integration and Deployment
 
-- **Docker Integration**
-  - We've created a `docker-image.yml` file, facilitating seamless Docker image builds. This step is part of our ongoing efforts to enhance containerized deployment capabilities.
-  - Additionally, we have included a `Dockerfile` to streamline the creation of Docker images, making it easier to deploy our application in containerized environments.
-
 - **GitHub Actions Updates**
   - Updated the `actions/checkout` action to version 4. This update brings the latest features and performance improvements to our CI/CD pipeline. (#153)
   - Upgraded GitHub Artifact Actions to version 4, ensuring our artifact management processes are more robust and efficient. (#152)
