@@ -148,3 +148,4 @@ jobs:
             upgrade-ux-${{ env.DISTVERSION }}.tar.gz/*.tar.gz
             upgrade-ux-${{ env.VERSION }}-1.${{ env.GITDATE }}.${{ env.DIST }}.${{ env.ARCH }}.rpm/*.rpm
             upgrade-ux-${{ env.VERSION }}-1.${{ env.GITDATE }}.${{ env.DIST }}.${{ env.ARCH }}.deb/*.deb
+          tag_name: ${{ env.GITDATE }}
