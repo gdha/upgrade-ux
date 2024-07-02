@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+    - name: To avoid Fatal: could not read Username for https://XXXXXX: No such device or address
+      run: |
+          git config --global user.email "gdha@users.noreply.github.com"
+          git config --global user.name "gdha"
+          git config --global url.https://${{ secrets.GH_PAT }}@github.com/
     - name: Create Release Notes
       uses: docker://decathlon/release-notes-generator-action:3.1.5
       env:
