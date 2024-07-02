@@ -1,4 +1,7 @@
-on: 
+on:
+  push:
+    branches:
+    - main
   milestone:
     types: [closed]
 name: Milestone Closure
