@@ -11,19 +11,23 @@ jobs:
       run: |
           git config --global user.email "gdha@users.noreply.github.com"
           git config --global user.name "gdha"
-          git config --global url.https://${{ secrets.GH_PAT }}@github.com/
+          git config --global url.https://${{ secrets.GITHUB_TOKEN }}@github.com/
+      env:
+        GH_PAT: ${{ secrets.GH_PAT }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Create Release Notes
       uses: docker://decathlon/release-notes-generator-action:3.1.5
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         OUTPUT_FOLDER: temp_release_notes
         USE_MILESTONE_TITLE: "true"
+        FILENAME_PREFIX: ReleaseNotes
     - name: Upload Release Notes to Wiki
       uses: docker://decathlon/wiki-page-creator-action:latest
       env:
         ACTION_MAIL: gdha@users.noreply.github.com
         ACTION_NAME: gdha
-        GH_PAT: ${{ secrets.GH_PAT }}
+        GH_PAT: ${{ secrets.GITHUB_TOKEN }}
         MD_FOLDER: temp_release_notes
         OWNER: gdha
         REPO_NAME: upgrade-ux
