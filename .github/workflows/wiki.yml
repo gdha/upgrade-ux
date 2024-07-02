@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
      - name: Upload Release Notes to Wiki
-       uses: docker://decathlon/wiki-page-creator-action:2.0.1
+       uses: docker://decathlon/wiki-page-creator-action:2.0.3
        env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
          ACTION_MAIL: gratien.dhaese@gmail.com
