@@ -16,5 +16,5 @@ clean:
 	asciidoc $<
 
 upload: $(htmltargets)
-	lftp -e 'put -O /wwwroot/projects/upgrade-ux $(htmltargets) ; bye' apache07.hostbasket.com
+	lftp -e 'put -O /wwwroot/projects/upgrade-ux $(htmltargets) ; bye' it3.be.apache52.cloud.telenet.be
 
