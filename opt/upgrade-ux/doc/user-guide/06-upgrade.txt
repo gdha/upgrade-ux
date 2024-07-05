@@ -1,6 +1,6 @@
 = Upgrade Operation
 
-The *upgrade* operation (or workflow) is the default one and does not need to be mentioned explicitely on the command line.
+The *upgrade* operation (or workflow) is the default one and does not need to be mentioned explicitly on the command line.
 The upgrade operation goes through different stages to accomplish a successful upgrade or patch installation. The stages in use are:
 
 init::
