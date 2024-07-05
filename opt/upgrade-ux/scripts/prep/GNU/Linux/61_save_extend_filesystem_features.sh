@@ -1,6 +1,6 @@
 # 61_save_extend_filesystem_features.sh
 # See https://github.com/gdha/upgrade-ux/issues/109
-# Purpose: we had issues with an ext3 file system where suddently an ext4 feauture got added and as a
+# Purpose: we had issues with an ext3 file system where suddently an ext4 feature got added and as a
 # result it could not mount this ext3 file system. We had to mount it as an ext4 file system.
 # Additional comment: reason was more then 32K directories on that mount point, and therefore, ext4 is forced
 [[ ! -x /bin/findmnt ]] && return  # we need this command
@@ -8,7 +8,7 @@
 
 [[ ! -f "$VAR_DIR/$DS/lsblk.before" ]] && lsblk -fipl > "$VAR_DIR/$DS/lsblk.before"
 
-[[ ! -x /usr/sbin/dumpe2fs ]] && return # we need this to view the feautures of an extend file system
+[[ ! -x /usr/sbin/dumpe2fs ]] && return # we need this to view the features of an extend file system
 
 # What we want to is to join the output of e.g.
 # dumpe2fs -h /dev/mapper/vg00-lv_log 2>/dev/null | grep "Filesystem features" | cut -d: -f2

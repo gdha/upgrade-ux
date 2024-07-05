@@ -1,6 +1,6 @@
 = Upgrade Operation
 
-The *upgrade* operation (or workflow) is the default one and does not need to be mentioned explecitely on the command line.
+The *upgrade* operation (or workflow) is the default one and does not need to be mentioned explicitely on the command line.
 The upgrade operation goes through different stages to accomplish a successful upgrade or patch installation. The stages in use are:
 
 init::
@@ -19,7 +19,7 @@ install::
 	The _install_ stage is the part where we actually install software, do the patching or start with the updates of software bundles and drivers. This part must be described in the INI file (install section).
 
 postinstall::
-	The _postinstall_ stage is mainly used to install extra software bundles which were mot part of the global patch bundles or update depots. Also here, these must be described in the INI file (postinstall section). Furthermore, we tend to save evidence during this stage (as we did in the prep stage) so we can compare if something trial was modified and if so, warn the user about it.
+	The _postinstall_ stage is mainly used to install extra software bundles which were not part of the global patch bundles or update depots. Also here, these must be described in the INI file (postinstall section). Furthermore, we tend to save evidence during this stage (as we did in the prep stage) so we can compare if something trial was modified and if so, warn the user about it.
 
 postremove::
 	The _postremove_ stage is just there in case some software bundles must be removed again to avoid conflicts. Usually, this stage is empty.
@@ -31,7 +31,7 @@ postexecute::
 	The _postexecute_ stage is used to execute some program, such as +cfg2html+ to grab a new base point of the system. Again, you can run other programs as well such as +HPSIM-HealthCheck.sh+ and so on
 
 
-Every time you enter or leave a stage the +/var/opt/upgrade-ux/status+ gets updated with a timestamp and the _stage_ name with an addtional notification of 'start' or 'ended'. Upgrade-ux will not delete this status file, but will always append to it so you get a nice historic view of all the runs.
+Every time you enter or leave a stage the +/var/opt/upgrade-ux/status+ gets updated with a timestamp and the _stage_ name with an additional notification of 'start' or 'ended'. Upgrade-ux will not delete this status file, but will always append to it so you get a nice historic view of all the runs.
 
 [source,bash]
 ----

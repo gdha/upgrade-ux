@@ -1,6 +1,6 @@
 function MailHeaders
 {
-    # input paramters (string of text) is used for subject line
+    # input parameters (string of text) is used for subject line
     echo "From: ${FromUser:-root}"
     echo "To: ${ToUser:-root}"
     echo "Subject: $*"

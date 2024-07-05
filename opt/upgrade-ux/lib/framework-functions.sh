@@ -44,7 +44,7 @@ function SourceStage {
         find default "$ARCH" "$OS" "$OS_MASTER_VENDOR" "$OS_MASTER_VENDOR_ARCH" "$OS_MASTER_VENDOR_VERSION" "$OS_VENDOR" "$OS_VENDOR_ARCH" "$OS_VENDOR_VERSION" -name "*.sh" 2>/dev/null \
         | sed -e 's#/\([0-9][0-9]\)_#/!\1!_#g' | sort -t \! -k 2 | tr -d \!
         )
-        # This sed hack is neccessary to sort the scripts by their 2-digit number INSIDE indepentand of the
+        # This sed hack is necessary to sort the scripts by their 2-digit number INSIDE indepentand of the
         # directory depth of the script. Basicall sed inserts a ! before and after the number which makes the
         # number always field nr. 2 when dividing lines into fields by !. The following tr removes the ! to
         # restore the original script name. But now the scripts are already in the correct order.

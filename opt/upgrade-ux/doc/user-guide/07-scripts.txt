@@ -149,7 +149,7 @@ The scripts that are sourced by the main script `upgrade-ux` reside under `/opt/
 
 NOTE: It depends on the OS architecture (see `dump` workflow) which scripts will be sources. In above example it was on HP hardware.
 
-In every _stage_ directory you will find minumum a `default` directory which is sourced by every OS and a hardware specific directory, such as:
+In every _stage_ directory you will find minimum a `default` directory which is sourced by every OS and a hardware specific directory, such as:
 
  - hp
  - GNU/Linux
@@ -187,5 +187,5 @@ if [[ $daysup -gt $DAYSUPTIME ]]; then
 fi
 ----
 
-Now it is up to you! If you wish to add new scripts it is always usefull to first make a new issue at GitHub: https://github.com/gdha/upgrade-ux/issues
+Now it is up to you! If you wish to add new scripts it is always useful to first make a new issue at GitHub: https://github.com/gdha/upgrade-ux/issues
 

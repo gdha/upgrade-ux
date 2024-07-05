@@ -24,7 +24,7 @@ fi
 # look for ERRORS in $CHECK_PATCHES_BEFORE 
 grep -q ERROR $CHECK_PATCHES_BEFORE
 if (( $? == 0 )) ; then
-    # seems we had erros during the check_patches - print a message
+    # seems we had errors during the check_patches - print a message
     LogPrint "Errors were detected by check_patches - look in $CHECK_PATCHES_BEFORE"
     # dump the errors in the log file (at least for now)
     grep -i error $CHECK_PATCHES_BEFORE >&2

@@ -203,7 +203,7 @@ In the +install+ section you typically only define the software bundles that sho
 In the +postinstall+ section we define the software pieces that were missing in the +install+ section for some specific reason (if any). Furthermore, in this stage we capture lots of evidence again and compare these via special scripts. Again see Chapter 6 (The Upgrade-ux scripts).
 
 === Section postremove
-In the +postremove+ section you could remove software bundles taht were in the big update round of the +install+ section, but should not stay on this particular platform for some reason. Again, you may leave it empty if not needed.
+In the +postremove+ section you could remove software bundles that were in the big update round of the +install+ section, but should not stay on this particular platform for some reason. Again, you may leave it empty if not needed.
 
 === Section configure
 In the +configure+ section you could define scripts or commands to be executed by +upgrade-ux+ to configure or add something in cron.

@@ -2,6 +2,6 @@
 
 if (( rhn_satellite_subscription )) ; then
     # PREVIEW or not we must do it otherwise we cannot check the patch updates in preview mode
-    LogPrint "Temporarely disabling RHN Satellite Subscription"
+    LogPrint "Temporarily disabling RHN Satellite Subscription"
     mv -f /etc/sysconfig/rhn/systemid /etc/sysconfig/rhn/systemid.$DS
 fi

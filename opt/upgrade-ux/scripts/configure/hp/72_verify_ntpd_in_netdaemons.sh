@@ -36,7 +36,7 @@ else
     chmod 444 /etc/rc.config.d/netdaemons
 fi
 
-Log "NTP daemon name currenly running is:"
+Log "NTP daemon name currently running is:"
 ps -ef|grep ntpd|grep -vE '(grep|ntpd_in_netdaemons)' >&2
 
 if (( PREVIEW )) ; then

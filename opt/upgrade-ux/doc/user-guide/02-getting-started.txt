@@ -24,7 +24,7 @@ When the RPM is available you could install it via the command:
 
     rpm -ivh upgrade-ux-1.0-1.el7.noarch.rpm
 
-Or, in case you would liek to upgrade a version via +yum+ you could do the following:
+Or, in case you would like to upgrade a version via +yum+ you could do the following:
 
     rpm -Uvh upgrade-ux-1.1-1.el7.noarch.rpm
 

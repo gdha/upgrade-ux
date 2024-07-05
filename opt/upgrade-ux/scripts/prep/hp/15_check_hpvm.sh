@@ -1,5 +1,5 @@
 # 15_check_hpvm.sh
-[[ ! -f /opt/hpvm/bin/hpvminfo ]] && return  # no HP VM installated
+[[ ! -f /opt/hpvm/bin/hpvminfo ]] && return  # no HP VM installed
 
 /opt/hpvm/bin/hpvminfo > $TMP_DIR/hpvminfo 2>&1
 

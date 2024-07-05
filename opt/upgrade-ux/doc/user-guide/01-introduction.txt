@@ -17,7 +17,7 @@ System requires to be upgraded in the way you want it (or designed it). Doing
 it this way allows you to *exactly* define how a system should look like after
 the upgrade or patching. Nothing else can be installed, removed or configured.
 
-Furthermore, many checks can be build-in via adding simple scripts (see chapter 
+Furthermore, many checks can be built-in via adding simple scripts (see chapter 
 "Adding your scripts"). We also keep of each run an unique log file, and furthermore, we keep
 evidence before and after patching in a special directory. Months later we can still
 inspect these logs and evidence directories to verify what happened or what has

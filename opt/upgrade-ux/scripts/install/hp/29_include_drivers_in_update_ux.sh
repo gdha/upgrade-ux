@@ -1,5 +1,5 @@
 # 29_include_drivers_in_update_ux.sh
-# see issue #31 - we better mark network drivers to be updated (as automatic selection is not always peformed)
+# see issue #31 - we better mark network drivers to be updated (as automatic selection is not always performed)
 # This is only required for the update/ux procedure on HP-UX 11.31
 
 # in the prep/hp/61_save_network_drivers_in_use.sh script we wrote in $VAR_TMP/$DS/network.drivers the list

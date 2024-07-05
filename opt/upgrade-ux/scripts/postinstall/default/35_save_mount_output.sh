@@ -1,5 +1,5 @@
 # 35_save_mount_output.sh
-# after patching we save another mount output as reference to proof patching was not to blaim
+# after patching we save another mount output as reference to proof patching was not to blame
 # for certain not yet happened issues (you would be surprised what people blame patching for...)
 
 mount > "$VAR_DIR/$DS/mount_output.after"

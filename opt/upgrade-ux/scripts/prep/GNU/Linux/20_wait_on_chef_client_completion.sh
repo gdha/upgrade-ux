@@ -18,7 +18,7 @@ if [[ $chefclientrunning -eq 1 ]]; then
   fi
 fi
 
-# If chef-client is running wait to completion before continueing
+# If chef-client is running wait to completion before continuing
 for iloop in $(seq 1 3)
 do
   chefclientrunning=$(ps ax | grep $CHEFCLIENT | grep -v grep | wc -l) # 0 when not found running

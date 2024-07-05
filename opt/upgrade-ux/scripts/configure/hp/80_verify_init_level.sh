@@ -1,5 +1,5 @@
 # 80_verify_init_level.sh
-# The init level is sometimes manually edited to level 2 and after succesful patching set to 3 again
+# The init level is sometimes manually edited to level 2 and after successful patching set to 3 again
 # However, sometimes it is forgotten
 i=$( grep ^init /etc/inittab | cut -d: -f2 )  # should be 3, but could be 2
 if (( i < 3 )) ; then

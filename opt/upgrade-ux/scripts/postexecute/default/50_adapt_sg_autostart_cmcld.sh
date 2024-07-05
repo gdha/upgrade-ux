@@ -1,5 +1,5 @@
 # 50_adapt_sg_autostart_cmcld.sh
-# Script is intented to deal with issue #61
+# Script is intended to deal with issue #61
 # We already have a similar script in place configure/default/62_verify_sg_autostart_cmcld.sh
 # which prints a warning in the log file. However, as nobody reads the logs afterwards...
 if [[ -f /etc/cmcluster.conf ]]; then

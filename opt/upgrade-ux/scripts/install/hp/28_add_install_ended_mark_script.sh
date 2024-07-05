@@ -1,6 +1,6 @@
 # 28_add_install_ended_mark_script.sh
 # Only really valid for HP-UX 11.31 and update-ux process
-# we will add a script in the pre-reboot area to add a marker in out status file so after a successfull reboot
+# we will add a script in the pre-reboot area to add a marker in out status file so after a successful reboot
 # we may skip the 'install' stage so we gain time:
 # 1. no running update-ux again (as it is not required anymore)
 # 2. avoid an error message by not re-running update-ux as it was already done (error message like:

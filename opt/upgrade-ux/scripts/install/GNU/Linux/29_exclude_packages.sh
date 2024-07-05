@@ -7,7 +7,7 @@ exclude_packages=""
 
 # Issue #145: we will always refill the variable $exclude_packages (in preview and upgrade mode)
 #if [[ -f "$VAR_DIR/$DS/exclude.packages.var" ]]  ; then
-#    # in PREVIEW mode the file exclude.packages.var will be created and in UPGARDE mode we will read this file
+#    # in PREVIEW mode the file exclude.packages.var will be created and in UPGRADE mode we will read this file
 #    exclude_packages=$( cat "$VAR_DIR/$DS/exclude.packages.var" )
 #    return
 #fi

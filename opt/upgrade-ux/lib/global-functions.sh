@@ -85,7 +85,7 @@ function CreateLockDir {
     CHECKPID=$(< "$PIDFILE" )
     [[ ${PID} != ${CHECKPID} ]] && return 1   # not successful; try again
 
-    # our PID is effectivily written in the PIFDILE
+    # our PID is effectively written in the PIFDILE
     return 0
 }
 
@@ -190,7 +190,7 @@ function Timeout {
     wait $COMMAND_PID
     RET=$?
     # Kill the killer timer
-    [ "$DEBUG" ] && echo Listing proces that will be killed
+    [ "$DEBUG" ] && echo Listing process that will be killed
     [ "$DEBUG" ] && UNIX95= ps -p $KILLER_PID -o pid,ppid | awk -v parent=$$ '$2==parent {print $1}' | xargs ps -fp
     UNIX95= ps -p $KILLER_PID -o pid,ppid | awk -v parent=$$ '$2==parent {print $1}' | xargs kill
     [ ! "$DEBUG" ] && exec 2>&6 6>&- # Restore stderr and close file descriptor #6.
