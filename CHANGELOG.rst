@@ -2,6 +2,124 @@ Changelog
 =========
 
 
+git202407151230.dev202407151430
+-------------------------------
+- #172 fix wrong variable name. [gdha]
+- Merge branch 'master' of github.com:gdha/upgrade-ux. [gdha]
+- Merge pull request #171 from gdha/renovate/ubuntu-22.x. [Gratien
+  D'haese]
+
+  Update dependency ubuntu to v22
+- Update dependency ubuntu to v22. [renovate[bot]]
+- Fix old upload address. [gdha]
+- Fix overlooked typo. [gdha]
+- Fix spelling errors found by Spell Check workflow. [gdha]
+- Add .codespellignore. [gdha]
+- Merge branch 'master' of github.com:gdha/upgrade-ux. [gdha]
+- Test. [D'Haese, Gratien [GTSBE - Non JJ]]
+- Add spellcheck.yml. [gdha]
+- Add comment to the wiki workflow. [gdha]
+- Update Wiki file name. [gdha]
+- Try to fix url.https. [gdha]
+- Try to fix the empty PAT. [gdha]
+- Fix syntax error. [gdha]
+- Add git config part. [gdha]
+- Update wiki.yml - master instead of main. [Gratien D'haese]
+- Update wiki.yml. [Gratien D'haese]
+- Update release-notes-generator-action:3.1.5. [gdha]
+- Merge pull request #169 from gdha/renovate/decathlon-release-notes-
+  generator-action-2.x. [Gratien D'haese]
+
+  Update decathlon/release-notes-generator-action Docker tag to v2.1.0
+- Update decathlon/release-notes-generator-action Docker tag to v2.1.0.
+  [renovate[bot]]
+- Try another wiki workflow. [gdha]
+- Use GH_PAT instead of TOKEN. [gdha]
+- Merge pull request #168 from gdha/renovate/decathlon-wiki-page-
+  creator-action-2.x. [Gratien D'haese]
+
+  Update decathlon/wiki-page-creator-action Docker tag to v2.0.3
+- Update decathlon/wiki-page-creator-action Docker tag to v2.0.3.
+  [renovate[bot]]
+- Create release notes os WIKI page. [gdha]
+- Merge pull request #166 from gdha/renovate/softprops-action-gh-
+  release-2.x. [Gratien D'haese]
+
+  Update softprops/action-gh-release action to v2
+- Update softprops/action-gh-release action to v2. [renovate[bot]]
+- Add git_tag to the release step. [gdha]
+- Rm Dockerfile. [gdha]
+- Test rpm build via workflow -12. [gdha]
+- Test rpm build via workflow -11. [gdha]
+- Test rpm build via workflow -10. [gdha]
+- Test rpm build via workflow -9. [gdha]
+- Test rpm build via workflow -8. [gdha]
+- Test rpm build via workflow -7. [gdha]
+- Test rpm build via workflow -6. [gdha]
+- Test rpm build via workflow -5. [gdha]
+- Test rpm build via workflow -4. [gdha]
+- Test rpm build via workflow -3. [gdha]
+- Test rpm build via workflow -2. [gdha]
+- Test rpm build via workflow -1. [gdha]
+- Make the build work step 26. [gdha]
+- Make the build work step 25. [gdha]
+- Make the build work step 24. [gdha]
+- Make the build work step 23. [gdha]
+- Make the build work step 22. [gdha]
+- Make the build work step 21. [gdha]
+- Make the build work step 20. [gdha]
+- Make the build work step 19. [gdha]
+- Make the build work step 18. [gdha]
+- Make the build work step 17. [gdha]
+- Make the build work step 16. [gdha]
+- Make the build work step 15. [gdha]
+- Make the build work step 14. [gdha]
+- Make the build work step 13. [gdha]
+- Make the build work step 12. [gdha]
+- Make the build work step 11. [gdha]
+- Make the build work step 10. [gdha]
+- Make the build work step 9. [gdha]
+- Make the build work step 8. [gdha]
+- Make the build work step 7. [gdha]
+- Make the build work step 6. [gdha]
+- Make the build work step 5. [gdha]
+- Make the build work step 4. [gdha]
+- Make the build work step 3. [gdha]
+- Make the build work step 2. [gdha]
+- Make the build work step 1. [gdha]
+- Change the run facility. [gdha]
+- Merge pull request #165 from gdha/renovate/actions-checkout-4.x.
+  [Gratien D'haese]
+
+  Update actions/checkout action to v4
+- Update actions/checkout action to v4. [renovate[bot]]
+- Update workflow for el8. [gdha]
+- Merge pull request #164 from gdha/renovate/major-github-artifact-
+  actions. [Gratien D'haese]
+
+  Update GitHub Artifact Actions to v4 (major)
+- Update GitHub Artifact Actions to v4. [renovate[bot]]
+- Add new workflow rpmbuild-of-upgrade-ux.yml. [gdha]
+- Remove docker publish.yml. [gdha]
+- #162 avoid false positive error message on HP-UX. [Gratien D'haese]
+- Improve the release notes. [gdha]
+- Adding release notes. [gdha]
+- Remove docker-image.yml. [gdha]
+- Create docker-publish.yml. [Gratien D'haese]
+- #157 replace cache with dbcache. [gdha]
+- Update docker-image.yml. [Gratien D'haese]
+- #157 test docker buidl. [gdha]
+- Merge pull request #155 from gdha/renovate/softprops-action-gh-
+  release-2.x. [Gratien D'haese]
+
+  Update softprops/action-gh-release action to v2
+- Update softprops/action-gh-release action to v2. [renovate[bot]]
+- Postinstall/default/10_save_dmesg.sh ksh -n complained about ==
+  [Gratien D'haese]
+- #150 also copy CHANGELOG to /usr/share/doc/upgrade-ux. [gdha]
+- #156 update CHANGELOG. [gdha]
+
+
 1.31 (2024-06-10)
 -----------------
 - #156 increasing version to 1.31 in upgrade-ux main script. [gdha]
@@ -1048,4 +1166,5 @@ Changelog
 - Used the dupro framework to populate the initial checkin for upgrade-
   ux. [Gratien D'haese]
 - Initial commit. [Gratien D'haese]
+
 
