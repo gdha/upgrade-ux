@@ -22,7 +22,11 @@ else
 
     # backups were found ; show the date of the last full backup
     LASTFULL=$(LANG=C /usr/openv/netbackup/bin/bpclimagelist $BPARG | grep Full | head -1 | cut -c1-10)
-    LASTFULLSEC=$(date +%s -d $LASTFULL)
+    if [[ -z "$LASTFULL" ]] ; then
+        # No "Full Backup" found, therefore, just use "Backup" as a catch all
+        LASTFULL=$(LANG=C /usr/openv/netbackup/bin/bpclimagelist $BPARG | grep Backup | head -1 | cut -c1-10)
+    fi
+    LASTFULLSEC=$(date +%s -d "$LASTFULL")
     NOWSEC=$(date +%s)
 
     DIFFDAYS=$(( (NOWSEC - LASTFULLSEC) /86400 ))
