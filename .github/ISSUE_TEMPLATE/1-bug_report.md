@@ -3,7 +3,7 @@ name: Bug report
 about: Create a report to help us improve
 title: 'Bug - '
 labels: bug
-assignees: 'gdha'
+assignees: gdha
 
 ---
 
@@ -54,5 +54,3 @@ If exists, describe the workaround for the bug.
 ### Additional context
 
 Add any other context about the problem here.
-
-
