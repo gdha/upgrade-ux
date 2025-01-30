@@ -1,1 +1,51 @@
 blank_issues_enabled: false
+contact_links:
+  - name: "Support"
+    url: "https://example.com/support"
+    about: "Support for this project"
+
+issue_templates:
+  - name: "Bug report"
+    description: "Report a bug in the project"
+    labels: ["bug"]
+    assignees: ["gdha"]
+    title: "Bug: "
+    body: |
+      ### Description
+      A clear and concise description of what the bug is.
+
+      ### Steps to Reproduce
+      Steps to reproduce the behavior:
+      1. Go to '...'
+      2. Click on '....'
+      3. Scroll down to '....'
+      4. See error
+
+      ### Expected behavior
+      A clear and concise description of what you expected to happen.
+
+      ### Screenshots
+      If applicable, add screenshots to help explain your problem.
+
+      ### Environment (please complete the following information):
+      - OS: [e.g. Windows, MacOS]
+      - Browser [e.g. Chrome, Safari]
+      - Version [e.g. 22]
+
+  - name: "Feature request"
+    description: "Suggest a new feature for the project"
+    labels: ["enhancement"]
+    assignees: ["gdha"]
+    title: "Feature request: "
+    body: |
+      ### Summary
+      A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+
+      ### Solution
+      A clear and concise description of what you want to happen.
+
+      ### Alternatives
+      A clear and concise description of any alternative solutions or features you've considered.
+
+      ### Additional context
+      Add any other context or screenshots about the feature request here.
