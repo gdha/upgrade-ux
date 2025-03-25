@@ -2,8 +2,28 @@ Changelog
 =========
 
 
-git202407151230.dev202407151430
--------------------------------
+1.33 (2025-03-25)
+-----------------
+- Increasing version in upgrade-ux. [gdha]
+- #177 add a proper VIRTUAL check. [gdha]
+- #178 use grubby when availabale. [gdha]
+- Update issue templates. [Gratien D'haese]
+- Using markdown. [gdha]
+- Update config.yml. [gdha]
+- Change 1-bug_report.md to 1-bug_report.yml form. [gdha]
+- Adding a config.yml. [gdha]
+- Update bug_report.md. [Gratien D'haese]
+- Update issue templates. [Gratien D'haese]
+- #176 remove option --disableplugin=fastestmirror from the rhel 8 and 9
+  INI file. [gdha]
+- #175 fix the empty LASTFULL varibale. [gdha]
+- #174 add new script prep 25_yum_dnf_check.sh. [gdha]
+- Update spellcheck workflow. [gdha]
+- Update CHANGELOG.rst. [gdha]
+
+
+1.32 (2024-07-15)
+-----------------
 - #172 fix wrong variable name. [gdha]
 - Merge branch 'master' of github.com:gdha/upgrade-ux. [gdha]
 - Merge pull request #171 from gdha/renovate/ubuntu-22.x. [Gratien
