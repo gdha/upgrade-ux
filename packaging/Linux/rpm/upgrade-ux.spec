@@ -18,7 +18,7 @@ Summary:	Open Source framework to patch, update or upgrade UNIX systems
 
 Group:		Applications/File
 License:	GPLv3
-URL:		https://www.it3.be/projects/upgrade-ux.html
+URL:		https://www.it3.be/projects/upgrade-ux/
 #Source:		%{name}-%{version}-%{distversion}.tar.gz
 Source:		%{name}-%{distversion}.tar.gz
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
