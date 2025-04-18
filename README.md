@@ -46,4 +46,4 @@ Author : Gratien D'haese
 
 
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgdha%2Fupgrade-ux.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgdha%2Fupgrade-ux?ref=badge_large)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgdha%2Fupgrade-ux.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgdha%2Fupgrade-ux?ref=badge_large) [![Build Linux Packages](https://github.com/gdha/upgrade-ux/actions/workflows/rpmbuild-of-upgrade-ux.yml/badge.svg)](https://github.com/gdha/upgrade-ux/actions/workflows/rpmbuild-of-upgrade-ux.yml)
