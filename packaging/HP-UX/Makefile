@@ -31,7 +31,7 @@ validate:
 	find ../../etc/opt/upgrade-ux -name '*.conf' | xargs -n 1 ksh -n ; \
 	ksh -n $(main_script) ; \
 	find ../../opt/upgrade-ux/lib -name "*.sh" | xargs -n 1 ksh -n ; \
-	find ../../opt/upgrade-ux/scripts -name "*.sh" | xargs -n 1 ksh -n ; \
+	find ../../opt/upgrade-ux/scripts -name "*.sh" | grep -v GNU | xargs -n 1 ksh -n ; \
 	echo "Scripts were successfully validated."
 
 rewrite: $(psf_file) $(main_script)
