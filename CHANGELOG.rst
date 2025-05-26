@@ -2,6 +2,19 @@ Changelog
 =========
 
 
+1.34 (2025-05-26)
+-----------------
+- Set version to 1.34 for new release (for HP-UX and Linux) [gdha]
+- #182 new file HP-UX-11.31-2025.ini. [gdha]
+- #180 stop/start ir_agent (rapid7) [gdha]
+- #181 RHEL 9 needs 25GB in /boot. [gdha]
+- Update README.md. [Gratien D'haese]
+- Update README.md. [Gratien D'haese]
+- #179 adding dnf repoquery --installed script. [gdha]
+- Fix URL in spec file. [gdha]
+- Update CHANGELOG. [gdha]
+
+
 1.33 (2025-03-25)
 -----------------
 - Increasing version in upgrade-ux. [gdha]
