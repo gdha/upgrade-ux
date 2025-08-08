@@ -1,417 +1,234 @@
-'\" t
-.\"     Title: upgrade-ux
-.\"    Author: Gratien Dhaese
-.\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
-.\"      Date: 23 April 2024
-.\"    Manual: \ \&
-.\"    Source: \ \&
-.\"  Language: English
-.\"
-.TH "UPGRADE\-UX" "8" "23 April 2024" "\ \&" "\ \&"
-.\" -----------------------------------------------------------------
-.\" * Define some portability stuff
-.\" -----------------------------------------------------------------
-.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.\" http://bugs.debian.org/507673
-.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
-.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.ie \n(.g .ds Aq \(aq
-.el       .ds Aq '
-.\" -----------------------------------------------------------------
-.\" * set default formatting
-.\" -----------------------------------------------------------------
-.\" disable hyphenation
-.nh
-.\" disable justification (adjust text to left margin only)
-.ad l
-.\" -----------------------------------------------------------------
-.\" * MAIN CONTENT STARTS HERE *
-.\" -----------------------------------------------------------------
+.\" generated with Ronn-NG/v0.9.1
+.\" http://github.com/apjanke/ronn-ng/tree/0.9.1
+.TH "UPGRADE\-UX" "8" "August 2025" ""
 .SH "NAME"
-upgrade-ux \- a framework to update or patch an Unix system (Linux, HP\-UX and Solaris)
+\fBupgrade\-ux\fR \- a framework to update or patch an Unix system (Linux, HP\-UX and Solaris)
 .SH "SYNOPSIS"
-.sp
-\fBupgrade\-ux\fR [\fB\-dDsSpFvV\fR] [\fB\-c DIR\fR] \fICOMMAND\fR [\-\- \fIARGS\fR\&...]
+\fBupgrade\-ux\fR [\fB\-dDsSpFvV\fR] [\fB\-c DIR\fR] \fICOMMAND\fR [\-\- \fIARGS\fR\|\.\|\.\|\.]
 .SH "DESCRIPTION"
-.sp
-Upgrade\-ux is an Open Source upgrade framework to make patching and upgrades easy and repeatable\&.
-.sp
-Extending upgrade\-ux is made possible by its modular (ksh) framework\&. Consistent logging and optionally extended output help understand the concepts behind Upgrade\-ux and help debug during development\&.
-.sp
-Upgrade\-ux comes with ABSOLUTELY NO WARRANTY; for details see the GNU General Public License at: \m[blue]\fBhttps://www\&.gnu\&.org/licenses/gpl\&.html\fR\m[]
+Upgrade\-ux is an Open Source upgrade framework to make patching and upgrades easy and repeatable\.
+.P
+Extending upgrade\-ux is made possible by its modular (ksh) framework\. Consistent logging and optionally extended output help understand the concepts behind Upgrade\-ux and help debug during development\.
+.P
+Upgrade\-ux comes with ABSOLUTELY NO WARRANTY; for details see the GNU General Public License at: https://www\.gnu\.org/licenses/gpl\.html
 .SH "OPTIONS"
 .SS "GLOBAL OPTIONS"
-.PP
-\-c DIR
-.RS 4
-alternative config directory; instead of /etc/opt/upgrade\-ux
-.RE
-.PP
-\-p
-.RS 4
-\fBpreview mode\fR
-(we will not remove or install, update any software on this system) A preview will be forced by
-\fBupgrade\-ux\fR
-before we can start an upgrade for real!
-.RE
-.PP
-\-d
-.RS 4
-\fBdebug mode\fR
-(log debug messages to log file)
-.RE
-.PP
-\-D
-.RS 4
-\fBdebugscript mode\fR
-(log every function call)
-.RE
-.PP
-\-s
-.RS 4
-\fBsimulation mode\fR
-(show what scripts rear would include)
-.RE
-.PP
-\-S
-.RS 4
-\fBstep\-by\-step mode\fR
-(acknowledge each script individually)
-.RE
-.PP
-\-F
-.RS 4
-\fBforced\fR
-continuation during preview or upgrade mode when check_patches returns errors
-.RE
-.PP
-\-v
-.RS 4
-\fBverbose output\fR
-(show progress output)
-.RE
-.PP
-\-V
-.RS 4
+.TP
+\fB\-c\fR \fIDIR\fR
+alternative config directory; instead of \fB/etc/opt/upgrade\-ux\fR
+.TP
+\fB\-p\fR
+\fIpreview mode\fR (we will not remove or install, update any software on this system) A preview will be forced by \fIupgrade\-ux\fR before we can start an upgrade for real!
+.TP
+\fB\-d\fR
+\fIdebug mode\fR (log debug messages to log file)
+.TP
+\fB\-D\fR
+\fIdebugscript mode\fR (log every function call)
+.TP
+\fB\-s\fR
+\fIsimulation mode\fR (show what scripts rear would include)
+.TP
+\fB\-S\fR
+\fIstep\-by\-step mode\fR (acknowledge each script individually)
+.TP
+\fB\-F\fR
+\fIforced\fR continuation during preview or upgrade mode when check_patches returns errors
+.TP
+\fB\-v\fR
+\fIverbose output\fR (show progress output)
+.TP
+\fB\-V\fR
 version information
-.RE
 .SS "COMMANDS"
-.PP
-\fBdump\fR
-.RS 4
+.TP
+\fIdump\fR
 dump configuration and system information; please run this to verify your setup
-.RE
-.PP
-\fBhelp\fR
-.RS 4
+.TP
+\fIhelp\fR
 print full list of commands and options
-.RE
-.PP
-\fBpurgelogs\fR
-.RS 4
+.TP
+\fIpurgelogs\fR
 remove log files older then 30 days
-.RE
-.PP
-\fBmkdist\fR
-.RS 4
+.TP
+\fImkdist\fR
 creates a tar archive of upgrade\-ux
-.RE
-.PP
-\fBtest\fR
-.RS 4
+.TP
+\fItest\fR
 a simple test flow (stale NFS test)
-.RE
-.PP
-\fBupgrade\fR
-.RS 4
+.TP
+\fIupgrade\fR
 the default command (when no command given) which will launch the upgrade/update/patch procedure
-.RE
+.P
+Use \fBupgrade\-ux \-v help\fR for more advanced commands\.
 .SH "CONFIGURATION"
-.sp
-There are several configuration files available under (\fB/etc/opt/upgrade\-ux/\fR):
-.PP
-\fBdefault\&.conf\fR
-.RS 4
-the default configuration file which defines parameters and variables\&. You should not change anything in here\&. If you need to modify a parameter then copy that line into the
-\fBlocal\&.conf\fR
-file\&.
-.RE
-.PP
-\fBlocal\&.conf\fR
-.RS 4
-the local configuration file meant for the end\-user\&. Remember, configuration files should be treated as shell scripts\&.
-.RE
-.PP
-\fBHP\-UX\&.conf\fR
-.RS 4
+There are several configuration files available under (\fI/etc/opt/upgrade\-ux/\fR):
+.TP
+\fIdefault\.conf\fR
+the default configuration file which defines parameters and variables\. You should not change anything in here\. If you need to modify a parameter then copy that line into the \fIlocal\.conf\fR file\.
+.TP
+\fIlocal\.conf\fR
+the local configuration file meant for the end\-user\. Remember, configuration files should be treated as shell scripts\.
+.TP
+\fIHP\-UX\.conf\fR
 parameters and settings only read by HP\-UX systems
-.RE
-.PP
-\fBSunOS\&.conf\fR
-.RS 4
+.TP
+\fISunOS\.conf\fR
 parameters and settings only read by Solaris systems
-.RE
-.PP
-\fBGNU/Linux\&.conf\fR
-.RS 4
+.TP
+\fIGNU/Linux\.conf\fR
 parameters and settings only read by GNU/Linux systems
-.RE
-.PP
-\fBexclude\&.packages\fR
-.RS 4
+.TP
+\fIexclude\.packages\fR
 the file to add packages which need to be excluded from updating
-.RE
-.sp
-You have the choice to create additional configuration files if required\&. Use the \fBupgrade\-ux dump\fR and check the \fIconfiguration tree\fR section to have a complete overview of all configuration files searched for (it is OK if these do not exist)\&.
-.sp
-A typical variable might be the YEAR setting to define from which year (instead of the default \fB$(date +%Y)\fR [current year]) we want to install the patch bundles\&.
+.P
+You have the choice to create additional configuration files if required\. Use the \fIupgrade\-ux dump\fR and check the \fIconfiguration tree\fR section to have a complete overview of all configuration files searched for (it is OK if these do not exist)\.
+.P
+A typical variable might be the \fBYEAR\fR setting to define from which year (instead of the default \fB$(date +%Y)\fR [current year]) we want to install the patch bundles\.
 .SH "INI FILES"
-.sp
-Each Unix Operating System requires an \fIINI\fR file which contains the sections the upgrade procedure will follow in sequence\&. The name of such \fIINI\fR file is build as follow:
-.sp
-\fB/etc/opt/upgrade\-ux/$OS\-$OS_VERSION\-$YEAR\&.ini\fR
-.sp
-The \fIINI\fR file is build out of sections (a section can be empty, except for the \fB[install]\fR INI section):
-.PP
-\fB[preremove]\fR
-.RS 4
-Add here any specific command to remove specific software bundles before starting the upgrade, e\&.g\&. if some software cannot be upgrade and should be re\-installed
-.sp
-.if n \{\
-.RS 4
-.\}
+Each Unix Operating System requires an \fIINI\fR file which contains the sections the upgrade procedure will follow in sequence\.
+.P
+The name of such \fIINI\fR file is build as follow:
+.IP "" 4
 .nf
-command[0] = (command)
-options[0] = (options for above command)
-bundle[0]  = (which software to remove)
-version[0] = (specific version of above software bundle to be removed)
+/etc/opt/upgrade\-ux/$OS\-$OS_VERSION\-$YEAR\.ini
 .fi
-.if n \{\
-.RE
-.\}
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-command[1] = (command)
-\&.\&.\&.
-.fi
-.if n \{\
-.RE
-.\}
-.RE
-.PP
-\fB[preinstall]\fR
-.RS 4
+.IP "" 0
+.P
+The \fIINI\fR file is build out of sections (a section can be empty, except for the \fI[install]\fR INI section):
+.TP
+\fI[preremove]\fR
+Add here any specific command to remove specific software bundles before starting the upgrade, e\.g\. if some software cannot be upgrade and should be re\-installed\. Example:
+.IP
+\fBcommand[0] = (command)\fR
+.IP
+\fBoptions[0] = (options for above command)\fR
+.IP
+\fBbundle[0] = (which software to remove)\fR
+.IP
+\fBversion[0] = (specific version of above software bundle to be removed)\fR
+.IP
+\fBcommand[1] = (command)\fR
+.IP
+\fB\|\.\|\.\|\.\fR
+.TP
+\fI[preinstall]\fR
 Add here any specific command you want to run
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-command[0] = (command)
-options[0] = (options for above command)
-.fi
-.if n \{\
-.RE
-.\}
-.RE
-.PP
-\fB[install]\fR
-.RS 4
-Add here all commands required to install, upgrade or patch our systems\&. Use the syntax:
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-command[0] = (command)
-options[0] = (options for above command)
-source[0]  = (location of the software depot)
-bundle[0]  = (which software to install, update)
-version[0] = (specific version of above software bundle to be installed or updated)
-.fi
-.if n \{\
-.RE
-.\}
-.RE
-.PP
-\fB[postinstall]\fR
-.RS 4
-Add here all commands required to install additional software packages\&. Use the same syntax as for [install]
-.RE
-.PP
-\fB[postremove]\fR
-.RS 4
-Add here commands to remove something that could not be prevented by [install]\&. Syntax is the same as with [preremove]
-.RE
-.PP
-\fB[configure]\fR
-.RS 4
-Add here commands to configure something special such as cron entries\&. Use same syntax as [preinstall]
-.RE
-.PP
-\fB[cleanup]\fR
-.RS 4
-Add here commands to cleanup, if required\&. Most likely it will be empty
-.RE
-.PP
-\fB[postexecute]\fR
-.RS 4
-Add here commands to run some special, such as
-\fBcfg2html\fR
-(as an example)
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-command[0] = "/opt/cfg2html/bin/cfg2html"
-options[0] = "\-2%Y%m%d"
-.fi
-.if n \{\
-.RE
-.\}
-.RE
+.IP
+\fBcommand[0] = (command)\fR
+.IP
+\fBoptions[0] = (options for above command)\fR
+.TP
+\fI[install]\fR
+Add here all commands required to install, upgrade or patch our systems\. Use the syntax:
+.IP
+\fBcommand[0] = (command)\fR
+.IP
+\fBoptions[0] = (options for above command)\fR
+.IP
+\fBsource[0] = (location of the software depot)\fR
+.IP
+\fBbundle[0] = (which software to install, update)\fR
+.IP
+\fBversion[0] = (specific version of above software bundle to be installed or updated)\fR
+.TP
+\fI[postinstall]\fR
+Add here all commands required to install additional software packages\. Use the same syntax as for [install]
+.TP
+\fI[postremove]\fR
+Add here commands to remove something that could not be prevented by [install]\. Syntax is the same as with [preremove]
+.TP
+\fI[configure]\fR
+Add here commands to configure something special such as cron entries\. Use same syntax as [preinstall]
+.TP
+\fI[cleanup]\fR
+Add here commands to cleanup, if required\. Most likely it will be empty
+.TP
+\fI[postexecute]\fR
+Add here commands to run some special, such as \fIcfg2html\fR (as an example)
+.IP
+\fBcommand[0] = "/opt/cfg2html/bin/cfg2html"\fR
+.IP
+\fBoptions[0] = "\-2%Y%m%d"\fR
 .SH "EXIT STATUS"
-.PP
-0
-.RS 4
-Successful program execution\&.
-.RE
-.PP
->0
-.RS 4
-Usage, syntax or execution errors\&. Check the log file in
-\fI/var/opt/upgrade\-ux/log/\fR
-for more information\&.
-.RE
+.TP
+\fB0\fR
+Successful program execution\.
+.TP
+\fB>0\fR
+Usage, syntax or execution errors\. Check the log file in \fB/var/opt/upgrade\-ux/log/\fR for more information\.
 .SH "FILES"
-.PP
+.TP
 /opt/upgrade\-ux/bin/upgrade\-ux
-.RS 4
-The program itself\&.
-.RE
-.PP
-/etc/opt/upgrade\-ux/default\&.conf
-.RS 4
-The default configuration file\&.
-.RE
-.PP
-/etc/opt/upgrade\-ux/local\&.conf
-.RS 4
-System specific configuration can be set here\&.
-.RE
-.PP
-/etc/opt/upgrade\-ux/exclude\&.packages
-.RS 4
-File contains packages to exclude from updating (one per line)\&.
-.RE
-.PP
+The program itself\.
+.TP
+/etc/opt/upgrade\-ux/default\.conf
+The default configuration file\.
+.TP
+/etc/opt/upgrade\-ux/local\.conf
+System specific configuration can be set here\.
+.TP
+/etc/opt/upgrade\-ux/exclude\.packages
+File contains packages to exclude from updating (one per line)\.
+.TP
 /var/opt/upgrade\-ux/
-.RS 4
-Directory which contains all timestamped directories and log directory\&.
-.RE
-.PP
+Directory which contains all timestamped directories and log directory\.
+.TP
 /var/opt/upgrade\-ux/status
-.RS 4
-File containing time stamps when all sections were executed (as upgrade\-ux may be restarted after a reboot and will continue where it was interrupted)\&. For example,
-.sp
-.if n \{\
-.RS 4
-.\}
+File containing time stamps when all sections were executed (as upgrade\-ux may be restarted after a reboot and will continue where it was interrupted)\.
+.P
+For example:
+.IP "" 4
 .nf
 2014\-05\-27 09:35:00 postexecute:ended
 2014\-05\-27 09:35:00 preview:ended   (preview ended successfully)
 .fi
-.if n \{\
-.RE
-.\}
-.RE
-.PP
-/var/opt/upgrade\-ux/<YYYY\-MM\-DD>/
-.RS 4
-Evidence files collected during
-\fIprep\fR
-phase (the
-\fIbefore\fR
-files) and
-\fIpostinstall\fR
-phase (the
-\fIafter\fR
-files) are stored under this directory\&.
-.RE
-.PP
+.IP "" 0
+.TP
+/var/opt/upgrade\-ux/\fIYYYY\-MM\-DD\fR/
+Evidence files collected during \fIprep\fR phase (the \fIbefore\fR files) and \fIpostinstall\fR phase (the \fIafter\fR files) are stored under this directory\.
+.TP
 /var/opt/upgrade\-ux/log/
-.RS 4
 Directory containing all log files of each upgrade\-ux run with timestamps
-.RE
-.PP
-/tmp/upgrade\-ux\&.xxx
-.RS 4
-Upgrade\-ux working directory\&. By default it is removed after each run\&. If upgrade\-ux exits with an error you probably need to remove this directory ny hand\&. In debugging mode the directory will not be removed as aid in helping to debug this software\&.
-.RE
-.PP
+.TP
+/tmp/upgrade\-ux\.xxx
+Upgrade\-ux working directory\. By default it is removed after each run\. If upgrade\-ux exits with an error you probably need to remove this directory ny hand\. In debugging mode the directory will not be removed as aid in helping to debug this software\.
+.TP
 /opt/upgrade\-ux/scripts
-.RS 4
-Each section will have its own directory (with the name of a section) under this directory\&. Under each section directory you will find sub\-directories with $OS_VENDOR name\&. Finally, under the $OS_VENDOR directories you will find scripts (without the she\-bang!) that will be executed according the flow of the script\&. To honor the sequence use a prefix number\&. To see all scripts to be executed use the simulate option:
-.sp
-.if n \{\
-.RS 4
-.\}
+Each section will have its own directory (with the name of a section) under this directory\. Under each section directory you will find sub\-directories with $OS_VENDOR name\. Finally, under the $OS_VENDOR directories you will find scripts (without the she\-bang!) that will be executed according the flow of the script\. To honor the sequence use a prefix number\.
+.P
+To see all scripts to be executed use the simulate option:
+.IP "" 4
 .nf
 # /opt/upgrade\-ux/bin/upgrade\-ux \-s
-upgrade\-ux 0\&.1 / Git
-Using log file: /var/opt/upgrade\-ux/log/upgrade\-ux\-20140506\-1037\-hostname\&.log
-Source init/default/03_prepare_tmp_build_area\&.sh
-Source init/default/05_select_ini_file\&.sh
-Source init/default/10_check_current_status\&.sh
-\&.\&.\&.
+upgrade\-ux 0\.1 / Git
+Using log file: /var/opt/upgrade\-ux/log/upgrade\-ux\-20140506\-1037\-hostname\.log
+Source init/default/03_prepare_tmp_build_area\.sh
+Source init/default/05_select_ini_file\.sh
+Source init/default/10_check_current_status\.sh
 .fi
-.if n \{\
-.RE
-.\}
-.RE
-.sp
-To run upgrade\-ux in \fIpreview\fR mode use the \-p flag:
-.sp
-.if n \{\
-.RS 4
-.\}
+.IP "" 0
+.P
+To run \fBupgrade\-ux\fR in \fIpreview\fR mode use the \fB\-p\fR flag:
+.IP "" 4
 .nf
 # /opt/upgrade\-ux/bin/upgrade\-ux \-vp
 .fi
-.if n \{\
-.RE
-.\}
-.sp
-To run upgrade\-ux in \fIupgrade\fR mode then do \fInot\fR use the \-p flag:
-.sp
-.if n \{\
-.RS 4
-.\}
+.IP "" 0
+.P
+To run \fBupgrade\-ux\fR in \fIupgrade\fR mode then do \fInot\fR use the \fB\-p\fR flag:
+.IP "" 4
 .nf
 # /opt/upgrade\-ux/bin/upgrade\-ux \-v
 .fi
-.if n \{\
-.RE
-.\}
+.IP "" 0
 .SH "BUGS"
-.sp
-Feedback is welcome, please report any issues or improvements to our issue\-tracker at: \m[blue]\fBhttps://github\&.com/gdha/upgrade\-ux/issues\fR\m[] Furthermore, we welcome pull requests via GitHub\&.
-.sp
-Be aware, that upgrade\-ux is only fully developed on RHEL based Linux systems and HP\-UX systems\&. For other GNU/Linux variants please create an issue with your wishlist\&. However, new development will only be carried out via sponsoring!
+Feedback is welcome, please report any issues or improvements to our issue\-tracker at: https://github\.com/gdha/upgrade\-ux/issues Furthermore, we welcome pull requests via GitHub\.
+.P
+Be aware, that upgrade\-ux is only fully developed on RHEL based Linux systems and HP\-UX systems\. For other GNU/Linux variants please create an issue with your wishlist\. However, new development will only be carried out via sponsoring!
 .SH "COPYRIGHT"
-.sp
-(c) 2014 \- 2024
-.sp
+(c) 2014 \- 2025
+.P
 Gratien Dhaese
-.sp
-Upgrade\-ux comes with ABSOLUTELY NO WARRANTY; for details see the GNU General Public License at \m[blue]\fBhttps://www\&.gnu\&.org/licenses/gpl\&.html\fR\m[]
-.SH "AUTHOR"
-.PP
-\fBGratien Dhaese\fR
-.RS 4
-Author.
-.RE
+.P
+Upgrade\-ux comes with ABSOLUTELY NO WARRANTY; for details see the GNU General Public License at https://www\.gnu\.org/licenses/gpl\.html

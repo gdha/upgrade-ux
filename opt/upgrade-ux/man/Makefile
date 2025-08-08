@@ -1,8 +1,10 @@
 prefix = /opt/upgrade-ux
 mandir = $(prefix)/man
 
-txttargets = $(shell echo *.txt)
-htmltargets = $(patsubst %.txt, %.html, $(txttargets))
+txttargets = $(shell echo *.ronn)
+htmltargets = $(patsubst %.ronn, %.html, $(txttargets))
+# ronn is a tool to generate man-pages directly from MarkDown files
+ronn := $(shell if type -p ronn >/dev/null; then echo ronn; fi)
 
 all: docs
 
@@ -16,16 +18,10 @@ install: upgrade-ux.8
 	install -Dp -m0644 upgrade-ux.8 $(DESTDIR)$(mandir)/man8/upgrade-ux.8
 
 clean:
-	rm -f unconv.8 *.html *.xml
+	rm -f *.8 *.html *.xml
 
-%.8.html: %.8.txt
-	asciidoc -d manpage $<
+%.8: %.8.ronn
+	$(ronn) --roff $<
 
-%.8: %.8.xml
-	xmlto man $<
-
-%.html: %.txt
-	asciidoc $<
-
-%.8.xml: %.8.txt
-	asciidoc -b docbook -d manpage $<
+%.8.html: %.8.ronn
+	$(ronn) --html $<
