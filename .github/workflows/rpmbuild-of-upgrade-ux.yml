@@ -54,7 +54,7 @@ jobs:
       - name: Replace version in RPM spec so correct source is downloaded when building RPM
         run: |
           cd packaging/Linux
-          sudo apt-get -qq update && sudo apt-get -qq install asciidoctor ksh
+          sudo apt-get -qq update && sudo apt-get -qq install ronn ksh
           make dist
 
       - name: Upload source archive as artifact
@@ -79,14 +79,14 @@ jobs:
         id: make_dist
         run: |
           cd packaging/Linux
-          sudo apt-get -qq update && sudo apt-get -qq install asciidoctor ksh
+          sudo apt-get -qq update && sudo apt-get -qq install ronn ksh
           make dist
 
       - name: Run rpmbuild on RPM spec to produce package
         id: make_rpm
         run: |
           cd packaging/Linux
-          sudo apt-get -qq update && sudo apt-get -qq install asciidoctor ksh
+          sudo apt-get -qq update && sudo apt-get -qq install ronn ksh
           make rpm
 
       - name: Upload .rpm package as artifact
