@@ -24,7 +24,7 @@ Source:		%{name}-%{distversion}.tar.gz
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 ExclusiveArch:  %ix86 x86_64
 
-BuildRequires:	 ronn
+#BuildRequires:	 ronn
 Requires:	ksh
 
 %description
