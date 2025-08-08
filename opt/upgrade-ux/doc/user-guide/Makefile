@@ -1,20 +1,20 @@
 prefix = /opt/upgrade-ux
 
-txttargets = upgrade-ux-user-guide.txt
-htmltargets = $(patsubst %.txt, %.html, $(txttargets))
+htmltarget = upgrade-ux-user-guide.html
+
+# ronn is a tool to generate man-pages directly from MarkDown files
+ronn := $(shell if type -p ronn >/dev/null; then echo ronn; fi)
 
 all: docs
 
 dist: docs
 
-docs: $(htmltargets)
+docs:
+	cat *.md | $(ronn) --html > $(htmltarget)
 
 clean:
 	rm -f *.html *.svg *.xml
 
-%.html: %.txt
-	asciidoc $<
-
-upload: $(htmltargets)
-	lftp -e 'put -O /wwwroot/projects/upgrade-ux $(htmltargets) ; bye' it3.be.apache52.cloud.telenet.be
+upload: $(htmltarget)
+	lftp -e 'put -O /wwwroot/projects/upgrade-ux $(htmltarget) ; bye' it3.be.apache52.cloud.telenet.be
 

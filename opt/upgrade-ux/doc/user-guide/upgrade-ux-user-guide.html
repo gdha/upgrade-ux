@@ -1,991 +1,219 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 9.0.0rc1" />
-<title>Upgrade-UX User Guide</title>
-<style type="text/css">
-/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
-
-/* Default font. */
-body {
-  font-family: Georgia,serif;
-}
-
-/* Title font. */
-h1, h2, h3, h4, h5, h6,
-div.title, caption.title,
-thead, p.table.header,
-#toctitle,
-#author, #revnumber, #revdate, #revremark,
-#footer {
-  font-family: Arial,Helvetica,sans-serif;
-}
-
-body {
-  margin: 1em 5% 1em 5%;
-}
-
-a {
-  color: blue;
-  text-decoration: underline;
-}
-a:visited {
-  color: fuchsia;
-}
-
-em {
-  font-style: italic;
-  color: navy;
-}
-
-strong {
-  font-weight: bold;
-  color: #083194;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: #527bbd;
-  margin-top: 1.2em;
-  margin-bottom: 0.5em;
-  line-height: 1.3;
-}
-
-h1, h2, h3 {
-  border-bottom: 2px solid silver;
-}
-h2 {
-  padding-top: 0.5em;
-}
-h3 {
-  float: left;
-}
-h3 + * {
-  clear: left;
-}
-h5 {
-  font-size: 1.0em;
-}
-
-div.sectionbody {
-  margin-left: 0;
-}
-
-hr {
-  border: 1px solid silver;
-}
-
-p {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-}
-
-ul, ol, li > p {
-  margin-top: 0;
-}
-ul > li     { color: #aaa; }
-ul > li > * { color: black; }
-
-.monospaced, code, pre {
-  font-family: "Courier New", Courier, monospace;
-  font-size: inherit;
-  color: navy;
-  padding: 0;
-  margin: 0;
-}
-pre {
-  white-space: pre-wrap;
-}
-
-#author {
-  color: #527bbd;
-  font-weight: bold;
-  font-size: 1.1em;
-}
-#email {
-}
-#revnumber, #revdate, #revremark {
-}
-
-#footer {
-  font-size: small;
-  border-top: 2px solid silver;
-  padding-top: 0.5em;
-  margin-top: 4.0em;
-}
-#footer-text {
-  float: left;
-  padding-bottom: 0.5em;
-}
-#footer-badges {
-  float: right;
-  padding-bottom: 0.5em;
-}
-
-#preamble {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-}
-div.imageblock, div.exampleblock, div.verseblock,
-div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
-div.admonitionblock {
-  margin-top: 1.0em;
-  margin-bottom: 1.5em;
-}
-div.admonitionblock {
-  margin-top: 2.0em;
-  margin-bottom: 2.0em;
-  margin-right: 10%;
-  color: #606060;
-}
-
-div.content { /* Block element content. */
-  padding: 0;
-}
-
-/* Block element titles. */
-div.title, caption.title {
-  color: #527bbd;
-  font-weight: bold;
-  text-align: left;
-  margin-top: 1.0em;
-  margin-bottom: 0.5em;
-}
-div.title + * {
-  margin-top: 0;
-}
-
-td div.title:first-child {
-  margin-top: 0.0em;
-}
-div.content div.title:first-child {
-  margin-top: 0.0em;
-}
-div.content + div.title {
-  margin-top: 0.0em;
-}
-
-div.sidebarblock > div.content {
-  background: #ffffee;
-  border: 1px solid #dddddd;
-  border-left: 4px solid #f0f0f0;
-  padding: 0.5em;
-}
-
-div.listingblock > div.content {
-  border: 1px solid #dddddd;
-  border-left: 5px solid #f0f0f0;
-  background: #f8f8f8;
-  padding: 0.5em;
-}
-
-div.quoteblock, div.verseblock {
-  padding-left: 1.0em;
-  margin-left: 1.0em;
-  margin-right: 10%;
-  border-left: 5px solid #f0f0f0;
-  color: #888;
-}
-
-div.quoteblock > div.attribution {
-  padding-top: 0.5em;
-  text-align: right;
-}
-
-div.verseblock > pre.content {
-  font-family: inherit;
-  font-size: inherit;
-}
-div.verseblock > div.attribution {
-  padding-top: 0.75em;
-  text-align: left;
-}
-/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
-div.verseblock + div.attribution {
-  text-align: left;
-}
-
-div.admonitionblock .icon {
-  vertical-align: top;
-  font-size: 1.1em;
-  font-weight: bold;
-  text-decoration: underline;
-  color: #527bbd;
-  padding-right: 0.5em;
-}
-div.admonitionblock td.content {
-  padding-left: 0.5em;
-  border-left: 3px solid #dddddd;
-}
-
-div.exampleblock > div.content {
-  border-left: 3px solid #dddddd;
-  padding-left: 0.5em;
-}
-
-div.imageblock div.content { padding-left: 0; }
-span.image img { border-style: none; vertical-align: text-bottom; }
-a.image:visited { color: white; }
-
-dl {
-  margin-top: 0.8em;
-  margin-bottom: 0.8em;
-}
-dt {
-  margin-top: 0.5em;
-  margin-bottom: 0;
-  font-style: normal;
-  color: navy;
-}
-dd > *:first-child {
-  margin-top: 0.1em;
-}
-
-ul, ol {
-    list-style-position: outside;
-}
-ol.arabic {
-  list-style-type: decimal;
-}
-ol.loweralpha {
-  list-style-type: lower-alpha;
-}
-ol.upperalpha {
-  list-style-type: upper-alpha;
-}
-ol.lowerroman {
-  list-style-type: lower-roman;
-}
-ol.upperroman {
-  list-style-type: upper-roman;
-}
-
-div.compact ul, div.compact ol,
-div.compact p, div.compact p,
-div.compact div, div.compact div {
-  margin-top: 0.1em;
-  margin-bottom: 0.1em;
-}
-
-tfoot {
-  font-weight: bold;
-}
-td > div.verse {
-  white-space: pre;
-}
-
-div.hdlist {
-  margin-top: 0.8em;
-  margin-bottom: 0.8em;
-}
-div.hdlist tr {
-  padding-bottom: 15px;
-}
-dt.hdlist1.strong, td.hdlist1.strong {
-  font-weight: bold;
-}
-td.hdlist1 {
-  vertical-align: top;
-  font-style: normal;
-  padding-right: 0.8em;
-  color: navy;
-}
-td.hdlist2 {
-  vertical-align: top;
-}
-div.hdlist.compact tr {
-  margin: 0;
-  padding-bottom: 0;
-}
-
-.comment {
-  background: yellow;
-}
-
-.footnote, .footnoteref {
-  font-size: 0.8em;
-}
-
-span.footnote, span.footnoteref {
-  vertical-align: super;
-}
-
-#footnotes {
-  margin: 20px 0 20px 0;
-  padding: 7px 0 0 0;
-}
-
-#footnotes div.footnote {
-  margin: 0 0 5px 0;
-}
-
-#footnotes hr {
-  border: none;
-  border-top: 1px solid silver;
-  height: 1px;
-  text-align: left;
-  margin-left: 0;
-  width: 20%;
-  min-width: 100px;
-}
-
-div.colist td {
-  padding-right: 0.5em;
-  padding-bottom: 0.3em;
-  vertical-align: top;
-}
-div.colist td img {
-  margin-top: 0.3em;
-}
-
-@media print {
-  #footer-badges { display: none; }
-}
-
-#toc {
-  margin-bottom: 2.5em;
-}
-
-#toctitle {
-  color: #527bbd;
-  font-size: 1.1em;
-  font-weight: bold;
-  margin-top: 1.0em;
-  margin-bottom: 0.1em;
-}
-
-div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-div.toclevel2 {
-  margin-left: 2em;
-  font-size: 0.9em;
-}
-div.toclevel3 {
-  margin-left: 4em;
-  font-size: 0.9em;
-}
-div.toclevel4 {
-  margin-left: 6em;
-  font-size: 0.9em;
-}
-
-span.aqua { color: aqua; }
-span.black { color: black; }
-span.blue { color: blue; }
-span.fuchsia { color: fuchsia; }
-span.gray { color: gray; }
-span.green { color: green; }
-span.lime { color: lime; }
-span.maroon { color: maroon; }
-span.navy { color: navy; }
-span.olive { color: olive; }
-span.purple { color: purple; }
-span.red { color: red; }
-span.silver { color: silver; }
-span.teal { color: teal; }
-span.white { color: white; }
-span.yellow { color: yellow; }
-
-span.aqua-background { background: aqua; }
-span.black-background { background: black; }
-span.blue-background { background: blue; }
-span.fuchsia-background { background: fuchsia; }
-span.gray-background { background: gray; }
-span.green-background { background: green; }
-span.lime-background { background: lime; }
-span.maroon-background { background: maroon; }
-span.navy-background { background: navy; }
-span.olive-background { background: olive; }
-span.purple-background { background: purple; }
-span.red-background { background: red; }
-span.silver-background { background: silver; }
-span.teal-background { background: teal; }
-span.white-background { background: white; }
-span.yellow-background { background: yellow; }
-
-span.big { font-size: 2em; }
-span.small { font-size: 0.6em; }
-
-span.underline { text-decoration: underline; }
-span.overline { text-decoration: overline; }
-span.line-through { text-decoration: line-through; }
-
-div.unbreakable { page-break-inside: avoid; }
-
-
-/*
- * xhtml11 specific
- *
- * */
-
-div.tableblock {
-  margin-top: 1.0em;
-  margin-bottom: 1.5em;
-}
-div.tableblock > table {
-  border: 3px solid #527bbd;
-}
-thead, p.table.header {
-  font-weight: bold;
-  color: #527bbd;
-}
-p.table {
-  margin-top: 0;
-}
-/* Because the table frame attribute is overridden by CSS in most browsers. */
-div.tableblock > table[frame="void"] {
-  border-style: none;
-}
-div.tableblock > table[frame="hsides"] {
-  border-left-style: none;
-  border-right-style: none;
-}
-div.tableblock > table[frame="vsides"] {
-  border-top-style: none;
-  border-bottom-style: none;
-}
-
-
-/*
- * html5 specific
- *
- * */
-
-table.tableblock {
-  margin-top: 1.0em;
-  margin-bottom: 1.5em;
-}
-thead, p.tableblock.header {
-  font-weight: bold;
-  color: #527bbd;
-}
-p.tableblock {
-  margin-top: 0;
-}
-table.tableblock {
-  border-width: 3px;
-  border-spacing: 0px;
-  border-style: solid;
-  border-color: #527bbd;
-  border-collapse: collapse;
-}
-th.tableblock, td.tableblock {
-  border-width: 1px;
-  padding: 4px;
-  border-style: solid;
-  border-color: #527bbd;
-}
-
-table.tableblock.frame-topbot {
-  border-left-style: hidden;
-  border-right-style: hidden;
-}
-table.tableblock.frame-sides {
-  border-top-style: hidden;
-  border-bottom-style: hidden;
-}
-table.tableblock.frame-none {
-  border-style: hidden;
-}
-
-th.tableblock.halign-left, td.tableblock.halign-left {
-  text-align: left;
-}
-th.tableblock.halign-center, td.tableblock.halign-center {
-  text-align: center;
-}
-th.tableblock.halign-right, td.tableblock.halign-right {
-  text-align: right;
-}
-
-th.tableblock.valign-top, td.tableblock.valign-top {
-  vertical-align: top;
-}
-th.tableblock.valign-middle, td.tableblock.valign-middle {
-  vertical-align: middle;
-}
-th.tableblock.valign-bottom, td.tableblock.valign-bottom {
-  vertical-align: bottom;
-}
-
-
-/*
- * manpage specific
- *
- * */
-
-body.manpage h1 {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  border-top: 2px solid silver;
-  border-bottom: 2px solid silver;
-}
-body.manpage h2 {
-  border-style: none;
-}
-body.manpage div.sectionbody {
-  margin-left: 3em;
-}
-
-@media print {
-  body.manpage div#toc { display: none; }
-}
-
-
-</style>
-<script type="text/javascript">
-/*<![CDATA[*/
-var asciidoc = {  // Namespace.
-
-/////////////////////////////////////////////////////////////////////
-// Table Of Contents generator
-/////////////////////////////////////////////////////////////////////
-
-/* Author: Mihai Bazon, September 2002
- * http://students.infoiasi.ro/~mishoo
- *
- * Table Of Content generator
- * Version: 0.4
- *
- * Feel free to use this script under the terms of the GNU General Public
- * License, as long as you do not remove or alter this notice.
- */
-
- /* modified by Troy D. Hanson, September 2006. License: GPL */
- /* modified by Stuart Rackham, 2006, 2009. License: GPL */
-
-// toclevels = 1..4.
-toc: function (toclevels) {
-
-  function getText(el) {
-    var text = "";
-    for (var i = el.firstChild; i != null; i = i.nextSibling) {
-      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
-        text += i.data;
-      else if (i.firstChild != null)
-        text += getText(i);
-    }
-    return text;
-  }
-
-  function TocEntry(el, text, toclevel) {
-    this.element = el;
-    this.text = text;
-    this.toclevel = toclevel;
-  }
-
-  function tocEntries(el, toclevels) {
-    var result = new Array;
-    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
-    // Function that scans the DOM tree for header elements (the DOM2
-    // nodeIterator API would be a better technique but not supported by all
-    // browsers).
-    var iterate = function (el) {
-      for (var i = el.firstChild; i != null; i = i.nextSibling) {
-        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
-          var mo = re.exec(i.tagName);
-          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
-            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
-          }
-          iterate(i);
-        }
-      }
-    }
-    iterate(el);
-    return result;
-  }
-
-  var toc = document.getElementById("toc");
-  if (!toc) {
-    return;
-  }
-
-  // Delete existing TOC entries in case we're reloading the TOC.
-  var tocEntriesToRemove = [];
-  var i;
-  for (i = 0; i < toc.childNodes.length; i++) {
-    var entry = toc.childNodes[i];
-    if (entry.nodeName.toLowerCase() == 'div'
-     && entry.getAttribute("class")
-     && entry.getAttribute("class").match(/^toclevel/))
-      tocEntriesToRemove.push(entry);
-  }
-  for (i = 0; i < tocEntriesToRemove.length; i++) {
-    toc.removeChild(tocEntriesToRemove[i]);
-  }
-
-  // Rebuild TOC entries.
-  var entries = tocEntries(document.getElementById("content"), toclevels);
-  for (var i = 0; i < entries.length; ++i) {
-    var entry = entries[i];
-    if (entry.element.id == "")
-      entry.element.id = "_toc_" + i;
-    var a = document.createElement("a");
-    a.href = "#" + entry.element.id;
-    a.appendChild(document.createTextNode(entry.text));
-    var div = document.createElement("div");
-    div.appendChild(a);
-    div.className = "toclevel" + entry.toclevel;
-    toc.appendChild(div);
-  }
-  if (entries.length == 0)
-    toc.parentNode.removeChild(toc);
-},
-
-
-/////////////////////////////////////////////////////////////////////
-// Footnotes generator
-/////////////////////////////////////////////////////////////////////
-
-/* Based on footnote generation code from:
- * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
- */
-
-footnotes: function () {
-  // Delete existing footnote entries in case we're reloading the footnodes.
-  var i;
-  var noteholder = document.getElementById("footnotes");
-  if (!noteholder) {
-    return;
-  }
-  var entriesToRemove = [];
-  for (i = 0; i < noteholder.childNodes.length; i++) {
-    var entry = noteholder.childNodes[i];
-    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
-      entriesToRemove.push(entry);
-  }
-  for (i = 0; i < entriesToRemove.length; i++) {
-    noteholder.removeChild(entriesToRemove[i]);
-  }
-
-  // Rebuild footnote entries.
-  var cont = document.getElementById("content");
-  var spans = cont.getElementsByTagName("span");
-  var refs = {};
-  var n = 0;
-  for (i=0; i<spans.length; i++) {
-    if (spans[i].className == "footnote") {
-      n++;
-      var note = spans[i].getAttribute("data-note");
-      if (!note) {
-        // Use [\s\S] in place of . so multi-line matches work.
-        // Because JavaScript has no s (dotall) regex flag.
-        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
-        spans[i].innerHTML =
-          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
-          "' title='View footnote' class='footnote'>" + n + "</a>]";
-        spans[i].setAttribute("data-note", note);
-      }
-      noteholder.innerHTML +=
-        "<div class='footnote' id='_footnote_" + n + "'>" +
-        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
-        n + "</a>. " + note + "</div>";
-      var id =spans[i].getAttribute("id");
-      if (id != null) refs["#"+id] = n;
-    }
-  }
-  if (n == 0)
-    noteholder.parentNode.removeChild(noteholder);
-  else {
-    // Process footnoterefs.
-    for (i=0; i<spans.length; i++) {
-      if (spans[i].className == "footnoteref") {
-        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
-        href = href.match(/#.*/)[0];  // Because IE return full URL.
-        n = refs[href];
-        spans[i].innerHTML =
-          "[<a href='#_footnote_" + n +
-          "' title='View footnote' class='footnote'>" + n + "</a>]";
-      }
-    }
-  }
-},
-
-install: function(toclevels) {
-  var timerId;
-
-  function reinstall() {
-    asciidoc.footnotes();
-    if (toclevels) {
-      asciidoc.toc(toclevels);
-    }
-  }
-
-  function reinstallAndRemoveTimer() {
-    clearInterval(timerId);
-    reinstall();
-  }
-
-  timerId = setInterval(reinstall, 500);
-  if (document.addEventListener)
-    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
-  else
-    window.onload = reinstallAndRemoveTimer;
-}
-
-}
-asciidoc.install(2);
-/*]]>*/
-</script>
+  <meta http-equiv='content-type' content='text/html;charset=utf8'>
+  <meta name='generator' content='Ronn-NG/v0.9.1 (http://github.com/apjanke/ronn-ng/tree/0.9.1)'>
+  <title>Introduction</title>
+  <style type='text/css' media='all'>
+  /* style: man */
+  body#manpage {margin:0}
+  .mp {max-width:100ex;padding:0 9ex 1ex 4ex}
+  .mp p,.mp pre,.mp ul,.mp ol,.mp dl {margin:0 0 20px 0}
+  .mp h2 {margin:10px 0 0 0}
+  .mp > p,.mp > pre,.mp > ul,.mp > ol,.mp > dl {margin-left:8ex}
+  .mp h3 {margin:0 0 0 4ex}
+  .mp dt {margin:0;clear:left}
+  .mp dt.flush {float:left;width:8ex}
+  .mp dd {margin:0 0 0 9ex}
+  .mp h1,.mp h2,.mp h3,.mp h4 {clear:left}
+  .mp pre {margin-bottom:20px}
+  .mp pre+h2,.mp pre+h3 {margin-top:22px}
+  .mp h2+pre,.mp h3+pre {margin-top:5px}
+  .mp img {display:block;margin:auto}
+  .mp h1.man-title {display:none}
+  .mp,.mp code,.mp pre,.mp tt,.mp kbd,.mp samp,.mp h3,.mp h4 {font-family:monospace;font-size:14px;line-height:1.42857142857143}
+  .mp h2 {font-size:16px;line-height:1.25}
+  .mp h1 {font-size:20px;line-height:2}
+  .mp {text-align:justify;background:#fff}
+  .mp,.mp code,.mp pre,.mp pre code,.mp tt,.mp kbd,.mp samp {color:#131211}
+  .mp h1,.mp h2,.mp h3,.mp h4 {color:#030201}
+  .mp u {text-decoration:underline}
+  .mp code,.mp strong,.mp b {font-weight:bold;color:#131211}
+  .mp em,.mp var {font-style:italic;color:#232221;text-decoration:none}
+  .mp a,.mp a:link,.mp a:hover,.mp a code,.mp a pre,.mp a tt,.mp a kbd,.mp a samp {color:#0000ff}
+  .mp b.man-ref {font-weight:normal;color:#434241}
+  .mp pre {padding:0 4ex}
+  .mp pre code {font-weight:normal;color:#434241}
+  .mp h2+pre,h3+pre {padding-left:0}
+  ol.man-decor,ol.man-decor li {margin:3px 0 10px 0;padding:0;float:left;width:33%;list-style-type:none;text-transform:uppercase;color:#999;letter-spacing:1px}
+  ol.man-decor {width:100%}
+  ol.man-decor li.tl {text-align:left}
+  ol.man-decor li.tc {text-align:center;letter-spacing:4px}
+  ol.man-decor li.tr {text-align:right;float:right}
+  </style>
 </head>
-<body class="book">
-<div id="header">
-<h1>Upgrade-UX User Guide</h1>
-<span id="author">Gratien Dhaese</span><br />
-<div id="toc">
-  <div id="toctitle">Table of Contents</div>
-  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
-</div>
-</div>
-<div id="content">
-<div id="preamble">
-<div class="sectionbody">
-<img src="https://www.it3.be/images/upgrade-ux.png">
-<div class="paragraph"><p>This document describes everything there is to know regarding
-<strong>Upgrade-UX</strong>, an Open Source upgrade and patching framework designed to assist the UNIX system engineer in patching or upgrading
-systems in a consistent and repeatable way with evidence before and after the running <code>upgrade-ux</code>.</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_introduction">1. Introduction</h2>
-<div class="sectionbody">
-<div class="paragraph"><p><strong>Upgrade-UX</strong> is ai software framework to update or patch lots of Unix systems (Linux,
-HP-UX, AIX and Solaris).</p></div>
-<div class="paragraph"><p>In professional environments it is not allowed
+<!--
+  The following styles are deprecated and will be removed at some point:
+  div#man, div#man ol.man, div#man ol.head, div#man ol.man.
+
+  The .man-page, .man-decor, .man-head, .man-foot, .man-title, and
+  .man-navigation should be used instead.
+-->
+<body id='manpage'>
+  <div class='mp' id='man'>
+
+  <div class='man-navigation' style='display:none'>
+    <a href="#UPGRADE-UX-PROJECT">Upgrade-UX project</a>
+    <a href="#DESIGN-CONCEPTS">Design concepts</a>
+    <a href="#FEATURES-AND-FUNCTIONALITY">Features and functionality</a>
+    <a href="#CLONE-THE-SOURCES-VIA-GITHUB">Clone the sources via GitHub</a>
+    <a href="#INSTALLING-THE-SOFTWARE-DEPOT-ON-HP-UX">Installing the software depot on HP-UX</a>
+    <a href="#INSTALLING-THE-RPM-PACKAGE-ON-LINUX-RHEL-SLES-">Installing the RPM package on Linux (RHEL, SLES)</a>
+    <a href="#PREREQUISITES">Prerequisites</a>
+    <a href="#UPGRADE-UX-RELATED-CONFIGURATION-FILES">Upgrade-ux related configuration files</a>
+    <a href="#THE-INI-FILES">The INI files</a>
+    <a href="#DUMP-WORKFLOW">Dump workflow</a>
+    <a href="#MKDIST-WORKFLOW">Mkdist workflow</a>
+    <a href="#PURGELOGS-WORKFLOW">Purgelogs workflow</a>
+    <a href="#TEST-WORKFLOW">Test workflow</a>
+    <a href="#UPGRADE-WORKFLOW">Upgrade workflow</a>
+    <a href="#UPGRADE-UX-NOT-FOUND">Upgrade-ux not found</a>
+    <a href="#WHY-UPGRADE-UX-AS-WE-KNOW-UPDATE-UX">Why upgrade-ux as we know update-ux</a>
+    <a href="#HOW-DO-WE-INSTALL-A-PATCH-BUNDLE-FROM-1-OR-2-YEARS-AGO-">How do we install a patch bundle from 1 or 2 years ago?</a>
+    <a href="#HOW-GETS-THE-SDSERVER-VARIABLE-DEFINED">How gets the SDSERVER variable defined</a>
+    <a href="#UPGRADE-UX-FORCES-ME-TO-REBOOT-THE-SERVER-IF-SYSTEM-IS-RUNNING-FOR-MORE-THEN-30-DAYS">Upgrade-ux forces me to reboot the server if system is running for more then 30 days</a>
+  </div>
+
+  <ol class='man-decor man-head man head'>
+    <li class='tl'></li>
+    <li class='tc'></li>
+    <li class='tr'></li>
+  </ol>
+
+  
+
+<h1 id="Introduction">Introduction</h1>
+<p><em>Upgrade-UX</em> is ai software framework to update or patch lots of Unix systems (Linux,
+HP-UX, AIX and Solaris).</p>
+
+<p>In professional environments it is not allowed
 to just blindly update an UNIX system without testing this first out on a development
 system, pre-production and so on. The upgrade-ux product allows you to repeat
 this process in a consistent way and as many times as you like on any system.
-Upgrade-ux understands two states:</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-preview mode: will go through the whole process without actually doing the update
-</p>
-</li>
-<li>
-<p>
-upgrade mode: will do it for real (the update)
-</p>
-</li>
-</ul></div>
-<div class="paragraph"><p>The upgrade-ux uses configuration files which describes what a particular Unix Operating
+Upgrade-ux understands two states:</p>
+
+<ul>
+  <li>preview mode: will go through the whole process without actually doing the update</li>
+  <li>upgrade mode: will do it for real (the update)</li>
+</ul>
+
+<p>The upgrade-ux uses configuration files which describes what a particular Unix Operating
 System requires to be upgraded in the way you want it (or designed it). Doing
-it this way allows you to <strong>exactly</strong> define how a system should look like after
-the upgrade or patching. Nothing else can be installed, removed or configured.</p></div>
-<div class="paragraph"><p>Furthermore, many checks can be built-in via adding simple scripts (see chapter
+it this way allows you to <em>exactly</em> define how a system should look like after
+the upgrade or patching. Nothing else can be installed, removed or configured.</p>
+
+<p>Furthermore, many checks can be built-in via adding simple scripts (see chapter 
 "Adding your scripts"). We also keep of each run an unique log file, and furthermore, we keep
 evidence before and after patching in a special directory. Months later we can still
 inspect these logs and evidence directories to verify what happened or what has
-changed in the meantime.</p></div>
-<div class="sect2">
-<h3 id="_upgrade_ux_project">1.1. Upgrade-UX project</h3>
-<div class="paragraph"><p>The support and development of the Upgrade-UX project takes place
-on Github:</p></div>
-<div class="dlist"><dl>
-<dt class="hdlist1">
-Upgrade-UX website
-</dt>
-<dd>
-<p>
-    <a href="https://www.it3.be/projects/upgrade-ux.html">https://www.it3.be/projects/upgrade-ux.html</a>
-</p>
-</dd>
-<dt class="hdlist1">
-Github project
-</dt>
-<dd>
-<p>
-    <a href="https://github.com/gdha/upgrade-ux/">https://github.com/gdha/upgrade-ux/</a>
-</p>
-</dd>
-</dl></div>
-<div class="paragraph"><p>In case you have questions, ideas or feedback about this document, you
+changed in the meantime.</p>
+
+<h2 id="Upgrade-UX-project">Upgrade-UX project</h2>
+
+<p>The support and development of the Upgrade-UX project takes place
+on Github:</p>
+
+<p>Upgrade-UX website:
+    https://www.it3.be/projects/upgrade-ux.html</p>
+
+<p>Github project:
+    https://github.com/gdha/upgrade-ux/</p>
+
+<p>In case you have questions, ideas or feedback about this document, you
 can contact the development team at:
-<a href="mailto:gratien.dhaese@gmail.com">gratien.dhaese@gmail.com</a>.</p></div>
-</div>
-<div class="sect2">
-<h3 id="_design_concepts">1.2. Design concepts</h3>
-<div class="paragraph"><p>Based on experience from previous projects, a set of design principles were
-defined, and improved over time:</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-Focus on easy and repeatable tasks
-</p>
-</li>
-<li>
-<p>
-Modular design, focused on system administrators
-</p>
-</li>
-<li>
-<p>
-For Unix operating systems
-</p>
-</li>
-<li>
-<p>
-Few external dependencies (ksh and standard Unix tools)
-</p>
-</li>
-<li>
-<p>
-Easy to use and easy to extend
-</p>
-</li>
-</ul></div>
-<div class="paragraph"><p>The goal is to make Upgrade-UX as least demanding as possible, it will
+gratien.dhaese@gmail.com.</p>
+
+<h2 id="Design-concepts">Design concepts</h2>
+
+<p>Based on experience from previous projects, a set of design principles were
+defined, and improved over time:</p>
+
+<ul>
+  <li>Focus on easy and repeatable tasks</li>
+  <li>Modular design, focused on system administrators</li>
+  <li>For Unix operating systems</li>
+  <li>Few external dependencies (ksh and standard Unix tools)</li>
+  <li>Easy to use and easy to extend</li>
+</ul>
+
+<p>The goal is to make Upgrade-UX as least demanding as possible, it will
 require only the applications necessary to fulfill the job upgrade-ux
-is configured for.</p></div>
-</div>
-<div class="sect2">
-<h3 id="_features_and_functionality">1.3. Features and functionality</h3>
-<div class="paragraph"><p>Upgrade-UX has a wide range of features:</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-Simple to use
-</p>
-</li>
-<li>
-<p>
-Has a <em>preview</em> mode (to dry-run an upgrade without doing it) and an <em>upgrade</em> mode
-</p>
-</li>
-<li>
-<p>
-Is customisable via <code>local.conf</code> configuration file
-</p>
-</li>
-<li>
-<p>
-Is written in standard Korn Shell (which makes it highly portable)
-</p>
-</li>
-<li>
-<p>
-Is UNIX Operating System independent as OS specific tasks reside in their own directory structures
-</p>
-</li>
-<li>
-<p>
-Is easy extendable with your own scripts
-</p>
-</li>
-<li>
-<p>
-The <code>upgrade-ux</code> command leaves a trace in its own log file
-</p>
-</li>
-<li>
-<p>
-Running in preview or upgrade mode always creates evidence files
-</p>
-</li>
-<li>
-<p>
-Has a man page
-</p>
-</li>
-<li>
-<p>
-Has user documentation (you are reading it)
-</p>
-</li>
-<li>
-<p>
-Can be used to install patch bundles of previous years with the <code>YEAR</code> variable
-</p>
-</li>
-<li>
-<p>
-Does understand Serviceguard clusters
-</p>
-</li>
-<li>
-<p>
-Can be programmed to bail out on settings you think are too serious to continue
-</p>
-</li>
-<li>
-<p>
-Can trigger remote alarms, syslog, monitors,&#8230;
-</p>
-</li>
-<li>
-<p>
-Can do a basis health check of your system - it is all up to you
-</p>
-</li>
-<li>
-<p>
-Has excellent support by its author
-</p>
-</li>
-</ul></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_getting_started">2. Getting started</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>You can use upgrade-ux via installing the sources or the software depot (HP-UX, Linux,&#8230;)</p></div>
-<div class="sect2">
-<h3 id="_clone_the_sources_via_github">2.1. Clone the sources via GitHub</h3>
-<div class="paragraph"><p>The latest sources are available at <a href="https://github.com/gdha/upgrade-ux">GitHub</a> and to clone
-the sources on your local Unix you could use</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>git clone git@github.com:gdha/upgrade-ux.git</code></pre>
-</div></div>
-<div class="paragraph"><p>To enter the directory use the command</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>cd upgrade-ux/opt/upgrade-ux</code></pre>
-</div></div>
-</div>
-<div class="sect2">
-<h3 id="_installing_the_software_depot_on_hp_ux">2.2. Installing the software depot on HP-UX</h3>
-<div class="paragraph"><p>If the software depot was already been made available by the system administrator then you can use <code>swinstall</code> to do the job.
-To install Upgrade-UX on HP-UX run the following command <code>swinstall -s SDserver:/var/opt/ignite/depots/GLOBAL/tools/11i UPGRADE-UX</code></p></div>
-</div>
-<div class="sect2">
-<h3 id="_installing_the_rpm_package_on_linux_rhel_sles">2.3. Installing the RPM package on Linux (RHEL, SLES)</h3>
-<div class="paragraph"><p>When the RPM is available you could install it via the command:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>rpm -ivh upgrade-ux-1.0-1.el7.noarch.rpm</code></pre>
-</div></div>
-<div class="paragraph"><p>Or, in case you would like to upgrade a version via <code>yum</code> you could do the following:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>rpm -Uvh upgrade-ux-1.1-1.el7.noarch.rpm</code></pre>
-</div></div>
-</div>
-<div class="sect2">
-<h3 id="_prerequisites">2.4. Prerequisites</h3>
-<div class="paragraph"><p>Be aware, that upgrade-ux is completely written in Korn Shell, therefore, you must have the <code>ksh</code> executable on your UNIX system. To be sure you could type <code>which ksh</code>. If it is not present please install it first (most likely on Linux where it is not a standard package in base OS).</p></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_configuration">3. Configuration</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_upgrade_ux_related_configuration_files">3.1. Upgrade-ux related configuration files</h3>
-<div class="paragraph"><p>The configuration files that <code>upgrade-ux</code> uses are basically just shell scripts and should be treated as such.</p></div>
-<div class="paragraph"><p>The default location of the configuration files is <code>/etc/opt/upgrade-ux/</code>. However, if you are working with the sources (e.g. via git clone) then it is perfectly possible to use the relative paths, e.g.</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>ls $HOME/project/upgrade-ux/etc/opt/upgrade-ux/</code></pre>
-</div></div>
-<div class="paragraph"><p>The easiest way to explain which configuration files are possible is by showing the output of the <code>upgrade-ux dump</code> command:</p></div>
-<div class="literalblock">
-<div class="content">
+is configured for.</p>
+
+<h2 id="Features-and-functionality">Features and functionality</h2>
+<p>Upgrade-UX has a wide range of features:</p>
+
+<ul>
+  <li>Simple to use</li>
+  <li>Has a <em>preview</em> mode (to dry-run an upgrade without doing it) and an <em>upgrade</em> mode</li>
+  <li>Is customisable via +local.conf+ configuration file</li>
+  <li>Is written in standard Korn Shell (which makes it highly portable)</li>
+  <li>Is UNIX Operating System independent as OS specific tasks reside in their own directory structures</li>
+  <li>Is easy extendable with your own scripts</li>
+  <li>The +upgrade-ux+ command leaves a trace in its own log file</li>
+  <li>Running in preview or upgrade mode always creates evidence files</li>
+  <li>Has a man page</li>
+  <li>Has user documentation (you are reading it)</li>
+  <li>Can be used to install patch bundles of previous years with the +YEAR+ variable</li>
+  <li>Does understand Serviceguard clusters</li>
+  <li>Can be programmed to bail out on settings you think are too serious to continue</li>
+  <li>Can trigger remote alarms, syslog, monitors,...</li>
+  <li>Can do a basis health check of your system - it is all up to you</li>
+  <li>Has excellent support by its author</li>
+</ul>
+
+<h1 id="Getting-started">Getting started</h1>
+
+<p>You can use upgrade-ux via installing the sources or the software depot (HP-UX, Linux,...)</p>
+
+<h2 id="Clone-the-sources-via-GitHub">Clone the sources via GitHub</h2>
+
+<p>The latest sources are available at https://github.com/gdha/upgrade-ux[GitHub] and to clone
+the sources on your local Unix you could use</p>
+
+<pre><code>git clone git@github.com:gdha/upgrade-ux.git
+</code></pre>
+
+<p>To enter the directory use the command</p>
+
+<pre><code>cd upgrade-ux/opt/upgrade-ux
+</code></pre>
+
+<h2 id="Installing-the-software-depot-on-HP-UX">Installing the software depot on HP-UX</h2>
+
+<p>If the software depot was already been made available by the system administrator then you can use <code>swinstall</code> to do the job.</p>
+
+<p>To install Upgrade-UX on HP-UX run the following command <code>swinstall -s SDserver:/var/opt/ignite/depots/GLOBAL/tools/11i UPGRADE-UX</code></p>
+
+<h2 id="Installing-the-RPM-package-on-Linux-RHEL-SLES-">Installing the RPM package on Linux (RHEL, SLES)</h2>
+
+<p>When the RPM is available you could install it via the command:</p>
+
+<pre><code>rpm -ivh upgrade-ux-1.0-1.el7.noarch.rpm
+</code></pre>
+
+<p>Or, in case you would like to upgrade a version via +yum+ you could do the following:</p>
+
+<pre><code>rpm -Uvh upgrade-ux-1.1-1.el7.noarch.rpm
+</code></pre>
+
+<h2 id="Prerequisites">Prerequisites</h2>
+
+<p>Be aware, that upgrade-ux is completely written in Korn Shell, therefore, you must have the +ksh+ executable on your UNIX system. To be sure you could type <code>which ksh</code>. If it is not present please install it first (most likely on Linux where it is not a standard package in base OS).</p>
+
+<h1 id="Configuration">Configuration</h1>
+
+<h2 id="Upgrade-ux-related-configuration-files">Upgrade-ux related configuration files</h2>
+
+<p>The configuration files that +upgrade-ux+ uses are basically just shell scripts and should be treated as such.</p>
+
+<p>The default location of the configuration files is <code>/etc/opt/upgrade-ux/</code>. However, if you are working with the sources (e.g. via git clone) then it is perfectly possible to use the relative paths, e.g.</p>
+
+<pre><code>ls $HOME/project/upgrade-ux/etc/opt/upgrade-ux/
+</code></pre>
+
+<p>The easiest way to explain which configuration files are possible is by showing the output of the <code>upgrade-ux dump</code> command:</p>
+
 <pre><code>$ sudo /opt/upgrade-ux/bin/upgrade-ux dump
 upgrade-ux 1.27 / 24-Aug-2022
 Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20221128-1005-ITSGBHHLSP00741.log
@@ -1017,52 +245,52 @@ Configuration tree:
                       rhel/8/x86_64.conf : missing/empty
                                site.conf : missing/empty
                               local.conf : OK
-                   Linux-rhel-8-2022.ini : OK</code></pre>
-</div></div>
-<div class="sect3">
-<h4 id="_default_configuration_file_default_conf">3.1.1. Default configuration file default.conf</h4>
-<div class="paragraph"><p>The <code>default.conf</code> contains lots of variables which should not be changed by the end-user. If you wish to modify one just redefine it in the <code>local.conf</code> file.</p></div>
-<div class="paragraph"><p>A good example of such variable is the <code>YEAR</code>. In the <code>default.conf</code> it is defined as:</p></div>
-<div class="literalblock">
-<div class="content">
+                   Linux-rhel-8-2022.ini : OK
+</code></pre>
+
+<h3 id="Default-configuration-file-default-conf">Default configuration file default.conf</h3>
+
+<p>The <code>default.conf</code> contains lots of variables which should not be changed by the end-user. If you wish to modify one just redefine it in the <code>local.conf</code> file.</p>
+
+<p>A good example of such variable is the <code>YEAR</code>. In the <code>default.conf</code> it is defined as:</p>
+
 <pre><code># The default year to use with our patch bundle is *current year* [ $(date '+%Y') ] - to overrule define it manually
 # in the local.conf file. E.g. when running upgrade-ux in 2015 but still installing patches from 2014 then define: YEAR=2014
-YEAR=$(date '+%Y')</code></pre>
-</div></div>
-<div class="paragraph"><p>However, in some cases as mentioned above, if you are in the year 2015 and you still want to install patch bundles of 2014 then it is necessary to define the <code>YEAR</code> variable in the <code>local.conf</code> file, as <code>YEAR=2014</code> (or whatever, the year might be).</p></div>
-</div>
-<div class="sect3">
-<h4 id="_local_configuration_file_local_conf">3.1.2. Local configuration file local.conf</h4>
-<div class="paragraph"><p>The <code>local.conf</code> should only contain variables which you want to overrule, as described in previous section (of the <code>default.conf</code> file). It is important to know that the <code>local.conf</code> file is the last configuration file read by <code>upgrade-ux</code> script and therefore, the variables defined in there are the last ones that will be used.</p></div>
-</div>
-<div class="sect3">
-<h4 id="_exclude_packages_from_the_update_process">3.1.3. Exclude packages from the update process</h4>
-<div class="paragraph"><p>The <code>/etc/opt/upgrade/exclude.packages</code> file contains a list of packages you wish to exclude from the update. This file is the same for HP-UX or Linux. A safe-guard is built-in to remove packages which are not found (installed) on current system. Use one line per package you wish to exclude.
-This file is <strong>not</strong> mandatory, so it does not have to exist for upgrade-ux to work properly (nothing will be excluded then).</p></div>
-</div>
-<div class="sect3">
-<h4 id="_operating_specific_configuration_files">3.1.4. Operating Specific configuration files</h4>
-<div class="paragraph"><p>On each OS you have specific OS related configuration files, e.g.</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>HP-UX.conf
+YEAR=$(date '+%Y')
+</code></pre>
+
+<p>However, in some cases as mentioned above, if you are in the year 2015 and you still want to install patch bundles of 2014 then it is necessary to define the <code>YEAR</code> variable in the <code>local.conf</code> file, as <code>YEAR=2014</code> (or whatever, the year might be).</p>
+
+<h3 id="Local-configuration-file-local-conf">Local configuration file local.conf</h3>
+
+<p>The <code>local.conf</code> should only contain variables which you want to overrule, as described in previous section (of the +default.conf+ file). It is important to know that the <code>local.conf</code> file is the last configuration file read by <code>upgrade-ux</code> script and therefore, the variables defined in there are the last ones that will be used.</p>
+
+<h3 id="Exclude-packages-from-the-update-process">Exclude packages from the update process</h3>
+
+<p>The <code>/etc/opt/upgrade/exclude.packages</code> file contains a list of packages you wish to exclude from the update. This file is the same for HP-UX or Linux. A safe-guard is built-in to remove packages which are not found (installed) on current system. Use one line per package you wish to exclude.
+This file is <em>not</em> mandatory, so it does not have to exist for upgrade-ux to work properly (nothing will be excluded then).</p>
+
+<h3 id="Operating-Specific-configuration-files">Operating Specific configuration files</h3>
+
+<p>On each OS you have specific OS related configuration files, e.g.</p>
+
+<pre><code>HP-UX.conf 
 GNU/Linux.conf
-SunOS.conf</code></pre>
-</div></div>
-<div class="paragraph"><p>These configuration files typically contain variables which have only a meaning within that specific OS, e.g. on HP-UX</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>SWINSTALL=/usr/sbin/swinstall</code></pre>
-</div></div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_the_ini_files">3.2. The INI files</h3>
-<div class="paragraph"><p>The INI files are always OS specific and contain the definitions of which patch bundles should be installed or removed, and so on.
-The INI files are kept under the <code>/etc/opt/upgrade-ux</code> or <code>$HOME/project/upgrade-ux/etc/opt/upgrade-ux/</code> directory and are typically called <code>$OS-$OS_VERSION-$YEAR.ini</code></p></div>
-<div class="paragraph"><p>It follows also the different stages known within <code>upgrade-ux</code> and these are best explained with an example INI file (below you see the INI file for HP-UX 11.11 systems):</p></div>
-<div class="literalblock">
-<div class="content">
+SunOS.conf
+</code></pre>
+
+<p>These configuration files typically contain variables which have only a meaning within that specific OS, e.g. on HP-UX</p>
+
+<pre><code>SWINSTALL=/usr/sbin/swinstall
+</code></pre>
+
+<h2 id="The-INI-files">The INI files</h2>
+
+<p>The INI files are always OS specific and contain the definitions of which patch bundles should be installed or removed, and so on.
+The INI files are kept under the <code>/etc/opt/upgrade-ux</code> or <code>$HOME/project/upgrade-ux/etc/opt/upgrade-ux/</code> directory and are typically called <code>$OS-$OS_VERSION-$YEAR.ini</code></p>
+
+<p>It follows also the different stages known within +upgrade-ux+ and these are best explained with an example INI file (below you see the INI file for HP-UX 11.11 systems):</p>
+
 <pre><code># HP-UX-11.11-2014.ini file
 ###########################
 #
@@ -1073,25 +301,20 @@ The INI files are kept under the <code>/etc/opt/upgrade-ux</code> or <code>$HOME
     command[0]      =       $SWREMOVE
     options[0]      =       "-x mount_all_filesystems=false  -x enforce_dependencies=false"
     bundle[0]       =       CFG2HTML
-    version[0]      =       "C.06.*"         ; cfg2html</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>command[1]      =       $SWREMOVE
-options[1]      =       "-x mount_all_filesystems=false  -x enforce_dependencies=false"
-bundle[1]       =       NCS_UTILS
-version[1]      =       "*"</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>####################
+    version[0]      =       "C.06.*"         ; cfg2html
+
+    command[1]      =       $SWREMOVE
+    options[1]      =       "-x mount_all_filesystems=false  -x enforce_dependencies=false"
+    bundle[1]       =       NCS_UTILS
+    version[1]      =       "*"
+
+####################
 # section preinstall - anything to do before running the installation of patches, software or update-ux
 ####################
-[preinstall]</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>#################
+[preinstall]
+
+
+#################
 # section install - what shall we do during the installation phase
 #################
 # please list the software bundles which do not require a reboot first!!!
@@ -1101,595 +324,654 @@ version[1]      =       "*"</code></pre>
     options[0]      =       "-x mount_all_filesystems=false"
     source[0]       =       "-s $SDSERVER:/var/opt/ignite/depots/GLOBAL/SSH/11.11"
     bundle[0]       =       T1471AA
-    version[0]      =       A.06.20.004</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code># the centrifyDC is the same for all HP-UX 11i versions
-command[1]      =       $SWINSTALL
-options[1]      =       "-x mount_all_filesystems=false"
-source[1]       =       "-s $SDSERVER:/var/opt/ignite/depots/GLOBAL/centrify/11.11/V5"
-bundle[1]       =       "CentrifyDC"
-version[1]      =       "5.1.1-831"</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>command[2]      =       $SWINSTALL
-options[2]      =       "-x mount_all_filesystems=false"
-source[2]       =       "-s $SDSERVER:/var/opt/ignite/depots/GLOBAL/centrify/11.31/V5"
-bundle[2]       =       "Centrify_conf"
-version[2]      =       "5.1.x"</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>command[3]      =       $SWINSTALL
-options[3]      =       "-x mount_all_filesystems=false -x autoreboot=true"
-source[3]       =       "-s $SDSERVER:/var/opt/ignite/depots/GLOBAL/jnjdrv11-11-may2014"
-bundle[3]       =       "*"
-version[3]      =       ""</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>#####################
+    version[0]      =       A.06.20.004
+
+    # the centrifyDC is the same for all HP-UX 11i versions
+    command[1]      =       $SWINSTALL
+    options[1]      =       "-x mount_all_filesystems=false"
+    source[1]       =       "-s $SDSERVER:/var/opt/ignite/depots/GLOBAL/centrify/11.11/V5"
+    bundle[1]       =       "CentrifyDC"
+    version[1]      =       "5.1.1-831"
+
+    command[2]      =       $SWINSTALL
+    options[2]      =       "-x mount_all_filesystems=false"
+    source[2]       =       "-s $SDSERVER:/var/opt/ignite/depots/GLOBAL/centrify/11.31/V5"
+    bundle[2]       =       "Centrify_conf"
+    version[2]      =       "5.1.x"
+
+    command[3]      =       $SWINSTALL
+    options[3]      =       "-x mount_all_filesystems=false -x autoreboot=true"
+    source[3]       =       "-s $SDSERVER:/var/opt/ignite/depots/GLOBAL/jnjdrv11-11-may2014"
+    bundle[3]       =       "*"
+    version[3]      =       ""
+
+
+#####################
 # section postinstall
 #####################
 # Use this section for additional (internal) software bundles - we assume no reboots are required
-[postinstall]</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>####################
+[postinstall]
+
+####################
 # section postremove
 ####################
-[postremove]</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>###################
+[postremove]
+
+###################
 # section configure
 ###################
 # or define explicit commands (real cmds) with options or define script tag [string] which
 # may be picked up by a script (under scripts/configure/default/)
 [configure]
     command[0]      =       uncomment_cfg2html_in_crontab
-    options[0]      =       ""</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>#################
+    options[0]      =       ""
+
+#################
 # section cleanup
 #################
-[cleanup]</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>#####################
+[cleanup]
+
+#####################
 # section postexecute
 #####################
 [postexecute]
     command[0]      =       "/opt/cfg2html/bin/cfg2html"
-    options[0]      =       "-2%Y%m%d"</code></pre>
-</div></div>
-<div class="sect3">
-<h4 id="_the_ini_syntax">3.2.1. The INI syntax</h4>
-<div class="paragraph"><p>You can use as many comments as you like, but it should start with <code>#</code> or <code>;</code> sign.</p></div>
-<div class="paragraph"><p>A stage or section is started with <code>[section]</code> header. The name within a section is known as a <em>stage</em> within <code>upgrade-ux</code>.</p></div>
-<div class="paragraph"><p>A section may be empty or may contain arrays (some of those may be left out and will be treated as empty strings). An array will always be treated as a string by the way. The content of arrays are wiped out when you enter a new stage (or section) by <code>upgrade-ux</code>.</p></div>
-<div class="paragraph"><p>The following arrays are known to <code>upgrade-ux</code>:</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-command[] - add the command to be executed (it can be a variable name, e.g. <code>$SWINSTALL</code>)
-</p>
-</li>
-<li>
-<p>
-options[] - add here specific options required by command[]
-</p>
-</li>
-<li>
-<p>
-source[] - should be the source location where the software bundle reside
-</p>
-</li>
-<li>
-<p>
-bundle[] - the name of the software bundle
-</p>
-</li>
-<li>
-<p>
-version[] - the specific version to be installed/removed (can contain <code>*</code> or may be empty as well)
-</p>
-</li>
-</ul></div>
-<div class="paragraph"><p>If you do not need all arrays in a certain section then it is fine to leave these empty (or not mentioning these in the INI file)</p></div>
-<div class="paragraph"><p>Be careful although that you define the array index correctly in the INI file (see example above).</p></div>
-</div>
-<div class="sect3">
-<h4 id="_section_preremove">3.2.2. Section preremove</h4>
-<div class="paragraph"><p>In the <code>preremove</code> section you typically define lines of software bundles that should be removed for one of other reason, e.g. when upgrading these would be problematic (in the way the software was designed - read badly).
-As said, if not needed leave this section empty.</p></div>
-</div>
-<div class="sect3">
-<h4 id="_section_preinstall">3.2.3. Section preinstall</h4>
-<div class="paragraph"><p>In the <code>preinstall</code> section we could define some commands that need to be run, but in most case we write small scripts to do specific tasks in this stage (or section) such as stopping some daemons, saving evidence of software inventory and so on. More about thiese scripts in Chapter 6 (The Upgrade-ux scripts).</p></div>
-</div>
-<div class="sect3">
-<h4 id="_section_install">3.2.4. Section install</h4>
-<div class="paragraph"><p>In the <code>install</code> section you typically only define the software bundles that should be installed and in the right order. For example, for update the installation software (<code>update-ux</code> or <code>yum</code>) before the new updates. In this stage we do not have much special scripts.</p></div>
-</div>
-<div class="sect3">
-<h4 id="_section_postinstall">3.2.5. Section postinstall</h4>
-<div class="paragraph"><p>In the <code>postinstall</code> section we define the software pieces that were missing in the <code>install</code> section for some specific reason (if any). Furthermore, in this stage we capture lots of evidence again and compare these via special scripts. Again see Chapter 6 (The Upgrade-ux scripts).</p></div>
-</div>
-<div class="sect3">
-<h4 id="_section_postremove">3.2.6. Section postremove</h4>
-<div class="paragraph"><p>In the <code>postremove</code> section you could remove software bundles that were in the big update round of the <code>install</code> section, but should not stay on this particular platform for some reason. Again, you may leave it empty if not needed.</p></div>
-</div>
-<div class="sect3">
-<h4 id="_section_configure">3.2.7. Section configure</h4>
-<div class="paragraph"><p>In the <code>configure</code> section you could define scripts or commands to be executed by <code>upgrade-ux</code> to configure or add something in cron.
-See also the example shown above with <code>uncomment_cfg2html_in_crontab</code>, which is a toggle meant for a script called <code>/opt/upgrade-ux/scripts/configure/default/10_configure_commands.sh</code> that simply touches a file under <code>$TMP_DIR</code></p></div>
-<div class="paragraph"><p>Another way to had this defined would have been:</p></div>
-<div class="literalblock">
-<div class="content">
+    options[0]      =       "-2%Y%m%d"
+</code></pre>
+
+<h3 id="The-INI-syntax">The INI syntax</h3>
+
+<p>You can use as many comments as you like, but it should start with <code>#</code> or <code>;</code> sign.</p>
+
+<p>A stage or section is started with +[section]+ header. The name within a section is known as a <em>stage</em> within <code>upgrade-ux</code>.</p>
+
+<p>A section may be empty or may contain arrays (some of those may be left out and will be treated as empty strings). An array will always be treated as a string by the way. The content of arrays are wiped out when you enter a new stage (or section) by <code>upgrade-ux</code>.</p>
+
+<p>The following arrays are known to <code>upgrade-ux</code>:</p>
+
+<ul>
+  <li>command[] - add the command to be executed (it can be a variable name, e.g. <code>$SWINSTALL</code>)</li>
+  <li>options[] - add here specific options required by command[]</li>
+  <li>source[] - should be the source location where the software bundle reside</li>
+  <li>bundle[] - the name of the software bundle</li>
+  <li>version[] - the specific version to be installed/removed (can contain +*+ or may be empty as well)</li>
+</ul>
+
+<p>If you do not need all arrays in a certain section then it is fine to leave these empty (or not mentioning these in the INI file)</p>
+
+<p>Be careful although that you define the array index correctly in the INI file (see example above).</p>
+
+<h3 id="Section-preremove">Section preremove</h3>
+
+<p>In the <code>preremove</code> section you typically define lines of software bundles that should be removed for one of other reason, e.g. when upgrading these would be problematic (in the way the software was designed - read badly).
+As said, if not needed leave this section empty.</p>
+
+<h3 id="Section-preinstall">Section preinstall</h3>
+
+<p>In the <code>preinstall</code> section we could define some commands that need to be run, but in most case we write small scripts to do specific tasks in this stage (or section) such as stopping some daemons, saving evidence of software inventory and so on. More about thiese scripts in Chapter 6 (The Upgrade-ux scripts).</p>
+
+<h3 id="Section-install">Section install</h3>
+
+<p>In the <code>install</code> section you typically only define the software bundles that should be installed and in the right order. For example, for update the installation software (<code>update-ux</code> or <code>yum</code>) before the new updates. In this stage we do not have much special scripts.</p>
+
+<h3 id="Section-postinstall">Section postinstall</h3>
+
+<p>In the <code>postinstall</code> section we define the software pieces that were missing in the +install+ section for some specific reason (if any). Furthermore, in this stage we capture lots of evidence again and compare these via special scripts. Again see Chapter 6 (The Upgrade-ux scripts).</p>
+
+<h3 id="Section-postremove">Section postremove</h3>
+
+<p>In the <code>postremove</code> section you could remove software bundles that were in the big update round of the +install+ section, but should not stay on this particular platform for some reason. Again, you may leave it empty if not needed.</p>
+
+<h3 id="Section-configure">Section configure</h3>
+
+<p>In the <code>configure</code> section you could define scripts or commands to be executed by <code>upgrade-ux</code> to configure or add something in cron.
+See also the example shown above with <code>uncomment_cfg2html_in_crontab</code>, which is a toggle meant for a script called <code>/opt/upgrade-ux/scripts/configure/default/10_configure_commands.sh</code> that simply touches a file under <code>$TMP_DIR</code></p>
+
+<p>Another way to had this defined would have been:</p>
+
 <pre><code>command[0]="touch"
-options[0]="$TMP_DIR/uncomment_cfg2html_in_crontab"</code></pre>
-</div></div>
-</div>
-<div class="sect3">
-<h4 id="_section_cleanup">3.2.8. Section cleanup</h4>
-<div class="paragraph"><p>In the <code>cleanup</code> section we could add commands to remove some old log files (of older software bundles), or you can also use it to report errors or any other message. The section is typically empty, but you could add some special scripts under <code>/opt/upgrade-ux/scripts/cleanup/default/</code></p></div>
-</div>
-<div class="sect3">
-<h4 id="_section_postexecute">3.2.9. Section postexecute</h4>
-<div class="paragraph"><p>In the <code>postexecute</code> section you could define commands and options of things you want to execute, e.g.</p></div>
-<div class="literalblock">
-<div class="content">
+options[0]="$TMP_DIR/uncomment_cfg2html_in_crontab"
+</code></pre>
+
+<h3 id="Section-cleanup">Section cleanup</h3>
+
+<p>In the <code>cleanup</code> section we could add commands to remove some old log files (of older software bundles), or you can also use it to report errors or any other message. The section is typically empty, but you could add some special scripts under <code>/opt/upgrade-ux/scripts/cleanup/default/</code></p>
+
+<h3 id="Section-postexecute">Section postexecute</h3>
+
+<p>In the <code>postexecute</code> section you could define commands and options of things you want to execute, e.g.</p>
+
 <pre><code>command[0]      =       "/opt/cfg2html/bin/cfg2html"
-options[0]      =       "-2%Y%m%d"</code></pre>
-</div></div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_workflows">4. Workflows</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>The workflows (or commands) available can be listed with the <code>-h</code> option:</p></div>
-<div class="listingblock">
-<div class="content"></div></div>
-<div class="sect2">
-<h3 id="_dump_workflow">4.1. Dump workflow</h3>
-<div class="paragraph"><p>The dump workflow was already discussed during the configuration chapter. The output of <code>/opt/upgrade-ux/bin/upgrade-ux dump</code>:</p></div>
-<div class="listingblock">
-<div class="content"></div></div>
-<div class="paragraph"><p>The first part displays the system definitions, such as OS, hardware type and OS version.
-The second part shows the configuration part and which files it could find (or you may define, create and/or use). They do not need to exist.</p></div>
-<div class="paragraph"><p>The following example shows the dump on a RHEL 7 system:</p></div>
-<div class="listingblock">
-<div class="content"></div></div>
-<div class="paragraph"><p>These configuration files live under the <code>/etc/opt/upgrade-ux</code> or <code>./upgrade-ux/etc/opt/upgrade-ux</code> (relative path) directory.
-At this moment we have the following configuration files present (however, it will grow over time):</p></div>
-<div class="listingblock">
-<div class="content"></div></div>
-</div>
-<div class="sect2">
-<h3 id="_mkdist_workflow">4.2. Mkdist workflow</h3>
-<div class="paragraph"><p>The mkdist workflow creates a compressed tar file of the current development tree, which only makes sense when you are using the <code>git clone</code> version of upgrade-ux. The compressed tar file is stored under <code>/tmp</code> file system and is called <code>/tmp/upgrade-ux-0.9.tar.gz</code> (the version can be different of course).</p></div>
-</div>
-<div class="sect2">
-<h3 id="_purgelogs_workflow">4.3. Purgelogs workflow</h3>
-<div class="paragraph"><p>The purgelogs workflow just has a simple function and that is to purge log files which are older than 30 days. It will display the logs it has purged (only when you are using the option <code>-v</code>):</p></div>
-<div class="listingblock">
-<div class="content"></div></div>
-</div>
-<div class="sect2">
-<h3 id="_test_workflow">4.4. Test workflow</h3>
-<div class="paragraph"><p>The test workflow is a very simplistic test (use option <code>-v</code> to see something):</p></div>
-<div class="listingblock">
-<div class="content"></div></div>
-</div>
-<div class="sect2">
-<h3 id="_upgrade_workflow">4.5. Upgrade workflow</h3>
-<div class="paragraph"><p>The upgrade workflow is the real work horse here and in fact is the default workflow (meaning if no workflow is mentioned we will assume you mean <code>upgrade</code>).</p></div>
-<div class="paragraph"><p>The upgrade workflow has two modes:</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-<em>preview mode</em>: is going through the complete flow checking all software and simulating an update of the system. Is a perfect way to examine your system to see whether any underlying issues could prevent a successful upgrade. You can do the preview (option <code>-p</code>) any time and as much as you like. However, before doing the <em>upgrade mode</em> you are forced to go through a successful <em>preview mode</em> as well.
-</p>
-</li>
-<li>
-<p>
-<em>upgrade mode</em>: is doing again all the checks, writing evidence and applying all the patch bundles or doing the upgrade. The system might reboot. After the reboot you can continue with retyping <code>/opt/upgrade-ux/bin/upgrade-ux -v</code> and it will continue from the point it was interrupted by the reboot as upgrade-ux keeps track of it stages.
-</p>
-</li>
-</ul></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_basic_usage">5. Basic Usage</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>Before digging deeper in <code>upgrade-ux</code> lets explain the basic usage. The option help (<code>-h</code>) will produce the following:</p></div>
-<div class="listingblock">
-<div class="content"></div></div>
-<div class="paragraph"><p>Keep in mind that upgrade-ux has an excellent man page too. See <code>man 8 upgrade-ux</code></p></div>
-<div class="paragraph"><p>It is important to know that <code>upgrade-ux</code> is a quiet program and will not show any output if you do not request for it with the verbose option (<code>-v</code>). Another point of interest is its excellent logging facilities as under <code>/var/opt/upgrade-ux/log</code> directory <code>upgrade-ux</code> keep a log file of each run. The log files are composed as follow <code>upgrade-ux-&lt;YYYYMMDD&gt;-&lt;HHMM&gt;-hostname.log</code></p></div>
-<div class="paragraph"><p>We already mentioned the evidence files which are kept under <code>/var/opt/upgrade-ux/&lt;YYYY-MM-DD&gt;/</code> directory. The type of files you find under there are of course different according the OS, OS version and which software is installed. Furthermore, <em>preview</em> and <em>upgrade</em> mode may result in more or less evidence files.</p></div>
-<div class="paragraph"><p>Starting up the program should be done by referencing the full path <code>/opt/upgrade-ux/bin/upgrade-ux</code> as the directory is not part of the <code>PATH</code> variable, and we prefer to keep it this way to avoid accidents.</p></div>
-<div class="paragraph"><p>You probably understood by now that <code>upgrade-ux</code> must be started in <em>preview</em> mode first before we can run it in <em>upgrade</em> mode. However, we prefer that you always use the option <code>-p</code> (<em>preview</em> mode) to make it clear to yourself and other (when they need to dig into the log files for some reason) what you meant. Furthermore, in the log file there is always a trace of in which mode the program was running:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>2014-06-10 15:22:45 Check if our PID (11950) is locked
-2014-06-10 15:22:45 Found /tmp/upgrade-ux-LOCKDIR/upgrade-ux-PIDFILE file - we could be locked...
-2014-06-10 15:22:45 lock is stale (6607) - will continue
-2014-06-10 15:22:45 lock succeeded: 11950 - /tmp/upgrade-ux-LOCKDIR/upgrade-ux-PIDFILE
-2014-06-10 15:22:47 upgrade-ux 0.7 / 03-Jun-2014
-2014-06-10 15:22:47 Command line options: /opt/upgrade-ux/bin/upgrade-ux -v
-2014-06-10 15:22:47 Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140610-1522-hostname.log
-2014-06-10 15:22:47 Including /opt/upgrade-ux/lib/progresssubsystem.nosh
-2014-06-10 15:22:47 Including /etc/opt/upgrade-ux/HP-UX.conf
-2014-06-10 15:22:47 Including /etc/opt/upgrade-ux/local.conf
-2014-06-10 15:22:47 Running upgrade workflow
-2014-06-10 15:22:47 Running 'init' stage
-2014-06-10 15:22:47 Including init/default/03_prepare_tmp_build_area.sh
-2014-06-10 15:22:47 Including init/default/04_create_var_dir.sh
-2014-06-10 15:22:47 Including init/default/05_select_ini_file.sh
-2014-06-10 15:22:47 Found ini file /etc/opt/upgrade-ux/HP-UX-11.11-2014.ini
-2014-06-10 15:22:47 Including init/default/08_set_preview_var.sh
-2014-06-10 15:22:47 Including init/default/10_check_current_status.sh
-2014-06-10 15:22:47 Including init/default/12_upgrade_allowed.sh
-2014-06-10 15:22:47 Including init/default/15_check_preview_run.sh
-2014-06-10 15:22:47 Last preview run was executed on Tue Jun 10 14:28:36 METDST 2014  (preview ended successfully)
-2014-06-10 15:22:47 Running in "upgrade mode"
-2014-06-10 15:22:47 =-=-=-=-=-=-=-=-=-=-=-=-=</code></pre>
-</div></div>
-<div class="paragraph"><p>From the Chapter "Workflow" you probably remember that the default workflow is <strong>upgrade</strong> (even if you did not mention it). So, as example running <code>upgrade-ux</code> in preview mode with verbose option is done as <code>/opt/upgrade-ux/bin/upgrade-ux -vp</code></p></div>
-<a href="https://asciinema.org/a/me3i759tvbVp495rQwgMA0GG5"> <img src="https://asciinema.org/a/me3i759tvbVp495rQwgMA0GG5.png" width="836"/></a>
-<div class="paragraph"><p>The last option that we bring to your attention in this Chapter is the force option (<code>-F</code>) which is handy in situation that for some reasons <code>upgrade-ux</code> does not want to continue due to serious software (patches) problems. For example, within HP-UX we run the <code>check_patches</code> command which when errors are detected will force an exit from <code>upgrade-ux</code> so that the System Administrator can first fix these patches (or any other issue) before re-running <code>upgrade-ux</code> again.
-We have seen cases it was impossible to get everything fixed and for that reason you may use the force option, but please do not use it by default.</p></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">We advise to run the <em>preview</em> mode a few weeks in advance, but on a given day we must run the <em>preview</em> first again before we can run in <em>upgrade</em> mode. This is done on purpose to avoid mistakes.</td>
-</tr></table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_upgrade_operation">6. Upgrade Operation</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>The <strong>upgrade</strong> operation (or workflow) is the default one and does not need to be mentioned explicitly on the command line.
-The upgrade operation goes through different stages to accomplish a successful upgrade or patch installation. The stages in use are:</p></div>
-<div class="dlist"><dl>
-<dt class="hdlist1">
-init
-</dt>
-<dd>
-<p>
-        The <em>init</em> stage is what we call the initialization stage where we create a temporary work directory, read the INI file, decides if we are running in <em>preview</em> or <em>upgrade</em> mode, read the current status
-</p>
-</dd>
-<dt class="hdlist1">
-prep
-</dt>
-<dd>
-<p>
-        The <em>prep</em> stage is the preparation stage where we can save, copy lots of files as evidence (before we start patching). You could also use it to investigate if the health of the system is good enough to start with an upgrade and if not, warn the user and exit.
-</p>
-</dd>
-<dt class="hdlist1">
-preremove
-</dt>
-<dd>
-<p>
-        The <em>prepremove</em> stage is doing what its name applies - remove software before upgrading. It may be a handy if you know old pieces of software could lead to inconsistencies. Usually, we make sure that a more recent version gets installed during or after the upgrade.
-</p>
-</dd>
-<dt class="hdlist1">
-preinstall
-</dt>
-<dd>
-<p>
-        The <em>preinstall</em> stage is used by scripts to stop daemons and other processes which may generate conflicts during the upgrade.
-</p>
-</dd>
-<dt class="hdlist1">
-install
-</dt>
-<dd>
-<p>
-        The <em>install</em> stage is the part where we actually install software, do the patching or start with the updates of software bundles and drivers. This part must be described in the INI file (install section).
-</p>
-</dd>
-<dt class="hdlist1">
-postinstall
-</dt>
-<dd>
-<p>
-        The <em>postinstall</em> stage is mainly used to install extra software bundles which were not part of the global patch bundles or update depots. Also here, these must be described in the INI file (postinstall section). Furthermore, we tend to save evidence during this stage (as we did in the prep stage) so we can compare if something trial was modified and if so, warn the user about it.
-</p>
-</dd>
-<dt class="hdlist1">
-postremove
-</dt>
-<dd>
-<p>
-        The <em>postremove</em> stage is just there in case some software bundles must be removed again to avoid conflicts. Usually, this stage is empty.
-</p>
-</dd>
-<dt class="hdlist1">
-configure
-</dt>
-<dd>
-<p>
-        The <em>configure</em> stage is used to setup cron entries, user permission or whatever  you can think of.
-</p>
-</dd>
-<dt class="hdlist1">
-postexecute
-</dt>
-<dd>
-<p>
-        The <em>postexecute</em> stage is used to execute some program, such as <code>cfg2html</code> to grab a new base point of the system. Again, you can run other programs as well such as <code>HPSIM-HealthCheck.sh</code> and so on
-</p>
-</dd>
-</dl></div>
-<div class="paragraph"><p>Every time you enter or leave a stage the <code>/var/opt/upgrade-ux/status</code> gets updated with a timestamp and the <em>stage</em> name with an additional notification of <em>start</em> or <em>ended</em>. Upgrade-ux will not delete this status file, but will always append to it so you get a nice historic view of all the runs.</p></div>
-<div class="listingblock">
-<div class="content"></div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_the_upgrade_ux_scripts">7. The upgrade-ux scripts</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>The scripts that are sourced by the main script <code>upgrade-ux</code> reside under <code>/opt/upgrade-ux/scripts/</code> directory and the easiest way to know what will be sourced is by running <code>/opt/upgrade-ux/bin/upgrade-ux -s</code>:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>$ sudo /opt/upgrade-ux/bin/upgrade-ux -s
-upgrade-ux 1.27 / 24-Aug-2022
-Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20221128-1008-ITSGBHHLSP00741.log
-Source init/default/02_print_host_info.sh
-Source init/default/03_parse_variables.sh
-Source init/default/03_prepare_tmp_build_area.sh
-Source init/default/04_create_var_dir.sh
-Source init/default/05_select_ini_file.sh
-Source init/default/08_set_preview_var.sh
-Source init/default/10_check_current_status.sh
-Source init/GNU/Linux/10_define_hostname.sh
-Source init/default/12_upgrade_allowed.sh
-Source init/default/15_check_preview_run.sh
-Source init/GNU/Linux/40_set_docker_var.sh
-Source init/default/85_set_current_state.sh
-Source init/default/90_show_current_state.sh
-Source prep/default/05_reboot_required.sh
-Source prep/default/05_source_cmcluster_conf.sh
-Source prep/default/10_check_current_status.sh
-Source prep/default/16_check_dp_backup.sh
-Source prep/default/16_check_nbu_backup.sh
-Source prep/default/16_check_nsr_backup.sh
-Source prep/default/16_check_tsm_backup.sh
-Source prep/default/17_list_nbu_backup_status.sh
-Source prep/GNU/Linux/20_wait_on_chef_client_completion.sh
-Source prep/GNU/Linux/27_save_grub_menu.sh
-Source prep/GNU/Linux/28_save_system_release.sh
-Source prep/GNU/Linux/29_save_kernel_version.sh
-Source prep/default/30_save_pam_conf.sh
-Source prep/GNU/Linux/30_save_rpm_qa.sh
-Source prep/default/31_save_env_output.sh
-Source prep/GNU/Linux/35_check_rear_image.sh
-Source prep/default/35_save_mount_output.sh
-Source prep/GNU/Linux/36_check_virusscanner_linuxshield.sh
-Source prep/GNU/Linux/37_check_diskspace_requirements.sh
-Source prep/GNU/Linux/38_save_satellite_info.sh
-Source prep/GNU/Linux/39_save_yum_history.sh
-Source prep/GNU/Linux/39_save_yum_log.sh
-Source prep/GNU/Linux/40_disabling_local_repos_with_satellite.sh
-Source prep/GNU/Linux/41_disable_rhn_satellite_subscription.sh
-Source prep/GNU/Linux/42_archive_yum_repos_dir.sh
-Source prep/GNU/Linux/43_save_yum_enable_status.sh
-Source prep/GNU/Linux/49_yum_repolist.sh
-Source prep/GNU/Linux/50_save_default_runlevel.sh
-Source prep/GNU/Linux/54_check_on_hanging_rpm_cmds.sh
-Source prep/GNU/Linux/55_verify_rpm_packages.sh
-Source prep/GNU/Linux/60_save_knife_node_output.sh
-Source prep/default/61_exclude_software_packages.sh
-Source prep/GNU/Linux/61_save_extend_filesystem_features.sh
-Source prep/default/62_sg_autostart_cmcld.sh
-Source prep/default/70_check_openssl_logjam.sh
-Source prep/default/72_save_uvscan_exclude_list.sh
-Source prep/default/95_check_missing_programs.sh
-Source prep/default/99_update_status.sh
-Source preremove/default/01_enter_stage_acceptable.sh
-Source preremove/default/05_read_section_from_inifile.sh
-Source preremove/default/99_update_status.sh
-Source preinstall/default/01_enter_stage_acceptable.sh
-Source preinstall/default/05_read_section_from_inifile.sh
-Source preinstall/GNU/Linux/06_yum_clean_all.sh
-Source preinstall/GNU/Linux/07_journalctl_flush.sh
-Source preinstall/GNU/Linux/08_clear_yum_cache.sh
-Source preinstall/GNU/Linux/09_import_rpm_gpg_keys.sh
-Source preinstall/GNU/Linux/10_stop_ds_agent.sh
-Source preinstall/GNU/Linux/10_stop_nails.sh
-Source preinstall/GNU/Linux/20_stop_cron.sh
-Source preinstall/default/22_shutdown_opcagt.sh
-Source preinstall/GNU/Linux/25_stop_tidal.sh
-Source preinstall/GNU/Linux/26_stop_ctmagent.sh
-Source preinstall/GNU/Linux/28_stop_docker.sh
-Source preinstall/GNU/Linux/30_disable_chef_client_in_crontab.sh
-Source preinstall/default/30_shutdown_quest.sh
-Source preinstall/GNU/Linux/32_stop_tanium.sh
-Source preinstall/GNU/Linux/33_stop_fluentbit.sh
-Source preinstall/GNU/Linux/34_stop_flexera.sh
-Source preinstall/GNU/Linux/35_stop_cisco_amp.sh
-Source preinstall/default/80_run_cmds_defined_in_ini.sh
-Source preinstall/default/99_update_status.sh
-Source install/default/01_enter_stage_acceptable.sh
-Source install/default/05_read_section_from_inifile.sh
-Source install/default/20_sw_installation_in_progress.sh
-Source install/GNU/Linux/29_exclude_packages.sh
-Source install/GNU/Linux/30_install_software.sh
-Source install/default/99_update_status.sh
-Source postinstall/default/01_enter_stage_acceptable.sh
-Source postinstall/default/05_read_section_from_inifile.sh
-Source postinstall/default/10_save_dmesg.sh
-Source postinstall/GNU/Linux/28_save_and_diff_system_release.sh
-Source postinstall/GNU/Linux/29_save_and_diff_kernel_version.sh
-Source postinstall/default/30_diff_pam_conf.sh
-Source postinstall/GNU/Linux/30_save_rpm_qa.sh
-Source postinstall/default/35_save_mount_output.sh
-Source postinstall/GNU/Linux/39_save_and_diff_yum_log.sh
-Source postinstall/GNU/Linux/40_needs_restarting.sh
-Source postinstall/GNU/Linux/61_save_and_diff_extend_filesystem_features.sh
-Source postinstall/default/99_update_status.sh
-Source postremove/default/01_enter_stage_acceptable.sh
-Source postremove/default/05_read_section_from_inifile.sh
-Source postremove/default/99_update_status.sh
-Source configure/default/01_enter_stage_acceptable.sh
-Source configure/default/05_read_section_from_inifile.sh
-Source configure/default/10_configure_commands.sh
-Source configure/GNU/Linux/20_uncomment_cfg2html_in_crontab.sh
-Source configure/default/26_fix_openssl_logjam.sh
-Source configure/default/55_fix_uvscan_exclude_list.sh
-Source configure/default/62_verify_sg_autostart_cmcld.sh
-Source configure/default/99_update_status.sh
-Source postexecute/default/01_enter_stage_acceptable.sh
-Source postexecute/default/05_read_section_from_inifile.sh
-Source postexecute/GNU/Linux/20_start_ds_agent.sh
-Source postexecute/GNU/Linux/20_start_nails.sh
-Source postexecute/GNU/Linux/25_start_crond.sh
-Source postexecute/GNU/Linux/25_start_ntpd.sh
-Source postexecute/GNU/Linux/25_start_tidal.sh
-Source postexecute/GNU/Linux/26_start_ctmagent.sh
-Source postexecute/GNU/Linux/28_start_docker.sh
-Source postexecute/GNU/Linux/29_start_tanium.sh
-Source postexecute/GNU/Linux/30_start_fluentbit.sh
-Source postexecute/GNU/Linux/31_start_flexera.sh
-Source postexecute/GNU/Linux/33_restart_apache.sh
-Source postexecute/default/37_start_opcagt.sh
-Source postexecute/default/38_start_quest.sh
-Source postexecute/GNU/Linux/40_enabling_local_repos_with_satellite.sh
-Source postexecute/GNU/Linux/43_restore_yum_enable_status.sh
-Source postexecute/GNU/Linux/44_enable_on_rhel_yum_repos.sh
-Source postexecute/GNU/Linux/45_enable_rhn_satellite_subscription.sh
-Source postexecute/default/50_adapt_sg_autostart_cmcld.sh
-Source postexecute/GNU/Linux/60_save_knife_node_output.sh
-Source postexecute/GNU/Linux/60_save_satellite_info.sh
-Source postexecute/GNU/Linux/65_remove_duplicate_packages.sh
-Source postexecute/GNU/Linux/70_define_default_runlevel.sh
-Source postexecute/default/80_run_cmds_defined_in_ini.sh
-Source postexecute/GNU/Linux/80_run_grub2_mkconfig.sh
-Source postexecute/GNU/Linux/82_enable_chef_client_in_crontab.sh
-Source postexecute/GNU/Linux/85_update_major_release_in_config.sh
-Source postexecute/GNU/Linux/95_reboot_required.sh
-Source postexecute/default/96_call_for_action_after_preview.sh
-Source postexecute/default/99_update_status.sh
-Source cleanup/default/05_read_section_from_inifile.sh
-Source cleanup/default/10_rm_old_cfg2html_reports.sh
-Source cleanup/default/20_rm_sap_db_tmp_file.sh
-Source cleanup/default/90_preview_ended_successfully.sh
-Source cleanup/default/95_show_logfile_location.sh</code></pre>
-</div></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">It depends on the OS architecture (see <code>dump</code> workflow) which scripts will be sources. In above example it was on HP hardware.</td>
-</tr></table>
-</div>
-<div class="paragraph"><p>In every <em>stage</em> directory you will find minimum a <code>default</code> directory which is sourced by every OS and a hardware specific directory, such as:</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-hp
-</p>
-</li>
-<li>
-<p>
-GNU/Linux
-</p>
-</li>
-<li>
-<p>
-sunos
-</p>
-</li>
-<li>
-<p>
-aix
-</p>
-</li>
-</ul></div>
-<div class="paragraph"><p>The scripts found under these directories are only sourced when you run <code>upgrade-ux</code> on those HW architectures (make sense, no?).
-If you need new scripts just write a small script called <code>my_script.sh</code> (the <code>.sh</code> is important!) and it will be picked up the next time automatically.</p></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">there is no need to make these small scripts executable (nor is it required to start with <code>#!/bin/sh</code> or whatever).</td>
-</tr></table>
-</div>
-<div class="paragraph"><p>An example of such a script is <code>/opt/upgrade-ux/scripts/preinstall/default/05_reboot_required.sh</code></p></div>
-<div class="listingblock">
-<div class="content"></div></div>
-<div class="paragraph"><p>Now it is up to you! If you wish to add new scripts it is always useful to first make a new issue at GitHub: <a href="https://github.com/gdha/upgrade-ux/issues">https://github.com/gdha/upgrade-ux/issues</a></p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_frequently_asked_questions">8. Frequently Asked Questions</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_upgrade_ux_not_found">8.1. Upgrade-ux not found</h3>
-<div class="paragraph"><p>If you get the following error when you try to run <code>upgrade-ux</code></p></div>
-<div class="listingblock">
-<div class="content"></div></div>
-<div class="paragraph"><p>The reason is that the absolute path <code>/opt/upgrade-ux/bin</code> is not added the the <code>PATH</code> variable. This is done on purpose to avoid mistakes! Therefore, always use the full path <code>/opt/upgrade-ux/bin/upgrade-ux</code></p></div>
-</div>
-<div class="sect2">
-<h3 id="_why_upgrade_ux_as_we_know_update_ux">8.2. Why upgrade-ux as we know update-ux</h3>
-<div class="paragraph"><p>This question is only valid for HP-UX 11i systems which can be upgraded to a newer version of the Operation System (say HP-UX 11.23 to HP-UX 11.31), or even using <code>update-ux</code> to upgrade software bundles on the same OS version.
-We have encountered situations where the UNIX engineer by accident started <code>update-ux</code> on HP-UX 11.23 to patch with HP-UX 11.23 bundles, but using the HP-UX 11.31 depot, and therefore, <code>update-ux</code> started the upgrade process to HP-UX 11.31. As a result we needed to recover from an Ignite/UX image before restarting the patching round again. By using <code>upgrade-ux</code> this simply becomes impossible as all update paths are described in the configuration files.</p></div>
-</div>
-<div class="sect2">
-<h3 id="_how_do_we_install_a_patch_bundle_from_1_or_2_years_ago">8.3. How do we install a patch bundle from 1 or 2 years ago?</h3>
-<div class="paragraph"><p>The <code>YEAR</code> variable defines the current year ( <code>$(date +%Y)</code> ) of the patch bundles in the <code>/etc/opt/upgrade-ux/default.conf</code> file. However, suppose we are in the year 2015 and still would like to install the patch bundle of 2014? The easiest way is to overrule the <code>YEAR</code> variable in the <code>/etc/opt/upgrade-ux/local.conf</code> as</p></div>
-<div class="listingblock">
-<div class="content"></div></div>
-</div>
-<div class="sect2">
-<h3 id="_how_gets_the_sdserver_variable_defined">8.4. How gets the SDSERVER variable defined</h3>
-<div class="paragraph"><p>You might wonder how we define the <code>SDSERVER</code>? And, is it possible to overrule it with your preference? The <code>SDSERVER</code> variable is used a lot in the INI files and points to an IP address or FQDN of an software depot server where the software depots are stored.</p></div>
-<div class="paragraph"><p>The <code>SDSERVER</code> variable is defined by a script <code>scripts/init/hp/30_define_sdserver.sh</code> and tries to figure out the region you are located in. Be aware, this script only works well for <em>one</em> particular customer (the sponsor of this project).</p></div>
-<div class="paragraph"><p>Therefore, for other users, you need to define the <code>SDSERVER</code> variable in the <code>/etc/opt/upgrade-ux/local.conf</code> file as</p></div>
-<div class="listingblock">
-<div class="content"></div></div>
-<div class="paragraph"><p>Obviously, you need to replace the name <em>my_sdserver.company.com</em> with the correct name of the software depot server.</p></div>
-</div>
-<div class="sect2">
-<h3 id="_upgrade_ux_forces_me_to_reboot_the_server_if_system_is_running_for_more_then_30_days">8.5. Upgrade-ux forces me to reboot the server if system is running for more then 30 days</h3>
-<div class="paragraph"><p>The forced reboot was introduced into upgrade-ux, because sometimes servers got patches after running over 1 year without a single reboot and to avoid pin-points to bad patch bundles we decided a recent reboot was required (by default 30 days uptime is the maximum we tolerate).</p></div>
-<div class="paragraph"><p>However, in rare cases, some customers want to extend this period to 60 days. So, how to do this?</p></div>
-<div class="paragraph"><p>The variable which defines the uptime is called <code>DAYSUPTIME</code> and is defined in <code>/etc/opt/upgrade-ux/default.conf</code>. As you should know by now, you can overrule this by defining a new value in the <code>/etc/opt/upgrade-ux/local.conf</code> file as</p></div>
-<div class="listingblock">
-<div class="content"></div></div>
-<div class="paragraph"><p>However, be aware, if you increase this value then do not file an issue against upgrade-ux!</p></div>
-</div>
-</div>
-</div>
-</div>
-<div id="footnotes"><hr /></div>
-<div id="footer">
-<div id="footer-text">
-Last updated
- 2024-04-23 14:18:11 CEST
-</div>
-</div>
+options[0]      =       "-2%Y%m%d"
+</code></pre>
+
+<h1 id="Workflows">Workflows</h1>
+
+<p>The workflows (or commands) available can be listed with the <code>-h</code> option:</p>
+
+<p><code>
+# /opt/upgrade-ux/bin/upgrade-ux -h
+    ....
+    List of commands:
+     dump            dump configuration and system information
+     mkdist          create a compressed tar archive distribution
+     purgelogs       purge the LOG [/home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log] directory
+     test            a simple test workflow
+     upgrade         upgrade the operating system
+</code></p>
+
+<h2 id="Dump-workflow">Dump workflow</h2>
+
+<p>The dump workflow was already discussed during the configuration chapter. The output of <code>/opt/upgrade-ux/bin/upgrade-ux dump</code>:</p>
+
+<p><code>
+# /opt/upgrade-ux/bin/upgrade-ux dump
+upgrade-ux 0.7 / 03-Jun-2014
+Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140626-1656-hostname.log
+Dumping out configuration and system information
+System definition:
+                                    ARCH = HP-UX-ia64
+                                      OS = HP-UX
+                        OS_MASTER_VENDOR =
+                       OS_MASTER_VERSION =
+                   OS_MASTER_VENDOR_ARCH =
+                OS_MASTER_VENDOR_VERSION =
+           OS_MASTER_VENDOR_VERSION_ARCH =
+                               OS_VENDOR = hp
+                              OS_VERSION = 11.31
+                          OS_VENDOR_ARCH = hp/ia64
+                       OS_VENDOR_VERSION = hp/11.31
+                  OS_VENDOR_VERSION_ARCH = hp/11.31/ia64
+Configuration tree:
+                         HP-UX-ia64.conf : missing/empty
+                              HP-UX.conf : OK
+                                 hp.conf : missing/empty
+                            hp/ia64.conf : missing/empty
+                           hp/11.31.conf : missing/empty
+                      hp/11.31/ia64.conf : missing/empty
+                               site.conf : missing/empty
+                              local.conf : OK
+</code></p>
+
+<p>The first part displays the system definitions, such as OS, hardware type and OS version.
+The second part shows the configuration part and which files it could find (or you may define, create and/or use). They do not need to exist.</p>
+
+<p>The following example shows the dump on a RHEL 7 system:</p>
+
+<p><code>
+  # /opt/upgrade-ux/bin/upgrade-ux dump
+  upgrade-ux 0.9 / Git
+  Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140626-1859-hostname.log
+  Dumping out configuration and system information
+  This is a 'Linux-x86_64' system, compatible with 'Linux-i386'.
+  System definition:
+                                    ARCH = Linux-i386
+                                      OS = GNU/Linux
+                        OS_MASTER_VENDOR = fedora
+                       OS_MASTER_VERSION = 7
+                   OS_MASTER_VENDOR_ARCH = fedora/x86_64
+                OS_MASTER_VENDOR_VERSION = fedora/7
+           OS_MASTER_VENDOR_VERSION_ARCH = fedora/7/x86_64
+                               OS_VENDOR = rhel
+                              OS_VERSION = 7
+                          OS_VENDOR_ARCH = rhel/x86_64
+                       OS_VENDOR_VERSION = rhel/7
+                  OS_VENDOR_VERSION_ARCH = rhel/7/x86_64
+Configuration tree:
+                         Linux-i386.conf : missing/empty
+                          GNU/Linux.conf : OK
+                             fedora.conf : missing/empty
+                      fedora/x86_64.conf : missing/empty
+                           fedora/7.conf : missing/empty
+                    fedora/7/x86_64.conf : missing/empty
+                               rhel.conf : missing/empty
+                        rhel/x86_64.conf : missing/empty
+                             rhel/7.conf : missing/empty
+                      rhel/7/x86_64.conf : missing/empty
+                               site.conf : missing/empty
+                              local.conf : OK
+</code></p>
+
+<p>These configuration files live under the <code>/etc/opt/upgrade-ux</code> or <code>./upgrade-ux/etc/opt/upgrade-ux</code> (relative path) directory.
+At this moment we have the following configuration files present (however, it will grow over time):</p>
+
+<pre><code># ls -lR
+total 112
+drwxr-xr-x   2 gdhaese1   users         8192 Mar  6 13:39 GNU
+-rw-r--r--   1 gdhaese1   users         2919 Jun  3 15:07 HP-UX-11.11-2014.ini
+-rw-r--r--   1 gdhaese1   users         2918 Jun  3 15:07 HP-UX-11.23-2014.ini
+-rw-r--r--   1 gdhaese1   users         3687 Jun  3 15:06 HP-UX-11.31-2014.ini
+-rw-r--r--   1 gdhaese1   users         1068 May 12 10:52 HP-UX.conf
+-rw-r--r--   1 gdhaese1   users         4571 Jun 13 14:58 default.conf
+-rw-r--r--   1 gdhaese1   users          790 May 21 09:48 local.conf
+
+./GNU:
+total 48
+-rw-r--r--   1 gdhaese1   users          102 Mar  6 13:39 Linux-fedora-20-2014.ini
+-rw-r--r--   1 gdhaese1   users          111 Mar  6 13:39 Linux-suse-11-2014.ini
+-rw-r--r--   1 gdhaese1   users           74 Mar  6 10:43 Linux.conf
+</code></pre>
+
+<h2 id="Mkdist-workflow">Mkdist workflow</h2>
+
+<p>The <em>mkdist</em> workflow creates a compressed tar file of the current development tree, which only makes sense when you are using the +git clone+ version of upgrade-ux. The compressed tar file is stored under <code>/tmp</code> file system and is called <code>/tmp/upgrade-ux-0.9.tar.gz</code> (the version can be different of course).</p>
+
+<h2 id="Purgelogs-workflow">Purgelogs workflow</h2>
+
+<p>The purgelogs workflow just has a simple function and that is to purge log files which are older than 30 days. It will display the logs it has purged (only when you are using the option <code>-v</code>):</p>
+
+<h1 id="opt-upgrade-ux-bin-upgrade-ux-v-purgelogs">opt/upgrade-ux/bin/upgrade-ux -v purgelogs</h1>
+
+<h2 id="Test-workflow">Test workflow</h2>
+
+<p>The test workflow is a very simplistic test (use option <code>-v</code> to see something):</p>
+
+<h1 id="opt-upgrade-ux-bin-upgrade-ux-v-test">opt/upgrade-ux/bin/upgrade-ux -v test</h1>
+<p>upgrade-ux 0.9 / Git
+Using log file: /home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log/upgrade-ux-20140625-1354-hostname.log
+no stale NFS mount points found</p>
+
+<h2 id="Upgrade-workflow">Upgrade workflow</h2>
+
+<p>The upgrade workflow is the real work horse here and in fact is the default workflow (meaning if no workflow is mentioned we will assume you mean <code>upgrade</code>).</p>
+
+<p>The upgrade workflow has two modes:</p>
+
+<ul>
+  <li>
+<em>preview mode</em>: is going through the complete flow checking all software and simulating an update of the system. Is a perfect way to examine your system to see whether any underlying issues could prevent a successful upgrade. You can do the preview (option <code>-p</code>) any time and as much as you like. However, before doing the <em>upgrade mode</em> you are forced to go through a successful <em>preview mode</em> as well.</li>
+  <li>
+<em>upgrade mode</em>: is doing again all the checks, writing evidence and applying all the patch bundles or doing the upgrade. The system might reboot. After the reboot you can continue with retyping <code>/opt/upgrade-ux/bin/upgrade-ux -v</code> and it will continue from the point it was interrupted by the reboot as upgrade-ux keeps track of it stages.</li>
+</ul>
+
+<h1 id="Basic-Usage">Basic Usage</h1>
+
+<p>Before digging deeper in <code>upgrade-ux</code> lets explain the basic usage.</p>
+
+<p>The option help (<code>-h</code>) will produce the following:</p>
+
+<pre><code># /opt/upgrade-ux/bin/upgrade-ux -h
+Usage: upgrade-ux [-dDFsSpvV] [-c DIR ] COMMAND [-- ARGS...]
+
+upgrade-ux comes with ABSOLUTELY NO WARRANTY; for details see
+the GNU General Public License at: https://www.gnu.org/licenses/gpl.html
+
+Available options:
+ -c DIR       alternative config directory; instead of /etc/opt/upgrade-ux
+ -d           debug mode; log debug messages
+ -D           debugscript mode; log every function call
+ -F           forcing preview or upgrade to continue when entering next stage is not allowed
+ -s           simulation mode; show what scripts upgrade-ux would include
+ -S           step-by-step mode; acknowledge each script individually
+ -p           preview mode; run all install or other commands in preview
+ -v           verbose mode; show more output
+ -V           version information
+
+List of commands:
+ dump            dump configuration and system information
+ mkdist          create a compressed tar archive distribution
+ purgelogs       purge the LOG [/var/opt/upgrade-ux/log] directory
+ test            a simple test workflow
+ upgrade         upgrade the operating system
+</code></pre>
+
+<p>Keep in mind that upgrade-ux has an excellent man page too. See <code>man 8 upgrade-ux</code></p>
+
+<p>It is important to know that <code>upgrade-ux</code> is a quiet program and will not show any output if you do not request for it with the verbose option (<code>-v</code>). Another point of interest is its excellent logging facilities as under <code>/var/opt/upgrade-ux/log</code> directory <code>upgrade-ux</code> keep a log file of each run. The log files are composed as follow <code>upgrade-ux-&lt;YYYYMMDD&gt;-&lt;HHMM&gt;-hostname.log</code></p>
+
+<p>We already mentioned the evidence files which are kept under <code>/var/opt/upgrade-ux/&lt;YYYY-MM-DD&gt;/</code> directory. The type of files you find under there are of course different according the OS, OS version and which software is installed. Furthermore, <em>preview</em> and <em>upgrade</em> mode may result in more or less evidence files.</p>
+
+<p>Starting up the program should be done by referencing the full path <code>/opt/upgrade-ux/bin/upgrade-ux</code> as the directory is not part of the <code>PATH</code> variable, and we prefer to keep it this way to avoid accidents.</p>
+
+<p>You probably understood by now that <code>upgrade-ux</code> must be started in <em>preview</em> mode first before we can run it in <em>upgrade</em> mode. However, we prefer that you always use the option <code>-p</code> (<em>preview</em> mode) to make it clear to yourself and other (when they need to dig into the log files for some reason) what you meant. Furthermore, in the log file there is always a trace of in which mode the program was running:</p>
+
+<p><code>
+    2014-06-10 15:22:45 Check if our PID (11950) is locked
+    2014-06-10 15:22:45 Found /tmp/upgrade-ux-LOCKDIR/upgrade-ux-PIDFILE file - we could be locked...
+    2014-06-10 15:22:45 lock is stale (6607) - will continue
+    2014-06-10 15:22:45 lock succeeded: 11950 - /tmp/upgrade-ux-LOCKDIR/upgrade-ux-PIDFILE
+    2014-06-10 15:22:47 upgrade-ux 0.7 / 03-Jun-2014
+    2014-06-10 15:22:47 Command line options: /opt/upgrade-ux/bin/upgrade-ux -v
+    2014-06-10 15:22:47 Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140610-1522-hostname.log
+    2014-06-10 15:22:47 Including /opt/upgrade-ux/lib/progresssubsystem.nosh
+    2014-06-10 15:22:47 Including /etc/opt/upgrade-ux/HP-UX.conf
+    2014-06-10 15:22:47 Including /etc/opt/upgrade-ux/local.conf
+    2014-06-10 15:22:47 Running upgrade workflow
+    2014-06-10 15:22:47 Running 'init' stage
+    2014-06-10 15:22:47 Including init/default/03_prepare_tmp_build_area.sh
+    2014-06-10 15:22:47 Including init/default/04_create_var_dir.sh
+    2014-06-10 15:22:47 Including init/default/05_select_ini_file.sh
+    2014-06-10 15:22:47 Found ini file /etc/opt/upgrade-ux/HP-UX-11.11-2014.ini
+    2014-06-10 15:22:47 Including init/default/08_set_preview_var.sh
+    2014-06-10 15:22:47 Including init/default/10_check_current_status.sh
+    2014-06-10 15:22:47 Including init/default/12_upgrade_allowed.sh
+    2014-06-10 15:22:47 Including init/default/15_check_preview_run.sh
+    2014-06-10 15:22:47 Last preview run was executed on Tue Jun 10 14:28:36 METDST 2014  (preview ended successfully)
+    2014-06-10 15:22:47 Running in "upgrade mode"
+    2014-06-10 15:22:47 =-=-=-=-=-=-=-=-=-=-=-=-=
+</code></p>
+
+<p>From the Chapter "Workflow" you probably remember that the default workflow is <em>upgrade</em> (even if you did not mention it). So, as example running <code>upgrade-ux</code> in preview mode with verbose option is done as <code>/opt/upgrade-ux/bin/upgrade-ux -vp</code></p>
+
+<p>The last option that we bring to your attention in this Chapter is the force option (<code>-F</code>) which is handy in situation that for some reasons <code>upgrade-ux</code> does not want to continue due to serious software (patches) problems. For example, within HP-UX we run the <code>check_patches</code> command which when errors are detected will force an exit from <code>upgrade-ux</code> so that the System Administrator can first fix these patches (or any other issue) before re-running <code>upgrade-ux</code> again.
+We have seen cases it was impossible to get everything fixed and for that reason you may use the force option, but please do not use it by default.</p>
+
+<p>NOTE: We advise to run the <em>preview</em> mode a few weeks in advance, but on a given day we must run the <em>preview</em> first again before we can run in <em>upgrade</em> mode. This is done on purpose to avoid mistakes.</p>
+
+<h1 id="Upgrade-Operation">Upgrade Operation</h1>
+
+<p>The <em>upgrade</em> operation (or workflow) is the default one and does not need to be mentioned explicitly on the command line.
+The upgrade operation goes through different stages to accomplish a successful upgrade or patch installation. The stages in use are:</p>
+
+<dl>
+<dt>init</dt>
+<dd>  The <em>init</em> stage is what we call the initialization stage where we create a temporary work directory, read the INI file, decides if we are running in <em>preview</em> or <em>upgrade</em> mode, read the current status</dd>
+<dt>prep</dt>
+<dd>  The <em>prep</em> stage is the preparation stage where we can save, copy lots of files as evidence (before we start patching). You could also use it to investigate if the health of the system is good enough to start with an upgrade and if not, warn the user and exit.</dd>
+<dt>preremove</dt>
+<dd>  The <em>prepremove</em> stage is doing what its name applies - remove software before upgrading. It may be a handy if you know old pieces of software could lead to inconsistencies. Usually, we make sure that a more recent version gets installed during or after the upgrade.</dd>
+<dt>preinstall</dt>
+<dd>  The <em>preinstall</em> stage is used by scripts to stop daemons and other processes which may generate conflicts during the upgrade.</dd>
+<dt>install</dt>
+<dd>  The <em>install</em> stage is the part where we actually install software, do the patching or start with the updates of software bundles and drivers. This part must be described in the INI file (install section).</dd>
+<dt>postinstall</dt>
+<dd>  The <em>postinstall</em> stage is mainly used to install extra software bundles which were not part of the global patch bundles or update depots. Also here, these must be described in the INI file (postinstall section). Furthermore, we tend to save evidence during this stage (as we did in the prep stage) so we can compare if something trial was modified and if so, warn the user about it.</dd>
+<dt>postremove</dt>
+<dd>  The <em>postremove</em> stage is just there in case some software bundles must be removed again to avoid conflicts. Usually, this stage is empty.</dd>
+<dt>configure</dt>
+<dd>  The <em>configure</em> stage is used to setup cron entries, user permission or whatever  you can think of.</dd>
+<dt>postexecute</dt>
+<dd>  The <em>postexecute</em> stage is used to execute some program, such as <code>cfg2html</code> to grab a new base point of the system. Again, you can run other programs as well such as <code>HPSIM-HealthCheck.sh</code> and so on</dd>
+</dl>
+
+<p>Every time you enter or leave a stage the <code>/var/opt/upgrade-ux/status</code> gets updated with a timestamp and the <em>stage</em> name with an additional notification of 'start' or 'ended'. Upgrade-ux will not delete this status file, but will always append to it so you get a nice historic view of all the runs:</p>
+
+<p><code>
+   # cat /var/opt/upgrade-ux/status
+   2014-06-13 13:12:26 init:start
+   2014-06-13 13:12:27 init:ended
+   2014-06-13 13:12:27 prep:start
+   2014-06-13 13:12:36 prep:ended
+   2014-06-13 13:12:36 preremove:start
+   2014-06-13 13:12:45 preremove:ended
+   2014-06-13 13:12:45 preinstall:start
+   2014-06-13 13:12:51 preinstall:ended
+   2014-06-13 13:12:51 install:start
+   2014-06-13 13:25:30 install:ended
+   2014-06-13 13:25:30 postinstall:start
+   2014-06-13 13:27:41 postinstall:ended
+   2014-06-13 13:27:41 postremove:start
+   2014-06-13 13:27:41 postremove:ended
+   2014-06-13 13:27:41 configure:start
+   2014-06-13 13:27:41 configure:ended
+   2014-06-13 13:27:41 postexecute:start
+   2014-06-13 13:28:19 postexecute:ended
+   2014-06-13 13:28:19 preview:ended   (preview ended successfully)
+   2014-06-13 13:34:09 init:start
+   2014-06-13 13:34:10 init:ended
+   2014-06-13 13:34:10 prep:start
+   2014-06-13 13:34:19 prep:ended
+   2014-06-13 13:34:19 preremove:start
+   2014-06-13 13:34:31 preremove:ended
+   2014-06-13 13:34:31 preinstall:start
+   2014-06-13 13:35:56 preinstall:ended
+   2014-06-13 13:35:56 install:start
+   2014-06-13 15:36:57 install:ended
+   2014-06-13 15:36:58 postinstall:start
+   2014-06-13 15:45:49 postinstall:ended
+   2014-06-13 15:45:49 postremove:start
+   2014-06-13 15:45:49 postremove:ended
+   2014-06-13 15:45:49 configure:start
+   2014-06-13 15:45:49 configure:ended
+   2014-06-13 15:45:49 postexecute:start
+   2014-06-13 15:55:21 postexecute:ended
+   2014-06-13 15:55:21 upgrade:ended   (upgrade ended successfully)
+</code>
+# The upgrade-ux scripts</p>
+
+<p>The scripts that are sourced by the main script <code>upgrade-ux</code> reside under <code>/opt/upgrade-ux/scripts/</code> directory and the easiest way to know what will be sourced is by running <code>/opt/upgrade-ux/bin/upgrade-ux -s</code>:</p>
+
+<p><code>
+    $ sudo /opt/upgrade-ux/bin/upgrade-ux -s
+    upgrade-ux 1.27 / 24-Aug-2022
+    Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20221128-1008-ITSGBHHLSP00741.log
+    Source init/default/02_print_host_info.sh
+    Source init/default/03_parse_variables.sh
+    Source init/default/03_prepare_tmp_build_area.sh
+    Source init/default/04_create_var_dir.sh
+    Source init/default/05_select_ini_file.sh
+    Source init/default/08_set_preview_var.sh
+    Source init/default/10_check_current_status.sh
+    Source init/GNU/Linux/10_define_hostname.sh
+    Source init/default/12_upgrade_allowed.sh
+    Source init/default/15_check_preview_run.sh
+    Source init/GNU/Linux/40_set_docker_var.sh
+    Source init/default/85_set_current_state.sh
+    Source init/default/90_show_current_state.sh
+    Source prep/default/05_reboot_required.sh
+    Source prep/default/05_source_cmcluster_conf.sh
+    Source prep/default/10_check_current_status.sh
+    Source prep/default/16_check_dp_backup.sh
+    Source prep/default/16_check_nbu_backup.sh
+    Source prep/default/16_check_nsr_backup.sh
+    Source prep/default/16_check_tsm_backup.sh
+    Source prep/default/17_list_nbu_backup_status.sh
+    Source prep/GNU/Linux/20_wait_on_chef_client_completion.sh
+    Source prep/GNU/Linux/27_save_grub_menu.sh
+    Source prep/GNU/Linux/28_save_system_release.sh
+    Source prep/GNU/Linux/29_save_kernel_version.sh
+    Source prep/default/30_save_pam_conf.sh
+    Source prep/GNU/Linux/30_save_rpm_qa.sh
+    Source prep/default/31_save_env_output.sh
+    Source prep/GNU/Linux/35_check_rear_image.sh
+    Source prep/default/35_save_mount_output.sh
+    Source prep/GNU/Linux/36_check_virusscanner_linuxshield.sh
+    Source prep/GNU/Linux/37_check_diskspace_requirements.sh
+    Source prep/GNU/Linux/38_save_satellite_info.sh
+    Source prep/GNU/Linux/39_save_yum_history.sh
+    Source prep/GNU/Linux/39_save_yum_log.sh
+    Source prep/GNU/Linux/40_disabling_local_repos_with_satellite.sh
+    Source prep/GNU/Linux/41_disable_rhn_satellite_subscription.sh
+    Source prep/GNU/Linux/42_archive_yum_repos_dir.sh
+    Source prep/GNU/Linux/43_save_yum_enable_status.sh
+    Source prep/GNU/Linux/49_yum_repolist.sh
+    Source prep/GNU/Linux/50_save_default_runlevel.sh
+    Source prep/GNU/Linux/54_check_on_hanging_rpm_cmds.sh
+    Source prep/GNU/Linux/55_verify_rpm_packages.sh
+    Source prep/GNU/Linux/60_save_knife_node_output.sh
+    Source prep/default/61_exclude_software_packages.sh
+    Source prep/GNU/Linux/61_save_extend_filesystem_features.sh
+    Source prep/default/62_sg_autostart_cmcld.sh
+    Source prep/default/70_check_openssl_logjam.sh
+    Source prep/default/72_save_uvscan_exclude_list.sh
+    Source prep/default/95_check_missing_programs.sh
+    Source prep/default/99_update_status.sh
+    Source preremove/default/01_enter_stage_acceptable.sh
+    Source preremove/default/05_read_section_from_inifile.sh
+    Source preremove/default/99_update_status.sh
+    Source preinstall/default/01_enter_stage_acceptable.sh
+    Source preinstall/default/05_read_section_from_inifile.sh
+    Source preinstall/GNU/Linux/06_yum_clean_all.sh
+    Source preinstall/GNU/Linux/07_journalctl_flush.sh
+    Source preinstall/GNU/Linux/08_clear_yum_cache.sh
+    Source preinstall/GNU/Linux/09_import_rpm_gpg_keys.sh
+    Source preinstall/GNU/Linux/10_stop_ds_agent.sh
+    Source preinstall/GNU/Linux/10_stop_nails.sh
+    Source preinstall/GNU/Linux/20_stop_cron.sh
+    Source preinstall/default/22_shutdown_opcagt.sh
+    Source preinstall/GNU/Linux/25_stop_tidal.sh
+    Source preinstall/GNU/Linux/26_stop_ctmagent.sh
+    Source preinstall/GNU/Linux/28_stop_docker.sh
+    Source preinstall/GNU/Linux/30_disable_chef_client_in_crontab.sh
+    Source preinstall/default/30_shutdown_quest.sh
+    Source preinstall/GNU/Linux/32_stop_tanium.sh
+    Source preinstall/GNU/Linux/33_stop_fluentbit.sh
+    Source preinstall/GNU/Linux/34_stop_flexera.sh
+    Source preinstall/GNU/Linux/35_stop_cisco_amp.sh
+    Source preinstall/default/80_run_cmds_defined_in_ini.sh
+    Source preinstall/default/99_update_status.sh
+    Source install/default/01_enter_stage_acceptable.sh
+    Source install/default/05_read_section_from_inifile.sh
+    Source install/default/20_sw_installation_in_progress.sh
+    Source install/GNU/Linux/29_exclude_packages.sh
+    Source install/GNU/Linux/30_install_software.sh
+    Source install/default/99_update_status.sh
+    Source postinstall/default/01_enter_stage_acceptable.sh
+    Source postinstall/default/05_read_section_from_inifile.sh
+    Source postinstall/default/10_save_dmesg.sh
+    Source postinstall/GNU/Linux/28_save_and_diff_system_release.sh
+    Source postinstall/GNU/Linux/29_save_and_diff_kernel_version.sh
+    Source postinstall/default/30_diff_pam_conf.sh
+    Source postinstall/GNU/Linux/30_save_rpm_qa.sh
+    Source postinstall/default/35_save_mount_output.sh
+    Source postinstall/GNU/Linux/39_save_and_diff_yum_log.sh
+    Source postinstall/GNU/Linux/40_needs_restarting.sh
+    Source postinstall/GNU/Linux/61_save_and_diff_extend_filesystem_features.sh
+    Source postinstall/default/99_update_status.sh
+    Source postremove/default/01_enter_stage_acceptable.sh
+    Source postremove/default/05_read_section_from_inifile.sh
+    Source postremove/default/99_update_status.sh
+    Source configure/default/01_enter_stage_acceptable.sh
+    Source configure/default/05_read_section_from_inifile.sh
+    Source configure/default/10_configure_commands.sh
+    Source configure/GNU/Linux/20_uncomment_cfg2html_in_crontab.sh
+    Source configure/default/26_fix_openssl_logjam.sh
+    Source configure/default/55_fix_uvscan_exclude_list.sh
+    Source configure/default/62_verify_sg_autostart_cmcld.sh
+    Source configure/default/99_update_status.sh
+    Source postexecute/default/01_enter_stage_acceptable.sh
+    Source postexecute/default/05_read_section_from_inifile.sh
+    Source postexecute/GNU/Linux/20_start_ds_agent.sh
+    Source postexecute/GNU/Linux/20_start_nails.sh
+    Source postexecute/GNU/Linux/25_start_crond.sh
+    Source postexecute/GNU/Linux/25_start_ntpd.sh
+    Source postexecute/GNU/Linux/25_start_tidal.sh
+    Source postexecute/GNU/Linux/26_start_ctmagent.sh
+    Source postexecute/GNU/Linux/28_start_docker.sh
+    Source postexecute/GNU/Linux/29_start_tanium.sh
+    Source postexecute/GNU/Linux/30_start_fluentbit.sh
+    Source postexecute/GNU/Linux/31_start_flexera.sh
+    Source postexecute/GNU/Linux/33_restart_apache.sh
+    Source postexecute/default/37_start_opcagt.sh
+    Source postexecute/default/38_start_quest.sh
+    Source postexecute/GNU/Linux/40_enabling_local_repos_with_satellite.sh
+    Source postexecute/GNU/Linux/43_restore_yum_enable_status.sh
+    Source postexecute/GNU/Linux/44_enable_on_rhel_yum_repos.sh
+    Source postexecute/GNU/Linux/45_enable_rhn_satellite_subscription.sh
+    Source postexecute/default/50_adapt_sg_autostart_cmcld.sh
+    Source postexecute/GNU/Linux/60_save_knife_node_output.sh
+    Source postexecute/GNU/Linux/60_save_satellite_info.sh
+    Source postexecute/GNU/Linux/65_remove_duplicate_packages.sh
+    Source postexecute/GNU/Linux/70_define_default_runlevel.sh
+    Source postexecute/default/80_run_cmds_defined_in_ini.sh
+    Source postexecute/GNU/Linux/80_run_grub2_mkconfig.sh
+    Source postexecute/GNU/Linux/82_enable_chef_client_in_crontab.sh
+    Source postexecute/GNU/Linux/85_update_major_release_in_config.sh
+    Source postexecute/GNU/Linux/95_reboot_required.sh
+    Source postexecute/default/96_call_for_action_after_preview.sh
+    Source postexecute/default/99_update_status.sh
+    Source cleanup/default/05_read_section_from_inifile.sh
+    Source cleanup/default/10_rm_old_cfg2html_reports.sh
+    Source cleanup/default/20_rm_sap_db_tmp_file.sh
+    Source cleanup/default/90_preview_ended_successfully.sh
+    Source cleanup/default/95_show_logfile_location.sh
+</code></p>
+
+<p>NOTE: It depends on the OS architecture (see <code>dump</code> workflow) which scripts will be sources. In above example it was on HP hardware.</p>
+
+<p>In every <em>stage</em> directory you will find minimum a <code>default</code> directory which is sourced by every OS and a hardware specific directory, such as:</p>
+
+<ul>
+  <li>hpe</li>
+  <li>GNU/Linux</li>
+  <li>sunos</li>
+  <li>aix</li>
+</ul>
+
+<p>The scripts found under these directories are only sourced when you run <code>upgrade-ux</code> on those HW architectures (make sense, no?).
+If you need new scripts just write a small script called <code>my_script.sh</code> (the <code>.sh</code> is important!) and it will be picked up the next time automatically.</p>
+
+<p>NOTE: there is no need to make these small scripts executable (nor is it required to start with <code>#!/bin/sh</code> or whatever).</p>
+
+<p>An example of such a script is <code>/opt/upgrade-ux/scripts/preinstall/default/05_reboot_required.sh</code>:</p>
+
+<p><code>
+    $ cat preinstall/default/05_reboot_required.sh
+    # 05_reboot_required.sh
+    # if the uptime of the system is higher then 30 days then we propose to reboot first
+    # pre-define daysup as 0 (we can check this variable later [after a reboot])
+    daysup=0
+    # when uptime is not expressed in days then we probably just rebooted our system
+    uptime | grep -q days || return
+    daysup=$( uptime | awk '{print $3}' )
+    IsDigit $daysup || daysup=$( w | head -1 | awk '{print $3}' )  # alternative method
+    IsDigit $daysup || daysup=0
+    if [[ $daysup -gt $DAYSUPTIME ]]; then
+        if (( PREVIEW )) ; then
+            LogPrint "Uptime of system is $daysup (&gt;$DAYSUPTIME days) - recommend to reboot before patching"
+        else
+            Error "Uptime of system is $daysup (&gt;$DAYSUPTIME days) - reboot is required before patching with $PRODUCT"
+        fi
+    fi
+</code></p>
+
+<p>Now it is up to you! If you wish to add new scripts it is always useful to first make a new issue at GitHub: https://github.com/gdha/upgrade-ux/issues</p>
+
+<h1 id="-Frequently-Asked-Questions">= Frequently Asked Questions</h1>
+
+<h2 id="Upgrade-ux-not-found">Upgrade-ux not found</h2>
+<p>If you get the following error when you try to run <code>upgrade-ux</code></p>
+
+<p><code>
+    # upgrade-ux
+    sh: upgrade-ux:  not found.
+</code></p>
+
+<p>The reason is that the absolute path <code>/opt/upgrade-ux/bin</code> is not added the the <code>PATH</code> variable. This is done on purpose to avoid mistakes! Therefore, always use the full path <code>/opt/upgrade-ux/bin/upgrade-ux</code></p>
+
+<h2 id="Why-upgrade-ux-as-we-know-update-ux">Why upgrade-ux as we know update-ux</h2>
+<p>This question is only valid for HP-UX 11i systems which can be upgraded to a newer version of the Operation System (say HP-UX 11.23 to HP-UX 11.31), or even using <code>update-ux</code> to upgrade software bundles on the same OS version. 
+We have encountered situations where the UNIX engineer by accident started <code>update-ux</code> on HP-UX 11.23 to patch with HP-UX 11.23 bundles, but using the HP-UX 11.31 depot, and therefore, <code>update-ux</code> started the upgrade process to HP-UX 11.31. As a result we needed to recover from an Ignite/UX image before restarting the patching round again. By using <code>upgrade-ux</code> this simply becomes impossible as all update paths are described in the configuration files.</p>
+
+<h2 id="How-do-we-install-a-patch-bundle-from-1-or-2-years-ago-">How do we install a patch bundle from 1 or 2 years ago?</h2>
+<p>The <code>YEAR</code> variable defines the current year ( <code>$(date </code>%Y)<code> ) of the patch bundles in the </code>/etc/opt/upgrade-ux/default.conf<code> file. However, suppose we are in the year 2015 and still would like to install the patch bundle of 2014? The easiest way is to overrule the </code>YEAR<code> variable in the </code>/etc/opt/upgrade-ux/local.conf` as</p>
+
+<p><code>
+    YEAR=2014
+</code></p>
+
+<h2 id="How-gets-the-SDSERVER-variable-defined">How gets the SDSERVER variable defined</h2>
+<p>You might wonder how we define the <code>SDSERVER</code>? And, is it possible to overrule it with your preference? The <code>SDSERVER</code> variable is used a lot in the INI files and points to an IP address or FQDN of an software depot server where the software depots are stored.</p>
+
+<p>The <code>SDSERVER</code> variable is defined by a script <code>scripts/init/hp/30_define_sdserver.sh</code> and tries to figure out the region you are located in. Be aware, this script only works well for <em>one</em> particular customer (the sponsor of this project).</p>
+
+<p>Therefore, for other users, you need to define the <code>SDSERVER</code> variable in the <code>/etc/opt/upgrade-ux/local.conf</code> file as</p>
+
+<p><code>
+    SDSERVER=my_sdserver.company.com
+</code></p>
+
+<p>Obviously, you need to replace the name <em>my_sdserver.company.com</em> with the correct name of the software depot server.</p>
+
+<h2 id="Upgrade-ux-forces-me-to-reboot-the-server-if-system-is-running-for-more-then-30-days">Upgrade-ux forces me to reboot the server if system is running for more then 30 days</h2>
+<p>The forced reboot was introduced into upgrade-ux, because sometimes servers got patches after running over 1 year without a single reboot and to avoid pin-points to bad patch bundles we decided a recent reboot was required (by default 30 days uptime is the maximum we tolerate).</p>
+
+<p>However, in rare cases, some customers want to extend this period to 60 days. So, how to do this?</p>
+
+<p>The variable which defines the uptime is called <code>DAYSUPTIME</code> and is defined in <code>/etc/opt/upgrade-ux/default.conf</code>. As you should know by now, you can overrule this by defining a new value in the <code>/etc/opt/upgrade-ux/local.conf</code> file as</p>
+
+<p><code>
+    DAYSUPTIME=60
+</code></p>
+
+<p>However, be aware, if you increase this value then do not file an issue against upgrade-ux!</p>
+
+  <ol class='man-decor man-foot man foot'>
+    <li class='tl'></li>
+    <li class='tc'>August 2025</li>
+    <li class='tr'></li>
+  </ol>
+
+  </div>
 </body>
 </html>

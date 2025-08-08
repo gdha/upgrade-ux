@@ -1,0 +1,238 @@
+# Configuration
+
+## Upgrade-ux related configuration files
+
+The configuration files that +upgrade-ux+ uses are basically just shell scripts and should be treated as such.
+
+The default location of the configuration files is `/etc/opt/upgrade-ux/`. However, if you are working with the sources (e.g. via git clone) then it is perfectly possible to use the relative paths, e.g.
+
+    ls $HOME/project/upgrade-ux/etc/opt/upgrade-ux/
+
+The easiest way to explain which configuration files are possible is by showing the output of the `upgrade-ux dump` command:
+
+    $ sudo /opt/upgrade-ux/bin/upgrade-ux dump
+    upgrade-ux 1.27 / 24-Aug-2022
+    Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20221128-1005-ITSGBHHLSP00741.log
+    Dumping out configuration and system information
+    This is a 'Linux-x86_64' system, compatible with 'Linux-i386'.
+    System definition:
+                                        ARCH = Linux-i386
+                                          OS = GNU/Linux
+                            OS_MASTER_VENDOR = fedora
+                           OS_MASTER_VERSION = 8
+                       OS_MASTER_VENDOR_ARCH = fedora/x86_64
+                    OS_MASTER_VENDOR_VERSION = fedora/8
+               OS_MASTER_VENDOR_VERSION_ARCH = fedora/8/x86_64
+                                   OS_VENDOR = rhel
+                                  OS_VERSION = 8
+                              OS_VENDOR_ARCH = rhel/x86_64
+                           OS_VENDOR_VERSION = rhel/8
+                      OS_VENDOR_VERSION_ARCH = rhel/8/x86_64
+    Configuration tree:
+                             Linux-i386.conf : missing/empty
+                              GNU/Linux.conf : OK
+                                 fedora.conf : OK
+                          fedora/x86_64.conf : missing/empty
+                               fedora/8.conf : missing/empty
+                        fedora/8/x86_64.conf : missing/empty
+                                   rhel.conf : missing/empty
+                            rhel/x86_64.conf : missing/empty
+                                 rhel/8.conf : missing/empty
+                          rhel/8/x86_64.conf : missing/empty
+                                   site.conf : missing/empty
+                                  local.conf : OK
+                       Linux-rhel-8-2022.ini : OK
+
+### Default configuration file default.conf
+
+The `default.conf` contains lots of variables which should not be changed by the end-user. If you wish to modify one just redefine it in the `local.conf` file. 
+
+A good example of such variable is the `YEAR`. In the `default.conf` it is defined as:
+
+    # The default year to use with our patch bundle is *current year* [ $(date '+%Y') ] - to overrule define it manually
+    # in the local.conf file. E.g. when running upgrade-ux in 2015 but still installing patches from 2014 then define: YEAR=2014
+    YEAR=$(date '+%Y')
+    
+
+However, in some cases as mentioned above, if you are in the year 2015 and you still want to install patch bundles of 2014 then it is necessary to define the `YEAR` variable in the `local.conf` file, as `YEAR=2014` (or whatever, the year might be).
+
+### Local configuration file local.conf
+
+The `local.conf` should only contain variables which you want to overrule, as described in previous section (of the +default.conf+ file). It is important to know that the `local.conf` file is the last configuration file read by `upgrade-ux` script and therefore, the variables defined in there are the last ones that will be used.
+
+### Exclude packages from the update process
+
+The `/etc/opt/upgrade/exclude.packages` file contains a list of packages you wish to exclude from the update. This file is the same for HP-UX or Linux. A safe-guard is built-in to remove packages which are not found (installed) on current system. Use one line per package you wish to exclude.
+This file is *not* mandatory, so it does not have to exist for upgrade-ux to work properly (nothing will be excluded then).
+
+### Operating Specific configuration files
+
+On each OS you have specific OS related configuration files, e.g.
+
+    HP-UX.conf 
+    GNU/Linux.conf
+    SunOS.conf
+
+These configuration files typically contain variables which have only a meaning within that specific OS, e.g. on HP-UX
+
+    SWINSTALL=/usr/sbin/swinstall
+
+
+## The INI files
+
+The INI files are always OS specific and contain the definitions of which patch bundles should be installed or removed, and so on.
+The INI files are kept under the `/etc/opt/upgrade-ux` or `$HOME/project/upgrade-ux/etc/opt/upgrade-ux/` directory and are typically called `$OS-$OS_VERSION-$YEAR.ini`
+
+It follows also the different stages known within +upgrade-ux+ and these are best explained with an example INI file (below you see the INI file for HP-UX 11.11 systems):
+
+    # HP-UX-11.11-2014.ini file
+    ###########################
+    #
+    ###################
+    # section preremove - which sd depots must be removed before we install the latest one (or even run update-ux)
+    ###################
+    [preremove]
+        command[0]      =       $SWREMOVE
+        options[0]      =       "-x mount_all_filesystems=false  -x enforce_dependencies=false"
+        bundle[0]       =       CFG2HTML
+        version[0]      =       "C.06.*"         ; cfg2html
+    
+        command[1]      =       $SWREMOVE
+        options[1]      =       "-x mount_all_filesystems=false  -x enforce_dependencies=false"
+        bundle[1]       =       NCS_UTILS
+        version[1]      =       "*"
+    
+    ####################
+    # section preinstall - anything to do before running the installation of patches, software or update-ux
+    ####################
+    [preinstall]
+    
+    
+    #################
+    # section install - what shall we do during the installation phase
+    #################
+    # please list the software bundles which do not require a reboot first!!!
+    [install]
+        # SecureShell
+        command[0]      =       $SWINSTALL
+        options[0]      =       "-x mount_all_filesystems=false"
+        source[0]       =       "-s $SDSERVER:/var/opt/ignite/depots/GLOBAL/SSH/11.11"
+        bundle[0]       =       T1471AA
+        version[0]      =       A.06.20.004
+    
+        # the centrifyDC is the same for all HP-UX 11i versions
+        command[1]      =       $SWINSTALL
+        options[1]      =       "-x mount_all_filesystems=false"
+        source[1]       =       "-s $SDSERVER:/var/opt/ignite/depots/GLOBAL/centrify/11.11/V5"
+        bundle[1]       =       "CentrifyDC"
+        version[1]      =       "5.1.1-831"
+    
+        command[2]      =       $SWINSTALL
+        options[2]      =       "-x mount_all_filesystems=false"
+        source[2]       =       "-s $SDSERVER:/var/opt/ignite/depots/GLOBAL/centrify/11.31/V5"
+        bundle[2]       =       "Centrify_conf"
+        version[2]      =       "5.1.x"
+    
+        command[3]      =       $SWINSTALL
+        options[3]      =       "-x mount_all_filesystems=false -x autoreboot=true"
+        source[3]       =       "-s $SDSERVER:/var/opt/ignite/depots/GLOBAL/jnjdrv11-11-may2014"
+        bundle[3]       =       "*"
+        version[3]      =       ""
+    
+    
+    #####################
+    # section postinstall
+    #####################
+    # Use this section for additional (internal) software bundles - we assume no reboots are required
+    [postinstall]
+    
+    ####################
+    # section postremove
+    ####################
+    [postremove]
+    
+    ###################
+    # section configure
+    ###################
+    # or define explicit commands (real cmds) with options or define script tag [string] which
+    # may be picked up by a script (under scripts/configure/default/)
+    [configure]
+        command[0]      =       uncomment_cfg2html_in_crontab
+        options[0]      =       ""
+    
+    #################
+    # section cleanup
+    #################
+    [cleanup]
+    
+    #####################
+    # section postexecute
+    #####################
+    [postexecute]
+        command[0]      =       "/opt/cfg2html/bin/cfg2html"
+        options[0]      =       "-2%Y%m%d"
+    
+
+### The INI syntax
+
+You can use as many comments as you like, but it should start with `#` or `;` sign.
+
+A stage or section is started with +[section]+ header. The name within a section is known as a _stage_ within `upgrade-ux`.
+
+A section may be empty or may contain arrays (some of those may be left out and will be treated as empty strings). An array will always be treated as a string by the way. The content of arrays are wiped out when you enter a new stage (or section) by `upgrade-ux`.
+
+The following arrays are known to `upgrade-ux`:
+
+ - command[] - add the command to be executed (it can be a variable name, e.g. `$SWINSTALL`)
+ - options[] - add here specific options required by command[]
+ - source[] - should be the source location where the software bundle reside
+ - bundle[] - the name of the software bundle
+ - version[] - the specific version to be installed/removed (can contain +*+ or may be empty as well)
+
+If you do not need all arrays in a certain section then it is fine to leave these empty (or not mentioning these in the INI file)
+
+Be careful although that you define the array index correctly in the INI file (see example above).
+
+### Section preremove
+
+In the `preremove` section you typically define lines of software bundles that should be removed for one of other reason, e.g. when upgrading these would be problematic (in the way the software was designed - read badly).
+As said, if not needed leave this section empty.
+
+### Section preinstall
+
+In the `preinstall` section we could define some commands that need to be run, but in most case we write small scripts to do specific tasks in this stage (or section) such as stopping some daemons, saving evidence of software inventory and so on. More about thiese scripts in Chapter 6 (The Upgrade-ux scripts).
+
+### Section install
+
+In the `install` section you typically only define the software bundles that should be installed and in the right order. For example, for update the installation software (`update-ux` or `yum`) before the new updates. In this stage we do not have much special scripts.
+
+### Section postinstall
+
+In the `postinstall` section we define the software pieces that were missing in the +install+ section for some specific reason (if any). Furthermore, in this stage we capture lots of evidence again and compare these via special scripts. Again see Chapter 6 (The Upgrade-ux scripts).
+
+### Section postremove
+
+In the `postremove` section you could remove software bundles that were in the big update round of the +install+ section, but should not stay on this particular platform for some reason. Again, you may leave it empty if not needed.
+
+### Section configure
+
+In the `configure` section you could define scripts or commands to be executed by `upgrade-ux` to configure or add something in cron.
+See also the example shown above with `uncomment_cfg2html_in_crontab`, which is a toggle meant for a script called `/opt/upgrade-ux/scripts/configure/default/10_configure_commands.sh` that simply touches a file under `$TMP_DIR`
+
+Another way to had this defined would have been:
+
+    command[0]="touch"
+    options[0]="$TMP_DIR/uncomment_cfg2html_in_crontab"
+
+
+### Section cleanup
+
+In the `cleanup` section we could add commands to remove some old log files (of older software bundles), or you can also use it to report errors or any other message. The section is typically empty, but you could add some special scripts under `/opt/upgrade-ux/scripts/cleanup/default/`
+
+### Section postexecute
+
+In the `postexecute` section you could define commands and options of things you want to execute, e.g.
+
+    command[0]      =       "/opt/cfg2html/bin/cfg2html"
+    options[0]      =       "-2%Y%m%d"
+
