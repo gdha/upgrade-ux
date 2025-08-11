@@ -464,73 +464,71 @@ options[0]      =       "-2%Y%m%d"
 
 <p>The dump workflow was already discussed during the configuration chapter. The output of <code>/opt/upgrade-ux/bin/upgrade-ux dump</code>:</p>
 
-<p><code>
-    # /opt/upgrade-ux/bin/upgrade-ux dump
-    upgrade-ux 0.7 / 03-Jun-2014
-    Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140626-1656-hostname.log
-    Dumping out configuration and system information
-    System definition:
-                                        ARCH = HP-UX-ia64
-                                          OS = HP-UX
-                            OS_MASTER_VENDOR =
-                           OS_MASTER_VERSION =
-                       OS_MASTER_VENDOR_ARCH =
-                    OS_MASTER_VENDOR_VERSION =
-               OS_MASTER_VENDOR_VERSION_ARCH =
-                                   OS_VENDOR = hp
-                                  OS_VERSION = 11.31
-                              OS_VENDOR_ARCH = hp/ia64
-                           OS_VENDOR_VERSION = hp/11.31
-                      OS_VENDOR_VERSION_ARCH = hp/11.31/ia64
-    Configuration tree:
-                             HP-UX-ia64.conf : missing/empty
-                                  HP-UX.conf : OK
-                                     hp.conf : missing/empty
-                                hp/ia64.conf : missing/empty
-                               hp/11.31.conf : missing/empty
-                          hp/11.31/ia64.conf : missing/empty
-                                   site.conf : missing/empty
-                                  local.conf : OK
-</code></p>
+<pre><code># /opt/upgrade-ux/bin/upgrade-ux dump
+upgrade-ux 0.7 / 03-Jun-2014
+Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140626-1656-hostname.log
+Dumping out configuration and system information
+System definition:
+                                    ARCH = HP-UX-ia64
+                                      OS = HP-UX
+                        OS_MASTER_VENDOR =
+                       OS_MASTER_VERSION =
+                   OS_MASTER_VENDOR_ARCH =
+                OS_MASTER_VENDOR_VERSION =
+           OS_MASTER_VENDOR_VERSION_ARCH =
+                               OS_VENDOR = hp
+                              OS_VERSION = 11.31
+                          OS_VENDOR_ARCH = hp/ia64
+                       OS_VENDOR_VERSION = hp/11.31
+                  OS_VENDOR_VERSION_ARCH = hp/11.31/ia64
+Configuration tree:
+                         HP-UX-ia64.conf : missing/empty
+                              HP-UX.conf : OK
+                                 hp.conf : missing/empty
+                            hp/ia64.conf : missing/empty
+                           hp/11.31.conf : missing/empty
+                      hp/11.31/ia64.conf : missing/empty
+                               site.conf : missing/empty
+                              local.conf : OK
+</code></pre>
 
 <p>The first part displays the system definitions, such as OS, hardware type and OS version.
 The second part shows the configuration part and which files it could find (or you may define, create and/or use). They do not need to exist.</p>
 
 <p>The following example shows the dump on a RHEL 7 system:</p>
 
-<p><code>
-    # /opt/upgrade-ux/bin/upgrade-ux dump
-    upgrade-ux 0.9 / Git
-    Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140626-1859-hostname.log
-    Dumping out configuration and system information
-    This is a 'Linux-x86_64' system, compatible with 'Linux-i386'.
-    System definition:
-                                      ARCH = Linux-i386
-                                        OS = GNU/Linux
-                          OS_MASTER_VENDOR = fedora
-                         OS_MASTER_VERSION = 7
-                     OS_MASTER_VENDOR_ARCH = fedora/x86_64
-                  OS_MASTER_VENDOR_VERSION = fedora/7
-             OS_MASTER_VENDOR_VERSION_ARCH = fedora/7/x86_64
-                                 OS_VENDOR = rhel
-                                OS_VERSION = 7
-                            OS_VENDOR_ARCH = rhel/x86_64
-                         OS_VENDOR_VERSION = rhel/7
-                    OS_VENDOR_VERSION_ARCH = rhel/7/x86_64
-    Configuration tree:
-                           Linux-i386.conf : missing/empty
-                            GNU/Linux.conf : OK
-                               fedora.conf : missing/empty
-                        fedora/x86_64.conf : missing/empty
-                             fedora/7.conf : missing/empty
-                      fedora/7/x86_64.conf : missing/empty
-                                 rhel.conf : missing/empty
-                          rhel/x86_64.conf : missing/empty
-                               rhel/7.conf : missing/empty
-                        rhel/7/x86_64.conf : missing/empty
-                                 site.conf : missing/empty
-                                local.conf : OK
-</code></p>
+<pre><code># /opt/upgrade-ux/bin/upgrade-ux dump
+upgrade-ux 0.9 / Git
+Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140626-1859-hostname.log
+Dumping out configuration and system information
+This is a 'Linux-x86_64' system, compatible with 'Linux-i386'.
+System definition:
+                                  ARCH = Linux-i386
+                                    OS = GNU/Linux
+                      OS_MASTER_VENDOR = fedora
+                     OS_MASTER_VERSION = 7
+                 OS_MASTER_VENDOR_ARCH = fedora/x86_64
+              OS_MASTER_VENDOR_VERSION = fedora/7
+         OS_MASTER_VENDOR_VERSION_ARCH = fedora/7/x86_64
+                             OS_VENDOR = rhel
+                            OS_VERSION = 7
+                        OS_VENDOR_ARCH = rhel/x86_64
+                     OS_VENDOR_VERSION = rhel/7
+                OS_VENDOR_VERSION_ARCH = rhel/7/x86_64
+Configuration tree:
+                       Linux-i386.conf : missing/empty
+                        GNU/Linux.conf : OK
+                           fedora.conf : missing/empty
+                    fedora/x86_64.conf : missing/empty
+                         fedora/7.conf : missing/empty
+                  fedora/7/x86_64.conf : missing/empty
+                             rhel.conf : missing/empty
+                      rhel/x86_64.conf : missing/empty
+                           rhel/7.conf : missing/empty
+                    rhel/7/x86_64.conf : missing/empty
+                             site.conf : missing/empty
+                            local.conf : OK
+</code></pre>
 
 <p>These configuration files live under the <code>/etc/opt/upgrade-ux</code> or <code>./upgrade-ux/etc/opt/upgrade-ux</code> (relative path) directory.
 At this moment we have the following configuration files present (however, it will grow over time):</p>
@@ -560,20 +558,18 @@ total 48
 
 <p>The purgelogs workflow just has a simple function and that is to purge log files which are older than 30 days. It will display the logs it has purged (only when you are using the option <code>-v</code>):</p>
 
-<p><code>
-    # opt/upgrade-ux/bin/upgrade-ux -v purgelogs
-</code></p>
+<pre><code># opt/upgrade-ux/bin/upgrade-ux -v purgelogs
+</code></pre>
 
 <h2 id="Test-workflow">Test workflow</h2>
 
 <p>The test workflow is a very simplistic test (use option <code>-v</code> to see something):</p>
 
-<p><code>
-    # opt/upgrade-ux/bin/upgrade-ux -v test
-    upgrade-ux 0.9 / Git
-    Using log file: /home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log/upgrade-ux-20140625-1354-hostname.log
-    no stale NFS mount points found
-</code></p>
+<pre><code># opt/upgrade-ux/bin/upgrade-ux -v test
+upgrade-ux 0.9 / Git
+Using log file: /home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log/upgrade-ux-20140625-1354-hostname.log
+no stale NFS mount points found
+</code></pre>
 
 <h2 id="Upgrade-workflow">Upgrade workflow</h2>
 
@@ -895,25 +891,24 @@ If you need new scripts just write a small script called <code>my_script.sh</cod
 
 <p>An example of such a script is <code>/opt/upgrade-ux/scripts/preinstall/default/05_reboot_required.sh</code>:</p>
 
-<p><code>
-    $ cat preinstall/default/05_reboot_required.sh
-    # 05_reboot_required.sh
-    # if the uptime of the system is higher then 30 days then we propose to reboot first
-    # pre-define daysup as 0 (we can check this variable later [after a reboot])
-    daysup=0
-    # when uptime is not expressed in days then we probably just rebooted our system
-    uptime | grep -q days || return
-    daysup=$( uptime | awk '{print $3}' )
-    IsDigit $daysup || daysup=$( w | head -1 | awk '{print $3}' )  # alternative method
-    IsDigit $daysup || daysup=0
-    if [[ $daysup -gt $DAYSUPTIME ]]; then
-        if (( PREVIEW )) ; then
-            LogPrint "Uptime of system is $daysup (&gt;$DAYSUPTIME days) - recommend to reboot before patching"
-        else
-            Error "Uptime of system is $daysup (&gt;$DAYSUPTIME days) - reboot is required before patching with $PRODUCT"
-        fi
+<pre><code>$ cat preinstall/default/05_reboot_required.sh
+# 05_reboot_required.sh
+# if the uptime of the system is higher then 30 days then we propose to reboot first
+# pre-define daysup as 0 (we can check this variable later [after a reboot])
+daysup=0
+# when uptime is not expressed in days then we probably just rebooted our system
+uptime | grep -q days || return
+daysup=$( uptime | awk '{print $3}' )
+IsDigit $daysup || daysup=$( w | head -1 | awk '{print $3}' )  # alternative method
+IsDigit $daysup || daysup=0
+if [[ $daysup -gt $DAYSUPTIME ]]; then
+    if (( PREVIEW )) ; then
+        LogPrint "Uptime of system is $daysup (&gt;$DAYSUPTIME days) - recommend to reboot before patching"
+    else
+        Error "Uptime of system is $daysup (&gt;$DAYSUPTIME days) - reboot is required before patching with $PRODUCT"
     fi
-</code></p>
+fi
+</code></pre>
 
 <p>Now it is up to you! If you wish to add new scripts it is always useful to first make a new issue at GitHub: https://github.com/gdha/upgrade-ux/issues</p>
 

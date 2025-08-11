@@ -17,7 +17,6 @@ The workflows (or commands) available can be listed with the `-h` option:
 
 The dump workflow was already discussed during the configuration chapter. The output of `/opt/upgrade-ux/bin/upgrade-ux dump`:
 
-```
     # /opt/upgrade-ux/bin/upgrade-ux dump
     upgrade-ux 0.7 / 03-Jun-2014
     Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140626-1656-hostname.log
@@ -44,14 +43,12 @@ The dump workflow was already discussed during the configuration chapter. The ou
                           hp/11.31/ia64.conf : missing/empty
                                    site.conf : missing/empty
                                   local.conf : OK
-```
 
 The first part displays the system definitions, such as OS, hardware type and OS version.
 The second part shows the configuration part and which files it could find (or you may define, create and/or use). They do not need to exist.
 
 The following example shows the dump on a RHEL 7 system:
 
-```
     # /opt/upgrade-ux/bin/upgrade-ux dump
     upgrade-ux 0.9 / Git
     Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140626-1859-hostname.log
@@ -83,7 +80,6 @@ The following example shows the dump on a RHEL 7 system:
                         rhel/7/x86_64.conf : missing/empty
                                  site.conf : missing/empty
                                 local.conf : OK
-```
 
 These configuration files live under the `/etc/opt/upgrade-ux` or `./upgrade-ux/etc/opt/upgrade-ux` (relative path) directory.
 At this moment we have the following configuration files present (however, it will grow over time):
@@ -112,20 +108,16 @@ The _mkdist_ workflow creates a compressed tar file of the current development t
 
 The purgelogs workflow just has a simple function and that is to purge log files which are older than 30 days. It will display the logs it has purged (only when you are using the option `-v`):
 
-```
     # opt/upgrade-ux/bin/upgrade-ux -v purgelogs
-```
 
 ## Test workflow
 
 The test workflow is a very simplistic test (use option `-v` to see something):
 
-```
     # opt/upgrade-ux/bin/upgrade-ux -v test
     upgrade-ux 0.9 / Git
     Using log file: /home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log/upgrade-ux-20140625-1354-hostname.log
     no stale NFS mount points found
-```
 
 ## Upgrade workflow
 

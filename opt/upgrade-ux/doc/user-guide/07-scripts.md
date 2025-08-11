@@ -162,7 +162,6 @@ NOTE: there is no need to make these small scripts executable (nor is it require
 
 An example of such a script is `/opt/upgrade-ux/scripts/preinstall/default/05_reboot_required.sh`:
 
-```
     $ cat preinstall/default/05_reboot_required.sh
     # 05_reboot_required.sh
     # if the uptime of the system is higher then 30 days then we propose to reboot first
@@ -180,7 +179,6 @@ An example of such a script is `/opt/upgrade-ux/scripts/preinstall/default/05_re
             Error "Uptime of system is $daysup (>$DAYSUPTIME days) - reboot is required before patching with $PRODUCT"
         fi
     fi
-```
 
 Now it is up to you! If you wish to add new scripts it is always useful to first make a new issue at GitHub: https://github.com/gdha/upgrade-ux/issues
 
