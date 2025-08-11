@@ -2,7 +2,7 @@
 
 ## Upgrade-ux related configuration files
 
-The configuration files that +upgrade-ux+ uses are basically just shell scripts and should be treated as such.
+The configuration files that `upgrade-ux` uses are basically just shell scripts and should be treated as such.
 
 The default location of the configuration files is `/etc/opt/upgrade-ux/`. However, if you are working with the sources (e.g. via git clone) then it is perfectly possible to use the relative paths, e.g.
 
@@ -58,7 +58,7 @@ However, in some cases as mentioned above, if you are in the year 2015 and you s
 
 ### Local configuration file local.conf
 
-The `local.conf` should only contain variables which you want to overrule, as described in previous section (of the +default.conf+ file). It is important to know that the `local.conf` file is the last configuration file read by `upgrade-ux` script and therefore, the variables defined in there are the last ones that will be used.
+The `local.conf` should only contain variables which you want to overrule, as described in previous section (of the `default.conf` file). It is important to know that the `local.conf` file is the last configuration file read by `upgrade-ux` script and therefore, the variables defined in there are the last ones that will be used.
 
 ### Exclude packages from the update process
 

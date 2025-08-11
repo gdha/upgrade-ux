@@ -25,11 +25,11 @@ When the RPM is available you could install it via the command:
 
     rpm -ivh upgrade-ux-1.0-1.el7.noarch.rpm
 
-Or, in case you would like to upgrade a version via +yum+ you could do the following:
+Or, in case you would like to upgrade a version via `yum` you could do the following:
 
     rpm -Uvh upgrade-ux-1.1-1.el7.noarch.rpm
 
 ## Prerequisites
 
-Be aware, that upgrade-ux is completely written in Korn Shell, therefore, you must have the +ksh+ executable on your UNIX system. To be sure you could type `which ksh`. If it is not present please install it first (most likely on Linux where it is not a standard package in base OS).
+Be aware, that upgrade-ux is completely written in Korn Shell, therefore, you must have the `ksh` executable on your UNIX system. To be sure you could type `which ksh`. If it is not present please install it first (most likely on Linux where it is not a standard package in base OS).
 

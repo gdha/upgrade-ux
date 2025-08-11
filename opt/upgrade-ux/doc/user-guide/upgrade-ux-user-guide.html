@@ -146,15 +146,15 @@ is configured for.</p>
 <ul>
   <li>Simple to use</li>
   <li>Has a <em>preview</em> mode (to dry-run an upgrade without doing it) and an <em>upgrade</em> mode</li>
-  <li>Is customisable via +local.conf+ configuration file</li>
+  <li>Is customisable via <code>local.conf</code> configuration file</li>
   <li>Is written in standard Korn Shell (which makes it highly portable)</li>
   <li>Is UNIX Operating System independent as OS specific tasks reside in their own directory structures</li>
   <li>Is easy extendable with your own scripts</li>
-  <li>The +upgrade-ux+ command leaves a trace in its own log file</li>
+  <li>The <code>upgrade-ux</code> command leaves a trace in its own log file</li>
   <li>Running in preview or upgrade mode always creates evidence files</li>
   <li>Has a man page</li>
   <li>Has user documentation (you are reading it)</li>
-  <li>Can be used to install patch bundles of previous years with the +YEAR+ variable</li>
+  <li>Can be used to install patch bundles of previous years with the <code>YEAR</code> variable</li>
   <li>Does understand Serviceguard clusters</li>
   <li>Can be programmed to bail out on settings you think are too serious to continue</li>
   <li>Can trigger remote alarms, syslog, monitors,...</li>
@@ -192,20 +192,20 @@ the sources on your local Unix you could use</p>
 <pre><code>rpm -ivh upgrade-ux-1.0-1.el7.noarch.rpm
 </code></pre>
 
-<p>Or, in case you would like to upgrade a version via +yum+ you could do the following:</p>
+<p>Or, in case you would like to upgrade a version via <code>yum</code> you could do the following:</p>
 
 <pre><code>rpm -Uvh upgrade-ux-1.1-1.el7.noarch.rpm
 </code></pre>
 
 <h2 id="Prerequisites">Prerequisites</h2>
 
-<p>Be aware, that upgrade-ux is completely written in Korn Shell, therefore, you must have the +ksh+ executable on your UNIX system. To be sure you could type <code>which ksh</code>. If it is not present please install it first (most likely on Linux where it is not a standard package in base OS).</p>
+<p>Be aware, that upgrade-ux is completely written in Korn Shell, therefore, you must have the <code>ksh</code> executable on your UNIX system. To be sure you could type <code>which ksh</code>. If it is not present please install it first (most likely on Linux where it is not a standard package in base OS).</p>
 
 <h1 id="Configuration">Configuration</h1>
 
 <h2 id="Upgrade-ux-related-configuration-files">Upgrade-ux related configuration files</h2>
 
-<p>The configuration files that +upgrade-ux+ uses are basically just shell scripts and should be treated as such.</p>
+<p>The configuration files that <code>upgrade-ux</code> uses are basically just shell scripts and should be treated as such.</p>
 
 <p>The default location of the configuration files is <code>/etc/opt/upgrade-ux/</code>. However, if you are working with the sources (e.g. via git clone) then it is perfectly possible to use the relative paths, e.g.</p>
 
@@ -263,7 +263,7 @@ YEAR=$(date '+%Y')
 
 <h3 id="Local-configuration-file-local-conf">Local configuration file local.conf</h3>
 
-<p>The <code>local.conf</code> should only contain variables which you want to overrule, as described in previous section (of the +default.conf+ file). It is important to know that the <code>local.conf</code> file is the last configuration file read by <code>upgrade-ux</code> script and therefore, the variables defined in there are the last ones that will be used.</p>
+<p>The <code>local.conf</code> should only contain variables which you want to overrule, as described in previous section (of the <code>default.conf</code> file). It is important to know that the <code>local.conf</code> file is the last configuration file read by <code>upgrade-ux</code> script and therefore, the variables defined in there are the last ones that will be used.</p>
 
 <h3 id="Exclude-packages-from-the-update-process">Exclude packages from the update process</h3>
 
@@ -450,14 +450,14 @@ options[0]      =       "-2%Y%m%d"
 <p>The workflows (or commands) available can be listed with the <code>-h</code> option:</p>
 
 <p><code>
-# /opt/upgrade-ux/bin/upgrade-ux -h
-    ....
-    List of commands:
-     dump            dump configuration and system information
-     mkdist          create a compressed tar archive distribution
-     purgelogs       purge the LOG [/home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log] directory
-     test            a simple test workflow
-     upgrade         upgrade the operating system
+    # /opt/upgrade-ux/bin/upgrade-ux -h
+        ....
+        List of commands:
+         dump            dump configuration and system information
+         mkdist          create a compressed tar archive distribution
+         purgelogs       purge the LOG [/home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log] directory
+         test            a simple test workflow
+         upgrade         upgrade the operating system
 </code></p>
 
 <h2 id="Dump-workflow">Dump workflow</h2>
@@ -465,32 +465,32 @@ options[0]      =       "-2%Y%m%d"
 <p>The dump workflow was already discussed during the configuration chapter. The output of <code>/opt/upgrade-ux/bin/upgrade-ux dump</code>:</p>
 
 <p><code>
-# /opt/upgrade-ux/bin/upgrade-ux dump
-upgrade-ux 0.7 / 03-Jun-2014
-Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140626-1656-hostname.log
-Dumping out configuration and system information
-System definition:
-                                    ARCH = HP-UX-ia64
-                                      OS = HP-UX
-                        OS_MASTER_VENDOR =
-                       OS_MASTER_VERSION =
-                   OS_MASTER_VENDOR_ARCH =
-                OS_MASTER_VENDOR_VERSION =
-           OS_MASTER_VENDOR_VERSION_ARCH =
-                               OS_VENDOR = hp
-                              OS_VERSION = 11.31
-                          OS_VENDOR_ARCH = hp/ia64
-                       OS_VENDOR_VERSION = hp/11.31
-                  OS_VENDOR_VERSION_ARCH = hp/11.31/ia64
-Configuration tree:
-                         HP-UX-ia64.conf : missing/empty
-                              HP-UX.conf : OK
-                                 hp.conf : missing/empty
-                            hp/ia64.conf : missing/empty
-                           hp/11.31.conf : missing/empty
-                      hp/11.31/ia64.conf : missing/empty
-                               site.conf : missing/empty
-                              local.conf : OK
+    # /opt/upgrade-ux/bin/upgrade-ux dump
+    upgrade-ux 0.7 / 03-Jun-2014
+    Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140626-1656-hostname.log
+    Dumping out configuration and system information
+    System definition:
+                                        ARCH = HP-UX-ia64
+                                          OS = HP-UX
+                            OS_MASTER_VENDOR =
+                           OS_MASTER_VERSION =
+                       OS_MASTER_VENDOR_ARCH =
+                    OS_MASTER_VENDOR_VERSION =
+               OS_MASTER_VENDOR_VERSION_ARCH =
+                                   OS_VENDOR = hp
+                                  OS_VERSION = 11.31
+                              OS_VENDOR_ARCH = hp/ia64
+                           OS_VENDOR_VERSION = hp/11.31
+                      OS_VENDOR_VERSION_ARCH = hp/11.31/ia64
+    Configuration tree:
+                             HP-UX-ia64.conf : missing/empty
+                                  HP-UX.conf : OK
+                                     hp.conf : missing/empty
+                                hp/ia64.conf : missing/empty
+                               hp/11.31.conf : missing/empty
+                          hp/11.31/ia64.conf : missing/empty
+                                   site.conf : missing/empty
+                                  local.conf : OK
 </code></p>
 
 <p>The first part displays the system definitions, such as OS, hardware type and OS version.
@@ -499,37 +499,37 @@ The second part shows the configuration part and which files it could find (or y
 <p>The following example shows the dump on a RHEL 7 system:</p>
 
 <p><code>
-  # /opt/upgrade-ux/bin/upgrade-ux dump
-  upgrade-ux 0.9 / Git
-  Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140626-1859-hostname.log
-  Dumping out configuration and system information
-  This is a 'Linux-x86_64' system, compatible with 'Linux-i386'.
-  System definition:
-                                    ARCH = Linux-i386
-                                      OS = GNU/Linux
-                        OS_MASTER_VENDOR = fedora
-                       OS_MASTER_VERSION = 7
-                   OS_MASTER_VENDOR_ARCH = fedora/x86_64
-                OS_MASTER_VENDOR_VERSION = fedora/7
-           OS_MASTER_VENDOR_VERSION_ARCH = fedora/7/x86_64
-                               OS_VENDOR = rhel
-                              OS_VERSION = 7
-                          OS_VENDOR_ARCH = rhel/x86_64
-                       OS_VENDOR_VERSION = rhel/7
-                  OS_VENDOR_VERSION_ARCH = rhel/7/x86_64
-Configuration tree:
-                         Linux-i386.conf : missing/empty
-                          GNU/Linux.conf : OK
-                             fedora.conf : missing/empty
-                      fedora/x86_64.conf : missing/empty
-                           fedora/7.conf : missing/empty
-                    fedora/7/x86_64.conf : missing/empty
-                               rhel.conf : missing/empty
-                        rhel/x86_64.conf : missing/empty
-                             rhel/7.conf : missing/empty
-                      rhel/7/x86_64.conf : missing/empty
-                               site.conf : missing/empty
-                              local.conf : OK
+    # /opt/upgrade-ux/bin/upgrade-ux dump
+    upgrade-ux 0.9 / Git
+    Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140626-1859-hostname.log
+    Dumping out configuration and system information
+    This is a 'Linux-x86_64' system, compatible with 'Linux-i386'.
+    System definition:
+                                      ARCH = Linux-i386
+                                        OS = GNU/Linux
+                          OS_MASTER_VENDOR = fedora
+                         OS_MASTER_VERSION = 7
+                     OS_MASTER_VENDOR_ARCH = fedora/x86_64
+                  OS_MASTER_VENDOR_VERSION = fedora/7
+             OS_MASTER_VENDOR_VERSION_ARCH = fedora/7/x86_64
+                                 OS_VENDOR = rhel
+                                OS_VERSION = 7
+                            OS_VENDOR_ARCH = rhel/x86_64
+                         OS_VENDOR_VERSION = rhel/7
+                    OS_VENDOR_VERSION_ARCH = rhel/7/x86_64
+    Configuration tree:
+                           Linux-i386.conf : missing/empty
+                            GNU/Linux.conf : OK
+                               fedora.conf : missing/empty
+                        fedora/x86_64.conf : missing/empty
+                             fedora/7.conf : missing/empty
+                      fedora/7/x86_64.conf : missing/empty
+                                 rhel.conf : missing/empty
+                          rhel/x86_64.conf : missing/empty
+                               rhel/7.conf : missing/empty
+                        rhel/7/x86_64.conf : missing/empty
+                                 site.conf : missing/empty
+                                local.conf : OK
 </code></p>
 
 <p>These configuration files live under the <code>/etc/opt/upgrade-ux</code> or <code>./upgrade-ux/etc/opt/upgrade-ux</code> (relative path) directory.
@@ -554,22 +554,26 @@ total 48
 
 <h2 id="Mkdist-workflow">Mkdist workflow</h2>
 
-<p>The <em>mkdist</em> workflow creates a compressed tar file of the current development tree, which only makes sense when you are using the +git clone+ version of upgrade-ux. The compressed tar file is stored under <code>/tmp</code> file system and is called <code>/tmp/upgrade-ux-0.9.tar.gz</code> (the version can be different of course).</p>
+<p>The <em>mkdist</em> workflow creates a compressed tar file of the current development tree, which only makes sense when you are using the <code>git clone</code> version of upgrade-ux. The compressed tar file is stored under <code>/tmp</code> file system and is called <code>/tmp/upgrade-ux-0.9.tar.gz</code> (the version can be different of course).</p>
 
 <h2 id="Purgelogs-workflow">Purgelogs workflow</h2>
 
 <p>The purgelogs workflow just has a simple function and that is to purge log files which are older than 30 days. It will display the logs it has purged (only when you are using the option <code>-v</code>):</p>
 
-<h1 id="opt-upgrade-ux-bin-upgrade-ux-v-purgelogs">opt/upgrade-ux/bin/upgrade-ux -v purgelogs</h1>
+<p><code>
+    # opt/upgrade-ux/bin/upgrade-ux -v purgelogs
+</code></p>
 
 <h2 id="Test-workflow">Test workflow</h2>
 
 <p>The test workflow is a very simplistic test (use option <code>-v</code> to see something):</p>
 
-<h1 id="opt-upgrade-ux-bin-upgrade-ux-v-test">opt/upgrade-ux/bin/upgrade-ux -v test</h1>
-<p>upgrade-ux 0.9 / Git
-Using log file: /home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log/upgrade-ux-20140625-1354-hostname.log
-no stale NFS mount points found</p>
+<p><code>
+    # opt/upgrade-ux/bin/upgrade-ux -v test
+    upgrade-ux 0.9 / Git
+    Using log file: /home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log/upgrade-ux-20140625-1354-hostname.log
+    no stale NFS mount points found
+</code></p>
 
 <h2 id="Upgrade-workflow">Upgrade workflow</h2>
 
@@ -625,31 +629,30 @@ List of commands:
 
 <p>You probably understood by now that <code>upgrade-ux</code> must be started in <em>preview</em> mode first before we can run it in <em>upgrade</em> mode. However, we prefer that you always use the option <code>-p</code> (<em>preview</em> mode) to make it clear to yourself and other (when they need to dig into the log files for some reason) what you meant. Furthermore, in the log file there is always a trace of in which mode the program was running:</p>
 
-<p><code>
-    2014-06-10 15:22:45 Check if our PID (11950) is locked
-    2014-06-10 15:22:45 Found /tmp/upgrade-ux-LOCKDIR/upgrade-ux-PIDFILE file - we could be locked...
-    2014-06-10 15:22:45 lock is stale (6607) - will continue
-    2014-06-10 15:22:45 lock succeeded: 11950 - /tmp/upgrade-ux-LOCKDIR/upgrade-ux-PIDFILE
-    2014-06-10 15:22:47 upgrade-ux 0.7 / 03-Jun-2014
-    2014-06-10 15:22:47 Command line options: /opt/upgrade-ux/bin/upgrade-ux -v
-    2014-06-10 15:22:47 Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140610-1522-hostname.log
-    2014-06-10 15:22:47 Including /opt/upgrade-ux/lib/progresssubsystem.nosh
-    2014-06-10 15:22:47 Including /etc/opt/upgrade-ux/HP-UX.conf
-    2014-06-10 15:22:47 Including /etc/opt/upgrade-ux/local.conf
-    2014-06-10 15:22:47 Running upgrade workflow
-    2014-06-10 15:22:47 Running 'init' stage
-    2014-06-10 15:22:47 Including init/default/03_prepare_tmp_build_area.sh
-    2014-06-10 15:22:47 Including init/default/04_create_var_dir.sh
-    2014-06-10 15:22:47 Including init/default/05_select_ini_file.sh
-    2014-06-10 15:22:47 Found ini file /etc/opt/upgrade-ux/HP-UX-11.11-2014.ini
-    2014-06-10 15:22:47 Including init/default/08_set_preview_var.sh
-    2014-06-10 15:22:47 Including init/default/10_check_current_status.sh
-    2014-06-10 15:22:47 Including init/default/12_upgrade_allowed.sh
-    2014-06-10 15:22:47 Including init/default/15_check_preview_run.sh
-    2014-06-10 15:22:47 Last preview run was executed on Tue Jun 10 14:28:36 METDST 2014  (preview ended successfully)
-    2014-06-10 15:22:47 Running in "upgrade mode"
-    2014-06-10 15:22:47 =-=-=-=-=-=-=-=-=-=-=-=-=
-</code></p>
+<pre><code>2014-06-10 15:22:45 Check if our PID (11950) is locked
+2014-06-10 15:22:45 Found /tmp/upgrade-ux-LOCKDIR/upgrade-ux-PIDFILE file - we could be locked...
+2014-06-10 15:22:45 lock is stale (6607) - will continue
+2014-06-10 15:22:45 lock succeeded: 11950 - /tmp/upgrade-ux-LOCKDIR/upgrade-ux-PIDFILE
+2014-06-10 15:22:47 upgrade-ux 0.7 / 03-Jun-2014
+2014-06-10 15:22:47 Command line options: /opt/upgrade-ux/bin/upgrade-ux -v
+2014-06-10 15:22:47 Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20140610-1522-hostname.log
+2014-06-10 15:22:47 Including /opt/upgrade-ux/lib/progresssubsystem.nosh
+2014-06-10 15:22:47 Including /etc/opt/upgrade-ux/HP-UX.conf
+2014-06-10 15:22:47 Including /etc/opt/upgrade-ux/local.conf
+2014-06-10 15:22:47 Running upgrade workflow
+2014-06-10 15:22:47 Running 'init' stage
+2014-06-10 15:22:47 Including init/default/03_prepare_tmp_build_area.sh
+2014-06-10 15:22:47 Including init/default/04_create_var_dir.sh
+2014-06-10 15:22:47 Including init/default/05_select_ini_file.sh
+2014-06-10 15:22:47 Found ini file /etc/opt/upgrade-ux/HP-UX-11.11-2014.ini
+2014-06-10 15:22:47 Including init/default/08_set_preview_var.sh
+2014-06-10 15:22:47 Including init/default/10_check_current_status.sh
+2014-06-10 15:22:47 Including init/default/12_upgrade_allowed.sh
+2014-06-10 15:22:47 Including init/default/15_check_preview_run.sh
+2014-06-10 15:22:47 Last preview run was executed on Tue Jun 10 14:28:36 METDST 2014  (preview ended successfully)
+2014-06-10 15:22:47 Running in "upgrade mode"
+2014-06-10 15:22:47 =-=-=-=-=-=-=-=-=-=-=-=-=
+</code></pre>
 
 <p>From the Chapter "Workflow" you probably remember that the default workflow is <em>upgrade</em> (even if you did not mention it). So, as example running <code>upgrade-ux</code> in preview mode with verbose option is done as <code>/opt/upgrade-ux/bin/upgrade-ux -vp</code></p>
 
@@ -686,196 +689,193 @@ The upgrade operation goes through different stages to accomplish a successful u
 
 <p>Every time you enter or leave a stage the <code>/var/opt/upgrade-ux/status</code> gets updated with a timestamp and the <em>stage</em> name with an additional notification of 'start' or 'ended'. Upgrade-ux will not delete this status file, but will always append to it so you get a nice historic view of all the runs:</p>
 
-<p><code>
-   # cat /var/opt/upgrade-ux/status
-   2014-06-13 13:12:26 init:start
-   2014-06-13 13:12:27 init:ended
-   2014-06-13 13:12:27 prep:start
-   2014-06-13 13:12:36 prep:ended
-   2014-06-13 13:12:36 preremove:start
-   2014-06-13 13:12:45 preremove:ended
-   2014-06-13 13:12:45 preinstall:start
-   2014-06-13 13:12:51 preinstall:ended
-   2014-06-13 13:12:51 install:start
-   2014-06-13 13:25:30 install:ended
-   2014-06-13 13:25:30 postinstall:start
-   2014-06-13 13:27:41 postinstall:ended
-   2014-06-13 13:27:41 postremove:start
-   2014-06-13 13:27:41 postremove:ended
-   2014-06-13 13:27:41 configure:start
-   2014-06-13 13:27:41 configure:ended
-   2014-06-13 13:27:41 postexecute:start
-   2014-06-13 13:28:19 postexecute:ended
-   2014-06-13 13:28:19 preview:ended   (preview ended successfully)
-   2014-06-13 13:34:09 init:start
-   2014-06-13 13:34:10 init:ended
-   2014-06-13 13:34:10 prep:start
-   2014-06-13 13:34:19 prep:ended
-   2014-06-13 13:34:19 preremove:start
-   2014-06-13 13:34:31 preremove:ended
-   2014-06-13 13:34:31 preinstall:start
-   2014-06-13 13:35:56 preinstall:ended
-   2014-06-13 13:35:56 install:start
-   2014-06-13 15:36:57 install:ended
-   2014-06-13 15:36:58 postinstall:start
-   2014-06-13 15:45:49 postinstall:ended
-   2014-06-13 15:45:49 postremove:start
-   2014-06-13 15:45:49 postremove:ended
-   2014-06-13 15:45:49 configure:start
-   2014-06-13 15:45:49 configure:ended
-   2014-06-13 15:45:49 postexecute:start
-   2014-06-13 15:55:21 postexecute:ended
-   2014-06-13 15:55:21 upgrade:ended   (upgrade ended successfully)
-</code>
-# The upgrade-ux scripts</p>
+<pre><code># cat /var/opt/upgrade-ux/status
+2014-06-13 13:12:26 init:start
+2014-06-13 13:12:27 init:ended
+2014-06-13 13:12:27 prep:start
+2014-06-13 13:12:36 prep:ended
+2014-06-13 13:12:36 preremove:start
+2014-06-13 13:12:45 preremove:ended
+2014-06-13 13:12:45 preinstall:start
+2014-06-13 13:12:51 preinstall:ended
+2014-06-13 13:12:51 install:start
+2014-06-13 13:25:30 install:ended
+2014-06-13 13:25:30 postinstall:start
+2014-06-13 13:27:41 postinstall:ended
+2014-06-13 13:27:41 postremove:start
+2014-06-13 13:27:41 postremove:ended
+2014-06-13 13:27:41 configure:start
+2014-06-13 13:27:41 configure:ended
+2014-06-13 13:27:41 postexecute:start
+2014-06-13 13:28:19 postexecute:ended
+2014-06-13 13:28:19 preview:ended   (preview ended successfully)
+2014-06-13 13:34:09 init:start
+2014-06-13 13:34:10 init:ended
+2014-06-13 13:34:10 prep:start
+2014-06-13 13:34:19 prep:ended
+2014-06-13 13:34:19 preremove:start
+2014-06-13 13:34:31 preremove:ended
+2014-06-13 13:34:31 preinstall:start
+2014-06-13 13:35:56 preinstall:ended
+2014-06-13 13:35:56 install:start
+2014-06-13 15:36:57 install:ended
+2014-06-13 15:36:58 postinstall:start
+2014-06-13 15:45:49 postinstall:ended
+2014-06-13 15:45:49 postremove:start
+2014-06-13 15:45:49 postremove:ended
+2014-06-13 15:45:49 configure:start
+2014-06-13 15:45:49 configure:ended
+2014-06-13 15:45:49 postexecute:start
+2014-06-13 15:55:21 postexecute:ended
+2014-06-13 15:55:21 upgrade:ended   (upgrade ended successfully) # The upgrade-ux scripts
+</code></pre>
 
 <p>The scripts that are sourced by the main script <code>upgrade-ux</code> reside under <code>/opt/upgrade-ux/scripts/</code> directory and the easiest way to know what will be sourced is by running <code>/opt/upgrade-ux/bin/upgrade-ux -s</code>:</p>
 
-<p><code>
-    $ sudo /opt/upgrade-ux/bin/upgrade-ux -s
-    upgrade-ux 1.27 / 24-Aug-2022
-    Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20221128-1008-ITSGBHHLSP00741.log
-    Source init/default/02_print_host_info.sh
-    Source init/default/03_parse_variables.sh
-    Source init/default/03_prepare_tmp_build_area.sh
-    Source init/default/04_create_var_dir.sh
-    Source init/default/05_select_ini_file.sh
-    Source init/default/08_set_preview_var.sh
-    Source init/default/10_check_current_status.sh
-    Source init/GNU/Linux/10_define_hostname.sh
-    Source init/default/12_upgrade_allowed.sh
-    Source init/default/15_check_preview_run.sh
-    Source init/GNU/Linux/40_set_docker_var.sh
-    Source init/default/85_set_current_state.sh
-    Source init/default/90_show_current_state.sh
-    Source prep/default/05_reboot_required.sh
-    Source prep/default/05_source_cmcluster_conf.sh
-    Source prep/default/10_check_current_status.sh
-    Source prep/default/16_check_dp_backup.sh
-    Source prep/default/16_check_nbu_backup.sh
-    Source prep/default/16_check_nsr_backup.sh
-    Source prep/default/16_check_tsm_backup.sh
-    Source prep/default/17_list_nbu_backup_status.sh
-    Source prep/GNU/Linux/20_wait_on_chef_client_completion.sh
-    Source prep/GNU/Linux/27_save_grub_menu.sh
-    Source prep/GNU/Linux/28_save_system_release.sh
-    Source prep/GNU/Linux/29_save_kernel_version.sh
-    Source prep/default/30_save_pam_conf.sh
-    Source prep/GNU/Linux/30_save_rpm_qa.sh
-    Source prep/default/31_save_env_output.sh
-    Source prep/GNU/Linux/35_check_rear_image.sh
-    Source prep/default/35_save_mount_output.sh
-    Source prep/GNU/Linux/36_check_virusscanner_linuxshield.sh
-    Source prep/GNU/Linux/37_check_diskspace_requirements.sh
-    Source prep/GNU/Linux/38_save_satellite_info.sh
-    Source prep/GNU/Linux/39_save_yum_history.sh
-    Source prep/GNU/Linux/39_save_yum_log.sh
-    Source prep/GNU/Linux/40_disabling_local_repos_with_satellite.sh
-    Source prep/GNU/Linux/41_disable_rhn_satellite_subscription.sh
-    Source prep/GNU/Linux/42_archive_yum_repos_dir.sh
-    Source prep/GNU/Linux/43_save_yum_enable_status.sh
-    Source prep/GNU/Linux/49_yum_repolist.sh
-    Source prep/GNU/Linux/50_save_default_runlevel.sh
-    Source prep/GNU/Linux/54_check_on_hanging_rpm_cmds.sh
-    Source prep/GNU/Linux/55_verify_rpm_packages.sh
-    Source prep/GNU/Linux/60_save_knife_node_output.sh
-    Source prep/default/61_exclude_software_packages.sh
-    Source prep/GNU/Linux/61_save_extend_filesystem_features.sh
-    Source prep/default/62_sg_autostart_cmcld.sh
-    Source prep/default/70_check_openssl_logjam.sh
-    Source prep/default/72_save_uvscan_exclude_list.sh
-    Source prep/default/95_check_missing_programs.sh
-    Source prep/default/99_update_status.sh
-    Source preremove/default/01_enter_stage_acceptable.sh
-    Source preremove/default/05_read_section_from_inifile.sh
-    Source preremove/default/99_update_status.sh
-    Source preinstall/default/01_enter_stage_acceptable.sh
-    Source preinstall/default/05_read_section_from_inifile.sh
-    Source preinstall/GNU/Linux/06_yum_clean_all.sh
-    Source preinstall/GNU/Linux/07_journalctl_flush.sh
-    Source preinstall/GNU/Linux/08_clear_yum_cache.sh
-    Source preinstall/GNU/Linux/09_import_rpm_gpg_keys.sh
-    Source preinstall/GNU/Linux/10_stop_ds_agent.sh
-    Source preinstall/GNU/Linux/10_stop_nails.sh
-    Source preinstall/GNU/Linux/20_stop_cron.sh
-    Source preinstall/default/22_shutdown_opcagt.sh
-    Source preinstall/GNU/Linux/25_stop_tidal.sh
-    Source preinstall/GNU/Linux/26_stop_ctmagent.sh
-    Source preinstall/GNU/Linux/28_stop_docker.sh
-    Source preinstall/GNU/Linux/30_disable_chef_client_in_crontab.sh
-    Source preinstall/default/30_shutdown_quest.sh
-    Source preinstall/GNU/Linux/32_stop_tanium.sh
-    Source preinstall/GNU/Linux/33_stop_fluentbit.sh
-    Source preinstall/GNU/Linux/34_stop_flexera.sh
-    Source preinstall/GNU/Linux/35_stop_cisco_amp.sh
-    Source preinstall/default/80_run_cmds_defined_in_ini.sh
-    Source preinstall/default/99_update_status.sh
-    Source install/default/01_enter_stage_acceptable.sh
-    Source install/default/05_read_section_from_inifile.sh
-    Source install/default/20_sw_installation_in_progress.sh
-    Source install/GNU/Linux/29_exclude_packages.sh
-    Source install/GNU/Linux/30_install_software.sh
-    Source install/default/99_update_status.sh
-    Source postinstall/default/01_enter_stage_acceptable.sh
-    Source postinstall/default/05_read_section_from_inifile.sh
-    Source postinstall/default/10_save_dmesg.sh
-    Source postinstall/GNU/Linux/28_save_and_diff_system_release.sh
-    Source postinstall/GNU/Linux/29_save_and_diff_kernel_version.sh
-    Source postinstall/default/30_diff_pam_conf.sh
-    Source postinstall/GNU/Linux/30_save_rpm_qa.sh
-    Source postinstall/default/35_save_mount_output.sh
-    Source postinstall/GNU/Linux/39_save_and_diff_yum_log.sh
-    Source postinstall/GNU/Linux/40_needs_restarting.sh
-    Source postinstall/GNU/Linux/61_save_and_diff_extend_filesystem_features.sh
-    Source postinstall/default/99_update_status.sh
-    Source postremove/default/01_enter_stage_acceptable.sh
-    Source postremove/default/05_read_section_from_inifile.sh
-    Source postremove/default/99_update_status.sh
-    Source configure/default/01_enter_stage_acceptable.sh
-    Source configure/default/05_read_section_from_inifile.sh
-    Source configure/default/10_configure_commands.sh
-    Source configure/GNU/Linux/20_uncomment_cfg2html_in_crontab.sh
-    Source configure/default/26_fix_openssl_logjam.sh
-    Source configure/default/55_fix_uvscan_exclude_list.sh
-    Source configure/default/62_verify_sg_autostart_cmcld.sh
-    Source configure/default/99_update_status.sh
-    Source postexecute/default/01_enter_stage_acceptable.sh
-    Source postexecute/default/05_read_section_from_inifile.sh
-    Source postexecute/GNU/Linux/20_start_ds_agent.sh
-    Source postexecute/GNU/Linux/20_start_nails.sh
-    Source postexecute/GNU/Linux/25_start_crond.sh
-    Source postexecute/GNU/Linux/25_start_ntpd.sh
-    Source postexecute/GNU/Linux/25_start_tidal.sh
-    Source postexecute/GNU/Linux/26_start_ctmagent.sh
-    Source postexecute/GNU/Linux/28_start_docker.sh
-    Source postexecute/GNU/Linux/29_start_tanium.sh
-    Source postexecute/GNU/Linux/30_start_fluentbit.sh
-    Source postexecute/GNU/Linux/31_start_flexera.sh
-    Source postexecute/GNU/Linux/33_restart_apache.sh
-    Source postexecute/default/37_start_opcagt.sh
-    Source postexecute/default/38_start_quest.sh
-    Source postexecute/GNU/Linux/40_enabling_local_repos_with_satellite.sh
-    Source postexecute/GNU/Linux/43_restore_yum_enable_status.sh
-    Source postexecute/GNU/Linux/44_enable_on_rhel_yum_repos.sh
-    Source postexecute/GNU/Linux/45_enable_rhn_satellite_subscription.sh
-    Source postexecute/default/50_adapt_sg_autostart_cmcld.sh
-    Source postexecute/GNU/Linux/60_save_knife_node_output.sh
-    Source postexecute/GNU/Linux/60_save_satellite_info.sh
-    Source postexecute/GNU/Linux/65_remove_duplicate_packages.sh
-    Source postexecute/GNU/Linux/70_define_default_runlevel.sh
-    Source postexecute/default/80_run_cmds_defined_in_ini.sh
-    Source postexecute/GNU/Linux/80_run_grub2_mkconfig.sh
-    Source postexecute/GNU/Linux/82_enable_chef_client_in_crontab.sh
-    Source postexecute/GNU/Linux/85_update_major_release_in_config.sh
-    Source postexecute/GNU/Linux/95_reboot_required.sh
-    Source postexecute/default/96_call_for_action_after_preview.sh
-    Source postexecute/default/99_update_status.sh
-    Source cleanup/default/05_read_section_from_inifile.sh
-    Source cleanup/default/10_rm_old_cfg2html_reports.sh
-    Source cleanup/default/20_rm_sap_db_tmp_file.sh
-    Source cleanup/default/90_preview_ended_successfully.sh
-    Source cleanup/default/95_show_logfile_location.sh
-</code></p>
+<pre><code>$ sudo /opt/upgrade-ux/bin/upgrade-ux -s
+upgrade-ux 1.27 / 24-Aug-2022
+Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20221128-1008-ITSGBHHLSP00741.log
+Source init/default/02_print_host_info.sh
+Source init/default/03_parse_variables.sh
+Source init/default/03_prepare_tmp_build_area.sh
+Source init/default/04_create_var_dir.sh
+Source init/default/05_select_ini_file.sh
+Source init/default/08_set_preview_var.sh
+Source init/default/10_check_current_status.sh
+Source init/GNU/Linux/10_define_hostname.sh
+Source init/default/12_upgrade_allowed.sh
+Source init/default/15_check_preview_run.sh
+Source init/GNU/Linux/40_set_docker_var.sh
+Source init/default/85_set_current_state.sh
+Source init/default/90_show_current_state.sh
+Source prep/default/05_reboot_required.sh
+Source prep/default/05_source_cmcluster_conf.sh
+Source prep/default/10_check_current_status.sh
+Source prep/default/16_check_dp_backup.sh
+Source prep/default/16_check_nbu_backup.sh
+Source prep/default/16_check_nsr_backup.sh
+Source prep/default/16_check_tsm_backup.sh
+Source prep/default/17_list_nbu_backup_status.sh
+Source prep/GNU/Linux/20_wait_on_chef_client_completion.sh
+Source prep/GNU/Linux/27_save_grub_menu.sh
+Source prep/GNU/Linux/28_save_system_release.sh
+Source prep/GNU/Linux/29_save_kernel_version.sh
+Source prep/default/30_save_pam_conf.sh
+Source prep/GNU/Linux/30_save_rpm_qa.sh
+Source prep/default/31_save_env_output.sh
+Source prep/GNU/Linux/35_check_rear_image.sh
+Source prep/default/35_save_mount_output.sh
+Source prep/GNU/Linux/36_check_virusscanner_linuxshield.sh
+Source prep/GNU/Linux/37_check_diskspace_requirements.sh
+Source prep/GNU/Linux/38_save_satellite_info.sh
+Source prep/GNU/Linux/39_save_yum_history.sh
+Source prep/GNU/Linux/39_save_yum_log.sh
+Source prep/GNU/Linux/40_disabling_local_repos_with_satellite.sh
+Source prep/GNU/Linux/41_disable_rhn_satellite_subscription.sh
+Source prep/GNU/Linux/42_archive_yum_repos_dir.sh
+Source prep/GNU/Linux/43_save_yum_enable_status.sh
+Source prep/GNU/Linux/49_yum_repolist.sh
+Source prep/GNU/Linux/50_save_default_runlevel.sh
+Source prep/GNU/Linux/54_check_on_hanging_rpm_cmds.sh
+Source prep/GNU/Linux/55_verify_rpm_packages.sh
+Source prep/GNU/Linux/60_save_knife_node_output.sh
+Source prep/default/61_exclude_software_packages.sh
+Source prep/GNU/Linux/61_save_extend_filesystem_features.sh
+Source prep/default/62_sg_autostart_cmcld.sh
+Source prep/default/70_check_openssl_logjam.sh
+Source prep/default/72_save_uvscan_exclude_list.sh
+Source prep/default/95_check_missing_programs.sh
+Source prep/default/99_update_status.sh
+Source preremove/default/01_enter_stage_acceptable.sh
+Source preremove/default/05_read_section_from_inifile.sh
+Source preremove/default/99_update_status.sh
+Source preinstall/default/01_enter_stage_acceptable.sh
+Source preinstall/default/05_read_section_from_inifile.sh
+Source preinstall/GNU/Linux/06_yum_clean_all.sh
+Source preinstall/GNU/Linux/07_journalctl_flush.sh
+Source preinstall/GNU/Linux/08_clear_yum_cache.sh
+Source preinstall/GNU/Linux/09_import_rpm_gpg_keys.sh
+Source preinstall/GNU/Linux/10_stop_ds_agent.sh
+Source preinstall/GNU/Linux/10_stop_nails.sh
+Source preinstall/GNU/Linux/20_stop_cron.sh
+Source preinstall/default/22_shutdown_opcagt.sh
+Source preinstall/GNU/Linux/25_stop_tidal.sh
+Source preinstall/GNU/Linux/26_stop_ctmagent.sh
+Source preinstall/GNU/Linux/28_stop_docker.sh
+Source preinstall/GNU/Linux/30_disable_chef_client_in_crontab.sh
+Source preinstall/default/30_shutdown_quest.sh
+Source preinstall/GNU/Linux/32_stop_tanium.sh
+Source preinstall/GNU/Linux/33_stop_fluentbit.sh
+Source preinstall/GNU/Linux/34_stop_flexera.sh
+Source preinstall/GNU/Linux/35_stop_cisco_amp.sh
+Source preinstall/default/80_run_cmds_defined_in_ini.sh
+Source preinstall/default/99_update_status.sh
+Source install/default/01_enter_stage_acceptable.sh
+Source install/default/05_read_section_from_inifile.sh
+Source install/default/20_sw_installation_in_progress.sh
+Source install/GNU/Linux/29_exclude_packages.sh
+Source install/GNU/Linux/30_install_software.sh
+Source install/default/99_update_status.sh
+Source postinstall/default/01_enter_stage_acceptable.sh
+Source postinstall/default/05_read_section_from_inifile.sh
+Source postinstall/default/10_save_dmesg.sh
+Source postinstall/GNU/Linux/28_save_and_diff_system_release.sh
+Source postinstall/GNU/Linux/29_save_and_diff_kernel_version.sh
+Source postinstall/default/30_diff_pam_conf.sh
+Source postinstall/GNU/Linux/30_save_rpm_qa.sh
+Source postinstall/default/35_save_mount_output.sh
+Source postinstall/GNU/Linux/39_save_and_diff_yum_log.sh
+Source postinstall/GNU/Linux/40_needs_restarting.sh
+Source postinstall/GNU/Linux/61_save_and_diff_extend_filesystem_features.sh
+Source postinstall/default/99_update_status.sh
+Source postremove/default/01_enter_stage_acceptable.sh
+Source postremove/default/05_read_section_from_inifile.sh
+Source postremove/default/99_update_status.sh
+Source configure/default/01_enter_stage_acceptable.sh
+Source configure/default/05_read_section_from_inifile.sh
+Source configure/default/10_configure_commands.sh
+Source configure/GNU/Linux/20_uncomment_cfg2html_in_crontab.sh
+Source configure/default/26_fix_openssl_logjam.sh
+Source configure/default/55_fix_uvscan_exclude_list.sh
+Source configure/default/62_verify_sg_autostart_cmcld.sh
+Source configure/default/99_update_status.sh
+Source postexecute/default/01_enter_stage_acceptable.sh
+Source postexecute/default/05_read_section_from_inifile.sh
+Source postexecute/GNU/Linux/20_start_ds_agent.sh
+Source postexecute/GNU/Linux/20_start_nails.sh
+Source postexecute/GNU/Linux/25_start_crond.sh
+Source postexecute/GNU/Linux/25_start_ntpd.sh
+Source postexecute/GNU/Linux/25_start_tidal.sh
+Source postexecute/GNU/Linux/26_start_ctmagent.sh
+Source postexecute/GNU/Linux/28_start_docker.sh
+Source postexecute/GNU/Linux/29_start_tanium.sh
+Source postexecute/GNU/Linux/30_start_fluentbit.sh
+Source postexecute/GNU/Linux/31_start_flexera.sh
+Source postexecute/GNU/Linux/33_restart_apache.sh
+Source postexecute/default/37_start_opcagt.sh
+Source postexecute/default/38_start_quest.sh
+Source postexecute/GNU/Linux/40_enabling_local_repos_with_satellite.sh
+Source postexecute/GNU/Linux/43_restore_yum_enable_status.sh
+Source postexecute/GNU/Linux/44_enable_on_rhel_yum_repos.sh
+Source postexecute/GNU/Linux/45_enable_rhn_satellite_subscription.sh
+Source postexecute/default/50_adapt_sg_autostart_cmcld.sh
+Source postexecute/GNU/Linux/60_save_knife_node_output.sh
+Source postexecute/GNU/Linux/60_save_satellite_info.sh
+Source postexecute/GNU/Linux/65_remove_duplicate_packages.sh
+Source postexecute/GNU/Linux/70_define_default_runlevel.sh
+Source postexecute/default/80_run_cmds_defined_in_ini.sh
+Source postexecute/GNU/Linux/80_run_grub2_mkconfig.sh
+Source postexecute/GNU/Linux/82_enable_chef_client_in_crontab.sh
+Source postexecute/GNU/Linux/85_update_major_release_in_config.sh
+Source postexecute/GNU/Linux/95_reboot_required.sh
+Source postexecute/default/96_call_for_action_after_preview.sh
+Source postexecute/default/99_update_status.sh
+Source cleanup/default/05_read_section_from_inifile.sh
+Source cleanup/default/10_rm_old_cfg2html_reports.sh
+Source cleanup/default/20_rm_sap_db_tmp_file.sh
+Source cleanup/default/90_preview_ended_successfully.sh
+Source cleanup/default/95_show_logfile_location.sh
+</code></pre>
 
 <p>NOTE: It depends on the OS architecture (see <code>dump</code> workflow) which scripts will be sources. In above example it was on HP hardware.</p>
 
@@ -917,7 +917,7 @@ If you need new scripts just write a small script called <code>my_script.sh</cod
 
 <p>Now it is up to you! If you wish to add new scripts it is always useful to first make a new issue at GitHub: https://github.com/gdha/upgrade-ux/issues</p>
 
-<h1 id="-Frequently-Asked-Questions">= Frequently Asked Questions</h1>
+<h1 id="Frequently-Asked-Questions">Frequently Asked Questions</h1>
 
 <h2 id="Upgrade-ux-not-found">Upgrade-ux not found</h2>
 <p>If you get the following error when you try to run <code>upgrade-ux</code></p>

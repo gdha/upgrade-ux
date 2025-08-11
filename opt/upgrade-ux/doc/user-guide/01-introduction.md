@@ -61,15 +61,15 @@ Upgrade-UX has a wide range of features:
 
  - Simple to use
  - Has a _preview_ mode (to dry-run an upgrade without doing it) and an _upgrade_ mode
- - Is customisable via +local.conf+ configuration file
+ - Is customisable via `local.conf` configuration file
  - Is written in standard Korn Shell (which makes it highly portable)
  - Is UNIX Operating System independent as OS specific tasks reside in their own directory structures
  - Is easy extendable with your own scripts
- - The +upgrade-ux+ command leaves a trace in its own log file
+ - The `upgrade-ux` command leaves a trace in its own log file
  - Running in preview or upgrade mode always creates evidence files
  - Has a man page
  - Has user documentation (you are reading it)
- - Can be used to install patch bundles of previous years with the +YEAR+ variable
+ - Can be used to install patch bundles of previous years with the `YEAR` variable
  - Does understand Serviceguard clusters
  - Can be programmed to bail out on settings you think are too serious to continue
  - Can trigger remote alarms, syslog, monitors,...

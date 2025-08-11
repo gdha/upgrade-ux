@@ -33,44 +33,42 @@ The upgrade operation goes through different stages to accomplish a successful u
 
 Every time you enter or leave a stage the `/var/opt/upgrade-ux/status` gets updated with a timestamp and the _stage_ name with an additional notification of 'start' or 'ended'. Upgrade-ux will not delete this status file, but will always append to it so you get a nice historic view of all the runs:
 
-```
-   # cat /var/opt/upgrade-ux/status
-   2014-06-13 13:12:26 init:start
-   2014-06-13 13:12:27 init:ended
-   2014-06-13 13:12:27 prep:start
-   2014-06-13 13:12:36 prep:ended
-   2014-06-13 13:12:36 preremove:start
-   2014-06-13 13:12:45 preremove:ended
-   2014-06-13 13:12:45 preinstall:start
-   2014-06-13 13:12:51 preinstall:ended
-   2014-06-13 13:12:51 install:start
-   2014-06-13 13:25:30 install:ended
-   2014-06-13 13:25:30 postinstall:start
-   2014-06-13 13:27:41 postinstall:ended
-   2014-06-13 13:27:41 postremove:start
-   2014-06-13 13:27:41 postremove:ended
-   2014-06-13 13:27:41 configure:start
-   2014-06-13 13:27:41 configure:ended
-   2014-06-13 13:27:41 postexecute:start
-   2014-06-13 13:28:19 postexecute:ended
-   2014-06-13 13:28:19 preview:ended   (preview ended successfully)
-   2014-06-13 13:34:09 init:start
-   2014-06-13 13:34:10 init:ended
-   2014-06-13 13:34:10 prep:start
-   2014-06-13 13:34:19 prep:ended
-   2014-06-13 13:34:19 preremove:start
-   2014-06-13 13:34:31 preremove:ended
-   2014-06-13 13:34:31 preinstall:start
-   2014-06-13 13:35:56 preinstall:ended
-   2014-06-13 13:35:56 install:start
-   2014-06-13 15:36:57 install:ended
-   2014-06-13 15:36:58 postinstall:start
-   2014-06-13 15:45:49 postinstall:ended
-   2014-06-13 15:45:49 postremove:start
-   2014-06-13 15:45:49 postremove:ended
-   2014-06-13 15:45:49 configure:start
-   2014-06-13 15:45:49 configure:ended
-   2014-06-13 15:45:49 postexecute:start
-   2014-06-13 15:55:21 postexecute:ended
-   2014-06-13 15:55:21 upgrade:ended   (upgrade ended successfully)
-```
+    # cat /var/opt/upgrade-ux/status
+    2014-06-13 13:12:26 init:start
+    2014-06-13 13:12:27 init:ended
+    2014-06-13 13:12:27 prep:start
+    2014-06-13 13:12:36 prep:ended
+    2014-06-13 13:12:36 preremove:start
+    2014-06-13 13:12:45 preremove:ended
+    2014-06-13 13:12:45 preinstall:start
+    2014-06-13 13:12:51 preinstall:ended
+    2014-06-13 13:12:51 install:start
+    2014-06-13 13:25:30 install:ended
+    2014-06-13 13:25:30 postinstall:start
+    2014-06-13 13:27:41 postinstall:ended
+    2014-06-13 13:27:41 postremove:start
+    2014-06-13 13:27:41 postremove:ended
+    2014-06-13 13:27:41 configure:start
+    2014-06-13 13:27:41 configure:ended
+    2014-06-13 13:27:41 postexecute:start
+    2014-06-13 13:28:19 postexecute:ended
+    2014-06-13 13:28:19 preview:ended   (preview ended successfully)
+    2014-06-13 13:34:09 init:start
+    2014-06-13 13:34:10 init:ended
+    2014-06-13 13:34:10 prep:start
+    2014-06-13 13:34:19 prep:ended
+    2014-06-13 13:34:19 preremove:start
+    2014-06-13 13:34:31 preremove:ended
+    2014-06-13 13:34:31 preinstall:start
+    2014-06-13 13:35:56 preinstall:ended
+    2014-06-13 13:35:56 install:start
+    2014-06-13 15:36:57 install:ended
+    2014-06-13 15:36:58 postinstall:start
+    2014-06-13 15:45:49 postinstall:ended
+    2014-06-13 15:45:49 postremove:start
+    2014-06-13 15:45:49 postremove:ended
+    2014-06-13 15:45:49 configure:start
+    2014-06-13 15:45:49 configure:ended
+    2014-06-13 15:45:49 postexecute:start
+    2014-06-13 15:55:21 postexecute:ended
+    2014-06-13 15:55:21 upgrade:ended   (upgrade ended successfully)

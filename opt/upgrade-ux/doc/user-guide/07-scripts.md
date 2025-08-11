@@ -2,7 +2,6 @@
 
 The scripts that are sourced by the main script `upgrade-ux` reside under `/opt/upgrade-ux/scripts/` directory and the easiest way to know what will be sourced is by running `/opt/upgrade-ux/bin/upgrade-ux -s`:
 
-```
     $ sudo /opt/upgrade-ux/bin/upgrade-ux -s
     upgrade-ux 1.27 / 24-Aug-2022
     Using log file: /var/opt/upgrade-ux/log/upgrade-ux-20221128-1008-ITSGBHHLSP00741.log
@@ -146,7 +145,6 @@ The scripts that are sourced by the main script `upgrade-ux` reside under `/opt/
     Source cleanup/default/20_rm_sap_db_tmp_file.sh
     Source cleanup/default/90_preview_ended_successfully.sh
     Source cleanup/default/95_show_logfile_location.sh
-```    
 
 NOTE: It depends on the OS architecture (see `dump` workflow) which scripts will be sources. In above example it was on HP hardware.
 

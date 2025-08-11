@@ -28,7 +28,6 @@ The option help (`-h`) will produce the following:
      test            a simple test workflow
      upgrade         upgrade the operating system
 
-
 Keep in mind that upgrade-ux has an excellent man page too. See `man 8 upgrade-ux`
 
 It is important to know that `upgrade-ux` is a quiet program and will not show any output if you do not request for it with the verbose option (`-v`). Another point of interest is its excellent logging facilities as under `/var/opt/upgrade-ux/log` directory `upgrade-ux` keep a log file of each run. The log files are composed as follow `upgrade-ux-<YYYYMMDD>-<HHMM>-hostname.log`
@@ -39,7 +38,6 @@ Starting up the program should be done by referencing the full path `/opt/upgrad
 
 You probably understood by now that `upgrade-ux` must be started in _preview_ mode first before we can run it in _upgrade_ mode. However, we prefer that you always use the option `-p` (_preview_ mode) to make it clear to yourself and other (when they need to dig into the log files for some reason) what you meant. Furthermore, in the log file there is always a trace of in which mode the program was running:
 
-```
     2014-06-10 15:22:45 Check if our PID (11950) is locked
     2014-06-10 15:22:45 Found /tmp/upgrade-ux-LOCKDIR/upgrade-ux-PIDFILE file - we could be locked...
     2014-06-10 15:22:45 lock is stale (6607) - will continue
@@ -63,7 +61,6 @@ You probably understood by now that `upgrade-ux` must be started in _preview_ mo
     2014-06-10 15:22:47 Last preview run was executed on Tue Jun 10 14:28:36 METDST 2014  (preview ended successfully)
     2014-06-10 15:22:47 Running in "upgrade mode"
     2014-06-10 15:22:47 =-=-=-=-=-=-=-=-=-=-=-=-=
-```
     
 From the Chapter "Workflow" you probably remember that the default workflow is *upgrade* (even if you did not mention it). So, as example running `upgrade-ux` in preview mode with verbose option is done as `/opt/upgrade-ux/bin/upgrade-ux -vp`
 

@@ -1,4 +1,4 @@
-#= Frequently Asked Questions
+# Frequently Asked Questions
 
 ## Upgrade-ux not found
 If you get the following error when you try to run `upgrade-ux`
