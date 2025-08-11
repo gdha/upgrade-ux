@@ -259,7 +259,7 @@ Configuration tree:
 
 <p>A good example of such variable is the <code>YEAR</code>. In the <code>default.conf</code> it is defined as:</p>
 
-<pre><code># The default year to use with our patch bundle is *current year* [ $(date '+%Y') ] - to overrule define it manually
+<pre><code># The default year to use with our patch bundle is 'current year' [ $(date '+%Y') ] - to overrule define it manually
 # in the local.conf file. E.g. when running upgrade-ux in 2015 but still installing patches from 2014 then define: YEAR=2014
 YEAR=$(date '+%Y')
 </code></pre>
@@ -294,7 +294,7 @@ SunOS.conf
 <p>The INI files are always OS specific and contain the definitions of which patch bundles should be installed or removed, and so on.
 The INI files are kept under the <code>/etc/opt/upgrade-ux</code> or <code>$HOME/project/upgrade-ux/etc/opt/upgrade-ux/</code> directory and are typically called <code>$OS-$OS_VERSION-$YEAR.ini</code></p>
 
-<p>It follows also the different stages known within +upgrade-ux+ and these are best explained with an example INI file (below you see the INI file for HP-UX 11.11 systems):</p>
+<p>It follows also the different stages known within <code>upgrade-ux</code> and these are best explained with an example INI file (below you see the INI file for HP-UX 11.11 systems):</p>
 
 <pre><code># HP-UX-11.11-2014.ini file
 ###########################
@@ -388,7 +388,7 @@ The INI files are kept under the <code>/etc/opt/upgrade-ux</code> or <code>$HOME
 
 <p>You can use as many comments as you like, but it should start with <code>#</code> or <code>;</code> sign.</p>
 
-<p>A stage or section is started with +[section]+ header. The name within a section is known as a <em>stage</em> within <code>upgrade-ux</code>.</p>
+<p>A stage or section is started with <code>[section]</code> header. The name within a section is known as a <em>stage</em> within <code>upgrade-ux</code>.</p>
 
 <p>A section may be empty or may contain arrays (some of those may be left out and will be treated as empty strings). An array will always be treated as a string by the way. The content of arrays are wiped out when you enter a new stage (or section) by <code>upgrade-ux</code>.</p>
 
@@ -399,7 +399,7 @@ The INI files are kept under the <code>/etc/opt/upgrade-ux</code> or <code>$HOME
   <li>options[] - add here specific options required by command[]</li>
   <li>source[] - should be the source location where the software bundle reside</li>
   <li>bundle[] - the name of the software bundle</li>
-  <li>version[] - the specific version to be installed/removed (can contain +*+ or may be empty as well)</li>
+  <li>version[] - the specific version to be installed/removed (can contain <code>*</code> or may be empty as well)</li>
 </ul>
 
 <p>If you do not need all arrays in a certain section then it is fine to leave these empty (or not mentioning these in the INI file)</p>
@@ -421,11 +421,11 @@ As said, if not needed leave this section empty.</p>
 
 <h3 id="Section-postinstall">Section postinstall</h3>
 
-<p>In the <code>postinstall</code> section we define the software pieces that were missing in the +install+ section for some specific reason (if any). Furthermore, in this stage we capture lots of evidence again and compare these via special scripts. Again see Chapter 6 (The Upgrade-ux scripts).</p>
+<p>In the <code>postinstall</code> section we define the software pieces that were missing in the <code>install</code> section for some specific reason (if any). Furthermore, in this stage we capture lots of evidence again and compare these via special scripts. Again see Chapter 6 (The Upgrade-ux scripts).</p>
 
 <h3 id="Section-postremove">Section postremove</h3>
 
-<p>In the <code>postremove</code> section you could remove software bundles that were in the big update round of the +install+ section, but should not stay on this particular platform for some reason. Again, you may leave it empty if not needed.</p>
+<p>In the <code>postremove</code> section you could remove software bundles that were in the big update round of the <code>install</code> section, but should not stay on this particular platform for some reason. Again, you may leave it empty if not needed.</p>
 
 <h3 id="Section-configure">Section configure</h3>
 
@@ -454,16 +454,15 @@ options[0]      =       "-2%Y%m%d"
 
 <p>The workflows (or commands) available can be listed with the <code>-h</code> option:</p>
 
-<p><code>
-    # /opt/upgrade-ux/bin/upgrade-ux -h
-        ....
-        List of commands:
-         dump            dump configuration and system information
-         mkdist          create a compressed tar archive distribution
-         purgelogs       purge the LOG [/home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log] directory
-         test            a simple test workflow
-         upgrade         upgrade the operating system
-</code></p>
+<pre><code># /opt/upgrade-ux/bin/upgrade-ux -h
+    ....
+    List of commands:
+     dump            dump configuration and system information
+     mkdist          create a compressed tar archive distribution
+     purgelogs       purge the LOG [/home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log] directory
+     test            a simple test workflow
+     upgrade         upgrade the operating system
+</code></pre>
 
 <h2 id="Dump-workflow">Dump workflow</h2>
 
