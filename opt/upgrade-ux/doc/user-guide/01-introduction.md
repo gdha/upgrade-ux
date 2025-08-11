@@ -1,6 +1,8 @@
+# Upgrade-UX User Guide
+
 # Introduction
 
-*Upgrade-UX* is ai software framework to update or patch lots of Unix systems (Linux,
+*Upgrade-UX* is a software framework to update or patch lots of Unix systems (Linux,
 HP-UX, AIX and Solaris).
 
 In professional environments it is not allowed
@@ -10,7 +12,7 @@ this process in a consistent way and as many times as you like on any system.
 Upgrade-ux understands two states:
 
  - preview mode: will go through the whole process without actually doing the update
- - upgrade mode: will do it for real (the update)
+ - upgrade mode: will do it for real (the update, upgrade or patching)
 
 The upgrade-ux uses configuration files which describes what a particular Unix Operating
 System requires to be upgraded in the way you want it (or designed it). Doing
@@ -30,14 +32,14 @@ The support and development of the Upgrade-UX project takes place
 on Github:
 
 Upgrade-UX website:
-    https://www.it3.be/projects/upgrade-ux.html
+    [https://www.it3.be/projects/upgrade-ux.html](https://www.it3.be/projects/upgrade-ux.html)
 
 Github project:
-    https://github.com/gdha/upgrade-ux/
+    [https://github.com/gdha/upgrade-ux/](https://github.com/gdha/upgrade-ux/)
 
 In case you have questions, ideas or feedback about this document, you
 can contact the development team at:
-gratien.dhaese@gmail.com.
+gratien.dhaese at gmail.com.
 
 
 ## Design concepts

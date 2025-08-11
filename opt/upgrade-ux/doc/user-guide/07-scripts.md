@@ -180,5 +180,5 @@ An example of such a script is `/opt/upgrade-ux/scripts/preinstall/default/05_re
         fi
     fi
 
-Now it is up to you! If you wish to add new scripts it is always useful to first make a new issue at GitHub: https://github.com/gdha/upgrade-ux/issues
+Now it is up to you! If you wish to add new scripts it is always useful to first make a [new issue at GitHub](https://github.com/gdha/upgrade-ux/issues)
 

@@ -4,7 +4,7 @@ You can use upgrade-ux via installing the sources or the software depot (HP-UX, 
 
 ## Clone the sources via GitHub
 
-The latest sources are available at https://github.com/gdha/upgrade-ux[GitHub] and to clone
+The latest sources are available at [GitHub Upgrade-UX project](https://github.com/gdha/upgrade-ux) and to clone
 the sources on your local Unix you could use
 
     git clone git@github.com:gdha/upgrade-ux.git
@@ -17,7 +17,9 @@ To enter the directory use the command
 
 If the software depot was already been made available by the system administrator then you can use `swinstall` to do the job.
 
-To install Upgrade-UX on HP-UX run the following command `swinstall -s SDserver:/var/opt/ignite/depots/GLOBAL/tools/11i UPGRADE-UX`
+To install Upgrade-UX on HP-UX run the following command:
+
+    swinstall -s SDserver:/var/opt/ignite/depots/GLOBAL/tools/11i UPGRADE-UX
 
 ## Installing the RPM package on Linux (RHEL, SLES)
 

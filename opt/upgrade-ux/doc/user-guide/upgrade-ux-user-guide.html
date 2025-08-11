@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv='content-type' content='text/html;charset=utf8'>
   <meta name='generator' content='Ronn-NG/v0.9.1 (http://github.com/apjanke/ronn-ng/tree/0.9.1)'>
-  <title>Introduction</title>
+  <title>Upgrade-UX User Guide</title>
   <style type='text/css' media='all'>
   /* style: man */
   body#manpage {margin:0}
@@ -82,8 +82,10 @@
 
   
 
+<h1 id="Upgrade-UX-User-Guide">Upgrade-UX User Guide</h1>
 <h1 id="Introduction">Introduction</h1>
-<p><em>Upgrade-UX</em> is ai software framework to update or patch lots of Unix systems (Linux,
+
+<p><em>Upgrade-UX</em> is a software framework to update or patch lots of Unix systems (Linux,
 HP-UX, AIX and Solaris).</p>
 
 <p>In professional environments it is not allowed
@@ -94,7 +96,7 @@ Upgrade-ux understands two states:</p>
 
 <ul>
   <li>preview mode: will go through the whole process without actually doing the update</li>
-  <li>upgrade mode: will do it for real (the update)</li>
+  <li>upgrade mode: will do it for real (the update, upgrade or patching)</li>
 </ul>
 
 <p>The upgrade-ux uses configuration files which describes what a particular Unix Operating
@@ -114,14 +116,14 @@ changed in the meantime.</p>
 on Github:</p>
 
 <p>Upgrade-UX website:
-    https://www.it3.be/projects/upgrade-ux.html</p>
+    <a href="https://www.it3.be/projects/upgrade-ux.html" data-bare-link="true">https://www.it3.be/projects/upgrade-ux.html</a></p>
 
 <p>Github project:
-    https://github.com/gdha/upgrade-ux/</p>
+    <a href="https://github.com/gdha/upgrade-ux/" data-bare-link="true">https://github.com/gdha/upgrade-ux/</a></p>
 
 <p>In case you have questions, ideas or feedback about this document, you
 can contact the development team at:
-gratien.dhaese@gmail.com.</p>
+gratien.dhaese at gmail.com.</p>
 
 <h2 id="Design-concepts">Design concepts</h2>
 
@@ -168,7 +170,7 @@ is configured for.</p>
 
 <h2 id="Clone-the-sources-via-GitHub">Clone the sources via GitHub</h2>
 
-<p>The latest sources are available at https://github.com/gdha/upgrade-ux[GitHub] and to clone
+<p>The latest sources are available at <a href="https://github.com/gdha/upgrade-ux">GitHub Upgrade-UX project</a> and to clone
 the sources on your local Unix you could use</p>
 
 <pre><code>git clone git@github.com:gdha/upgrade-ux.git
@@ -183,7 +185,10 @@ the sources on your local Unix you could use</p>
 
 <p>If the software depot was already been made available by the system administrator then you can use <code>swinstall</code> to do the job.</p>
 
-<p>To install Upgrade-UX on HP-UX run the following command <code>swinstall -s SDserver:/var/opt/ignite/depots/GLOBAL/tools/11i UPGRADE-UX</code></p>
+<p>To install Upgrade-UX on HP-UX run the following command:</p>
+
+<pre><code>swinstall -s SDserver:/var/opt/ignite/depots/GLOBAL/tools/11i UPGRADE-UX
+</code></pre>
 
 <h2 id="Installing-the-RPM-package-on-Linux-RHEL-SLES-">Installing the RPM package on Linux (RHEL, SLES)</h2>
 
@@ -910,7 +915,7 @@ if [[ $daysup -gt $DAYSUPTIME ]]; then
 fi
 </code></pre>
 
-<p>Now it is up to you! If you wish to add new scripts it is always useful to first make a new issue at GitHub: https://github.com/gdha/upgrade-ux/issues</p>
+<p>Now it is up to you! If you wish to add new scripts it is always useful to first make a <a href="https://github.com/gdha/upgrade-ux/issues">new issue at GitHub</a></p>
 
 <h1 id="Frequently-Asked-Questions">Frequently Asked Questions</h1>
 
