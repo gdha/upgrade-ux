@@ -49,7 +49,7 @@ The `default.conf` contains lots of variables which should not be changed by the
 
 A good example of such variable is the `YEAR`. In the `default.conf` it is defined as:
 
-    # The default year to use with our patch bundle is *current year* [ $(date '+%Y') ] - to overrule define it manually
+    # The default year to use with our patch bundle is 'current year' [ $(date '+%Y') ] - to overrule define it manually
     # in the local.conf file. E.g. when running upgrade-ux in 2015 but still installing patches from 2014 then define: YEAR=2014
     YEAR=$(date '+%Y')
     
@@ -83,7 +83,7 @@ These configuration files typically contain variables which have only a meaning 
 The INI files are always OS specific and contain the definitions of which patch bundles should be installed or removed, and so on.
 The INI files are kept under the `/etc/opt/upgrade-ux` or `$HOME/project/upgrade-ux/etc/opt/upgrade-ux/` directory and are typically called `$OS-$OS_VERSION-$YEAR.ini`
 
-It follows also the different stages known within +upgrade-ux+ and these are best explained with an example INI file (below you see the INI file for HP-UX 11.11 systems):
+It follows also the different stages known within `upgrade-ux` and these are best explained with an example INI file (below you see the INI file for HP-UX 11.11 systems):
 
     # HP-UX-11.11-2014.ini file
     ###########################
@@ -177,7 +177,7 @@ It follows also the different stages known within +upgrade-ux+ and these are bes
 
 You can use as many comments as you like, but it should start with `#` or `;` sign.
 
-A stage or section is started with +[section]+ header. The name within a section is known as a _stage_ within `upgrade-ux`.
+A stage or section is started with `[section]` header. The name within a section is known as a _stage_ within `upgrade-ux`.
 
 A section may be empty or may contain arrays (some of those may be left out and will be treated as empty strings). An array will always be treated as a string by the way. The content of arrays are wiped out when you enter a new stage (or section) by `upgrade-ux`.
 
@@ -187,7 +187,7 @@ The following arrays are known to `upgrade-ux`:
  - options[] - add here specific options required by command[]
  - source[] - should be the source location where the software bundle reside
  - bundle[] - the name of the software bundle
- - version[] - the specific version to be installed/removed (can contain +*+ or may be empty as well)
+ - version[] - the specific version to be installed/removed (can contain `*` or may be empty as well)
 
 If you do not need all arrays in a certain section then it is fine to leave these empty (or not mentioning these in the INI file)
 
@@ -208,11 +208,11 @@ In the `install` section you typically only define the software bundles that sho
 
 ### Section postinstall
 
-In the `postinstall` section we define the software pieces that were missing in the +install+ section for some specific reason (if any). Furthermore, in this stage we capture lots of evidence again and compare these via special scripts. Again see Chapter 6 (The Upgrade-ux scripts).
+In the `postinstall` section we define the software pieces that were missing in the `install` section for some specific reason (if any). Furthermore, in this stage we capture lots of evidence again and compare these via special scripts. Again see Chapter 6 (The Upgrade-ux scripts).
 
 ### Section postremove
 
-In the `postremove` section you could remove software bundles that were in the big update round of the +install+ section, but should not stay on this particular platform for some reason. Again, you may leave it empty if not needed.
+In the `postremove` section you could remove software bundles that were in the big update round of the `install` section, but should not stay on this particular platform for some reason. Again, you may leave it empty if not needed.
 
 ### Section configure
 

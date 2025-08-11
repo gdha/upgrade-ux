@@ -2,7 +2,6 @@
 
 The workflows (or commands) available can be listed with the `-h` option:
 
-```
     # /opt/upgrade-ux/bin/upgrade-ux -h
         ....
         List of commands:
@@ -11,7 +10,6 @@ The workflows (or commands) available can be listed with the `-h` option:
          purgelogs       purge the LOG [/home/gdhaese1/projects/upgrade-ux/var/opt/upgrade-ux/log] directory
          test            a simple test workflow
          upgrade         upgrade the operating system
-```
 
 ## Dump workflow
 
