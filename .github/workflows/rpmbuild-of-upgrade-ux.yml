@@ -23,7 +23,7 @@ jobs:
       distversion: ${{ steps.distversion.outputs.DISTVERSION }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # Grab the versionnr to use in the main script
       - name: Grab the VERSION number in upgrade-ux main script
@@ -73,7 +73,7 @@ jobs:
       DISTVERSION: ${{ needs.build_tarball.outputs.distversion }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Replace version in RPM spec so correct source is downloaded when building RPM
         id: make_dist
