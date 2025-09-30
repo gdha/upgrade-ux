@@ -9,7 +9,7 @@ if test $DMIDECODE ; then
         ("Google Compute Engine") VIRTUAL=true ;; # Google
         ("Virtual Machine") VIRTUAL=true ;; # Azure
         ("HVM domU") VIRTUAL=true ;; # AWS RHEL/CentOS
-        ("*.*") VIRTUAL=true ;; # all kind of AWS types
+        (*.*) VIRTUAL=true ;; # all kind of AWS types
     esac
 fi
 
