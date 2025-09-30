@@ -2,6 +2,42 @@ Changelog
 =========
 
 
+1.35 (2025-09-30)
+-----------------
+- Increasing version in upgrade-ux. [gdha]
+- #184 fix bug to detect system-product-name with dmidecode. [gdha]
+- #183 add test on nsswitch.conf file. [gdha]
+- Merge pull request #189 from gdha/renovate/actions-checkout-5.x.
+  [Gratien D'haese]
+
+  Update actions/checkout action to v5
+- Update actions/checkout action to v5. [renovate[bot]]
+- Last smaller items to fix + upgrade-ux-user-guide.html. [gdha]
+- Last smaller items to fix. [gdha]
+- Fix URL representation according MD syntax. [gdha]
+- Fix some missing asciidoc to md conversion issues. [gdha]
+- Fix some missing asciidoc to md conversion issues. [gdha]
+- #188 remove ronn as a buildrequire in the RPM spec. [gdha]
+- Merge branch 'master' of https://github.com/gdha/upgrade-ux. [gdha]
+- #188 workflow rpmbuild-of-upgrade-ux.yml - replace asciidoctor by
+  ronn. [gdha]
+- #188 rpmbuild-of-upgrade-ux.yml - replace asciidoctor with ronn in
+  workflow. [gdha]
+- #188 ronn was not found during make in doc. [gdha]
+- #188 add ronn in spec file as BuildRequires. [gdha]
+- #188 fix Makefile under doc directory. [gdha]
+- #188 convert asciidoc docs into markdown. [gdha]
+- #187 Save a copy of Control-M CONFIG.dat file. [gdha]
+- #186 convert man page from asciidoc to mkardown using ronn. [gdha]
+- Merge pull request #185 from gdha/renovate/major-github-artifact-
+  actions. [Gratien D'haese]
+
+  Update actions/download-artifact action to v5
+- Update actions/download-artifact action to v5. [renovate[bot]]
+- Do not validate Linux scripts on HP-UX. [Gratien D'haese]
+- Update Changelog file. [gdha]
+
+
 1.34 (2025-05-26)
 -----------------
 - Set version to 1.34 for new release (for HP-UX and Linux) [gdha]
