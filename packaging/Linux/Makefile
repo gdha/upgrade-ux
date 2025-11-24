@@ -15,6 +15,7 @@ distversion = $(version)
 debrelease = 0
 rpmrelease = %nil
 
+git_branch = master
 ### Get the branch information from git
 ifeq ($(OFFICIAL),)
 ifneq ($(shell which git),)
@@ -25,7 +26,6 @@ endif
 else
 git_branch = $(product)-$(version)
 endif
-git_branch ?= master
 
 date := $(shell date --date="$(git_date)" +%Y%m%d%H%M)
 release_date := $(shell date --date="$(git_date)" +%Y-%m-%d)
