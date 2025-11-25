@@ -42,4 +42,9 @@ function WORKFLOW_dump  {
     esac
 
     LogPrint "$( printf "%40s : %s" "$(basename $INI_FILE)" "$( test -s "$INI_FILE" && echo OK || echo missing/empty )" )"
+
+    if [[ -f "${ETC_DIR}/${OS}-${OS_VENDOR}-${OS_VERSION}.ini" ]]; then
+        INI_FILE="${ETC_DIR}/${OS}-${OS_VENDOR}-${OS_VERSION}.ini"
+        LogPrint "$( printf "%40s : %s" "$(basename $INI_FILE)" "$( test -s "$INI_FILE" && echo OK || echo missing/empty )" )"
+    fi
 }
