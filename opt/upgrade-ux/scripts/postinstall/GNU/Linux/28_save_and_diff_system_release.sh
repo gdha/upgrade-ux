@@ -1,5 +1,7 @@
 # 28_save_and_diff_system_release.sh
 
+[[ ! -f /etc/system-release ]] && return
+
 cp /etc/system-release "$VAR_DIR/$DS/system-release.after"
 
 [[ ! -f "$VAR_DIR/$DS/system-release.before" ]] && return  # should never be true
