@@ -34,17 +34,27 @@ function WORKFLOW_dump  {
                                 )" )"
     done
 
-    # see also script scripts/init/05_select_ini_file.sh
+    LogPrint "INI files tree:"
+    # See also script scripts/init/default/05_select_ini_file.sh
+    # In first instance we check if we have an ${OS_MASTER_VENDOR}.ini file:
+    #  - On Debian variants the ini file is GNU/Linux-debian.ini
+    #  - On RHEL variants the ini file is GNU/Linux-fedora.ini
+    #  - On HP-UX the HP-UX-.ini will never exists as $OS_MASTER_VENDOR is empty
+    if [[ -f "${ETC_DIR}/${OS}-${OS_MASTER_VENDOR}.ini" ]] ; then
+        INI_FILE="${ETC_DIR}/${OS}-${OS_MASTER_VENDOR}.ini"
+        LogPrint "$( printf "%40s : %s" "$(basename $INI_FILE)" "$( test -s "$INI_FILE" && echo OK || echo missing/empty )" )"
+    fi
     case "$OS" in
         "HP-UX"|"SunOS") INI_FILE="${ETC_DIR}/${OS}-${OS_VERSION}-${YEAR}.ini" ;;
-        "GNU/Linux")     INI_FILE="${ETC_DIR}/${OS}-${OS_VENDOR}-${OS_VERSION}-${YEAR}.ini" ;;
+        "GNU/Linux")     INI_FILE="${ETC_DIR}/${OS}-${OS_VENDOR}-${OS_VERSION}.ini" ;;
         *)               INI_FILE="${ETC_DIR}/${OS}-${OS_VENDOR}-${OS_VERSION}.ini" ;;
     esac
 
     LogPrint "$( printf "%40s : %s" "$(basename $INI_FILE)" "$( test -s "$INI_FILE" && echo OK || echo missing/empty )" )"
 
-    if [[ -f "${ETC_DIR}/${OS}-${OS_VENDOR}-${OS_VERSION}.ini" ]]; then
-        INI_FILE="${ETC_DIR}/${OS}-${OS_VENDOR}-${OS_VERSION}.ini"
+    # However, if we find ${OS}-${OS_VENDOR}-${OS_VERSION}-${YEAR}.ini file, then this ini file overrules all
+    if [[ -f "${ETC_DIR}/${OS}-${OS_VENDOR}-${OS_VERSION}-${YEAR}.ini" ]] ; then
+        INI_FILE="${ETC_DIR}/${OS}-${OS_VENDOR}-${OS_VERSION}-${YEAR}.ini"
         LogPrint "$( printf "%40s : %s" "$(basename $INI_FILE)" "$( test -s "$INI_FILE" && echo OK || echo missing/empty )" )"
     fi
 }
