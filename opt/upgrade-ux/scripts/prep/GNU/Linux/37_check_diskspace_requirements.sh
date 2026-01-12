@@ -10,10 +10,9 @@ diskspace_err=0
 
 function free_space_in_filesystem_mb
 {
-    local free_size
     free_size=$(df -P "$1" | tail -1 | awk '{print $4}')  # size in Kb
     # we will return the value in Mb
-    return $(bc <<<$free_size_mb/1024)
+    echo $(bc <<<$free_size/1024)
 }
 
 # On RHEL --direct is an option with df, but Ubuntu does not recognize this option.
