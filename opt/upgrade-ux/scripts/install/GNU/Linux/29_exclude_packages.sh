@@ -22,13 +22,14 @@ do
         $RPM -qa --qf "%{name}-%{version}-%{release}\n" | grep -q $pkg_name && exclude_packages="$exclude_packages --exclude=$pkg"
         echo "$exclude_packages" > "$VAR_DIR/$DS/exclude.packages.var"
     elif [[ "$OS_MASTER_VENDOR" == "debian" ]] ; then
-        apt-mark hold $pkg_name
+        apt show $pkg_name >/dev/null 2>&1 && apt-mark hold $pkg_name
     fi
 done
 
 # only write a line to the log file when we can exclude something (test on zero length string give correct results)
 # On Enterprise Linux alike we use:
 test -z $exclude_packages || Log "We will add \"$exclude_packages\" to the update command(s)"
+
 # On Debian alike we use:
 if [[ "$OS_MASTER_VENDOR" == "debian" ]] ; then
     Log "Output of command \"apt-mark showhold\":"
