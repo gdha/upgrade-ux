@@ -1,6 +1,8 @@
 # 82_enable_chef_client_in_crontab.sh
 # In case we disabled chef-client we need to re-enable it in root's crontab
 
+[[ ! -f /var/spool/cron/root ]] && return
+
 /bin/grep "chef-client " /var/spool/cron/root | /bin/grep -q "^#" || return
 
 if (( PREVIEW )) ; then
