@@ -3,7 +3,7 @@
 # If not, then we have an major issue and we should not continue until we fix it
 
 if [[ "$OS_MASTER_VENDOR" == "debian" ]] ; then
-   Log "Running $ATP -v"
+   Log "Running $APT -v"
    $APT -v
    rc=$?
    if [[ $rc -ne 0 ]] ; then
