@@ -5,12 +5,15 @@
 (( PREVIEW )) && return  # do not kill nor wait on chef-client runs during preview mode
 
 SLEEPTIME=20  # seconds
-CHEFCLIENT="chef-client"
+type -p chef-client 2>/dev/null && CHEFCLIENT="chef-client"
+type -p scm-client  2>/dev/null && CHEFCLIENT="scm-client"
+type -p cinc-client 2>/dev/null && CHEFCLIENT="cinc-client"
+[[ -z "$CHEFCLIENT" ]] && return  # if nor chef-client, scm-client or cinc-client found just return
 
 # if we are still in sleeping mode we better kill this process
 chefclientrunning=$(ps ax | grep $CHEFCLIENT | grep -v grep | wc -l) # if the count is 1 then most likely it is the sleepy one:
 # 1156328 ?        Ss     0:00 /bin/sh -c /bin/sleep 176; /opt/chef/bin/chef-client   -j "/etc/chef/attribs.json" >> /dev/null 2>&1
-if [[ $chefclientrunning -eq 1 ]]; then
+if (( chefclientrunning )); then
   pid=$(ps ax | grep $CHEFCLIENT | grep -v grep | grep sleep | awk '{print $1}')
   if [[ -n "$pid" ]]; then
     Log "Kill the sleeping $CHEFCLIENT process:"
@@ -22,11 +25,11 @@ fi
 for iloop in $(seq 1 3)
 do
   chefclientrunning=$(ps ax | grep $CHEFCLIENT | grep -v grep | wc -l) # 0 when not found running
-  if [[ $chefclientrunning -eq 0 ]]; then
-    return
-  else
+  if (( chefclientrunning )); then
     LogPrint "Waiting on $CHEFCLIENT completion - sleep for $SLEEPTIME seconds before retrying."
     sleep $SLEEPTIME
+  else
+    return
   fi
 done
 
