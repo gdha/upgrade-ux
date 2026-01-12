@@ -2,6 +2,8 @@
 #
 # script to list the available repositories visible on this system
 
+[[ ! -f $YUM ]] && return
+
 [[ -f "$VAR_DIR/$DS/yum.repolist" ]] && return
 
 Log "Save the available repositories into yum.repolist"

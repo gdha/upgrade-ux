@@ -38,10 +38,16 @@
 # Another very interesting tool that is available in EPEL is "Tracer":
 # https://github.com/FrostyX/tracer
 # However, that is out-of-scope for upgrade-ux, but I thought still worth mentioning
-rm -f "$VAR_DIR/$DS/reboot-required"
 
 LogPrint "Do we need restarting of services or reboot?"
+if (( PREVIEW )) ; then
+    LogPrint "No reboot seems necessary"
+    return
+fi
+
 if has_binary needs-restarting ; then
+    # RHEL-alike systems
+    rm -f "$VAR_DIR/$DS/reboot-required" # could be made by postinstall/GNU/Linux/29_save_and_diff_kernel_version.sh
     # "needs-restarting -r" will always output something in the stdout; however $rc=1 means reboot is required
     # but a bad yum repo will not result in a false positive (see #108)
     needs-restarting -r > "$VAR_DIR/$DS/needs-restarting"
@@ -50,23 +56,24 @@ if has_binary needs-restarting ; then
         touch "$VAR_DIR/$DS/reboot-required"
         Log "Processes that require a restart:"
         cat "$VAR_DIR/$DS/needs-restarting" >&2
-        LogPrint "*********************************"
-        LogPrint "** Reboot seems to be required **"
-        LogPrint "*********************************"
-    else
-       LogPrint "No reboot seems necessary"
     fi
+fi
+
+#lsof +c0 -d DEL | grep -v '\s/SYSV' |awk 'NR==1 || !/dev\/zero/ {print $2,$1,$4,$NF}' | column -t > "$VAR_DIR/$DS/dead-processes"
+#counter=$( cat "$VAR_DIR/$DS/dead-processes" | grep -v ora | wc -l )
+#if (( counter > 1 )) ; then
+#     touch "$VAR_DIR/$DS/reboot-required"
+#     Log "Processes that are dead or need a restart:"
+#     cat "$VAR_DIR/$DS/dead-processes" >&2
+
+# On Debian-alike systems we rely on a kernel version update as we do not have "needs-restarting" executable available
+# If a newer kernel was installed then postinstall/GNU/Linux/29_save_and_diff_kernel_version.sh would have created
+# the $VAR_DIR/$DS/reboot-required file
+# Or, if the file /var/run/reboot-required exist
+if [[ -f "$VAR_DIR/$DS/reboot-required" ]] || [[ -f /var/run/reboot-required ]]; then
+     LogPrint "*********************************"
+     LogPrint "** Reboot seems to be required **"
+     LogPrint "*********************************"
 else
-    lsof +c0 -d DEL | grep -v '\s/SYSV' |awk 'NR==1 || !/dev\/zero/ {print $2,$1,$4,$NF}' | column -t > "$VAR_DIR/$DS/dead-processes"
-    counter=$( cat "$VAR_DIR/$DS/dead-processes" | grep -v ora | wc -l )
-    if (( counter > 1 )) ; then
-        touch "$VAR_DIR/$DS/reboot-required"
-        Log "Processes that are dead or need a restart:"
-        cat "$VAR_DIR/$DS/dead-processes" >&2
-        LogPrint "*********************************"
-        LogPrint "** Reboot seems to be required **"
-        LogPrint "*********************************"
-    else
-        LogPrint "No reboot seems necessary"
-    fi
+     LogPrint "No reboot seems necessary"
 fi

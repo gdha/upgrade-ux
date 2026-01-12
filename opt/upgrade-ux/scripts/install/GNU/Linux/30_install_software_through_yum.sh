@@ -1,4 +1,6 @@
-# install/GNU/Linux/30_install_software.sh
+# install/GNU/Linux/30_install_software_through_yum.sh
+
+[[ ! -x $YUM ]] && return   # Not RHEL-alike system
 
 [ "$CURRENT_STATE" = "$stage:ended" ] && return  # after reboot perhaps
 
@@ -38,6 +40,6 @@ do
       100) Log "Packages available for an update" ;;
         *) LogPrint "Return code is $rc for: ${command[i]} ${options[i]} ${bundle[i]}" ;;
     esac
-    i=$((i+1))
+    ((i=i+1))
 done
 
