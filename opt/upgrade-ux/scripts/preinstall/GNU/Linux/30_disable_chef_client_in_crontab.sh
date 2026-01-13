@@ -2,6 +2,8 @@
 # We already disabled the crond daemon before, but it gets restarted automatically
 # Therefore, we better disable during patching chef-client from running if present
 
+[[ ! -f /var/spool/cron/root ]] && return  # no cron for root, so just return
+
 type -p chef-client 2>/dev/null && CHEFCLIENT="chef-client"
 type -p scm-client  2>/dev/null && CHEFCLIENT="scm-client"
 type -p cinc-client 2>/dev/null && CHEFCLIENT="cinc-client"

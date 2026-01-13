@@ -4,6 +4,8 @@
 
 if (( PREVIEW )) ; then
     grep -q -i ERROR $LOGFILE || return  # no ERRORs found; silently return
+    grep -q 'ERROR Operation aborted' $LOGFILE && return # is coming from YUM in preview returns 1 (we can ignore it in preview)
+
     echo "******************************************************************************
 WARNING - We found ERROR(s) during the PREVIEW run - please take care and retry
 

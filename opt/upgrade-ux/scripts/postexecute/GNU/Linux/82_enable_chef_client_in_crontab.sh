@@ -3,11 +3,16 @@
 
 [[ ! -f /var/spool/cron/root ]] && return
 
-/bin/grep "chef-client " /var/spool/cron/root | /bin/grep -q "^#" || return
+type -p chef-client 2>/dev/null && CHEFCLIENT="chef-client"
+type -p scm-client  2>/dev/null && CHEFCLIENT="scm-client"
+type -p cinc-client 2>/dev/null && CHEFCLIENT="cinc-client"
+[[ -z "$CHEFCLIENT" ]] && return  # if nor chef-client, scm-client or cinc-client found just return
+
+/bin/grep "$CHEFCLIENT " /var/spool/cron/root | /bin/grep -q "^#" || return
 
 if (( PREVIEW )) ; then
-    Log "Enable chef-client again in crontab of root [not done in preview]"
+    Log "Enable $CHEFCLIENT again in crontab of root [not done in preview]"
 else
-    LogPrint "Enable chef-client again in crontab of root"
-    sed -i "/chef-client / s/^#//" /var/spool/cron/root
+    LogPrint "Enable $CHEFCLIENT again in crontab of root"
+    sed -i '/'"$CHEFCLIENT "'/ s/^#//' /var/spool/cron/root
 fi
