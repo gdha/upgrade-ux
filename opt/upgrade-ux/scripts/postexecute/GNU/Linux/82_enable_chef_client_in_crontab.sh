@@ -3,9 +3,9 @@
 
 [[ ! -f /var/spool/cron/root ]] && return
 
-type -p chef-client 2>/dev/null && CHEFCLIENT="chef-client"
-type -p scm-client  2>/dev/null && CHEFCLIENT="scm-client"
-type -p cinc-client 2>/dev/null && CHEFCLIENT="cinc-client"
+type -p chef-client >/dev/null 2>&1 && CHEFCLIENT="chef-client"
+type -p scm-client  >/dev/null 2>&1 && CHEFCLIENT="scm-client"
+type -p cinc-client >/dev/null 2>&1 && CHEFCLIENT="cinc-client"
 [[ -z "$CHEFCLIENT" ]] && return  # if nor chef-client, scm-client or cinc-client found just return
 
 /bin/grep "$CHEFCLIENT " /var/spool/cron/root | /bin/grep -q "^#" || return
