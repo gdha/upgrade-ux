@@ -66,14 +66,17 @@ fi
 #     Log "Processes that are dead or need a restart:"
 #     cat "$VAR_DIR/$DS/dead-processes" >&2
 
-# On Debian-alike systems we rely on a kernel version update as we do not have "needs-restarting" executable available
-# If a newer kernel was installed then postinstall/GNU/Linux/29_save_and_diff_kernel_version.sh would have created
-# the $VAR_DIR/$DS/reboot-required file
-# Or, if the file /var/run/reboot-required exist
+# If a newer kernel was installed the postinstall/GNU/Linux/29_save_and_diff_kernel_version.sh script
+# would have created the $VAR_DIR/$DS/reboot-required file.
+# On Debian-alike systems we will have a file /var/run/reboot-required to indicate we need a reboot.
 if [[ -f "$VAR_DIR/$DS/reboot-required" ]] || [[ -f /var/run/reboot-required ]]; then
+     if [[ -f /var/run/reboot-required.pkgs ]] ; then
+         Log "Processes or packages that require a reboot:"
+         cat /var/run/reboot-required.pkgs >&2
+     fi
      LogPrint "*********************************"
      LogPrint "** Reboot seems to be required **"
      LogPrint "*********************************"
 else
-     LogPrint "No reboot seems necessary"
+     LogPrint "No reboot seems necessary."
 fi
