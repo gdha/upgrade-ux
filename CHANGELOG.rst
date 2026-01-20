@@ -2,6 +2,42 @@ Changelog
 =========
 
 
+1.36 (2026-01-15)
+-----------------
+- Upgrade-ux v1.36. [gdha]
+- #194 adding Linux-rhel-10.ini. [gdha]
+- #195 some more updates for ubuntu. [gdha]
+- #195 WiP for ubuntu. [gdha]
+- #195 WiP for ubuntu. [gdha]
+- Commit batch updates for ubuntu. [gdha]
+- #197 also check for scm-client, cinc-client and chef-client. [gdha]
+- #200 fix the ksh errors in function. [gdha]
+- #200 use plain old df -P to retrieve free space. [gdha]
+- #195 minor fixes for debian. [gdha]
+- #196 mark LeaseWeb VMs as VIRTUAL. [gdha]
+- #199 save installed packages on debian. [gdha]
+- #198 add script for /etc/os-release. [gdha]
+- Merge branch 'master' of github.com:gdha/upgrade-ux. [gdha]
+- Merge pull request #191 from gdha/renovate/major-github-artifact-
+  actions. [Gratien D'haese]
+
+  Update GitHub Artifact Actions (major)
+- Update GitHub Artifact Actions. [renovate[bot]]
+- #193 fix the logic to find the proper INI file. [gdha]
+- #194 add $DNF to REQUIRED_PROGS array. [gdha]
+- #193 enhance dump workflow to show the generic ini file if present.
+  [gdha]
+- Merge branch 'master' of github.com:gdha/upgrade-ux. [gdha]
+- Merge pull request #192 from gdha/renovate/actions-checkout-6.x.
+  [Gratien D'haese]
+
+  Update actions/checkout action to v6
+- Update actions/checkout action to v6. [renovate[bot]]
+- Fix rmp building to avoid rpm_branch is empty. [gdha]
+- Fix code spelling errors. [gdha]
+- Update CHANGELOG.rst. [gdha]
+
+
 1.35 (2025-09-30)
 -----------------
 - Increasing version in upgrade-ux. [gdha]
