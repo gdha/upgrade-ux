@@ -12,8 +12,9 @@ IsDigit $daysup || daysup=$( w | head -1 | awk '{print $3}' )  # alternative met
 IsDigit $daysup || daysup=0
 
 if (( daysup > DAYSUPTIME )) ; then
+    LogPrint "Uptime of system is $daysup (>$DAYSUPTIME days) - recommend to reboot before patching"
     if (( PREVIEW )) ; then
-        LogPrint "Uptime of system is $daysup (>$DAYSUPTIME days) - recommend to reboot before patching"
+        : # nothing to do
     else
         # unless we used the "-F" force flag we quit
         (( FORCED )) || Error "Uptime of system is $daysup (>$DAYSUPTIME days) - reboot is required before patching with $PRODUCT"
