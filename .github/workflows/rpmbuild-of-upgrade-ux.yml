@@ -58,7 +58,7 @@ jobs:
           make dist
 
       - name: Upload source archive as artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: upgrade-ux-${{ env.DISTVERSION }}.tar.gz
           path: upgrade-ux-${{ env.DISTVERSION }}.tar.gz
@@ -90,7 +90,7 @@ jobs:
           make rpm
 
       - name: Upload .rpm package as artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: upgrade-ux-${{ env.VERSION }}-1.${{ env.GITDATE }}.${{ env.DIST }}.${{ env.ARCH }}.rpm
           path: packaging/Linux/*.rpm
@@ -105,7 +105,7 @@ jobs:
       DISTVERSION: ${{ needs.build_tarball.outputs.distversion }}
     steps:
       - name: Download .rpm artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         id: download
         with:
           name: upgrade-ux-${{ env.VERSION }}-1.${{ env.GITDATE }}.${{ env.DIST }}.${{ env.ARCH }}.rpm
@@ -121,7 +121,7 @@ jobs:
         run: find . -exec readlink -f {} \;
 
       - name: Upload .deb package as artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: upgrade-ux-${{ env.VERSION }}-1.${{ env.GITDATE }}.${{ env.DIST }}.${{ env.ARCH }}.deb
           path: upgrade-ux*.deb
@@ -136,7 +136,7 @@ jobs:
       DISTVERSION: ${{ needs.build_tarball.outputs.distversion }}
     steps:
       - name: Download .rpm artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
 
       - name: find .
         run: find .
