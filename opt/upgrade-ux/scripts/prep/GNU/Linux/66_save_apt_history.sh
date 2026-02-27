@@ -1,7 +1,7 @@
 # 66_save_apt_history.sh
 # If found we will save the last 3 /var/log/history.log* files
 
-[[ ! -d /var/log/apt ]] && return  # if the dir doesnot exist return
+[[ ! -d /var/log/apt ]] && return  # if the directory does not exist return
 
 log "Save the 3 most recent history.log files in directory $VAR_DIR/$DS"
 
