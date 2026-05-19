@@ -1,6 +1,6 @@
 # Script 90_remove_mitigation_CopyFail.sh
 
-function remove_copyfail_mitigation() {
+function remove_copyfail_mitigation {
     # When the default kernel entry does not contain algif_aead_init argument just return
     /usr/sbin/grubby --info=0 | grep args | grep -q algif_aead_init || return
     # Remove the kernel parameter from all entries:
