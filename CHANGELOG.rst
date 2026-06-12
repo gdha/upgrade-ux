@@ -2,6 +2,34 @@ Changelog
 =========
 
 
+1.37 (2026-06-12)
+-----------------
+- Set version to v1.37. [gdha]
+- #206 add new script 91_remove_mitigation_DirtyFrag.sh. [gdha]
+- #206 fix function call. [gdha]
+- #206 adding 90_remove_mitigation_CopyFail.sh. [gdha]
+- Merge pull request #205 from gdha/renovate/softprops-action-gh-
+  release-3.x. [Gratien D'haese]
+
+  Update softprops/action-gh-release action to v3
+- Update softprops/action-gh-release action to v3. [renovate[bot]]
+- Merge pull request #204 from gdha/copilot/update-release-notes-
+  document. [Gratien D'haese]
+
+  Update release-notes.md with v1.32–v1.36 wiki content
+- Update release-notes.md with wiki content for v1.32 through v1.36.
+  [copilot-swe-agent[bot]]
+- Merge pull request #203 from gdha/renovate/major-github-artifact-
+  actions. [Gratien D'haese]
+
+  Update GitHub Artifact Actions (major)
+- Update GitHub Artifact Actions. [renovate[bot]]
+- Fix typo popped up via codespell. [gdha]
+- #202 always print the daysup message. [gdha]
+- #195 small cosmetic fix. [gdha]
+- Improve 40_needs_restarting.sh for ubuntu #195. [gdha]
+
+
 1.36 (2026-01-15)
 -----------------
 - Upgrade-ux v1.36. [gdha]
