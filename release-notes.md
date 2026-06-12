@@ -1,3 +1,12 @@
+# Release Notes for Version 1.37
+
+## New Features
+
+- Foresee a method to remove unwanted or obsolete kernel arguments [#206](https://github.com/gdha/upgrade-ux/issues/206)
+- Always show uptime [#202](https://github.com/gdha/upgrade-ux/issues/202)
+
+---
+
 # Release Notes for Version 1.36
 
 ## New Features and Enhancements
