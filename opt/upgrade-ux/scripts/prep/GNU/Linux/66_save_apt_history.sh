@@ -3,7 +3,7 @@
 
 [[ ! -d /var/log/apt ]] && return  # if the directory does not exist return
 
-log "Save the 3 most recent history.log files in directory $VAR_DIR/$DS"
+Log "Save the 3 most recent history.log files in directory $VAR_DIR/$DS"
 
 if [[ -f /var/log/apt/history.log ]] ; then
     cp /var/log/apt/history.log "$VAR_DIR/$DS/"
