@@ -156,17 +156,18 @@ function ParseIniFile {
     # Security: parse the INI section without eval to prevent code injection from
     # INI file content.  Only assignments whose key matches the known set of
     # recognised names (command, options, source, bundle, version) with a numeric
-    # index suffix are processed.  Values are assigned via printf/read rather than
-    # eval so that shell metacharacters in the value are never interpreted.
+    # index suffix are processed.  Values are assigned directly so that shell
+    # metacharacters in the value are never interpreted as code.
     #
     # The recognised key pattern is:  name[N]  where name is one of the allowed
     # identifiers and N is a non-negative integer.
-    local _in_section=0
+    #
+    # Preprocessing with sed (run once before the loop) handles comment stripping
+    # and whitespace trimming to avoid ksh93 warnings about ';' inside ${}
+    # parameter expansion patterns.
+    typeset _in_section=0
+    typeset _line _key _val _arrname _idx
     while IFS= read -r _line ; do
-        # Strip inline comments (anything from ; onwards) and leading/trailing whitespace
-        _line="${_line%%;*}"
-        _line="${_line#"${_line%%[! ]*}"}"   # ltrim
-        _line="${_line%"${_line##*[! ]}"}"   # rtrim
         [[ -z "$_line" ]] && continue
 
         # Section header detection
@@ -186,11 +187,6 @@ function ParseIniFile {
 
         _key="${_line%%=*}"
         _val="${_line#*=}"
-        # Strip whitespace around key and value
-        _key="${_key#"${_key%%[! ]*}"}"
-        _key="${_key%"${_key##*[! ]}"}"
-        _val="${_val#"${_val%%[! ]*}"}"
-        _val="${_val%"${_val##*[! ]}"}"
         # Strip surrounding quotes from value (single or double)
         if [[ "$_val" == '"'*'"' ]] || [[ "$_val" == "'"*"'" ]]; then
             _val="${_val:1:${#_val}-2}"
@@ -209,7 +205,7 @@ function ParseIniFile {
         _idx="${_idx%]}"
 
         # Assign via indirect array reference without eval.
-        # ksh93 / bash both support:  typeset -a <name>; <name>[idx]=val
+        # ksh93 / bash both support:  <name>[idx]=val
         case "$_arrname" in
             command) command[$_idx]="$_val" ;;
             options) options[$_idx]="$_val" ;;
@@ -217,7 +213,13 @@ function ParseIniFile {
             bundle)  bundle[$_idx]="$_val"  ;;
             version) version[$_idx]="$_val" ;;
         esac
-    done < "$INI_FILE"
+    done <<INIEOF
+$( sed \
+    -e 's/[[:space:]]*;.*$//' \
+    -e 's/^[[:space:]]*//' \
+    -e 's/[[:space:]]*$//' \
+    < "$INI_FILE" )
+INIEOF
 
     # ${command[@]} : array of commands
     # ${options[@]} : array of options for commands array
