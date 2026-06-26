@@ -1,0 +1,7 @@
+build-stamp
+debian/.debhelper
+debian/files
+debian/upgrade-ux.substvars
+debian/upgrade-ux
+*.deb
+*.tar.gz

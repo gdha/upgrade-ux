@@ -116,12 +116,10 @@ rpm-sign: rpm
 
 deb: dist
 	@echo -e "\033[1m== Building DEB package $(name)-$(distversion) ==\033[0;0m"
-	cp -r packaging/debian/ .
 	chmod 755 debian/rules
 	fakeroot debian/rules clean
 	fakeroot dh_install
 	fakeroot debian/rules binary
-	-rm -rf debian/
 
 install-config:
 	@echo -e "\033[1m== Installing configuration ==\033[0;0m"
