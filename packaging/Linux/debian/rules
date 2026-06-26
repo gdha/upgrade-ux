@@ -41,10 +41,10 @@ binary-indep: build
 		debian/upgrade-ux/var/opt/upgrade-ux/
 
 	# copy upgrade-ux components into directories
-	cp -av ../../etc/opt/upgrade-ux debian/upgrade-ux/etc/opt/upgrade-ux
-	cp -av ../../opt/upgrade-ux/bin debian/upgrade-ux/opt/upgrade-ux/bin/
-	cp -av ../../opt/upgrade-ux/lib debian/upgrade-ux/opt/upgrade-ux/lib/
-	cp -av ../../opt/upgrade-ux/scripts debian/upgrade-ux/opt/upgrade-ux/scripts/
+	cp -av ../../etc/opt/upgrade-ux/. debian/upgrade-ux/etc/opt/upgrade-ux/
+	cp -av ../../opt/upgrade-ux/bin/. debian/upgrade-ux/opt/upgrade-ux/bin/
+	cp -av ../../opt/upgrade-ux/lib/. debian/upgrade-ux/opt/upgrade-ux/lib/
+	cp -av ../../opt/upgrade-ux/scripts/. debian/upgrade-ux/opt/upgrade-ux/scripts/
 
 	# update man page with correct locations
 	install -Dp -m0644 ../../opt/upgrade-ux/man/upgrade-ux.8 debian/upgrade-ux/usr/share/man/man8/upgrade-ux.8
