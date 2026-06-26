@@ -21,14 +21,17 @@ do
     if (( PREVIEW )) ; then
         LogPrint "${command[i]} ${options[i]} --assumeno ${bundle[i]} ${exclude_packages}"
         printf "${command[i]} ${options[i]} --assumeno ${bundle[i]} ${exclude_packages}" >> "$VAR_DIR/$DS/sw_installation_in_progress"
-        ${command[i]} ${options[i]} --assumeno ${bundle[i]} ${exclude_packages}
-        ${command[i]} ${options[i]} --assumeno ${bundle[i]} ${exclude_packages} >&2
+        # Security: quote all INI-derived variables to prevent word-splitting and
+        # glob expansion; options is intentionally unquoted so space-separated
+        # flags expand correctly (values are validated by ParseIniFile).
+        "${command[i]}" ${options[i]} --assumeno "${bundle[i]}" ${exclude_packages}
+        "${command[i]}" ${options[i]} --assumeno "${bundle[i]}" ${exclude_packages} >&2
         rc=$?
     else
         LogPrint "${command[i]} ${options[i]} ${bundle[i]} ${exclude_packages}"
         printf "${command[i]} ${options[i]} --assumeyes ${bundle[i]} ${exclude_packages}" >> "$VAR_DIR/$DS/sw_installation_in_progress"
-        ${command[i]} ${options[i]} --assumeno  ${bundle[i]} ${exclude_packages} >&2   # to catch the updates in the logfile
-        ${command[i]} ${options[i]} --assumeyes ${bundle[i]} ${exclude_packages}       # to actually install the updates without manual intervention
+        "${command[i]}" ${options[i]} --assumeno  "${bundle[i]}" ${exclude_packages} >&2   # to catch the updates in the logfile
+        "${command[i]}" ${options[i]} --assumeyes "${bundle[i]}" ${exclude_packages}       # to actually install the updates without manual intervention
         rc=$?
     fi
 

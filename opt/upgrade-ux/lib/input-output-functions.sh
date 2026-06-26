@@ -56,7 +56,34 @@ function DoExitTasks {
     fi
     for task in "${EXIT_TASKS[@]}" ; do
         Debug "Exit task '$task'"
-        eval "$task"
+        # Security: restrict exit tasks to a known safe allowlist to prevent
+        # accidental or malicious code injection through task strings.
+        # All callers use one of the patterns below; anything else is rejected.
+        case "$task" in
+            "exec 7>&-" | "exec 8>&-")
+                # Close file descriptors opened during startup
+                eval "$task"
+                ;;
+            "cleanup_build_area_and_end_program")
+                cleanup_build_area_and_end_program
+                ;;
+            "ReleaseLock")
+                ReleaseLock
+                ;;
+            *)
+                # Fall back to eval only for tasks that look like safe fd-close
+                # expressions (exec N>&-) or function names (word chars only).
+                # Anything else is logged and skipped.
+                if [[ "$task" =~ ^exec\ [0-9]+\>\&\-$ ]]; then
+                    eval "$task"
+                elif [[ "$task" =~ ^[a-zA-Z_][a-zA-Z0-9_]*$ ]]; then
+                    # Plain function name with no arguments — safe to call directly
+                    "$task"
+                else
+                    Log "WARNING: DoExitTasks skipping unrecognised exit task: '$task'"
+                fi
+                ;;
+        esac
     done
 }
 
