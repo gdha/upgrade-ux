@@ -121,10 +121,14 @@ rpm-sign: rpm
 
 deb: dist
 	@echo -e "\033[1m== Building DEB package $(name)-$(distversion) ==\033[0;0m"
+	# rewrite version into debian/changelog before building the package
+	cp -p $(debchangelog) $(debchangelog).save ; \
+	sed -e '1s#([^)]*)#($(version)-$(debrelease))#' < $(debchangelog).save > $(debchangelog) ;
 	chmod 755 debian/rules
 	fakeroot debian/rules clean
 	fakeroot dh_install
 	fakeroot debian/rules binary
+	mv -f $(debchangelog).save $(debchangelog)
 
 install-config:
 	@echo -e "\033[1m== Installing configuration ==\033[0;0m"
