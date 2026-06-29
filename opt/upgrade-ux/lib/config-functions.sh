@@ -162,9 +162,17 @@ function ParseIniFile {
     # The recognised key pattern is:  name[N]  where name is one of the allowed
     # identifiers and N is a non-negative integer.
     #
-    # Preprocessing with sed (run once before the loop) handles comment stripping
-    # and whitespace trimming to avoid ksh93 warnings about ';' inside ${}
-    # parameter expansion patterns.
+    # We preprocess with sed into a temp file and redirect that into the while loop
+    # to avoid ksh subshell issues (piping or here-docs with $() create subshells
+    # that prevent variable assignments from propagating to the caller).
+    typeset _ini_tmp="${TMP_DIR:-/tmp}/.parseini.$$"
+    sed \
+        -e 's/[[:space:]]*;.*$//' \
+        -e 's/^[[:space:]]*//' \
+        -e 's/[[:space:]]*$//' \
+        -e 's/[[:space:]]*=[[:space:]]*/=/' \
+        < "$INI_FILE" > "$_ini_tmp"
+
     typeset _in_section=0
     typeset _line _key _val _arrname _idx
     while IFS= read -r _line ; do
@@ -192,6 +200,15 @@ function ParseIniFile {
             _val="${_val:1:${#_val}-2}"
         fi
 
+        # Expand variable references ($VARNAME) in the value.
+        # Only expand if the value contains $VARNAME patterns and does NOT
+        # contain dangerous constructs like command substitution $() or
+        # backticks.  This preserves the original eval behaviour for simple
+        # variable references while blocking code injection.
+        if [[ "$_val" == *'$'* && "$_val" != *'`'* && "$_val" != *'$('* ]]; then
+            eval "_val=\"$_val\"" 2>/dev/null
+        fi
+
         # Validate key: only allow  word[N]  where word is a known name
         # Allowed names: command options source bundle version
         if [[ ! "$_key" =~ ^(command|options|source|bundle|version)\[[0-9]+\]$ ]]; then
@@ -201,7 +218,7 @@ function ParseIniFile {
 
         # Extract array name and index
         _arrname="${_key%%\[*}"
-        _idx="${_key#*[}"
+        _idx="${_key#*\[}"
         _idx="${_idx%]}"
 
         # Assign via indirect array reference without eval.
@@ -213,13 +230,8 @@ function ParseIniFile {
             bundle)  bundle[$_idx]="$_val"  ;;
             version) version[$_idx]="$_val" ;;
         esac
-    done <<INIEOF
-$( sed \
-    -e 's/[[:space:]]*;.*$//' \
-    -e 's/^[[:space:]]*//' \
-    -e 's/[[:space:]]*$//' \
-    < "$INI_FILE" )
-INIEOF
+    done < "$_ini_tmp"
+    rm -f "$_ini_tmp"
 
     # ${command[@]} : array of commands
     # ${options[@]} : array of options for commands array

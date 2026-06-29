@@ -35,6 +35,7 @@ do
         "${command[i]}" ${options[i]} --assume-no  "${bundle[i]}" ${exclude_packages} >&2   # to catch the updates in the logfile
         "${command[i]}" ${options[i]} --assume-yes "${bundle[i]}" ${exclude_packages}       # to actually install the updates without manual intervention
         rc=$?
+        Log "Ignore the \"Abort\" message as we used \"--assume-no\" for logging purposes."
     fi
 
     # Returns  exit  value  of  100 if there are packages available for an update.
