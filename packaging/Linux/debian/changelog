@@ -1,17 +1,5 @@
-upgrade-ux (1.37-1) stable; urgency=low
+upgrade-ux (0.0-0) stable; urgency=low
 
-  * Security hardening release
-  * Replace eval-based INI parsing with safe allowlist parser
-  * Fix SwJob command injection from log files
-  * Use mktemp -d for secure temp directory creation
-  * Validate workflow names against registered allowlist
-  * Guard rm -Rf against empty variables
-  * Add ownership checks before sourcing external config files
-
- -- Gratien Dhaese <gratien.dhaese@gmail.com>  Mon, 29 Jun 2026 12:00:00 +0200
-
-upgrade-ux (1.0-1) stable; urgency=low
-
-  * Initial Release
+  * See CHANGELOG.rst for details
 
  -- Gratien Dhaese <gratien.dhaese@gmail.com>  Wed, 31 Dec 2014 16:05:04 +0100
