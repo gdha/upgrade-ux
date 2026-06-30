@@ -3,6 +3,7 @@ name = $(product)
 
 specfile = rpm/$(name).spec
 dscfile = debian/$(name).dsc
+debchangelog = debian/changelog
 main_script = ../../opt/upgrade-ux/bin/upgrade-ux
 log_dir = ../../var/opt/upgrade-ux/log
 
@@ -82,6 +83,9 @@ rewrite: $(specfile) $(main_script)
 	@echo "Update the $(dscfile) file"
 	cp -p $(dscfile) $(dscfile).save ; \
 	sed -e 's#^Version:.*#Version: $(version)#'  < $(dscfile).save > $(dscfile) ;
+	@echo "Update the $(debchangelog) file"
+	cp -p $(debchangelog) $(debchangelog).save ; \
+	sed -e '1s#([^)]*)#($(version)-$(debrelease))#' < $(debchangelog).save > $(debchangelog) ;
 	@echo "Update the $(main_script) script with current date"
 	today=`date +'%d-%b-%Y'` ; \
 	cp -p $(main_script) $(main_script).save ; \
@@ -91,6 +95,7 @@ restore:
 	echo -e "\033[1m== Restoring $(specfile) and $(main_script) ==\033[0;0m"
 	mv -f $(specfile).save $(specfile)
 	mv -f $(dscfile).save $(dscfile)
+	mv -f $(debchangelog).save $(debchangelog)
 	mv -f $(main_script).save $(main_script)
 
 rpm: dist
@@ -116,12 +121,14 @@ rpm-sign: rpm
 
 deb: dist
 	@echo -e "\033[1m== Building DEB package $(name)-$(distversion) ==\033[0;0m"
-	cp -r packaging/debian/ .
+	# rewrite version into debian/changelog before building the package
+	cp -p $(debchangelog) $(debchangelog).save ; \
+	sed -e '1s#([^)]*)#($(version)-$(debrelease))#' < $(debchangelog).save > $(debchangelog) ;
 	chmod 755 debian/rules
 	fakeroot debian/rules clean
 	fakeroot dh_install
 	fakeroot debian/rules binary
-	-rm -rf debian/
+	mv -f $(debchangelog).save $(debchangelog)
 
 install-config:
 	@echo -e "\033[1m== Installing configuration ==\033[0;0m"

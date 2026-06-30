@@ -17,7 +17,8 @@ do
     else
 	if [[ -x "${command[i]}" ]]; then
             LogPrint "Executing: ${command[i]}  ${options[i]}"
-	    ${command[i]}  ${options[i]}
+            # Security: quote command; options intentionally unquoted for flag expansion
+	    "${command[i]}" ${options[i]}
 	else
             Log "Command ${command[i]} not found [skipping]"
 	fi

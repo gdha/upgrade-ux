@@ -7,7 +7,8 @@ do
     [[ -z "${command[i]}" ]] && continue   # command seems to be empty
     case "${command[i]}" in
         "uncomment_cfg2html_in_crontab" ) touch "$TMP_DIR/uncomment_cfg2html_in_crontab" ;;
-	* ) ${command[i]}  ${options[i]} >&2 ;;
+        # Security: quote command; options intentionally unquoted for flag expansion
+	* ) "${command[i]}" ${options[i]} >&2 ;;
     esac
     i=$((i+1))
 

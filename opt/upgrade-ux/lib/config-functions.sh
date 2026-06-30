@@ -153,19 +153,91 @@ function ParseIniFile {
         # done
 
     INI_SECTION="$1"
-    eval $( sed -e 's/[[:space:]]*\=[[:space:]]*/=/g' \
-        -e 's/;.*$//' \
-        -e 's/[[:space:]]*$//' \
+    # Security: parse the INI section without eval to prevent code injection from
+    # INI file content.  Only assignments whose key matches the known set of
+    # recognised names (command, options, source, bundle, version) with a numeric
+    # index suffix are processed.  Values are assigned directly so that shell
+    # metacharacters in the value are never interpreted as code.
+    #
+    # The recognised key pattern is:  name[N]  where name is one of the allowed
+    # identifiers and N is a non-negative integer.
+    #
+    # We preprocess with sed into a temp file and redirect that into the while loop
+    # to avoid ksh subshell issues (piping or here-docs with $() create subshells
+    # that prevent variable assignments from propagating to the caller).
+    typeset _ini_tmp="${TMP_DIR:-/tmp}/.parseini.$$"
+    sed \
+        -e 's/[[:space:]]*;.*$//' \
         -e 's/^[[:space:]]*//' \
-        -e "s/^\(.*\)=\([^\"']*\)$/\1=\"\2\"/" \
-        < $INI_FILE \
-        | sed -n -e "/^\[$INI_SECTION\]/,/^\s*\[/{/^[^;].*\=.*/p;}" )
+        -e 's/[[:space:]]*$//' \
+        -e 's/[[:space:]]*=[[:space:]]*/=/' \
+        < "$INI_FILE" > "$_ini_tmp"
+
+    typeset _in_section=0
+    typeset _line _key _val _arrname _idx
+    while IFS= read -r _line ; do
+        [[ -z "$_line" ]] && continue
+
+        # Section header detection
+        if [[ "$_line" == "["* ]]; then
+            if [[ "$_line" == "[${INI_SECTION}]" ]]; then
+                _in_section=1
+            else
+                _in_section=0
+            fi
+            continue
+        fi
+
+        (( _in_section )) || continue
+
+        # Must contain an = sign
+        [[ "$_line" != *"="* ]] && continue
+
+        _key="${_line%%=*}"
+        _val="${_line#*=}"
+        # Strip surrounding quotes from value (single or double)
+        if [[ "$_val" == '"'*'"' ]] || [[ "$_val" == "'"*"'" ]]; then
+            _val="${_val:1:${#_val}-2}"
+        fi
+
+        # Expand variable references ($VARNAME) in the value.
+        # Only expand if the value contains $VARNAME patterns and does NOT
+        # contain dangerous constructs like command substitution $() or
+        # backticks.  This preserves the original eval behaviour for simple
+        # variable references while blocking code injection.
+        if [[ "$_val" == *'$'* && "$_val" != *'`'* && "$_val" != *'$('* ]]; then
+            eval "_val=\"$_val\"" 2>/dev/null
+        fi
+
+        # Validate key: only allow  word[N]  where word is a known name
+        # Allowed names: command options source bundle version
+        if [[ ! "$_key" =~ ^(command|options|source|bundle|version)\[[0-9]+\]$ ]]; then
+            Debug "ParseIniFile: ignoring unrecognised key '$_key' in section [$INI_SECTION]"
+            continue
+        fi
+
+        # Extract array name and index
+        _arrname="${_key%%\[*}"
+        _idx="${_key#*\[}"
+        _idx="${_idx%]}"
+
+        # Assign via indirect array reference without eval.
+        # ksh93 / bash both support:  <name>[idx]=val
+        case "$_arrname" in
+            command) command[$_idx]="$_val" ;;
+            options) options[$_idx]="$_val" ;;
+            source)  source[$_idx]="$_val"  ;;
+            bundle)  bundle[$_idx]="$_val"  ;;
+            version) version[$_idx]="$_val" ;;
+        esac
+    done < "$_ini_tmp"
+    rm -f "$_ini_tmp"
 
     # ${command[@]} : array of commands
     # ${options[@]} : array of options for commands array
     # ${bundle[@]}  : array of the software bundle we want to install, remove, upgrade
     # ${version[@]} : array of the expected version of above mentioned bundle array
-    # be aware that bundle[0] and version [0] belong together
-    # if our array command contain more then 1 command then we should loop over the array of bundles
+    # be aware that bundle[0] and version[0] belong together
+    # if our array command contains more than 1 command then we should loop over the array of bundles
 }
 

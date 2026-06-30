@@ -24,15 +24,18 @@ do
     if (( PREVIEW )) ; then
         LogPrint "${command[i]} ${options[i]} --assume-no ${bundle[i]} ${exclude_packages}"
         printf "${command[i]} ${options[i]} --assume-no ${bundle[i]} ${exclude_packages}" >> "$VAR_DIR/$DS/sw_installation_in_progress"
-        ${command[i]} ${options[i]} --assume-no ${bundle[i]} ${exclude_packages}
-        ${command[i]} ${options[i]} --assume-no ${bundle[i]} ${exclude_packages} >&2
+        # Security: quote INI-derived command and bundle to prevent word-splitting;
+        # options is left unquoted intentionally so space-separated flags expand.
+        "${command[i]}" ${options[i]} --assume-no "${bundle[i]}" ${exclude_packages}
+        "${command[i]}" ${options[i]} --assume-no "${bundle[i]}" ${exclude_packages} >&2
         rc=$?
     else
         LogPrint "${command[i]} ${options[i]} --assume-yes ${bundle[i]} ${exclude_packages}"
         printf "${command[i]} ${options[i]} --assume-yes ${bundle[i]} ${exclude_packages}" >> "$VAR_DIR/$DS/sw_installation_in_progress"
-        ${command[i]} ${options[i]} --assume-no  ${bundle[i]} ${exclude_packages} >&2   # to catch the updates in the logfile
-        ${command[i]} ${options[i]} --assume-yes ${bundle[i]} ${exclude_packages}       # to actually install the updates without manual intervention
+        "${command[i]}" ${options[i]} --assume-no  "${bundle[i]}" ${exclude_packages} >&2   # to catch the updates in the logfile
+        "${command[i]}" ${options[i]} --assume-yes "${bundle[i]}" ${exclude_packages}       # to actually install the updates without manual intervention
         rc=$?
+        Log "Ignore the \"Abort\" message as we used \"--assume-no\" for logging purposes."
     fi
 
     # Returns  exit  value  of  100 if there are packages available for an update.

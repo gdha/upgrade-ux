@@ -1,5 +1,5 @@
-upgrade-ux (1.0-1) stable; urgency=low
+upgrade-ux (0.0-0) stable; urgency=low
 
-  * Initial Release
+  * See CHANGELOG.rst for details
 
  -- Gratien Dhaese <gratien.dhaese@gmail.com>  Wed, 31 Dec 2014 16:05:04 +0100
