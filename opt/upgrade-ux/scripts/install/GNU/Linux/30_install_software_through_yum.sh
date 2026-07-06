@@ -21,9 +21,8 @@ do
     if (( PREVIEW )) ; then
         LogPrint "${command[i]} ${options[i]} --assumeno ${bundle[i]} ${exclude_packages}"
         printf "${command[i]} ${options[i]} --assumeno ${bundle[i]} ${exclude_packages}" >> "$VAR_DIR/$DS/sw_installation_in_progress"
-        # Security: quote all INI-derived variables to prevent word-splitting and
-        # glob expansion; options is intentionally unquoted so space-separated
-        # flags expand correctly (values are validated by ParseIniFile).
+        # Security: quote INI-derived command/bundle to prevent word-splitting and glob expansion;
+        # options and exclude_packages are intentionally unquoted so multiple space-separated flags expand.
         "${command[i]}" ${options[i]} --assumeno "${bundle[i]}" ${exclude_packages}
         "${command[i]}" ${options[i]} --assumeno "${bundle[i]}" ${exclude_packages} >&2
         rc=$?
