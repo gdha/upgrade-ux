@@ -7,11 +7,11 @@ function Source {
     [[ ! -d "$1" ]]
     StopIfError "$1 is a directory, cannot source"
     if test -s "$1" ; then
-        # Security: only source scripts owned by root to guard against privilege
-        # escalation via world-writable or tampered stage scripts.
-        _src_owner=$(stat -c '%U' "$1" 2>/dev/null || stat -f '%Su' "$1" 2>/dev/null)
-        if [[ "$_src_owner" != "root" ]]; then
-            LogPrint "WARNING: Skipping '$1' - not owned by root (owner: ${_src_owner:-unknown})"
+        # Security: when running as root, only source files owned by root (uid 0) or
+        # by the invoking sudo user (SUDO_UID) to keep "run from git clone" working.
+        _src_uid=$(stat -c '%u' "$1" 2>/dev/null || stat -f '%u' "$1" 2>/dev/null)
+        if (( EUID == 0 )) && [[ -n "$_src_uid" && "$_src_uid" != "0" && ( -z "$SUDO_UID" || "$_src_uid" != "$SUDO_UID" ) ]]; then
+            LogPrint "WARNING: Skipping '$1' - not owned by root or invoking user (uid: ${_src_uid:-unknown})"
             return
         fi
         relname="${1##$SHARE_DIR/}"
