@@ -200,13 +200,11 @@ function ParseIniFile {
             _val="${_val:1:${#_val}-2}"
         fi
 
-        # Expand variable references ($VARNAME) in the value.
-        # Only expand if the value contains $VARNAME patterns and does NOT
-        # contain dangerous constructs like command substitution $() or
-        # backticks.  This preserves the original eval behaviour for simple
-        # variable references while blocking code injection.
-        if [[ "$_val" == *'$'* && "$_val" != *'`'* && "$_val" != *'$('* ]]; then
-            eval "_val=\"$_val\"" 2>/dev/null
+        # Expand simple variable references ($VARNAME or ${VARNAME}) in the value.
+        # For safety, only expand when the whole value is a single variable reference.
+        if [[ "$_val" =~ ^\$\{?[a-zA-Z_][a-zA-Z0-9_]*\}?$ ]]; then
+            _var="${_val#\$}"; _var="${_var#\{}"; _var="${_var%\}}"
+            eval "_val=\"\${${_var}}\"" 2>/dev/null
         fi
 
         # Validate key: only allow  word[N]  where word is a known name
