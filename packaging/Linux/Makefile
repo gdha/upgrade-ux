@@ -92,7 +92,7 @@ rewrite: $(specfile) $(main_script)
 	sed -e 's#RELEASE_DATE=.*#RELEASE_DATE='$$today'#' < $(main_script).save > $(main_script);
 
 restore:
-	echo -e "\033[1m== Restoring $(specfile) and $(main_script) ==\033[0;0m"
+	echo -e "\033[1m== Restoring $(specfile), $(dscfile), $(debchangelog) and $(main_script) ==\033[0;0m"
 	mv -f $(specfile).save $(specfile)
 	mv -f $(dscfile).save $(dscfile)
 	mv -f $(debchangelog).save $(debchangelog)
