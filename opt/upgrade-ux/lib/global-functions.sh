@@ -144,22 +144,29 @@ function GetHostnameFromIP {
 function IsVolumeGroupActive {
     # input arg: VG; output:0=VG active, or 1=VG not active)
     typeset VG=$1
-    TMPVG=/tmp/vgdisplay-${VG}.${PID}
-    vgdisplay ${VG} > ${TMPVG} 2>&1
-    grep -q "Cannot display volume group" ${TMPVG}
+    # Security: validate VG name to contain only safe characters before using it
+    # in a file path, preventing path traversal if an unexpected value is passed.
+    if [[ ! "$VG" =~ ^[a-zA-Z0-9_][a-zA-Z0-9_./-]*$ ]]; then
+        Log "IsVolumeGroupActive: invalid VG name '$VG' - aborting"
+        return 1
+    fi
+    # Security: use mktemp instead of a predictable /tmp name to prevent symlink attacks.
+    TMPVG=$(mktemp /tmp/vgdisplay.XXXXXX)
+    vgdisplay "${VG}" > "${TMPVG}" 2>&1
+    grep -q "Cannot display volume group" "${TMPVG}"
     if (( $? == 0 )) ; then
         Log "VG $VG is \"not\" active."
         rc=1
     else
         Log "VG $VG is active."
-    rc=0
+        rc=0
     fi
-    grep -q "is exported" ${TMPVG}
+    grep -q "is exported" "${TMPVG}"
     if (( $? == 0 )) ; then
         Log "VG $VG is \"exported\"."
         rc=1
     fi
-    rm -f ${TMPVG}
+    rm -f "${TMPVG}"
     return $rc
 }
 
@@ -350,15 +357,14 @@ function PingSystem {
 
 # ------------------------------------------------------------------------------
 function GenerateTempDirName {
-    # the mktemp command differs between HP-UX, Linux, and other Unixes
-    # so we generate a generic function for it
-    # input args: $1 base directory to create temp dir in (e.g. /tmp
-    #             $2 base name (we will append a RANDOM number to it)
-    # output arg: directory name we generated
-    DIR1="$1"
-    DIR2="$2"
-    [[ ! -d "$DIR1" ]] && DIR1=/tmp  # when not existing use /tmp as default
-    [[ -z "$DIR2" ]] && DIR2="$PROGRAM"
-    echo "${DIR1}/${DIR2}_${RANDOM}"
-
+    # Create a secure temporary directory using mktemp(1).
+    # input args: $1 base directory (e.g. /tmp); $2 base name prefix
+    # output: the path of the newly-created directory (printed to stdout)
+    # Security: replaced the predictable ${RANDOM}-based name with mktemp -d to
+    # eliminate TOCTOU/symlink attacks that were possible with the old approach.
+    DIR1="${1:-/tmp}"
+    [[ ! -d "$DIR1" ]] && DIR1=/tmp
+    DIR2="${2:-$PROGRAM}"
+    # mktemp -d syntax is portable across Linux and HP-UX 11.31+
+    mktemp -d "${DIR1}/${DIR2}_XXXXXX"
 }

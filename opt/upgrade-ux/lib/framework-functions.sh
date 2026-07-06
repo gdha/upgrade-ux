@@ -7,6 +7,13 @@ function Source {
     [[ ! -d "$1" ]]
     StopIfError "$1 is a directory, cannot source"
     if test -s "$1" ; then
+        # Security: when running as root, only source files owned by root (uid 0) or
+        # by the invoking sudo user (SUDO_UID) to keep "run from git clone" working.
+        _src_uid=$(stat -c '%u' "$1" 2>/dev/null || stat -f '%u' "$1" 2>/dev/null)
+        if (( EUID == 0 )) && [[ -n "$_src_uid" && "$_src_uid" != "0" && ( -z "$SUDO_UID" || "$_src_uid" != "$SUDO_UID" ) ]]; then
+            LogPrint "WARNING: Skipping '$1' - not owned by root or invoking user (uid: ${_src_uid:-unknown})"
+            return
+        fi
         relname="${1##$SHARE_DIR/}"
         if test "$SIMULATE" && expr "$1" : "$SHARE_DIR" >&8; then
             # simulate sourcing the scripts in $SHARE_DIR
@@ -71,8 +78,13 @@ function cleanup_build_area_and_end_program {
         LogPrint "You should also rm -Rf $BUILD_DIR"
     else
         Log "Removing build area $BUILD_DIR"
-        rm -Rf $TMP_DIR
-        [[ -d $BUILD_DIR ]] && rmdir $BUILD_DIR >&2
+        # Security: guard against an empty or root TMP_DIR before recursive delete
+        if [[ -n "$TMP_DIR" && "$TMP_DIR" != "/" && -d "$TMP_DIR" ]]; then
+            rm -Rf "$TMP_DIR"
+        else
+            Log "WARNING: TMP_DIR='$TMP_DIR' looks unsafe - skipping rm -Rf"
+        fi
+        [[ -n "$BUILD_DIR" && -d "$BUILD_DIR" ]] && rmdir "$BUILD_DIR" >&2
     fi
     Log "End of program reached"
 }

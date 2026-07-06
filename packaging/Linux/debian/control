@@ -7,7 +7,7 @@ Homepage: https://www.it3.be/projects/upgrade-ux.html
 Package: upgrade-ux
 Architecture: all
 Provides: upgrade-ux
-Build-Depends: debhelper (>> 5.0.0)
+Build-Depends: debhelper (>= 13)
 Depends: binutils, gawk
 Description: Upgrade-UX is an open source framework developed to assist in patching
              and/or updating Unix Operating Systems in a consistent and repeatable way

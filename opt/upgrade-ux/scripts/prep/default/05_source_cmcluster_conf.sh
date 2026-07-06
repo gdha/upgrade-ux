@@ -19,7 +19,14 @@
 # SGROOT=/usr/local/cmcluster
 
 if [[ -f /etc/cmcluster.conf ]]; then
-    . /etc/cmcluster.conf
+    # Security: only source the file if it is owned by root to prevent privilege
+    # escalation via a world-writable or attacker-controlled cluster config.
+    _cmcl_owner=$(stat -c '%U' /etc/cmcluster.conf 2>/dev/null || stat -f '%Su' /etc/cmcluster.conf 2>/dev/null)
+    if [[ "$_cmcl_owner" != "root" ]]; then
+        LogPrint "WARNING: /etc/cmcluster.conf is not owned by root (owner: ${_cmcl_owner:-unknown}) - skipping source"
+    else
+        . /etc/cmcluster.conf
+    fi
 fi
 
 # adding the paths to serviceguard executables to the path

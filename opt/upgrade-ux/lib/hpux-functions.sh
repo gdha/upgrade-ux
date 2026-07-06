@@ -25,7 +25,19 @@ function SwJob {
     [[ -z "$1" ]] && return   # no argument - no output
     # $1=/usr/sbin/swinstall => /var/adm/sw/swinstall.log
     swlogfile=/var/adm/sw/${1##*/}.log
-    swjob_cmd="$( tail -10 $swlogfile | grep swjob | sed -e 's/command//' -e 's/\.$//' -e 's/\"//g' -e 's/^[ \t]*//' )"
-    Log "Output: $swjob_cmd"
-    echo $swjob_cmd | sh -
+    # Extract only the numeric job ID from the log to avoid executing arbitrary
+    # content from the log file (security fix: no more "echo ... | sh -").
+    # swjob lines look like: "  swjob -a log -j <jobID> @<host>:/  command ..."
+    swjob_id="$( tail -10 "$swlogfile" | grep swjob | grep -oE '\-j [0-9]+' | awk '{print $2}' | tail -1 )"
+    if [[ -z "$swjob_id" ]]; then
+        Log "SwJob: could not find a numeric job ID in $swlogfile"
+        return 1
+    fi
+    # Validate: job ID must be purely numeric
+    if [[ ! "$swjob_id" =~ ^[0-9]+$ ]]; then
+        Log "SwJob: unexpected non-numeric job ID '$swjob_id' - skipping"
+        return 1
+    fi
+    Log "Running: swjob -a log -j $swjob_id"
+    swjob -a log -j "$swjob_id"
 }
