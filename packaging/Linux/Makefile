@@ -111,8 +111,7 @@ dist: clean validate man doc rewrite $(name)-$(distversion).tar.gz restore
 $(name)-$(distversion).tar.gz:
 	@echo -e "\033[1m== Building archive $(name)-$(distversion) ==\033[0;0m"
 	cd ../.. ; \
-	git checkout $(git_branch) ; \
-	git ls-tree -r --name-only --full-tree $(git_branch) | grep -v -E '(HP-UX|/hp/|/aix/|/bsd/|/sunos/)' | \
+	git ls-files | grep -v -E '(HP-UX|/hp/|/aix/|/bsd/|/sunos/)' | \
 		tar -czf $(name)-$(distversion).tar.gz --transform='s,^,$(name)-$(distversion)/,S' --files-from=-
 
 rpm-sign: rpm
