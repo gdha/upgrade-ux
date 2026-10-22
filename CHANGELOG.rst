@@ -2,6 +2,107 @@ Changelog
 =========
 
 
+1.40 (2026-10-22)
+-----------------
+- Increasing version to v1.40 in upgrade-ux. [gdha]
+- #215 add script to check Oracle sockets ownership. [gdha]
+- Merge pull request #214 from gdha/copilot/fix-release-notes-job.
+  [Gratien D'haese]
+
+  Fix release-notes wiki publish auth in milestone workflow
+- Fix release-notes workflow wiki auth. [copilot-swe-agent[bot], gdha]
+- Initial plan. [copilot-swe-agent[bot]]
+- Merge pull request #213 from gdha/copilot/fix-build-rpm-package.
+  [Gratien D'haese]
+
+  Fix RPM build failure in detached HEAD (GitHub Actions) state
+- Fix RPM build: use git ls-files instead of git ls-tree to support
+  detached HEAD. [copilot-swe-agent[bot], gdha]
+- Initial plan. [copilot-swe-agent[bot]]
+- #212 fix dnf updateinfo --security listing. [gdha]
+- Merge pull request #211 from gdha/security-review. [Gratien D'haese]
+
+  (#210) security review updates by Kiro
+- Potential fix for pull request finding. [Copilot Autofix powered by
+  AI, Gratien D'haese]
+- Potential fix for pull request finding. [Copilot Autofix powered by
+  AI, Gratien D'haese]
+- Potential fix for pull request finding. [Copilot Autofix powered by
+  AI, Gratien D'haese]
+- Potential fix for pull request finding. [Copilot Autofix powered by
+  AI, Gratien D'haese]
+- Renamed 90_remove_mitigation_CopyFail.sh to
+  75_remove_mitigation_CopyFail.sh and use another approach to detect
+  new kernel. [gdha]
+- Update version 1.38. [gdha]
+- Fix ParseIniFile and add extra log was warning with apt upgrade.
+  [gdha]
+- #210 rewrite debian/changelog version inside deb target. [gdha]
+
+  The dist target runs rewrite→tar→restore, so by the time the deb target
+  builds the package the changelog is already restored to its placeholder.
+  Fix: the deb target now does its own changelog rewrite (save/sed/restore)
+  around the fakeroot build steps, ensuring the correct version ends up in
+  the .deb filename.
+- #210 derive deb package version from bin/upgrade-ux VERSION at build
+  time. [gdha]
+
+  The debian/changelog now uses a placeholder version (0.0-0) that gets
+  rewritten by the Makefile 'rewrite' target to match the VERSION
+  variable from opt/upgrade-ux/bin/upgrade-ux, using the same
+  save/sed/restore pattern already used for the specfile and dscfile.
+
+  This ensures the .deb filename always reflects the actual version
+  (e.g. upgrade-ux_1.37-0git202606291056_all.deb) without needing
+  manual changelog updates.
+- #210 fix deb package version: use VERSION 1.37 from bin/upgrade-ux.
+  [gdha]
+
+  The debian/changelog was stuck at 1.0-1 since 2014, causing dpkg-deb
+  to build packages with the wrong version. Updated to 1.37-1 to match
+  the VERSION variable in opt/upgrade-ux/bin/upgrade-ux.
+
+  Also updated debian/upgrade-ux.dsc to version 1.37 and fixed the
+  Build-Depends to require debhelper >= 13 (matching compat level).
+- #210 fix deb package path doubling (bin/bin/ → bin/) [gdha]
+
+  The cp -av commands in debian/rules copied source directories INTO the
+  already-created destination directories, producing paths like
+  opt/upgrade-ux/bin/bin/upgrade-ux instead of opt/upgrade-ux/bin/upgrade-ux.
+
+  Fix: use 'cp -av src/. dest/' syntax (copy directory *contents* rather
+  than the directory itself) to place files directly in the target.
+- Make deb package working. [gdha]
+- #210 fix ksh93 ParseIniFile warnings and Makefile deb target path bug.
+  [gdha]
+
+  - config-functions.sh: replace ksh93-incompatible parameter expansion
+    patterns in ParseIniFile (';' inside ${} warnings) with a sed
+    preprocessing pass that strips comments and whitespace before the
+    while-read loop.  The no-eval security fix from the previous commit
+    is preserved; only the whitespace/comment stripping method changed.
+
+  - packaging/Linux/Makefile: remove broken 'cp -r packaging/debian/ .'
+    step from the 'deb' target.  The Makefile runs from packaging/Linux/
+    where debian/ is already present; the copy attempted a nonexistent
+    path and caused 'make debrm' to fail with an error.
+- #210 security review updates by Kiro. [gdha]
+- Merge pull request #209 from gdha/copilot/fix-log-not-found-issue.
+  [Gratien D'haese]
+
+  Fix undefined logging call in apt history prep script
+- Fix undefined log call in apt history prep script. [copilot-swe-
+  agent[bot]]
+- Initial plan. [copilot-swe-agent[bot]]
+- Merge pull request #208 from gdha/renovate/actions-checkout-7.x.
+  [Gratien D'haese]
+
+  Update actions/checkout action to v7
+- Update actions/checkout action to v7. [renovate[bot]]
+- Update release-notes. [gdha]
+- Update CHANGELOG. [gdha]
+
+
 1.37 (2026-06-12)
 -----------------
 - Set version to v1.37. [gdha]
