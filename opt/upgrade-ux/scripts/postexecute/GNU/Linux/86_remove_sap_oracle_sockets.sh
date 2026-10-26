@@ -25,7 +25,9 @@ function remove_sap_oracle_sockets {
     # (re)creating them, resulting in the TNS-12555 permission denied error after a reboot.
     # We only remove the socket files that are owned by user 'oracle' so they get recreated
     # with the correct ownership when the listener starts.
-    local socket_dir socket_file removed=0
+    socket_dir=""
+    socket_file=""
+    removed=0
 
     for socket_dir in /var/tmp/.oracle /tmp/.oracle ; do
         [[ -d "$socket_dir" ]] || continue

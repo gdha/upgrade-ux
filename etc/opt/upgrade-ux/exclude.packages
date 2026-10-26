@@ -6,3 +6,5 @@ containerd*
 rke2*
 # For issue #146 we add observability-tools to the exclude list to avoid conflicts with jq package
 observability-tools
+# as iotop is installed by Chef we may not upgrade the package to iotop-c as chef fails afterwards
+iotop*
